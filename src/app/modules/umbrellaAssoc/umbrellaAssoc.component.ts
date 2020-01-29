@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-umbrella-assoc',
   templateUrl: './umbrellaAssoc.component.html',
   styleUrls: ['./umbrellaAssoc.component.scss']
 })

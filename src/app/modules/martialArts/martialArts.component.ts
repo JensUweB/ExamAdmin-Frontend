@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-martial-art',
   templateUrl: './martialArts.component.html',
   styleUrls: ['./martialArts.component.scss']
 })

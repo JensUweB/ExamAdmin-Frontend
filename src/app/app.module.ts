@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,10 +11,12 @@ import { MartialArtsComponent } from './modules/martialArts/martialArts.componen
 import { ExamComponent } from './modules/exam/exam.component';
 import { ClubComponent } from './modules/club/club.component';
 import { UmbrellaAssocComponent } from './modules/umbrellaAssoc/umbrellaAssoc.component';
+import { StartComponent } from './modules/start/start.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    StartComponent,
     HeaderComponent,
     AuthComponent,
     UserComponent,
@@ -24,7 +27,8 @@ import { UmbrellaAssocComponent } from './modules/umbrellaAssoc/umbrellaAssoc.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
