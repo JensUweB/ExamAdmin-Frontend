@@ -1,36 +1,40 @@
 <nav class="navbar navbar-default">
-  <div class="container-fluid">
-
-      <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-              <li>
-                  <a 
-                  routerLink="/" 
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{exact: true}"
-                  >
-                  Start</a>
-              </li>
-              <li>
-                  <a 
-                  routerLink="/user" 
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{exact: true}"
-                  >
-                  My Profile</a>
-              </li>
-              <li>
-                  <a 
-                  routerLink="/auth" 
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{exact: true}"
-                  *ngIf="!isAuthenticated">
-                  Authenticate</a>
-              </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-              <li><a *ngIf="isAuthenticated" (click)="onLogout()">Logout</a></li>
-          </ul>
-      </div>
+  <div class="container-fluid bg-dark">
+    <ul class="nav nav-pills">
+      <img src="https://pngimage.net/wp-content/uploads/2018/06/logo-placeholder-png.png" alt="Logo">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          *ngIf="isAuthenticated">
+          Start</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          *ngIf="isAuthenticated">
+          My Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          *ngIf="isAuthenticated">
+          Authenticate</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          *ngIf="isAuthenticated">
+          Exams</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          *ngIf="isAuthenticated">
+          Martial Arts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/clubs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          *ngIf="isAuthenticated">
+          Clubs</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-right nav-pills">
+      <li class="nav-item"><a class="nav-link" *ngIf="isAuthenticated" (click)="onLogout()">Logout</a></li>
+  </ul>
   </div>
 </nav>

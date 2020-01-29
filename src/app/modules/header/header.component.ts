@@ -9,14 +9,14 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit, OnDestroy{
   private userSub: Subscription;
-  isAuthenticated = false;
+  isAuthenticated = true;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.userSub = this.authService.user.subscribe(user => {
+    /* this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !user ? false : true; //instead you could write = !!user
-    });
+    }); */
   }
 
   ngOnDestroy() {
