@@ -1,6 +1,141 @@
-<div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>My Profile</h1>
+<div class="container bg-light">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>My Profile</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h3>Personal data:</h3>
+      <form>
+        <div class="row">
+          <div class="col-sm">
+            <div class="row">
+              <div class="col-sm">
+                <label for="firstName">First Name:</label>
+              </div>
+              <div class="col-sm">
+                <input type="text" value={{user.firstName}} name="firstName">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <label for="lastName">Last Name:</label>
+              </div>
+              <div class="col-sm">
+                <input type="text" value={{user.lastName}} name="lastName">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <label for="email">E-Mail:</label>
+              </div>
+              <div class="col-sm">
+                <input type="text" value={{user.email}} name="email">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <label for="oldPassword">Old Password:</label>
+              </div>
+              <div class="col-sm">
+                <input type="password" id="oldPassword"  name="oldPassword">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <label for="newPassword">New Password:</label>
+              </div>
+              <div class="col-sm">
+                <input type="password" id="password" name="newPassword">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <label for="repeatPassword">Repeat Password:</label>
+              </div>
+              <div class="col-sm">
+                <input type="password" id="password" name="repeatPassword">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <input type="submit" value="Change!" class="btn btn-sm btn-primary">
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-8">
+          <h4>Your Clubs:</h4>
+        </div>
+        <div class="col-4">
+          <button type="button" class="btn btn-sm btn-success">Add</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <a href="/user/#">{{user.clubs[0].name}}</a>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-8">
+          <h4>Your Martial Arts:</h4>
+        </div>
+        <div class="col-4">
+          <button type="button" class="btn btn-sm btn-success">Add</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-8">
+          <a href="/user/#">{{user.martialArts[0].style}} {{user.martialArts[0].name}}</a>
+        </div>
+        <div class="col-4">
+          <b>{{user.martialArts[0].ranks[0].name}}</b>
+        </div>
       </div>
     </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col">
+      <h4>Exam Results:</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Martial Art</th>
+            <th>Rank</th>
+            <th>Result</th>
+            <th>Date</th>
+            <th>Protocol</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Example Inyo-Ryu</th>
+            <th>1. Kyu</th>
+            <th>Passed</th>
+            <th>12.09.2016</th>
+            <th><a href="/user">download</a></th>
+          </tr>
+          <tr>
+            <th>Example Inyo-Ryu</th>
+            <th>2. Kyu</th>
+            <th>Passed</th>
+            <th>02.03.2016</th>
+            <th><a href="/user">download</a></th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
