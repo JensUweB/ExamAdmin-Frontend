@@ -12,6 +12,9 @@ import { ExamComponent } from './modules/exam/exam.component';
 import { ClubComponent } from './modules/club/club.component';
 import { UmbrellaAssocComponent } from './modules/umbrellaAssoc/umbrellaAssoc.component';
 import { StartComponent } from './modules/start/start.component';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ExamResultComponent } from './modules/examResult/examResult.component';
+import { GraphQLModule } from './apollo.config';
 
 @NgModule({
   declarations: [
@@ -23,12 +26,14 @@ import { StartComponent } from './modules/start/start.component';
     MartialArtsComponent,
     ExamComponent,
     ClubComponent,
-    UmbrellaAssocComponent
+    UmbrellaAssocComponent,
+    ExamResultComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]
