@@ -3,8 +3,7 @@
     <ul class="nav nav-pills">
       <img src="https://pngimage.net/wp-content/uploads/2018/06/logo-placeholder-png.png" alt="Logo">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          *ngIf="isAuthenticated">
+        <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           Start</a>
       </li>
       <li class="nav-item">
@@ -14,7 +13,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          *ngIf="isAuthenticated">
+        *ngIf="!isAuthenticated">
           Authenticate</a>
       </li>
       <li class="nav-item">
