@@ -1,6 +1,23 @@
 <div class="container">
+    <div *ngIf="error" class="alert alert-danger">
+        Email or password incorrect. Please try again!
+    </div>
     <div class="row">
         <div class="col-md-12">
-            <h1>Authentication</h1>
+            <h4 class='mv3'>{{login ? 'Login' : 'Sign Up'}}</h4>
+            <div class='flex flex-column'>
+                <input *ngIf="!login"  [(ngModel)]="name" type="text" placeholder="Your name">
+                <input  [(ngModel)]="email" type="text" placeholder="Your email address" required>
+                <input  [(ngModel)]="password" type="password" placeholder="Password" required>
+            </div>
+            <div class='flex mt3'>
+                <div class='btn btn-success' (click)="confirm()">
+                    {{login ? 'login' : 'create account'}}
+                </div><br>
+                <div class='btn btn-primary' (click)="login = !login">
+                    {{login ? 'need to create an account?' : 'already have an account?'}}
+                </div>
+            </div>
         </div>
     </div>
+</div>
