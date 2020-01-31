@@ -12,10 +12,10 @@ import { ExamComponent } from './modules/exam/exam.component';
 import { ClubComponent } from './modules/club/club.component';
 import { UmbrellaAssocComponent } from './modules/umbrellaAssoc/umbrellaAssoc.component';
 import { StartComponent } from './modules/start/start.component';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ExamResultComponent } from './modules/examResult/examResult.component';
 import { GraphQLModule } from './apollo.config';
 import { FormsModule } from '@angular/forms';
+import { ExamDetailsComponent } from './modules/exam/exam-details/exam-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     ExamComponent,
     ClubComponent,
     UmbrellaAssocComponent,
-    ExamResultComponent
+    ExamResultComponent,
+    ExamDetailsComponent
   ],
   imports: [
     BrowserModule,

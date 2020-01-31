@@ -4,3 +4,28 @@
         <h1>Exams</h1>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th>Martial Art</th>
+              <th>Description</th>
+              <th>Club</th>
+              <th>Registration End Date</th>
+              <th>Exam Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let result of exams">
+              <th>{{result.martialArt.styleName}} {{result.martialArt.name}}</th>
+              <th>{{result.title}}</th>
+              <th>{{result.club.name}}</th>
+              <th>{{result.regEndDate}}</th>
+              <th>{{result.examDate}}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

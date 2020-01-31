@@ -1,3 +1,9 @@
-export function normalizeDate(date: Date): String {
-    return date.getDay()+'.'+date.getMonth()+'.'+date.getFullYear();
+export function normalizeDate(input: Date): String {
+    const date = new Date(input);
+    return date.toLocaleDateString();
+}
+
+export function normalizeDateTime(input: Date): String {
+    const date = new Date(input);
+    return date.toLocaleDateString()+' '+date.toLocaleTimeString();
 }

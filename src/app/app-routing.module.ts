@@ -6,15 +6,16 @@ import { StartComponent } from './modules/start/start.component';
 import { ExamComponent } from './modules/exam/exam.component';
 import { MartialArtsComponent } from './modules/martialArts/martialArts.component';
 import { ClubComponent } from './modules/club/club.component';
+import { AuthGuard } from './modules/auth/auth.guard';
 
 
 const routes: Routes = [
   {path: '', component: StartComponent},
   {path: 'auth', component: AuthComponent},
-  {path: 'user', component: UserComponent},
-  {path: 'exams', component: ExamComponent},
-  {path: 'martialArts', component: MartialArtsComponent},
-  {path: 'clubs', component: ClubComponent},
+  {path: 'user', canActivate: [AuthGuard], component: UserComponent},
+  {path: 'exams', canActivate: [AuthGuard], component: ExamComponent},
+  {path: 'martialArts', canActivate: [AuthGuard], component: MartialArtsComponent},
+  {path: 'clubs', canActivate: [AuthGuard], component: ClubComponent},
 ];
 
 @NgModule({

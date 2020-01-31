@@ -1,4 +1,4 @@
-<div class="container bg-light">
+<div class="container">
   <div class="row">
     <div class="col-md-12">
       <h1>My Profile</h1>
@@ -126,7 +126,7 @@
             <th *ngIf="result.passed">passed</th>
             <th *ngIf="!result.passed">failed</th>
             <th>{{result.date}}</th>
-            <th><a href="{{result.reportUri}}">download</a></th>
+            <th><a class="btn btn-sm btn-warning" (click)="getReport()">download</a></th>
           </tr>
         </tbody>
       </table>

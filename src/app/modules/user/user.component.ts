@@ -6,9 +6,9 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
-const getUser = gql`{getUser{_id, firstName, lastName, email, martialArts{name, styleName, ranks{name, number}}, clubs{club{name}}}}`;
-const queryExamResults = gql`query getAllExamResults{getAllExamResults{_id, user, exam, date, passed, martialArt{name, styleName},rank}}`;
+const queryExamResults = gql`query getAllExamResults{getAllExamResults{_id, user, exam, date, passed, reportUri , martialArt{name, styleName},rank}}`;
 
 @Component({
   selector: 'app-user',
@@ -18,8 +18,13 @@ const queryExamResults = gql`query getAllExamResults{getAllExamResults{_id, user
 export class UserComponent implements OnInit{
   private user;
   private examResults;
+  private url;
 
-  constructor(private apollo: Apollo, private authService: AuthService, private router: Router) {}
+  constructor(
+    private apollo: Apollo, 
+    private authService: AuthService, 
+    private router: Router,
+    private http: HttpClient) {}
 
   ngOnInit() {
     if(localStorage.getItem('token')){
@@ -40,7 +45,10 @@ export class UserComponent implements OnInit{
       
     }
     this.user = this.authService.user;
-    if(!this.user) this.router.navigate(['/auth']);
-    
   }
+
+  getReport() {
+    return this.http.get(this.examResults[0].reportUri);
+  }
+
 }
