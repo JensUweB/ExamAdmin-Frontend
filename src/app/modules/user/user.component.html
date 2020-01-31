@@ -15,7 +15,7 @@
                 <label for="firstName">First Name:</label>
               </div>
               <div class="col-sm">
-                <input type="text" value={{user.firstName}} name="firstName">
+                <input type="text" placeholder="{{user.firstName}}" name="firstName">
               </div>
             </div>
             <div class="row">
@@ -23,7 +23,7 @@
                 <label for="lastName">Last Name:</label>
               </div>
               <div class="col-sm">
-                <input type="text" value={{user.lastName}} name="lastName">
+                <input type="text" placeholder="{{user.lastName}}" name="lastName">
               </div>
             </div>
             <div class="row">
@@ -31,7 +31,7 @@
                 <label for="email">E-Mail:</label>
               </div>
               <div class="col-sm">
-                <input type="text" value={{user.email}} name="email">
+                <input type="text" placeholder="{{user.email}}" name="email">
               </div>
             </div>
             <div class="row">
@@ -39,7 +39,7 @@
                 <label for="oldPassword">Old Password:</label>
               </div>
               <div class="col-sm">
-                <input type="password" id="oldPassword"  name="oldPassword">
+                <input type="password" placeholder="old password" id="oldPassword"  name="oldPassword">
               </div>
             </div>
             <div class="row">
@@ -47,7 +47,7 @@
                 <label for="newPassword">New Password:</label>
               </div>
               <div class="col-sm">
-                <input type="password" id="password" name="newPassword">
+                <input type="password" placeholder="new password" id="password" name="newPassword">
               </div>
             </div>
             <div class="row">
@@ -55,7 +55,7 @@
                 <label for="repeatPassword">Repeat Password:</label>
               </div>
               <div class="col-sm">
-                <input type="password" id="password" name="repeatPassword">
+                <input type="password" placeholder="confirm new password" id="password2" name="repeatPassword">
               </div>
             </div>
             <div class="row">
@@ -78,7 +78,7 @@
       </div>
       <div class="row">
         <div class="col-sm">
-          <a href="/user/#">{{user.clubs[0].name}}</a>
+          <a href="/user/#">{{user.clubs[0].club.name}}</a>
         </div>
       </div>
       <hr>
@@ -92,7 +92,7 @@
       </div>
       <div class="row">
         <div class="col-8">
-          <a href="/user/#">{{user.martialArts[0].style}} {{user.martialArts[0].name}}</a>
+          <a href="/user/#">{{user.martialArts[0].styleName}} {{user.martialArts[0].name}}</a>
         </div>
         <div class="col-4">
           <b>{{user.martialArts[0].ranks[0].name}}</b>
@@ -120,19 +120,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>Example Inyo-Ryu</th>
-            <th>1. Kyu</th>
-            <th>Passed</th>
-            <th>12.09.2016</th>
-            <th><a href="/user">download</a></th>
-          </tr>
-          <tr>
-            <th>Example Inyo-Ryu</th>
-            <th>2. Kyu</th>
-            <th>Passed</th>
-            <th>02.03.2016</th>
-            <th><a href="/user">download</a></th>
+          <tr *ngFor="let result of examResults">
+            <th>{{result.martialArt.styleName}} {{result.martialArt.name}}</th>
+            <th>{{result.rank}}</th>
+            <th *ngIf="result.passed">passed</th>
+            <th *ngIf="!result.passed">failed</th>
+            <th>{{result.date}}</th>
+            <th><a href="{{result.reportUri}}">download</a></th>
           </tr>
         </tbody>
       </table>
