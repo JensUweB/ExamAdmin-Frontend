@@ -31,14 +31,6 @@
             </div>
             <div class="row">
               <div class="col-sm">
-                <b>Description:</b>
-              </div>
-              <div class="col-sm">
-                {{result.description}}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm">
                 <b>Registration End Date:</b>
               </div>
               <div class="col-sm">
@@ -79,7 +71,7 @@
               </div>
             </div>
             <div class="row">
-                <button class="btn btn-success" (click)="showDetails(result)">Book</button>
+                <button class="btn btn-success" (click)="showDetails(result)">Details</button>
                 <div *ngIf="result.examiner._id == user._id">
                   <button class="btn btn-warning">Edit</button>
                 </div>

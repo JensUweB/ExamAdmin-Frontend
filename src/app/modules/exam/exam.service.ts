@@ -3,11 +3,16 @@ import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable()
 export class ExamService {
-    currentExam = new Subject<any>();
+    private currentExam;
+    editExam = false;
 
     constructor() {}
 
     setExam(exam) {
-        this.currentExam.next(exam);
+        this.currentExam = exam;
+    }
+
+    getExam() {
+        return this.currentExam;
     }
 }

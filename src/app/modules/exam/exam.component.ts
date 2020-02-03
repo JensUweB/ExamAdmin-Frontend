@@ -5,6 +5,7 @@ import { Apollo } from 'apollo-angular';
 import { normalizeDateTime } from '../helpers/date.helper';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { ExamService } from './exam.service';
 
 const examsQuery = gql`query getPlannedExams{getPlannedExams{
   _id, title, description, examDate, regEndDate, isPublic, examPlace , club{name}, martialArt{name, styleName}, examiner{_id, firstName, lastName}
@@ -21,7 +22,12 @@ export class ExamComponent implements OnInit, OnDestroy{
   private user;
   private querySubscription: Subscription;
 
-  constructor(private apollo: Apollo, private router: Router, private authService: AuthService) {}
+  constructor(
+    private apollo: Apollo, 
+    private router: Router, 
+    private authService: AuthService,
+    private examService: ExamService
+  ) {}
 
   ngOnInit(): void {
     this.querySubscription = this.apollo.watchQuery<any>({
@@ -44,8 +50,14 @@ export class ExamComponent implements OnInit, OnDestroy{
   }
 
   showDetails(exam: any): void {
+    this.examService.setExam(exam);
     this.router.navigate(['/exam-details']);
-    this.exam.emit(exam);
+  }
+
+  showEdit(exam: any): void {
+    this.examService.setExam(exam);
+    this.examService.editExam = true;
+    this.router.navigate(['/exam-details']);
   }
 
 }

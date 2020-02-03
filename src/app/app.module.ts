@@ -16,6 +16,7 @@ import { ExamResultComponent } from './modules/examResult/examResult.component';
 import { GraphQLModule } from './apollo.config';
 import { FormsModule } from '@angular/forms';
 import { ExamDetailsComponent } from './modules/exam/exam-details/exam-details.component';
+import { ExamService } from './modules/exam/exam.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { ExamDetailsComponent } from './modules/exam/exam-details/exam-details.c
     GraphQLModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ExamService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ExamService } from '../exam.service';
 
 @Component({
   selector: 'app-exam-details',
@@ -6,11 +7,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./exam-details.component.css']
 })
 export class ExamDetailsComponent implements OnInit {
-  @Input('currentExam') currentExam;
+ private exam;
+ private editExam;
 
-  constructor() { }
+  constructor(private examService: ExamService) { }
 
   ngOnInit() {
+    this.exam = this.examService.getExam();
+    this.editExam = this.examService.editExam;
   }
 
 }

@@ -1,31 +1,33 @@
 <div class="row">
     <div class="col">
         <h1>Exam Details</h1>
-        <div class="row">
-            <div class="col-sm">
-                <b>{{exam.title}}</b>
-                <p>{{exam.description}}</p>
+        <div *ngIf="!editExam">
+            <div class="row">
+                <div class="col-sm">
+                    <b>{{exam.title}}</b>
+                    <p>{{exam.description}}</p>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-              <b>{{exam.martialArt.styleName}} {{exam.martialArt.name}}</b>  
+            <div class="row">
+                <div class="col-sm">
+                    <b>{{exam.martialArt.styleName}} {{exam.martialArt.name}}</b>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                Registration End Date: {{exam.regEndDate}}<br>
-                Exam Date: {{exam.examDate}}
+            <div class="row">
+                <div class="col-sm">
+                    Registration End Date: {{exam.regEndDate}}<br>
+                    Exam Date: {{exam.examDate}}
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                Club: {{exam.club.name}}
+            <div class="row">
+                <div class="col-sm">
+                    Club: {{exam.club.name}}
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm">
-                Examiner: {{exam.examiner.firstName}} {{exam.examiner.lastName}}
+            <div class="row">
+                <div class="col-sm">
+                    Examiner: {{exam.examiner.firstName}} {{exam.examiner.lastName}}
+                </div>
             </div>
         </div>
     </div>
