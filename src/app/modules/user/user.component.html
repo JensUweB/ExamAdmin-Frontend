@@ -90,12 +90,12 @@
           <button type="button" class="btn btn-sm btn-success">Add</button>
         </div>
       </div>
-      <div class="row">
+      <div *ngFor="let martialArt of user.martialArts" class="row">
         <div class="col-8">
-          <a href="/user/#">{{user.martialArts[0].styleName}} {{user.martialArts[0].name}}</a>
+          <a href="/user/#">{{martialArt._id.styleName}} {{martialArt._id.name}}</a>
         </div>
         <div class="col-4">
-          <b>{{user.martialArts[0].ranks[0].name}}</b>
+          <b>{{martialArt.rankName}}</b>
         </div>
       </div>
     </div>
