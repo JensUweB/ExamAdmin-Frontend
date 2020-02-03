@@ -1,31 +1,92 @@
-<div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>Exams</h1>
+<div class="row">
+  <div class="col-md-12">
+    <h1>Exams</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div id="accordion" *ngFor="let result of exams">
+      <div class="card shadow">
+        <div class="card-header bg-dark" id="headingOne">
+          <div class="row">
+            <div class="col-sm">
+              <button class="btn btn-link" (click)="result.isHidden = !result.isHidden">
+                <b class="card-title">{{result.title}}</b>
+              </button>
+            </div>
+            <div class="col-sm align-middle">
+              <b>{{result.examDate}}</b>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!result.isHidden">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm">
+                <b>Martial Art:</b>
+              </div>
+              <div class="col-sm">
+                <b>{{result.martialArt.styleName}} {{result.martialArt.name}}</b>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <b>Description:</b>
+              </div>
+              <div class="col-sm">
+                {{result.description}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <b>Registration End Date:</b>
+              </div>
+              <div class="col-sm">
+                {{result.regEndDate}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <b>Exam Date:</b>
+              </div>
+              <div class="col-sm">
+                {{result.examDate}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <b>Club:</b>
+              </div>
+              <div class="col-sm">
+                {{result.club.name}}<br>
+                {{result.examPlace}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <b>Examiner:</b>
+              </div>
+              <div class="col-sm">
+                {{result.examiner.firstName}} {{result.examiner.lastName}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <b>Price:</b>
+              </div>
+              <div class="col-sm">
+                20.00 €
+              </div>
+            </div>
+            <div class="row">
+                <button class="btn btn-success" (click)="showDetails(result)">Book</button>
+                <div *ngIf="result.examiner._id == user._id">
+                  <button class="btn btn-warning">Edit</button>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <table class="table table-striped">
-          <thead class="thead-dark">
-            <tr>
-              <th>Martial Art</th>
-              <th>Description</th>
-              <th>Club</th>
-              <th>Registration End Date</th>
-              <th>Exam Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let result of exams">
-              <th>{{result.martialArt.styleName}} {{result.martialArt.name}}</th>
-              <th>{{result.title}}</th>
-              <th>{{result.club.name}}</th>
-              <th>{{result.regEndDate}}</th>
-              <th>{{result.examDate}}</th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+  </div>
 </div>
