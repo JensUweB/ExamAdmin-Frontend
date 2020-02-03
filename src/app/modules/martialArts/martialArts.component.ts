@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
 import gql from 'graphql-tag';
 
-const maQuery = gql`{getAllMartialArts{_id, name, styleName, examiners{firstName, lastName, martialArts{_id, rankName}}}}`;
+const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{firstName, lastName, martialArts{_id, rankName}}}}`;
 
 @Component({
   selector: 'app-martial-art',
@@ -19,15 +19,17 @@ export class MartialArtsComponent implements OnInit {
 
     ngOnInit() {
       this.apollo.watchQuery<any>({
-        query: maQuery
+        query: maQuery,
+        fetchPolicy: 'no-cache'
       }).valueChanges.subscribe((response) => { 
         this.martialArts = response.data.getAllMartialArts;
         console.log('[MaComp] Got the following data: ',this.martialArts);
+        console.log('[MaComp] To compare: ',response.data.getAllMartialArts);
 
         this.martialArts.forEach(ma => {
+          ma.isHidden = true;
           ma.examiners.forEach(examiner => {
-            console.log('Whats happening?');
-            const result = examiner.martialArts.filter(ele => ele._id.toString() != ma._id.toString());
+            let result = examiner.martialArts.filter(ele => ele._id.toString() != ma._id.toString());
             if(result.length) examiner.martialArts = result;
           });
         });

@@ -7,27 +7,34 @@
   <div class="row">
     <div class="col-sm">
       <div *ngFor="let ma of martialArts">
-        <div class="row">
-          <div class="col">
-            <h2>{{ma.styleName}} {{ma.name}}</h2>
+        <div class="card shadow">
+          <div class="card-header bg-dark">
+            <button class="btn btn-link" (click)="ma.isHidden = !ma.isHidden">
+              <b>{{ma.styleName}} {{ma.name}}</b>
+            </button>
           </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <table class="table table-striped">
-              <thead class="thead-dark">
-                <tr>
-                  <th>Examiner Name</th>
-                  <th>Examiner Rank</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let examiner of ma['examiners']">
-                  <td>{{examiner.firstName}} {{examiner.lastName}}</td>
-                  <td>{{examiner.martialArts[0].rankName}}</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="card-body" *ngIf="!ma.isHidden">
+            <div class="row">
+              <div class="col">
+                <p>{{ma.description}}</p>
+              </div>
+              <div class="col">
+                <table class="table table-striped">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>Examiner Name</th>
+                      <th>Examiner Rank</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let examiner of ma['examiners']">
+                      <td>{{examiner.firstName}} {{examiner.lastName}}</td>
+                      <td>{{examiner.martialArts[0].rankName}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
