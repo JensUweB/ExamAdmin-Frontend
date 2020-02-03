@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 const login = gql`
 query login($email: String!, $password: String!)
 {login(email: $email, password: $password)
-{token, tokenExpireDate, user{_id, firstName,lastName, email, martialArts{_id, rankName, rankNumber}, clubs{club{name}}}}}`;
+{token, tokenExpireDate, user{_id, firstName,lastName, email, martialArts{_id{_id, name, styleName}, rankName, rankNumber}, clubs{club{name}}}}}`;
 
-const getUser = gql`{getUser{_id, firstName, lastName, email, martialArts{_id, rankName, rankNumber}, clubs{club{name}}}}`;
+const getUser = gql`{getUser{_id, firstName, lastName, email, martialArts{_id{_id, name, styleName}, rankName, rankNumber}, clubs{club{name}}}}`;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnInit, OnDestroy{
@@ -35,10 +35,13 @@ export class AuthService implements OnInit, OnDestroy{
             variables: {
                 email: email, 
                 password: password
-            }
+            },
+            fetchPolicy: 'no-cache'
           }).valueChanges.subscribe((response) => {
             if(response.data){
                 console.log('[AuthService] Success! Got some data!');
+                console.log(response.data.login.user.martialArts);
+                console.log('');
                 this.user = response.data.login.user;
                 this.token = response.data.login.token;
                 this.tokenExpireDate = response.data.login.tokenExpireDate;
@@ -59,13 +62,13 @@ export class AuthService implements OnInit, OnDestroy{
         if(localStorage.getItem('token')){
             console.log('[AuthService] Loading user data...');
             this.querySubscription = this.apollo.watchQuery<any>({
-                query: getUser
+                query: getUser,
+                fetchPolicy: 'no-cache'
               }).valueChanges.subscribe((response) => {
                 if(response.data){
                     console.log('[AuthService] Success! Got some data!');
                     this.user = response.data.getUser;
                     this._isAuthenticated.next(true);
-                    this.router.navigate(['/']);
                 }
             }, (err) => {
                 console.log('[AuthService]',err);

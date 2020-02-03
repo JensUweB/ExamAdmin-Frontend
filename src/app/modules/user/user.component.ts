@@ -31,7 +31,8 @@ export class UserComponent implements OnInit{
       console.log('Token found. Querying exam results!');
       
       this.apollo.watchQuery<any>({
-        query: queryExamResults
+        query: queryExamResults,
+        fetchPolicy: 'no-cache'
       }).valueChanges.subscribe((response) => { 
         this.examResults = response.data.getAllExamResults;
         this.examResults.forEach(ele => {
