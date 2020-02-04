@@ -3,18 +3,19 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 const login = gql`
 query login($email: String!, $password: String!)
 {login(email: $email, password: $password)
-{token, tokenExpireDate, user{_id, firstName,lastName, email, martialArts{_id{_id, name, styleName}, rankName, rankNumber}, clubs{club{name}}}}}`;
+{token, tokenExpireDate, user{_id, firstName,lastName, email, martialArts{_id{_id, name, styleName, examiners}, rankName, rankNumber}, clubs{club{name}}}}}`;
 
 const getUser = gql`{getUser{_id, firstName, lastName, email, martialArts{_id{_id, name, styleName}, rankName, rankNumber}, clubs{club{name}}}}`;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnInit, OnDestroy{
     private querySubscription: Subscription;
-    user: any;
+    user: User;
     token: string;
     tokenExpireDate: Date;
 
@@ -26,8 +27,7 @@ export class AuthService implements OnInit, OnDestroy{
         
     }
 
-    async login(email: string, password: string): Promise<any> {
-        let user;
+    async login(email: string, password: string): Promise<boolean> {
         let error;
         console.log('[AuthService] Logging in...');
         this.querySubscription = this.apollo.watchQuery<any>({
@@ -82,6 +82,7 @@ export class AuthService implements OnInit, OnDestroy{
         this.token = null;
         this.tokenExpireDate = null;
         localStorage.setItem('token',null);
+        this.router.navigate(['/']);
     }
 
     signup() {
