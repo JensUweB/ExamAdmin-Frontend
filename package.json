@@ -26,6 +26,7 @@
     "apollo-client": "^2.6.8",
     "apollo-link-error": "^1.1.12",
     "bootstrap": "^4.4.1",
+    "font-awesome": "^4.7.0",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.1",
     "rxjs": "~6.4.0",
