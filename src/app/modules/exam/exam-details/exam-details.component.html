@@ -15,20 +15,134 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    Registration End Date: {{exam.regEndDate}}<br>
-                    Exam Date: {{exam.examDate}}
+                    Registration End Date:
+                </div>
+                <div class="col-sm">
+                    {{exam.regEndDate}}
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm">
-                    Club: {{exam.club.name}}
+                    Exam Date:
+                </div>
+                <div class="col-sm">
+                    {{exam.examDate}}
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm">
-                    Examiner: {{exam.examiner.firstName}} {{exam.examiner.lastName}}
+                    Club:
+                </div>
+                <div class="col-sm">
+                    {{exam.club.name}}
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm">
+                    Address:
+                </div>
+                <div class="col-sm">
+                    {{exam.examPlace}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    Examiner:
+                </div>
+                <div class="col-sm">
+                    {{exam.examiner.firstName}} {{exam.examiner.lastName}}
+                </div>
+            </div>
+            <div *ngIf="exam.examiner._id == user._id">
+                <div class="row">
+                    <div class="col-sm">
+                        <b>Participants:</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm" *ngIf="exam.participants">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Rank</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let user of exam.participants">
+                                <tr>
+                                    <td>{{user.firstName}} {{user.lastName}}</td>
+                                    <td>{{user.martialArts[0].rankName}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm" *ngIf="!exam.participants">
+                        <b>No participants found.</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="editExam">
+        <form>
+            <div class="row">
+                <div class="col-sm">
+                    <input type="text" value="{{exam.title}}" id="title">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <textarea value="{{exam.description}}" id="description" rows="4" cols="50"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    Martial Art:
+                </div>
+                <div class="col-sm">
+                    {{exam.martialArt.styleName}} {{exam.martialArt.name}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    Registration End Date:
+                </div>
+                <div class="col-sm">
+                    <input type="text" value="{{exam.regEndDate}}" id="regEndDate">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    Exam Date:
+                </div>
+                <div class="col-sm">
+                    <input type="text" value="{{exam.examDate}}" id="examDate">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    Club:
+                </div>
+                <div class="col-sm">
+                    <select *ngFor="let club of clubs">
+                        <option value="{{club._id}}">{{club.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    Address:
+                </div>
+                <div class="col-sm">
+                    <input type="text" value="{{exam.examPlace}}" id="examPlace">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <button class="btn btn-success">Update</button>
+                    <button class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </form>
         </div>
     </div>
 </div>

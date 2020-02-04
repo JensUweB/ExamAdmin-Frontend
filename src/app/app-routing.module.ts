@@ -8,6 +8,7 @@ import { MartialArtsComponent } from './modules/martialArts/martialArts.componen
 import { ClubComponent } from './modules/club/club.component';
 import { AuthGuard } from './modules/auth/auth.guard';
 import { ExamDetailsComponent } from './modules/exam/exam-details/exam-details.component';
+import { NewExamComponent } from './modules/exam/new-exam/new-exam.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'auth', component: AuthComponent},
   {path: 'user', canActivate: [AuthGuard], component: UserComponent},
   {path: 'exams', canActivate: [AuthGuard], component: ExamComponent},
-  {path: 'exam-details',  component: ExamDetailsComponent},
+  {path: 'exams/new', canActivate: [AuthGuard], component: NewExamComponent},
+  {path: 'exam-details', canActivate: [AuthGuard],  component: ExamDetailsComponent},
   {path: 'martialArts', canActivate: [AuthGuard], component: MartialArtsComponent},
   {path: 'clubs', canActivate: [AuthGuard], component: ClubComponent},
 ];
