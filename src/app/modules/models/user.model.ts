@@ -1,18 +1,15 @@
 import { Club } from './club.model';
 import { MartialArt } from './martialArt.model';
+import { MaRank } from './maRank.model';
 
 export class User {
     _id: string;
     firstName: string;
     lastName: string;
     email: string;
-    martialArts: [{
-        _id: MartialArt,
-        rankName: string,
-        rankNumber: number
-    }];
-    clubs: [{
+    martialArts: MaRank[];
+    clubs: {
         club: Club,
         confirmed: boolean
-    }];
+    }[];
 }

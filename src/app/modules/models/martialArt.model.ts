@@ -5,7 +5,7 @@ export class MartialArt {
     name: string;
     styleName: string;
     deescription: string;
-    examiner: User[];
+    examiners: any[];
     ranks: [{
         name: string,
         number: string
