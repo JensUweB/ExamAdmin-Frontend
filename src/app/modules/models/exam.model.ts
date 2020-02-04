@@ -1,0 +1,17 @@
+import { Club } from './club.model';
+import { User } from './user.model';
+import { MartialArt } from './martialArt.model';
+
+export class Exam {
+    title: string;
+    description: string;
+    examDate: string;
+    regEndDate: string;
+    isPublic: boolean;
+    club: Club;
+    examiner: User;
+    examPlace: string;
+    martialArt: MartialArt;
+    participants: User[];
+    isHidden: boolean;
+}
