@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener  } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,31 +11,45 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy{
   private userSub: Subscription;
   isAuthenticated = false;
+  navbarOpen = true;
+  private screenHeight;
+  private screenWidth;
 
-  constructor(private authService: AuthService) { }
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.userSub = this.authService._isAuthenticated.subscribe(ele => {
-      this.isAuthenticated = !ele ? false : true; //instead you could write = !!user
+      this.isAuthenticated = !!ele;
     });
-    //if(localStorage.getItem('token')) this.isAuthenticated = true;
   }
 
   ngOnDestroy() {
     this.userSub.unsubscribe();
   }
 
-  onSaveData() {
-    
-  }
-
-  onFetchData() {
-    
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
+    this.screenHeight = window.innerHeight;
+    this.screenWidth = window.innerWidth;
+    if(this.screenWidth < 600) this.navbarOpen = false;
   }
 
   onLogout() {
     this.authService.logout();
   }
 
+  addExam() {
+    this.router.navigate(['/exams/new']);
+  }
+
+  addExamResult() {}
+
+  addMA() {}
+
+  addClub() {}
 
 }

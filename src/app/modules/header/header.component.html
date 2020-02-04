@@ -1,39 +1,55 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid bg-dark">
-    <ul class="nav nav-pills">
-      <img src="https://pngimage.net/wp-content/uploads/2018/06/logo-placeholder-png.png" alt="Logo">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          Start</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          *ngIf="isAuthenticated">
-          My Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-        *ngIf="!isAuthenticated">
-          Authenticate</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          *ngIf="isAuthenticated">
-          Exams</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          *ngIf="isAuthenticated">
-          Martial Arts</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/clubs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-          *ngIf="isAuthenticated">
-          Clubs</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-right nav-pills">
-      <li class="nav-item"><a class="btn btn-sm btn-danger" *ngIf="isAuthenticated" (click)="onLogout()">Logout</a></li>
-  </ul>
-  </div>
+<nav class="navbar navbar-expand-lg bg-dark">
+      <a class="navbar-brand" href="/">
+        <img class="logo pull-left" src="https://pngimage.net/wp-content/uploads/2018/06/logo-placeholder-png.png" alt="Logo">
+          ExamAdmin
+      </a>
+      <button class="btn btn-primary navbar-toggler" (click)="toggleNavbar()">
+      Toggle
+      </button>
+
+      <ul *ngIf="screenWidth > 600 || navbarOpen" class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            Start</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+            *ngIf="isAuthenticated">
+            My Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          *ngIf="!isAuthenticated">
+            Authenticate</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+            *ngIf="isAuthenticated">
+            Exams</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+            *ngIf="isAuthenticated">
+            Martial Arts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" routerLink="/clubs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+            *ngIf="isAuthenticated">
+            Clubs</a>
+        </li>
+      </ul>
+      <ul *ngIf="screenWidth > 600 || navbarOpen" class="nav nav-pills pull-right">
+        <li class="nav-item">
+          <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Add...</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button ngbDropdownItem (click)="addExam()">Add Exam</button>
+              <button ngbDropdownItem (click)="addExamResult()">Add Exam Result</button>
+              <button ngbDropdownItem (click)="addMA()">Add Martial Art</button>
+              <button ngbDropdownItem (click)="addClub()">Add Club</button>
+            </div>
+            </div>
+        </li>
+        <li class="nav-item"><button class="btn btn-sm btn-danger" *ngIf="isAuthenticated" (click)="onLogout()">Logout</button></li>
+      </ul>
 </nav>
