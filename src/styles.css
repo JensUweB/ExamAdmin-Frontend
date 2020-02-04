@@ -13,3 +13,9 @@ footer {
 button {
     margin: 5px;
 }
+.pull-right {
+    right: 0;
+}
+.pull-left {
+    left: 5px;
+}
