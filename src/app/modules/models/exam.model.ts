@@ -3,6 +3,7 @@ import { User } from './user.model';
 import { MartialArt } from './martialArt.model';
 
 export class Exam {
+    _id: string;
     title: string;
     description: string;
     examDate: string;

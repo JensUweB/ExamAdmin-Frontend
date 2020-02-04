@@ -2,6 +2,7 @@ import { User } from './user.model';
 import { Exam } from './exam.model';
 
 export class ExamResult {
+    _id: string;
     user: User;
     exam: Exam;
     martialArt: {
