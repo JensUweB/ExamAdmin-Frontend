@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-dark">
-      <a class="navbar-brand" href="/">
-        <img class="logo pull-left" src="https://pngimage.net/wp-content/uploads/2018/06/logo-placeholder-png.png" alt="Logo">
-          ExamAdmin
+      <a class="navbar-brand" href="/" style="text-align: bottom;">
+        <img class="pull-left" src="https://pngimage.net/wp-content/uploads/2018/06/logo-placeholder-png.png" alt="Logo">
+        ExamAdmin
       </a>
       <button class="btn btn-primary navbar-toggler" (click)="toggleNavbar()">
       Toggle
@@ -39,14 +39,14 @@
         </li>
       </ul>
       <ul *ngIf="screenWidth > 600 || navbarOpen" class="nav nav-pills pull-right">
-        <li class="nav-item">
-          <div ngbDropdown class="d-inline-block">
+        <li class="nav-item" style="margin-right: 25px;">
+          <div ngbDropdown class="d-inline-block" *ngIf="isAuthenticated">
             <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Add...</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem (click)="addExam()">Add Exam</button>
               <button ngbDropdownItem (click)="addExamResult()">Add Exam Result</button>
-              <button ngbDropdownItem (click)="addMA()">Add Martial Art</button>
-              <button ngbDropdownItem (click)="addClub()">Add Club</button>
+              <button ngbDropdownItem (click)="addMA()" disabled>Add Martial Art</button>
+              <button ngbDropdownItem (click)="addClub()" disabled>Add Club</button>
             </div>
             </div>
         </li>
