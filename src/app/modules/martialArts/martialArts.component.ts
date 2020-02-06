@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
 import gql from 'graphql-tag';
+import { MartialArtsService } from './martialArts.service';
 
-const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{firstName, lastName, martialArts{_id, rankName}}}}`;
 
 @Component({
   selector: 'app-martial-art',
@@ -11,29 +11,16 @@ const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examin
   styleUrls: ['./martialArts.component.scss']
 })
 export class MartialArtsComponent implements OnInit {
-  private martialArts: any[];
+  private martialArts;
 
   constructor(
-    private apollo: Apollo, 
-    private router: Router) {}
+    private maService: MartialArtsService
+  ) {
+    this.martialArts = this.maService.getMartialArts();
+    console.log('[MAComp] Data fetched!');
+  }
 
-    ngOnInit() {
-      this.apollo.watchQuery<any>({
-        query: maQuery,
-        fetchPolicy: 'no-cache'
-      }).valueChanges.subscribe((response) => { 
-        this.martialArts = response.data.getAllMartialArts;
-        console.log('[MaComp] Got the following data: ',this.martialArts);
-        console.log('[MaComp] To compare: ',response.data.getAllMartialArts);
-
-        this.martialArts.forEach(ma => {
-          ma.isHidden = true;
-          ma.examiners.forEach(examiner => {
-            let result = examiner.martialArts.filter(ele => ele._id.toString() != ma._id.toString());
-            if(result.length) examiner.martialArts = result;
-          });
-        });
-
-      }, (err) => {console.log('GraphQL error: ',JSON.stringify(err.graphQLErrors[0].message))});
-    }
+  ngOnInit() {
+    
+  }
 }
