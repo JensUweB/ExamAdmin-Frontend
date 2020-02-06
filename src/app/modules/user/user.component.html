@@ -15,7 +15,7 @@
                 <label for="firstName">First Name:</label>
               </div>
               <div class="col-sm">
-                <input type="text" placeholder="{{user.firstName}}" name="firstName">
+                <input class="form-control" type="text" placeholder="{{user.firstName}}" name="firstName">
               </div>
             </div>
             <div class="row">
@@ -23,7 +23,7 @@
                 <label for="lastName">Last Name:</label>
               </div>
               <div class="col-sm">
-                <input type="text" placeholder="{{user.lastName}}" name="lastName">
+                <input class="form-control" type="text" placeholder="{{user.lastName}}" name="lastName">
               </div>
             </div>
             <div class="row">
@@ -31,7 +31,7 @@
                 <label for="email">E-Mail:</label>
               </div>
               <div class="col-sm">
-                <input type="text" placeholder="{{user.email}}" name="email">
+                <input class="form-control" type="text" placeholder="{{user.email}}" name="email">
               </div>
             </div>
             <div class="row">
@@ -39,7 +39,7 @@
                 <label for="oldPassword">Old Password:</label>
               </div>
               <div class="col-sm">
-                <input type="password" placeholder="old password" id="oldPassword"  name="oldPassword">
+                <input class="form-control" type="password" placeholder="old password" id="oldPassword"  name="oldPassword">
               </div>
             </div>
             <div class="row">
@@ -47,7 +47,7 @@
                 <label for="newPassword">New Password:</label>
               </div>
               <div class="col-sm">
-                <input type="password" placeholder="new password" id="password" name="newPassword">
+                <input class="form-control" type="password" placeholder="new password" id="password" name="newPassword">
               </div>
             </div>
             <div class="row">
@@ -55,12 +55,12 @@
                 <label for="repeatPassword">Repeat Password:</label>
               </div>
               <div class="col-sm">
-                <input type="password" placeholder="confirm new password" id="password2" name="repeatPassword">
+                <input class="form-control" type="password" placeholder="confirm new password" id="password2" name="repeatPassword">
               </div>
             </div>
             <div class="row">
               <div class="col-sm">
-                <input type="submit" value="Change!" class="btn btn-sm btn-primary">
+                <input class="form-control" type="submit" value="Change!" class="btn btn-sm btn-primary">
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@
           <h4>Your Clubs:</h4>
         </div>
         <div class="col-4">
-          <button type="button" class="btn btn-sm btn-success">Add</button>
+          <button type="button" class="btn btn-sm btn-success" (click)="openAddClub(content)">Add</button>
         </div>
       </div>
       <div class="row">
@@ -133,3 +133,27 @@
     </div>
   </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add a Club</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Hello, {{user.firstName}}!<br>
+    Here you can add a new club to your profile, if you want!</p>
+    <form [formGroup]="clubForm">
+      <div class="form-group">
+        <label>CLub list</label>
+        <select class="form-control" formControlName="clubId">
+          <option *ngFor="let club of clubs" [value]="club._id">{{club.name}}</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="onClubSubmit(); c('Save click')">Add Club</button>
+  </div>
+</ng-template>
