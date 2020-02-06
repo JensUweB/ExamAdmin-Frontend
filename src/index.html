@@ -6,11 +6,85 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- inline spinner styles to be able to display spinner right away -->
+  <style type="text/css">
+    body, html {
+      height: 100%;
+    }
+    .app-loading {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .app-loading .spinner {
+      height: 200px;
+      width: 200px;
+      animation: rotate 2s linear infinite;
+      transform-origin: center center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    .app-loading .spinner .path {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      animation: dash 1.5s ease-in-out infinite;
+      stroke-linecap: round;
+      stroke: #ddd;
+    }
+
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+      }
+      100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+      }
+    }
+    .logo {
+    width: 100px;
+    height: 100px;
+    
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAA4CAYAAABNGP5yAAAE7UlEQVRoQ+2aQWzcRBSG33ibTDYbkQilgNoTAgoSqJTEAgUJFQErhKDitIhKsYuUZJ0LUsSV9tT20BMqBxQnQkrXiRAcuNAjoBSkhBJvoICAVkVc6AEJQaFdZC+NB83W3nq9tsez67V3k8xt188zb773vzczthHs8IbSnD8Wpb8B4C63D6auCQBAkvIrNQBYlEInaepaIr4lMog3moNPvL5vK9N3LSzK2xJAUNTN69YwXF35JynZu8dJTAFhkncAzM/PX0EIPRQEQlGU2P2NvcO68xOFLOC9GVh97yYz320FbBsArAl7I9zzCtgzNvnMrc3lL+nE+sfkg0ggl3jyuWcB8EY6CAovgFxpPXQJrcgTkVM7sqGf87wACMC6Xz/VKuThO60StQZ0BQAsSu8CwJtcUmdsbnoNwE8A8EicABYXF+8XBKE/qM+pqanL9FqqCsg+Lu+3+shvPBN3bJ3dnaqqTTnMs8anCoA37z0HnVrNYQHIffT1fWBs/eCFXJEnRlNXQBIAsufW9gsINanMqe6pKoBGoFUIUVOg6wEMjMvHCCJLvHUgLgCscd0KYe0JWtoHYFGqAMAgy5GmLa+9DLJqAEsBrHE7CqBV+VOno57xgwC4Jx4W2Z4H4BfhIW2tSAhSnWthAIZKa4cdu5vy0xfCFMOdAu0ogCVdeh0hlDc2Sp/mzq1fAwT7gu5h5XaUsWrjRTXEomTQBSCqfat2CMGzxoZ2gQUgLB28NSZskxUJQKej7p4MCwCNfE776hsg5FBQOrQNAIuS5agDAfqTALm71Yjy3pc+gAdfwnhklMo9ldYOAHfko54tGlIAj0++BUh4DoC8nMrs7UGjLpdeH9sCkGSes+BSAK1MRlXVB5y+FUX5hTVOwyrQ7QBUVS3Sg6R3UkFSdzZDrOWyMQUYr6uiEI3DxlZAfQOjKMrhZACMya+AQD6JYxJhffQLaLRqkT9smyp9mOyxv2HqWsNL0zAACwsLJ537LctanZ2d/cz5rapqHwDQMWrNq5imfQB+Uj4AFqk9eupEGyTZkb/KC/StcL2x0s9WRGAKuOuFIAinZ2ZmjrcMwLkRj0uXAMHBGCEYpq5l/fpzAzCHMllYXTKwKH0PAI9R+1QABE0899TReysXP/idFbWg+xGyXjA2VuoSpXbuvkjGerR6ceVH7//vz704bBjGPd5+p6enr4YpoFAoZPL5/LJzX7FYPOruI9JWOFAFh94YgW+XrtvO3gCAIbdtbT0fLwxjNFCzabpm/9EA00JHzM3S+boS7cKMLHje2NQ+p/97H4mxKn2YitsD4O15opDF/w38CwCXTV1reGSORekWAGT8IDQAIGTOLC+fDXO6ewEwCgYWpTkAeMcLwQPgrFlepna1hkXZACD0FLpl6tqe7lYAA0DtcqGQwb8OUDX4N4LOm+XSkcCPKXQN9awC3DMOLqLoCgA5cMcWfWHqpfoTniiMeWzirQE8I0d4vJ7EF2NdC4AAlKq6doyTKbd5qgCyY5OvWQL60M/rVo/EvARSBXC7yvt/L7gLYDt/KBllNdhVwE5XAEJwytjQTvAWNV77dIvgnbODr99JpEGqAFhH6h0PAAAsU9caTpC8EmfZp6YAVvQdxzutgtgAYHHyYQB0BgBeZVHv0PWPCcm8XS0v/czTf2wAeAbtJttdAN0UjTR82fEK+B/b4o5X70YgRwAAAABJRU5ErkJggg==') center center no-repeat; 
+  }
+  </style>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <!-- loading layout replaced by app after startup -->
+    <div class="app-loading">
+      <div class="logo"></div>
+      <svg class="spinner" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+      </svg>
+      Loading...
+    </div>
+  </app-root>
   <footer class="card-body bg-dark fixed-bottom">
     <p class="card-text text-primary text-center">&copy; 2020 - Jens Uwe Becker - Root-ITSolutions</p>
   </footer>
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
 </body>
 </html>
