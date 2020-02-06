@@ -14,10 +14,14 @@ import { UmbrellaAssocComponent } from './modules/umbrellaAssoc/umbrellaAssoc.co
 import { StartComponent } from './modules/start/start.component';
 import { ExamResultComponent } from './modules/examResult/examResult.component';
 import { GraphQLModule } from './apollo.config';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExamDetailsComponent } from './modules/exam/exam-details/exam-details.component';
 import { ExamService } from './modules/exam/exam.service';
 import { NewExamComponent } from './modules/exam/new-exam/new-exam.component';
+import { MartialArtsService } from './modules/martialArts/martialArts.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { ClubService } from './modules/club/club.service';
 
 @NgModule({
   declarations: [
@@ -39,9 +43,11 @@ import { NewExamComponent } from './modules/exam/new-exam/new-exam.component';
     AppRoutingModule,
     NgbModule,
     GraphQLModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [ExamService],
+  providers: [ExamService, MartialArtsService, ClubService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
