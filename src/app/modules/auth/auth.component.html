@@ -1,22 +1,31 @@
-<div class="container">
-    <div *ngIf="error" class="alert alert-danger">
-        Email or password incorrect. Please try again!
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <h4 class='mv3'>{{login ? 'Login' : 'Sign Up'}}</h4>
-            <div class='flex flex-column'>
-                <input *ngIf="!login"  [(ngModel)]="name" type="text" placeholder="Your name">
-                <input  [(ngModel)]="email" type="text" placeholder="Your email address" required>
-                <input  [(ngModel)]="password" type="password" placeholder="Password" required>
-            </div>
-            <div class='flex mt3'>
-                <div class='btn btn-success' (click)="confirm()">
-                    {{login ? 'login' : 'create account'}}
-                </div><br>
-                <div class='btn btn-primary' (click)="login = !login">
-                    {{login ? 'need to create an account?' : 'already have an account?'}}
-                </div>
+<div class="row">
+    <div class="col-sm">
+        Value: {{userForm.value | json}}
+        <div class="row">
+            <div class="col-md-12">
+                <form [formGroup]="userForm">
+                    <h4 class='mv3'>{{login ? 'Login' : 'Sign Up'}}</h4>
+                    <div class='flex flex-column'>
+                        <input *ngIf="!login" formControlName="firstName" type="text" placeholder="Your first name">
+                        <input *ngIf="!login" formControlName="lastName" type="text" placeholder="Your last name">
+                        <input formControlName="email" type="text" placeholder="Your email address" required>
+                        <input formControlName="password" type="password" placeholder="Password" required>
+                        <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+                            Please type in a correct email!
+                        </div>
+                        <div *ngIf="password.invalid && password.touched" class="alert alert-danger">
+                            You need to type in your password...
+                        </div>
+                    </div>
+                    <div class='flex mt3'>
+                        <div class='btn btn-success' (click)="confirm()">
+                            {{login ? 'login' : 'create account'}}
+                        </div><br>
+                        <div class='btn btn-primary' (click)="login = !login">
+                            {{login ? 'need to create an account?' : 'already have an account?'}}
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

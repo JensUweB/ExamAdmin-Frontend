@@ -1,16 +1,18 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 
 const login = gql`
 query login($email: String!, $password: String!)
 {login(email: $email, password: $password)
-{token, tokenExpireDate, user{_id, firstName,lastName, email, martialArts{_id{_id, name, styleName, examiners}, rankName, rankNumber}, clubs{club{name}}}}}`;
+{token, tokenExpireDate, user{_id, firstName, lastName, email, martialArts{_id{_id, name, styleName, examiners{_id}, ranks{name, number}}, 
+                        rankName, rankNumber}, clubs{club{_id,name}}}}}`;
 
-const getUser = gql`{getUser{_id, firstName, lastName, email, martialArts{_id{_id, name, styleName}, rankName, rankNumber}, clubs{club{name}}}}`;
+const getUser = gql`{getUser{_id, firstName, lastName, email, martialArts{_id{_id, name, styleName, examiners{_id}, ranks{name, number}}, 
+                        rankName, rankNumber}, clubs{club{_id,name}}}}`;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnInit, OnDestroy{
@@ -40,8 +42,6 @@ export class AuthService implements OnInit, OnDestroy{
           }).valueChanges.subscribe((response) => {
             if(response.data){
                 console.log('[AuthService] Success! Got some data!');
-                console.log(response.data.login.user.martialArts);
-                console.log('');
                 this.user = response.data.login.user;
                 this.token = response.data.login.token;
                 this.tokenExpireDate = response.data.login.tokenExpireDate;
@@ -51,7 +51,7 @@ export class AuthService implements OnInit, OnDestroy{
                 this.router.navigate(['/']);
             }
         }, (err) => {
-            console.log('[AuthService]',err);
+            console.warn('[AuthService] GraphQL Error:',JSON.stringify(err));
         });
 
         if(error) return false;
@@ -71,7 +71,7 @@ export class AuthService implements OnInit, OnDestroy{
                     this._isAuthenticated.next(true);
                 }
             }, (err) => {
-                console.log('[AuthService]',err);
+                console.warn('[AuthService] GraphQL Error:',err.graphQLErrors[0].message);
             });
         }
     }
@@ -85,7 +85,7 @@ export class AuthService implements OnInit, OnDestroy{
         this.router.navigate(['/']);
     }
 
-    signup() {
+    signup(firstName: string, lastName: string, email: string, password: string): boolean {
         throw new Error("Method not implemented.");
     }
 
