@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'auth', component: AuthComponent},
   {path: 'user', canActivate: [AuthGuard], component: UserComponent},
   {path: 'exams', canActivate: [AuthGuard], component: ExamComponent},
-  {path: 'exams/new', canActivate: [AuthGuard], component: NewExamComponent},
+  {path: 'new-exams', canActivate: [AuthGuard], component: NewExamComponent},
   {path: 'exam-details', canActivate: [AuthGuard],  component: ExamDetailsComponent},
   {path: 'martialArts', canActivate: [AuthGuard], component: MartialArtsComponent},
   {path: 'clubs', canActivate: [AuthGuard], component: ClubComponent},
