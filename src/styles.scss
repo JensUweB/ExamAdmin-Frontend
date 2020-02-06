@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    min-height: 100%;
+}
+.container {
+   margin-bottom: 50px;
+   min-height: 80%;
+   background-color: whitesmoke;
+}
+footer {
+    max-height: 50px;
+}
+.bg-dark {
+    color: white; //Text Color
+}
+button {
+    margin: 5px;
+}
+@media screen and (max-width: 600px) {
+    body {
+        width: 100%;
+    }
+    .container{
+        width: 100%;
+    }
+    button {
+        margin: 0;
+    }
+}
