@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./start.component.scss']
 })
 export class StartComponent {
-  title = 'Exam-Admin Frontend';
+  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
 }

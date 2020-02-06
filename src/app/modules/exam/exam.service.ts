@@ -50,7 +50,7 @@ export class ExamService implements OnInit, OnDestroy{
                     console.log('[ExamService] Data preparing done!');
                 });
             }
-            }, (err) => {console.log('[ExamService]: GraphQL Error:',err.graphQLErrors[0].message);});
+            }, (err) => {console.warn('[ExamService]: GraphQL Error:',err.graphQLErrors[0].message);});
             console.log("[ExamService] Initializing done!");
             console.log("[ExamService] Received data: ",this.exams);
     }
@@ -69,7 +69,7 @@ export class ExamService implements OnInit, OnDestroy{
                 if(response.data){
                     this.examinerClubs.push(response.data.getClubById);
                 }
-            }, (err) => {console.log('[ExamService]: GraphQL Error:',err.graphQLErrors[0].message);});
+            }, (err) => {console.warn('[ExamService]: GraphQL Error:',err.graphQLErrors[0].message);});
         });
     }
 
