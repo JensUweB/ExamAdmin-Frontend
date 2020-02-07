@@ -1,6 +1,5 @@
 <div class="row">
     <div class="col-sm">
-        Value: {{userForm.value | json}}
         <div class="row">
             <div class="col-md-12">
                 <form [formGroup]="userForm">
@@ -10,10 +9,10 @@
                         <input *ngIf="!login" formControlName="lastName" type="text" placeholder="Your last name">
                         <input formControlName="email" type="text" placeholder="Your email address" required>
                         <input formControlName="password" type="password" placeholder="Password" required>
-                        <div *ngIf="email.invalid && email.touched" class="alert alert-danger">
+                        <div *ngIf="email.invalid && email.touched" class="alert alert-danger" i18n>
                             Please type in a correct email!
                         </div>
-                        <div *ngIf="password.invalid && password.touched" class="alert alert-danger">
+                        <div *ngIf="password.invalid && password.touched" class="alert alert-danger i18n">
                             You need to type in your password...
                         </div>
                     </div>

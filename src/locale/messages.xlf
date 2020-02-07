@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="ngb.alert.close" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/alert/alert.d.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.previous" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.carousel.next" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.previous-month" datatype="html">
+        <source>Previous month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.next-month" datatype="html">
+        <source>Next month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.select-month" datatype="html">
+        <source>Select month</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.datepicker.select-year" datatype="html">
+        <source>Select year</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first" datatype="html">
+        <source>««</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous" datatype="html">
+        <source>«</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next" datatype="html">
+        <source>»</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.last" datatype="html">
+        <source>»»</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.first-aria" datatype="html">
+        <source>First</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.previous-aria" datatype="html">
+        <source>Previous</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.next-aria" datatype="html">
+        <source>Next</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.pagination.last-aria" datatype="html">
+        <source>Last</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.progressbar.value" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{getPercentValue()}}"/>%</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/progressbar/progressbar.d.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-hours" datatype="html">
+        <source>Increment hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.HH" datatype="html">
+        <source>HH</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.hours" datatype="html">
+        <source>Hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
+        <source>Decrement hours</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
+        <source>Increment minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.MM" datatype="html">
+        <source>MM</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.minutes" datatype="html">
+        <source>Minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
+        <source>Decrement minutes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
+        <source>Increment seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.SS" datatype="html">
+        <source>SS</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.seconds" datatype="html">
+        <source>Seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
+        <source>Decrement seconds</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.PM" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ i18n.getAfternoonPeriod() }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.timepicker.AM" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ i18n.getMorningPeriod() }}"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ngb.toast.close-aria" datatype="html">
+        <source>Close</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">node_modules/@ng-bootstrap/ng-bootstrap/toast/toast.d.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="14b3eb9864356733f5212612bb8e8b53ce334977" datatype="html">
+        <source>Start Page</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/start/start.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">Start page Headline</note>
+      </trans-unit>
+      <trans-unit id="ccbd2a96962a844a8ad12a0bead2b30773accb1c" datatype="html">
+        <source>
+      Toggle
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a8f59ae8270d51c512cc9451af31c1fecc1a08e3" datatype="html">
+        <source>
+            Start</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f9764cd336792699c7f98ea7ab5e540924e4b0a8" datatype="html">
+        <source>
+            My Profile</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="45208c0af3183dba0aeb1a2dbddf55e6b96a9d86" datatype="html">
+        <source>
+            Authenticate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1701a1ae85a0011e78956a1d6ea76e076f5fa7e6" datatype="html">
+        <source>
+            Exams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="07077406d279604c990d3ec57ced50926fe98dfa" datatype="html">
+        <source>
+            Martial Arts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="53e2cf1e96b6357125963de124b594433767189d" datatype="html">
+        <source>
+            Clubs</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eceecfc96cb23e7a608ead2d76ff9a8c21ab0ec9" datatype="html">
+        <source>Add...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d85e5ff869af70d03a0b6f69d0e56a9b4ade37bb" datatype="html">
+        <source>Add Exam</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f08b1c11e7fc5712eff2921d3e0a841ba802f84f" datatype="html">
+        <source>Add Exam Result</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="82c5b3ff0577689ddd88055ef9e44b96f61b6e39" datatype="html">
+        <source>Add Martial Art</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c0bb66f11fab4ab8ee9b6a05514bfe6ea84fe463" datatype="html">
+        <source>Add Club</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">159</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bb694b49d408265c91c62799c2b3a7e3151c824d" datatype="html">
+        <source>Logout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fb62fc5ab23c46ef54fcbd197517c5a072c5ecd4" datatype="html">
+        <source>
+                            Please type in a correct email!
+                        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="450e28e57284212c18cd3beb79b91cfea5a0d122" datatype="html">
+        <source>My Profile</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="728e20ae0465b216b3a18fdb5ee5db23f3942df3" datatype="html">
+        <source>Personal data:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="96c6ead4da45d7ca45a9703171301f0c79c82d16" datatype="html">
+        <source>First Name:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ba6702bed331082fd18a5755c9b05fe40be188f5" datatype="html">
+        <source>Last Name:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="844aa28b618184686c190f3622ad71ee7c0d8631" datatype="html">
+        <source>E-Mail:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="43a87c03e76b2fc18c03c8da28721de261d73a14" datatype="html">
+        <source>Old Password:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="694da3ca77397d1aa9c2df10681144eee0e7113d" datatype="html">
+        <source>New Password:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ab24d1cc9c59c4813bacc6fe433fc60e462f14cb" datatype="html">
+        <source>Repeat Password:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="414633878413277e360a4be6a62f11663ae1d193" datatype="html">
+        <source>Your Clubs:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="dd845a7902c8addabef95c90b5e9ce4849cd2eee" datatype="html">
+        <source>Your Martial Arts:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a26abd8849633f30c01a456860e9cae72275730" datatype="html">
+        <source>Exam Results:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">109</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e8d5e1bafa3da2ac582620bde835ca2de7b4881b" datatype="html">
+        <source>Martial Art</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3c3a423d91e36ac6624e909fcd2669a25685f847" datatype="html">
+        <source>Rank</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">118</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">68</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="80ebb1b82fed892345531fff2ba095160972dd86" datatype="html">
+        <source>Result</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">119</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2f933b826a570836cab04f683970a2d22068458c" datatype="html">
+        <source>Date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">120</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="acc04ca445d64958d843622f9ce95c0378198c24" datatype="html">
+        <source>Protocol</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3a03d3c2e459f8f8fa7202c0fce465d6165f9e2b" datatype="html">
+        <source>passed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">128</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="41435d5a5692c8e412c74deaee95d99dbd3617e1" datatype="html">
+        <source>failed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">129</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e576d10a00b926dc56802231438eea7831b602ee" datatype="html">
+        <source>download</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f4939b9f76bdb663ab14b47d0e97fd19ac9d308" datatype="html">
+        <source>Add a Club</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="60f20da57a685b6bdd256b13e7ee6f0590933e5b" datatype="html">
+        <source>Hello, <x id="INTERPOLATION" equiv-text="{{user.firstName}}"/>!<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+      Here you can add a new club to your profile, if you want!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fe87de90cd2cbf7ce06f79190c07fb927f9c8090" datatype="html">
+        <source>CLub list</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">151</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e669986593533a7d553ed0d3d691e9565bef7ac7" datatype="html">
+        <source>Martial Arts</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/martialArts.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">Headline</note>
+      </trans-unit>
+      <trans-unit id="40be9669a32265b595af31cb05c0c45c9a18723a" datatype="html">
+        <source>Examiner Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/martialArts.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <note priority="1" from="description">Martial Arts Component</note>
+      </trans-unit>
+      <trans-unit id="34bb631d179e79d7ad5dc472d33911fc5ca3569b" datatype="html">
+        <source>Examiner Rank</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/martialArts.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <note priority="1" from="description">Martial Arts Component</note>
+      </trans-unit>
+      <trans-unit id="00af03a23e9dd4a271a6d17a123288403ed98abd" datatype="html">
+        <source>Exams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2e4130ec5d5c9618bbf20557c8b2bd67f7fd5742" datatype="html">
+        <source>Martial Art:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a909032bc1adde98d59893a38435c432fa0ccbd7" datatype="html">
+        <source>Registration End Date:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2180fcadd87c92af034f9c20f08c5b01a1044bc8" datatype="html">
+        <source>Exam Date:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="49561bc4c0e62eeddb0e5bb2631afff005f16964" datatype="html">
+        <source>Club:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be137d893371edc43b3c4b3379b4393cb4760c73" datatype="html">
+        <source>Examiner:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6ffeec779783d93e43e2f47cf6d45d74321bd040" datatype="html">
+        <source>Price:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f8b2bb476981727ab34ed40fde1218361f92c45" datatype="html">
+        <source>Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="28f86ffd419b869711aa13f5e5ff54be6d70731c" datatype="html">
+        <source>Edit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ac5beed7d881bab02e5d06ffe52f98d490f2b46b" datatype="html">
+        <source>Exam Details</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d656685ee8a232067e1ef24742fc18804212576f" datatype="html">
+        <source>
+                    Registration End Date:
+                </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b7b0f148d99b69ecfa4b6ee8d30a560a10439648" datatype="html">
+        <source>
+                    Exam Date:
+                </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a4483a4c6feaf1fc463b766e94866b0d7d8f7432" datatype="html">
+        <source>
+                    Club:
+                </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="68f141fb2f77f5a0ec9eaa1eca2fba161a4184fe" datatype="html">
+        <source>
+                    Address:
+                </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">132</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d3db995be2707dac0ea603a3330fae6b6e23a181" datatype="html">
+        <source>
+                    Examiner:
+                </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="49ff8305f6d82abcbdf12cf0814a06a6748ce216" datatype="html">
+        <source>Participants:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cff1428d10d59d14e45edec3c735a27b5482db59" datatype="html">
+        <source>Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="22b9cb3567ef53d2549fef112bc9eedaf1c48d0d" datatype="html">
+        <source>No participants found.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bfedc3b3c7c9631f313b58d2335e490c7645a813" datatype="html">
+        <source>
+                    Martial Art:
+                </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">98</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="10af2130c7645a94f12a84ab4107b67ec4cf96d0" datatype="html">
+        <source>
+            Minimum Rank for Registration:
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a2f14a73f7a6e94479f67423cc51102da8d6f524" datatype="html">
+        <source>None</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ac0a0660b065daf46917d7d9353b347f802ebeb0" datatype="html">
+        <source>
+                Please set a min rank! You can set it to &quot;none&quot;, if there is no min rank.
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ffa3f4f17a84dceaba546918c13fddc556cf076b" datatype="html">
+        <source>
+            Exam Date:
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">99</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0181162430e66f159fb488fbafa86a70db0c59ff" datatype="html">
+        <source>
+                Please set time and date when the exam should start!
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3d16a875addd3cef798af530708b8f592fa9ff69" datatype="html">
+        <source>
+            Registration End Date:
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">120</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1643766f74b28a213d91dae30e712d5cf5a9988e" datatype="html">
+        <source>
+                Please set time and date when registration should close!
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">134</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="28f263dc3eab2d17ca17f9a8874dda3fd4ba40ae" datatype="html">
+        <source>
+            Participation Fee
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">141</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8a4818caa707326397366e5bda4d6d18f743610f" datatype="html">
+        <source>
+                Please enter a participation fee! &quot;0&quot; would be a valid fee. ;-)
+            </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">146</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4e53086f305e55d3d59721a14535b7f80e934c0f" datatype="html">
+        <source>
+            Your new exam was successfully created! Good for you!
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">163</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="95b117dda3987298381e15ab95f0eaf37447784d" datatype="html">
+        <source>
+            <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Sorry, but we got an error message from our backend:<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>
+            <x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/><x id="INTERPOLATION" equiv-text="{{error}}"/><x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/>
+            <x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>It looks like there is something wrong on our side. Please open a bug report on our <x id="START_LINK" ctype="x-a" equiv-text="&lt;a&gt;"/>GitHub<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> or try again in a few minutes!<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/>
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">168</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        <h1>Exam Details</h1>
+        <h1 i18n>Exam Details</h1>
         <div *ngIf="!editExam">
             <div class="row">
                 <div class="col-sm">
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" i18n>
                     Registration End Date:
                 </div>
                 <div class="col-sm">
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" i18n>
                     Exam Date:
                 </div>
                 <div class="col-sm">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" i18n>
                     Club:
                 </div>
                 <div class="col-sm">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" i18n>
                     Address:
                 </div>
                 <div class="col-sm">
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" i18n>
                     Examiner:
                 </div>
                 <div class="col-sm">
@@ -56,7 +56,7 @@
             <div *ngIf="exam.examiner._id == user._id">
                 <div class="row">
                     <div class="col-sm">
-                        <b>Participants:</b>
+                        <b i18n>Participants:</b>
                     </div>
                 </div>
                 <div class="row">
@@ -64,8 +64,8 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Rank</th>
+                                    <th i18n>Name</th>
+                                    <th i18n>Rank</th>
                                 </tr>
                             </thead>
                             <tbody *ngFor="let user of exam.participants">
@@ -77,7 +77,7 @@
                         </table>
                     </div>
                     <div class="col-sm" *ngIf="!exam.participants">
-                        <b>No participants found.</b>
+                        <b i18n>No participants found.</b>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" i18n>
                     Martial Art:
                 </div>
                 <div class="col-sm">
@@ -103,7 +103,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" i18n>
                     Registration End Date:
                 </div>
                 <div class="col-sm">
@@ -111,7 +111,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" i18n>
                     Exam Date:
                 </div>
                 <div class="col-sm">
@@ -119,7 +119,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" i18n>
                     Club:
                 </div>
                 <div class="col-sm">
@@ -129,7 +129,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm" i18n>
                     Address:
                 </div>
                 <div class="col-sm">

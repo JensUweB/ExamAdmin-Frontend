@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <h1>Exams</h1>
+    <h1 i18n>Exams</h1>
   </div>
 </div>
 <div class="row">
@@ -23,7 +23,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-sm">
-                <b>Martial Art:</b>
+                <b i18n>Martial Art:</b>
               </div>
               <div class="col-sm">
                 <b>{{result.martialArt.styleName}} {{result.martialArt.name}}</b>
@@ -31,7 +31,7 @@
             </div>
             <div class="row">
               <div class="col-sm">
-                <b>Registration End Date:</b>
+                <b i18n>Registration End Date:</b>
               </div>
               <div class="col-sm">
                 {{result.regEndDate}}
@@ -39,7 +39,7 @@
             </div>
             <div class="row">
               <div class="col-sm">
-                <b>Exam Date:</b>
+                <b i18n>Exam Date:</b>
               </div>
               <div class="col-sm">
                 {{result.examDate}}
@@ -47,7 +47,7 @@
             </div>
             <div class="row">
               <div class="col-sm">
-                <b>Club:</b>
+                <b i18n>Club:</b>
               </div>
               <div class="col-sm">
                 {{result.club.name}}<br>
@@ -56,7 +56,7 @@
             </div>
             <div class="row">
               <div class="col-sm">
-                <b>Examiner:</b>
+                <b i18n>Examiner:</b>
               </div>
               <div class="col-sm">
                 {{result.examiner.firstName}} {{result.examiner.lastName}}
@@ -64,16 +64,16 @@
             </div>
             <div class="row">
               <div class="col-sm">
-                <b>Price:</b>
+                <b i18n>Price:</b>
               </div>
               <div class="col-sm">
                 20.00 €
               </div>
             </div>
             <div class="row">
-                <button class="btn btn-success" (click)="showDetails(result)">Details</button>
+                <button class="btn btn-success" (click)="showDetails(result)" i18n>Details</button>
                 <div *ngIf="result.examiner._id == user._id">
-                  <button class="btn btn-warning" (click)="showEdit(result)">Edit</button>
+                  <button class="btn btn-warning" (click)="showEdit(result)" i18n>Edit</button>
                 </div>
             </div>
           </div>
