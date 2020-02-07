@@ -9,8 +9,9 @@ import { ExamService } from './exam.service';
   styleUrls: ['./exam.component.scss']
 })
 export class ExamComponent implements OnInit{
-  exams;
+  plannedExams;
   user;
+  showPlanned = true;
 
   constructor(
     private router: Router, 
@@ -19,7 +20,7 @@ export class ExamComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.exams = this.examService.getExams();
+    this.plannedExams = this.examService.getExams();
     this.user = this.authService.user;
   }
   showDetails(exam: any): void {

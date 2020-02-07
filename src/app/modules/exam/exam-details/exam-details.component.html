@@ -53,6 +53,11 @@
                     {{exam.examiner.firstName}} {{exam.examiner.lastName}}
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm">
+                    <button class="btn btn-success" i18n>Participate</button>
+                </div>
+            </div>
             <div *ngIf="exam.examiner._id == user._id">
                 <div class="row">
                     <div class="col-sm">
@@ -66,12 +71,14 @@
                                 <tr>
                                     <th i18n>Name</th>
                                     <th i18n>Rank</th>
+                                    <th>Exam Result</th>
                                 </tr>
                             </thead>
                             <tbody *ngFor="let user of exam.participants">
                                 <tr>
                                     <td>{{user.firstName}} {{user.lastName}}</td>
                                     <td>{{user.martialArts[0].rankName}}</td>
+                                    <td><button class="btn btn-success">Add</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -86,14 +93,16 @@
         <form>
             <div class="row">
                 <div class="col-sm">
-                    <input type="text" value="{{exam.title}}" id="title">
+                    <input class="form-control" type="text" value="{{exam.title}}" id="title">
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-sm">
-                    <textarea value="{{exam.description}}" id="description" rows="4" cols="50"></textarea>
+                    <textarea class="form-control" value="{{exam.description}}" id="description" rows="4" cols="50"></textarea>
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-sm" i18n>
                     Martial Art:
@@ -102,40 +111,45 @@
                     {{exam.martialArt.styleName}} {{exam.martialArt.name}}
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-sm" i18n>
                     Registration End Date:
                 </div>
                 <div class="col-sm">
-                    <input type="text" value="{{exam.regEndDate}}" id="regEndDate">
+                    <input class="form-control" type="text" value="{{exam.regEndDate}}" id="regEndDate">
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-sm" i18n>
                     Exam Date:
                 </div>
                 <div class="col-sm">
-                    <input type="text" value="{{exam.examDate}}" id="examDate">
+                    <input class="form-control" type="text" value="{{exam.examDate}}" id="examDate">
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-sm" i18n>
                     Club:
                 </div>
                 <div class="col-sm">
-                    <select *ngFor="let club of clubs">
+                    <select class="form-control" *ngFor="let club of clubs">
                         <option value="{{club._id}}">{{club.name}}</option>
                     </select>
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-sm" i18n>
                     Address:
                 </div>
                 <div class="col-sm">
-                    <input type="text" value="{{exam.examPlace}}" id="examPlace">
+                    <input class="form-control" type="text" value="{{exam.examPlace}}" id="examPlace">
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col-sm">
                     <button class="btn btn-success">Update</button>
