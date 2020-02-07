@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
 
-const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{firstName, lastName, martialArts{_id, rankName}}}}`;
+const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{firstName, lastName, martialArts{_id, rankName}}, ranks{name, number}}}`;
 
 @Injectable()
 export class MartialArtsService implements OnInit {
