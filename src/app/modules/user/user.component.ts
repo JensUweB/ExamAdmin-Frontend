@@ -21,11 +21,11 @@ const clubMutation = gql`mutation addUserToClub($id: String!){addUserToClub(club
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  private user;
-  private examResults;
-  private url;
-  private clubs;
-  private clubForm: FormGroup;
+  user;
+  examResults;
+  url;
+  clubs;
+  clubForm: FormGroup;
 
   constructor(
     private apollo: Apollo,

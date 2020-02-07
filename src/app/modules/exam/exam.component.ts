@@ -9,8 +9,8 @@ import { ExamService } from './exam.service';
   styleUrls: ['./exam.component.scss']
 })
 export class ExamComponent implements OnInit{
-  private exams;
-  private user;
+  exams;
+  user;
 
   constructor(
     private router: Router, 

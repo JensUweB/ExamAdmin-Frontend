@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy{
-  private userSub: Subscription;
+  userSub: Subscription;
   isAuthenticated = false;
   navbarOpen = true;
-  private screenHeight;
-  private screenWidth;
+  screenHeight;
+  screenWidth;
 
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;

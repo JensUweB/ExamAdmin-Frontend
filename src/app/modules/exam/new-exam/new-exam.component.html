@@ -54,7 +54,7 @@
         </div>
         <div class="col-8">
             <select class="form-control" formControlName="club">
-                <option [value]="none">none</option>
+                <option value="none">none</option>
                 <option *ngFor="let ele of user.clubs" [value]="ele.club._id">{{ele.club.name}}</option>
             </select>
             <div *ngIf="!club.valid && club.touched" class="alert alert-danger" role="alert">
@@ -87,7 +87,7 @@
         </div>
         <div class="col-8">
             <select class="form-control" formControlName="minRank" *ngIf="martialArt.value">
-                <option [value]="none">None</option>
+                <option value="none">None</option>
                 <option *ngFor="let rank of martialArts[martialArt.value].ranks" [value]="rank | json">{{rank.name}}</option>
             </select>
             <div *ngIf="!minRank.valid && minRank.touched" class="alert alert-danger" role="alert">
@@ -95,8 +95,6 @@
             </div>
         </div>
     </div>  
-    <hr>
-    <div *ngIf="martialArt.value">{{martialArt.ranks | json}}</div>
     <div class="row">
         <div class="col-4">
             Exam Date:

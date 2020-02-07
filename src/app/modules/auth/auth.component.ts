@@ -9,7 +9,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
-  private userForm: FormGroup;
+  userForm: FormGroup;
+  login = true;
 
   constructor(private router: Router, private authService: AuthService, private fb: FormBuilder) { }
 
@@ -20,13 +21,12 @@ export class AuthComponent implements OnInit {
       lastName: [''],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required ], //Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')
-      login: true
     });
   }
 
   async confirm() {
     if (this.userForm.valid) {
-      if (this.login.value) {
+      if (this.login) {
         this.authService.login(this.email.value, this.password.value);
         this.router.navigate(['/']);
       } else {
@@ -50,8 +50,5 @@ export class AuthComponent implements OnInit {
   }
   get password() {
     return this.userForm.get('password');
-  }
-  get login() {
-    return this.userForm.get('login');
   }
 }

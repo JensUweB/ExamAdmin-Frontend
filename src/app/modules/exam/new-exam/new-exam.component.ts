@@ -28,13 +28,13 @@ const newExamQuery = gql`mutation createExam
 })
 export class NewExamComponent implements OnInit, OnDestroy{
 
-  private user: User;
-  private isExaminer = false;
-  private martialArts = [];
-  private examForm: FormGroup;
-  private isSubmitted: boolean = false;
-  private formSubscription: Subscription;
-  private error;
+  user: User;
+  isExaminer = false;
+  martialArts = [];
+  examForm: FormGroup;
+  isSubmitted: boolean = false;
+  formSubscription: Subscription;
+  error;
 
   constructor(
     private apollo: Apollo, 

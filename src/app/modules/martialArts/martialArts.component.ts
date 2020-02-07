@@ -11,7 +11,7 @@ import { MartialArtsService } from './martialArts.service';
   styleUrls: ['./martialArts.component.scss']
 })
 export class MartialArtsComponent implements OnInit {
-  private martialArts;
+  martialArts;
 
   constructor(
     private maService: MartialArtsService

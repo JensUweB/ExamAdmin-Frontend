@@ -10,10 +10,10 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./exam-details.component.css']
 })
 export class ExamDetailsComponent implements OnInit {
- private exam: Exam;
- private user: User;
- private editExam: boolean;
- private clubs;
+ exam: Exam;
+ user: User;
+ editExam: boolean;
+ clubs;
 
   constructor(private examService: ExamService, private authService: AuthService) { }
 
