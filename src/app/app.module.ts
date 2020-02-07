@@ -22,10 +22,6 @@ import { MartialArtsService } from './modules/martialArts/martialArts.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ClubService } from './modules/club/club.service';
-import { registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/de';
-
-registerLocaleData(localeDe, 'de-DE');
 
 @NgModule({
   declarations: [
