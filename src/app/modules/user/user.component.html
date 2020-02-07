@@ -75,12 +75,12 @@
           <h4 i18n>Your Clubs:</h4>
         </div>
         <div class="col-4">
-          <button type="button" class="btn btn-sm btn-success" (click)="openAddClub(content)">Add</button>
+          <button type="button" class="btn btn-sm btn-success" (click)="openPopup(clubPopup)">Add</button>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngFor="let club of user.clubs">
         <div class="col-sm">
-          <a href="/user/#">{{user.clubs[0].club.name}}</a>
+          <a href="/user/#">{{club.club.name}}</a>
         </div>
       </div>
       <hr>
@@ -89,7 +89,7 @@
           <h4 i18n>Your Martial Arts:</h4>
         </div>
         <div class="col-4">
-          <button type="button" class="btn btn-sm btn-success">Add</button>
+          <button type="button" class="btn btn-sm btn-success" (click)="openPopup(maPopup)">Add</button>
         </div>
       </div>
       <div *ngFor="let martialArt of user.martialArts" class="row">
@@ -100,6 +100,15 @@
           <b>{{martialArt.rankName}}</b>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="maError">
+    <div class="col">
+      <ngb-alert [dismissible]="false" type="danger">
+        <p>Warning! We got an error message from our api:</p>
+        <p><strong>{{maError}}</strong></p>
+        <p>Please try again later or report this issue on github!</p>
+      </ngb-alert>
     </div>
   </div>
   <br>
@@ -128,7 +137,7 @@
             <th *ngIf="result.passed" i18n>passed</th>
             <th *ngIf="!result.passed" i18n>failed</th>
             <th>{{result.date}}</th>
-            <th><a class="btn btn-sm btn-warning" (click)="getReport()" i18n>download</a></th>
+            <th><a class="btn btn-sm btn-warning" (click)="downloadFile(result.reportUri, null)" i18n>download</a></th>
           </tr>
         </tbody>
       </table>
@@ -136,7 +145,8 @@
   </div>
 </div>
 
-<ng-template #content let-c="close" let-d="dismiss">
+<!-- Popup form for adding a new club to the user profile -->
+<ng-template #clubPopup let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title" i18n>Add a Club</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -148,7 +158,7 @@
       Here you can add a new club to your profile, if you want!</p>
     <form [formGroup]="clubForm">
       <div class="form-group">
-        <label i18n>CLub list</label>
+        <label i18n>Club list</label>
         <select class="form-control" formControlName="clubId">
           <option *ngFor="let club of clubs" [value]="club._id">{{club.name}}</option>
         </select>
@@ -157,5 +167,30 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success" (click)="onClubSubmit(); c('Save click')" i18n>Add Club</button>
+  </div>
+</ng-template>
+
+<!-- A popup form for adding a new martial art to the user profile -->
+<ng-template #maPopup let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" i18n>Add a Martial Art</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p i18n>Hello, {{user.firstName}}!<br>
+      Here you can add a new martial art to your profile, if you want!</p>
+      <form [formGroup]="maForm">
+        <select class="form-control" formControlName="maId">
+          <option *ngFor="let ma of martialArts let i = index" [value]="i">{{ma.styleName}} {{ma.name}}</option>
+        </select>
+        <select class="form-control" formControlName="rankName">
+          <option *ngFor="let rank of martialArts[maId.value].ranks" [value]="rank.name">{{rank.name}}</option>
+        </select>
+      </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="onMaSubmit(); c('Save click')" i18n>Add Martial Art</button>
   </div>
 </ng-template>
