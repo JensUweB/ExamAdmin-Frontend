@@ -7,7 +7,7 @@
       Toggle
       </button>
 
-      <ul *ngIf="screenWidth > 600 || navbarOpen" class="navbar-nav mr-auto">
+      <ul ngbNav *ngIf="screenWidth > 600 || navbarOpen" class="nav-pills nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" i18n>
             Start</a>

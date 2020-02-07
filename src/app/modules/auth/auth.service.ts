@@ -60,6 +60,7 @@ export class AuthService implements OnInit, OnDestroy{
 
     async loadUser() {
         if(localStorage.getItem('token')){
+            this.token = localStorage.getItem('token');
             console.log('[AuthService] Loading user data...');
             this.querySubscription = this.apollo.watchQuery<any>({
                 query: getUser,
