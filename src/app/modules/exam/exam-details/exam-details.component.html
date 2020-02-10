@@ -1,6 +1,14 @@
 <div class="row">
     <div class="col">
-        <h1 i18n>Exam Details</h1>
+        <div class="row">
+            <div class="col-8">
+                <h1 i18n>Exam Details</h1>
+            </div>
+            <div class="col -4">
+                <button class="btn btn-warning" (click)="editExam=true" style="float: right">Edit</button>
+            </div>
+        </div>
+        
         <div *ngIf="!editExam">
             <div class="row">
                 <div class="col-sm">
@@ -55,9 +63,17 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <button class="btn btn-success" i18n>Participate</button>
+                    <button class="btn btn-success" (click)="onParticipate()" i18n>Participate</button>
                 </div>
             </div>
+            <div class="row" *ngIf="errors">
+                <div class="col">
+                  <ngb-alert [dismissible]="false" type="danger" *ngFor="let error of errors">
+                    <p>We got an error message from our api:</p>
+                    <p><strong>{{error}}</strong></p>
+                  </ngb-alert>
+                </div>
+              </div>
             <div *ngIf="exam.examiner._id == user._id">
                 <div class="row">
                     <div class="col-sm">
@@ -154,6 +170,7 @@
                 <div class="col-sm">
                     <button class="btn btn-success">Update</button>
                     <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-warning" (click)="editExam=false">Cancel</button>
                 </div>
             </div>
         </form>
