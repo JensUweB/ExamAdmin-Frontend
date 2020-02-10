@@ -4,7 +4,7 @@
             <div class="col-8">
                 <h1 i18n>Exam Details</h1>
             </div>
-            <div class="col -4">
+            <div class="col -4" *ngIf="exam.examiner._id == user._id">
                 <button class="btn btn-warning" (click)="editExam=true" style="float: right">Edit</button>
             </div>
         </div>

@@ -28,7 +28,6 @@ export class ExamDetailsComponent implements OnInit {
     this.editExam = this.examService.editExam;
     this.user = this.authService.user;
     this.clubs = this.examService.getCurrentClubs();
-    console.log('[ExamDetails] Clubs Array: ',this.clubs);
   }
 
   onParticipate() {
