@@ -102,12 +102,12 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="maError">
+  <br>
+  <div class="row" *ngIf="errors">
     <div class="col">
-      <ngb-alert [dismissible]="false" type="danger">
-        <p>Warning! We got an error message from our api:</p>
-        <p><strong>{{maError}}</strong></p>
-        <p>Please try again later or report this issue on github!</p>
+      <ngb-alert [dismissible]="false" type="danger" *ngFor="let error of errors">
+        <p>We got an error message from our api:</p>
+        <p><strong>{{error}}</strong></p>
       </ngb-alert>
     </div>
   </div>
@@ -119,7 +119,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col" *ngIf="examResults.length">
       <table class="table table-striped">
         <thead class="thead-dark">
           <tr>
@@ -141,6 +141,9 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="col" *ngIf="!examResults.length">
+      <b i18n>Sorry, but you don't have any exam results yet!</b>
     </div>
   </div>
 </div>

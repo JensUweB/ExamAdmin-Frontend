@@ -72,7 +72,7 @@ export class AuthService implements OnInit, OnDestroy{
                     this._isAuthenticated.next(true);
                 }
             }, (err) => {
-                console.warn('[AuthService] GraphQL Error:',err.graphQLErrors[0].message);
+                console.warn('[AuthService] GraphQL Error:',err);
             });
         }
     }

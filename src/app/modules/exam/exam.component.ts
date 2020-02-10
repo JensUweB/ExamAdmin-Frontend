@@ -25,6 +25,7 @@ export class ExamComponent implements OnInit{
   }
   showDetails(exam: any): void {
     this.examService.setExam(exam);
+    this.examService.editExam = false;
     this.router.navigate(['/exam-details']);
   }
 

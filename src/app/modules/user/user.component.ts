@@ -12,9 +12,9 @@ import { MartialArtsService } from '../martialArts/martialArts.service';
 const queryExamResults = gql`query getAllExamResults{getAllExamResults{_id, user, exam, date, passed, reportUri , martialArt{name, styleName},rank}}`;
 
 const clubMutation = gql`mutation addUserToClub($id: String!){addUserToClub(clubId: $id){_id}}`;
-const maMutation = gql`mutation addMartialArtRankToUser($maId: String!, $name: String!, $number: Number!)
-{addMartialArtRankToUser(maRank: {
-  _id: $maId, rankName: $name, rankNumber: $number})
+const maMutation = gql`mutation addMartialArtRankToUser($id: String!, $name: String!, $number: Float!)
+{addMartialArtRankToUser(userId: "", maRank: {
+  _id: $id, rankName: $name, rankNumber: $number})
 {_id}}`;
 
 @Component({
@@ -24,7 +24,7 @@ const maMutation = gql`mutation addMartialArtRankToUser($maId: String!, $name: S
 })
 export class UserComponent implements OnInit {
   user;
-  examResults;
+  examResults = [];
   url;
   clubs;
   martialArts;
@@ -32,6 +32,8 @@ export class UserComponent implements OnInit {
   maForm: FormGroup;
   userForm: FormGroup;
   maError;
+  errors = [];
+  warnings = [];
 
   constructor(
     private apollo: Apollo,
@@ -58,7 +60,6 @@ export class UserComponent implements OnInit {
     this.clubForm = this.fb.group({
       clubId: ''
     });
-    console.table(this.martialArts);
   }
 
   openPopup(content) {
@@ -67,28 +68,35 @@ export class UserComponent implements OnInit {
 
   onClubSubmit() {
     this.apollo.mutate<any>({
-      mutation: maMutation,
+      mutation: clubMutation,
       variables: {
         id: this.clubId.value
       }
     }).subscribe((response) => { 
-      //console.log('[User] Adding Club: ',response.data );
-    }); 
+      if(response.errors) console.log('[User] ',response.errors );
+    }, (err) => {
+      if(err.graphQLErrors.length)  this.errors.push('Code: '+err.graphQLErrors[0].message.statusCode + ' - ' + err.graphQLErrors[0].message.error + ' - ' + err.graphQLErrors[0].message.message);
+      else this.errors.push(err);
+    });
   }
 
   onMaSubmit() {
     //this.user.martialArts.push({_id: this.martialArts[this.maId.value], rankName: this.rankName.value});
     console.log(this.martialArts[this.maId.value].ranks.filter(rank => rank.name == this.rankName.value)[0].number);
     this.apollo.mutate<any>({
-      mutation: clubMutation,
+      mutation: maMutation,
       variables: {
-        maId: this.martialArts[this.maId.value]._id,
+        id: this.martialArts[this.maId.value]._id,
         name: this.rankName.value,
         number: this.martialArts[this.maId.value].ranks.filter(rank => rank.name == this.rankName.value)[0].number
       }
     }).subscribe((response) => { 
-      console.log('[UserComp] Response: ',response);
-    }, (err) => this.maError = err);
+      console.log('[UserComp] Success!');
+    }, (err) => {
+      if(err.graphQLErrors.length)  this.errors.push('Code: '+err.graphQLErrors[0].message.statusCode + ' - ' + err.graphQLErrors[0].message.error + ' - ' + err.graphQLErrors[0].message.message);
+      else this.errors.push(err);
+      console.log('[Usercomp] GraphQl Error: ',err);
+    });
   }
 
   ngOnInit() {
@@ -100,15 +108,15 @@ export class UserComponent implements OnInit {
         fetchPolicy: 'no-cache'
       }).valueChanges.subscribe((response) => {
         this.examResults = response.data.getAllExamResults;
-        console.log(this.examResults);
         this.examResults.forEach(ele => {
           const date = new Date(ele.date);
           ele.date = date.toLocaleDateString();
         });
-
-        console.log(this.examResults);
-        console.log('Done!');
-      }, (err) => { console.log('GraphQL error: ', JSON.stringify(err.graphQLErrors[0].message)) });
+        console.log('[UserComp] Done!');
+      }, (err) => {
+        if(err.graphQLErrors.length)  this.errors.push('Code: '+err.graphQLErrors[0].message.statusCode + ' - ' + err.graphQLErrors[0].message.error + ' - ' + err.graphQLErrors[0].message.message);
+      else this.errors.push(err);
+      });
 
     }
     this.user = this.authService.user;
