@@ -9,10 +9,11 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 
 const newExamQuery = gql`mutation createExam
-($title: String!, $description: String!, $examDate: Date!, $regEndDate: Date!, $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
+($title: String!, $description: String!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!, $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
 {createExam(input: {
   title: $title
   description: $description
+  examPlace: $address
   examDate: $examDate
   regEndDate: $regEndDate
   isPublic: $isPublic
@@ -34,7 +35,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
   examForm: FormGroup;
   isSubmitted: boolean = false;
   formSubscription: Subscription;
-  error;
+  errors = [];
 
   constructor(
     private apollo: Apollo, 
@@ -63,6 +64,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
       club: ['', [Validators.required]],
       title: ['', [Validators.required, Validators.minLength(10)]],
       description: ['', [Validators.required, Validators.minLength(15)]],
+      examPlace: ['', [Validators.required, Validators.minLength(10)]],
       minRank: [null, [Validators.required, Validators.minLength(2)]],
       examDate: [null, [Validators.required]],
       examTime: [null, [Validators.required]],
@@ -86,6 +88,9 @@ export class NewExamComponent implements OnInit, OnDestroy{
   }
   get description () {
     return this.examForm.get('description');
+  }
+  get examPlace () {
+    return this.examForm.get('examPlace');
   }
   get minRank () {
     return this.examForm.get('minRank');
@@ -119,13 +124,19 @@ export class NewExamComponent implements OnInit, OnDestroy{
     if(this.examForm.valid) {
       console.log('[NewExamComp] Your form is valid!');
 
+      var examDate = new Date(this.regEndDate.value.year, this.examDate.value.month, this.examDate.value.day, this.examTime.value.hour,this.examTime.value.minute,this.examTime.value.second, 0);
+      var regEndDate = new Date(this.regEndDate.value.year, this.regEndDate.value.month, this.regEndDate.value.day, this.regEndTime.value.hour,this.regEndTime.value.minute,this.regEndTime.value.second, 0);
+
+      console.log(this.regEndDate.value.year, this.examDate.value.month, this.examDate.value.day, this.examTime.value.hour,this.examTime.value.minute,this.examTime.value.second, 0);
+
       const result = await this.apollo.mutate<any>({
         mutation: newExamQuery,
         variables: {
           title: this.title.value,
           description: this.description.value,
-          examDate: new Date(this.examDate.value + ' ' + this.examTime.value),
-          regEndDate: new Date(this.regEndDate.value + ' ' + this.regEndTime.value),
+          address: this.examPlace.value,
+          examDate: examDate,
+          regEndDate: regEndDate,
           isPublic: this.isPublic.value,
           clubId: this.club.value,
           userId: this.user._id,
@@ -133,12 +144,10 @@ export class NewExamComponent implements OnInit, OnDestroy{
         }
       }).subscribe(response => {
         if(response.data) console.log('[NewExamComp] New exam successfull created!');
-        if(response.errors) console.warn('[NewExamComp] ERROR: ', response.errors);
       }, (err) => {
-        this.error = err;
-        console.warn('[NewExamComp]: GraphQL Error:',err);
+        this.errors.push(err);
+        console.warn('[NewExamComp]: GraphQL Error:',JSON.stringify(err));
       });
-
       this.isSubmitted = true;
     } else {
       console.log('[NewExamComp] Your form is NOT valid!');
