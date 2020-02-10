@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
+
+const signUp = gql`mutation signup($firstName: String!, $lastName: String!, $email: String!, $password: String!){
+  signup(userInput: {firstName: $firstName, lastName: $lastName, email: $email, password: $password})
+  {_id}}`;
 
 @Component({
   selector: 'app-auth',
@@ -11,8 +17,10 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class AuthComponent implements OnInit {
   userForm: FormGroup;
   login = true;
+  successMessages = [];
+  errors = [];
 
-  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder) { }
+  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder, private apollo: Apollo) { }
 
   ngOnInit() {
     // Setup the form
@@ -30,7 +38,23 @@ export class AuthComponent implements OnInit {
         this.authService.login(this.email.value, this.password.value);
         this.router.navigate(['/']);
       } else {
-        this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
+        //this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
+        console.log('[Auth] Sending account creation request...');
+        this.apollo.mutate<any>({
+          mutation: signUp,
+          variables: {
+            firstName: this.firstName.value,
+            lastName: this.lastName.value,
+            email: this.email.value,
+            password: this.password.value
+          }
+        }).subscribe((response) => { 
+          this.successMessages.push('Success! You should receive an confirmation email!');
+          console.log('[Auth] Success! You should receive an confirmation email!');
+        }, (err) => {
+          if(err.graphQLErrors.length)  this.errors.push('Code: '+err.graphQLErrors[0].message.statusCode + ' - ' + err.graphQLErrors[0].message.error + ' - ' + err.graphQLErrors[0].message.message);
+          this.errors.push(err);
+        });
       }
     } else {
     }
