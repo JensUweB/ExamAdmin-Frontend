@@ -12,7 +12,7 @@ import { ExamComponent } from './modules/exam/exam.component';
 import { ClubComponent } from './modules/club/club.component';
 import { UmbrellaAssocComponent } from './modules/umbrellaAssoc/umbrellaAssoc.component';
 import { StartComponent } from './modules/start/start.component';
-import { ExamResultComponent } from './modules/examResult/examResult.component';
+import { ExamResultComponent } from './modules/exam/exam-result/exam-result.component';
 import { GraphQLModule } from './apollo.config';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExamDetailsComponent } from './modules/exam/exam-details/exam-details.component';
