@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
   }
 
   addExamResult() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/exam-results']);
   }
 
   addMA() {
