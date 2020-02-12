@@ -115,7 +115,7 @@ export class UserComponent implements OnInit {
         console.log('[UserComp] Done!');
       }, (err) => {
         if(err.graphQLErrors.length)  this.errors.push('Code: '+err.graphQLErrors[0].message.statusCode + ' - ' + err.graphQLErrors[0].message.error + ' - ' + err.graphQLErrors[0].message.message);
-      else this.errors.push(err);
+        else this.errors.push(err);
       });
 
     }

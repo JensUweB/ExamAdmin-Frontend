@@ -99,7 +99,6 @@
         </div>
         <div class="col-8">
             <select class="form-control" formControlName="minRank" *ngIf="martialArt.value">
-                <option value="none" i18n>None</option>
                 <option *ngFor="let rank of martialArts[martialArt.value].ranks" [value]="rank | json">{{rank.name}}</option>
             </select>
             <div *ngIf="!minRank.valid && minRank.touched" class="alert alert-danger" role="alert" i18n>
