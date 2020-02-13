@@ -63,17 +63,17 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <button class="btn btn-success" (click)="onParticipate()" i18n>Participate</button>
+                    <button *ngIf="!hasCheckedIn" class="btn btn-success" (click)="onCheckIn()" i18n>Check in</button>
+                    <button *ngIf="hasCheckedIn" class="btn btn-warning" (click)="onCheckOut()" i18n>Check out</button>
                 </div>
             </div>
-            <div class="row" *ngIf="errors">
+            <div class="row" *ngIf="alerts">
                 <div class="col">
-                  <ngb-alert [dismissible]="false" type="danger" *ngFor="let error of errors">
-                    <p>We got an error message from our api:</p>
-                    <p><strong>{{error}}</strong></p>
+                  <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+                    <p><strong>{{alert.message}}</strong></p>
                   </ngb-alert>
                 </div>
-              </div>
+            </div>
             <div *ngIf="exam.examiner._id == user._id">
                 <div class="row">
                     <div class="col-sm">
