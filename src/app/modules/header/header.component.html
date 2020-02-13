@@ -32,11 +32,11 @@
             *ngIf="isAuthenticated" i18n>
             Martial Arts</a>
         </li>
-        <li class="nav-item">
+        <!-- li class="nav-item">
           <a class="nav-link disabled" routerLink="/clubs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
             *ngIf="isAuthenticated" i18n>
             Clubs</a>
-        </li>
+        </li-->
       </ul>
       <ul *ngIf="screenWidth > 600 || navbarOpen" class="nav nav-pills pull-right">
         <li class="nav-item" style="margin-right: 25px;">
@@ -45,8 +45,8 @@
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem (click)="addExam()" i18n>Add Exam</button>
               <button ngbDropdownItem (click)="addExamResult()" i18n>Add Exam Result</button>
-              <button ngbDropdownItem (click)="addMA()" disabled i18n>Add Martial Art</button>
-              <button ngbDropdownItem (click)="addClub()" disabled i18n>Add Club</button>
+              <!--button ngbDropdownItem (click)="addMA()" disabled i18n>Add Martial Art</button>
+              <button ngbDropdownItem (click)="addClub()" disabled i18n>Add Club</button-->
             </div>
             </div>
         </li>
