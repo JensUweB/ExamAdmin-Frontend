@@ -7,6 +7,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
+import { Alert } from '../../types/Alert';
 
 const newExamQuery = gql`mutation createExam
 ($title: String!, $description: String!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!, $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
@@ -35,7 +36,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
   examForm: FormGroup;
   isSubmitted: boolean = false;
   formSubscription: Subscription;
-  errors = [];
+  alerts: Alert[] = [];
 
   constructor(
     private apollo: Apollo, 
@@ -143,14 +144,18 @@ export class NewExamComponent implements OnInit, OnDestroy{
           maId: this.martialArts[this.martialArt.value]._id
         }
       }).subscribe(response => {
+        this.alerts.push({type:"success", message: 'Success! A new exam was created.'});
         if(response.data) console.log('[NewExamComp] New exam successfull created!');
       }, (err) => {
-        this.errors.push(err);
+        this.alerts.push({type: 'danger', message: err});
         console.warn('[NewExamComp]: GraphQL Error:',JSON.stringify(err));
       });
       this.isSubmitted = true;
     } else {
       console.log('[NewExamComp] Your form is NOT valid!');
     }
+  }
+  close(alert: Alert) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 }

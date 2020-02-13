@@ -1,9 +1,10 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
+import { Alert } from '../types/Alert';
 
 const login = gql`
 query login($email: String!, $password: String!)
@@ -20,6 +21,7 @@ export class AuthService implements OnInit, OnDestroy{
     user: User;
     token: string;
     tokenExpireDate: Date;
+    alerts: Alert[] = [];
 
     public _isAuthenticated = new BehaviorSubject(false);
 
@@ -29,10 +31,11 @@ export class AuthService implements OnInit, OnDestroy{
         
     }
 
-    async login(email: string, password: string): Promise<boolean> {
+    async login(email: string, password: string): Promise<any> {
+        let returnCode: number;
         let error;
         console.log('[AuthService] Logging in...');
-        this.querySubscription = this.apollo.watchQuery<any>({
+        this.apollo.watchQuery<any>({
             query: login,
             variables: {
                 email: email, 
@@ -48,14 +51,16 @@ export class AuthService implements OnInit, OnDestroy{
                 this._isAuthenticated.next(true);
                 localStorage.setItem('token',this.token);
                 localStorage.setItem('tokenExpDate',this.tokenExpireDate.toString());
-                this.router.navigate(['/']);
+            } 
+            if(response.errors) {
+                this.alerts.push({type: 'danger', message: response.errors[0].message})
+                throw response.errors;
             }
         }, (err) => {
-            console.warn('[AuthService] GraphQL Error:',JSON.stringify(err));
+            console.log('[AuthService] Error:',err);
+            this.alerts.push({type: 'danger', message: err});
+            throw err;
         });
-
-        if(error) return false;
-        return true;
     }
 
     async loadUser() {

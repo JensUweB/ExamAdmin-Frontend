@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { AuthService } from '../../auth/auth.service';
 import { Apollo } from 'apollo-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Alert } from '../../types/Alert';
 
 const query = gql`{getOpenExams{_id, title, examDate, martialArt{_id, name, styleName, ranks{name}}, 
 participants{_id, firstName, lastName}}}`;
@@ -23,10 +24,11 @@ const uploadFile = gql`mutation uploadExamProtocol($examResultId: String!, $file
 export class ExamResultComponent implements OnInit {
   exams;
   erForm: FormGroup;
-  file: File;
+  file: Blob;
   errors = [];
   erId: String;
   user;
+  alerts: Alert[] = [];
 
   constructor(
     private authService: AuthService,
@@ -44,7 +46,11 @@ export class ExamResultComponent implements OnInit {
         console.log(this.exams);
         console.log('[ExamResult] Data: ', response.data);
       }
-    }, (err) => { console.warn('[ExamResult]: GraphQL Error:', JSON.stringify(err)); });
+    }, (err) => { 
+      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
+      else this.alerts.push({type: 'danger', message: err});
+      console.warn('[ExamResult]: GraphQL Error:', JSON.stringify(err)); 
+    });
 
     this.erForm = this.fb.group({
       userId: ['', [Validators.required]],
@@ -81,42 +87,44 @@ export class ExamResultComponent implements OnInit {
         passed: this.passed.value
       }
     }).subscribe(response => {
-      console.log('Response: ', response);
       if (response.data) {
-        // Upload protocol file for the created exam result
-        var operations = {
-          mutation: uploadFile,
-          variables: {
-            examResultId: response.data.createExamResult._id,
-            file: null,
-          }
-        };
-        this.apollo.mutate<any>({
-          mutation: uploadFile,
-          variables: {
-            examResultId: response.data.createExamResult._id,
-            file: this.file,
-          }
-        }).subscribe(response => {
-          if (response.data) {
-          }
-        }, (err) => {
-          this.errors.push(err);
-          console.warn('[ExamResult] ', JSON.stringify(err));
-        });
+        this.alerts.push({type:"success", message: 'Success! Exam Result created!'});
+        this.uploadFile(response.data.createExamResult._id);
       }
     }, (err) => {
-      if (err.graphQLErrors[0].message.statusCode != 406) this.errors.push(err); // Code 406 means, that the exam result already exists
-      else {
-      this.erId = this.exams[this.examId.value]._id;
-        console.log('Your IDs:', this.erId, this.exams[this.examId.value]._id);
-      }
+      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
+      else this.alerts.push({type: 'danger', message: err});
       console.warn('[ExamResult] ', JSON.stringify(err));
+
+      if (err.graphQLErrors[0].message.statusCode == 406) {this.erId = this.exams[this.examId.value]._id;}
     });
   }
 
   fileChanged(e) {
     this.file = e.target.files[0];
+  }
+
+  uploadFile(erId: string) {
+    // Upload protocol file for the created exam result
+    this.apollo.mutate<any>({
+      mutation: uploadFile,
+      variables: {
+        examResultId: erId,
+        file: this.file,
+      },
+      // Setting the context is very important i order for apollo-upload to work!
+      context: {
+         useMultipart: true
+      }
+    }).subscribe(response => {
+      if (response.data) {
+        this.alerts.push({type:"success", message: 'Exam Result Procotol Upload finished!'});
+      }
+    }, (err) => {
+      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
+      else this.alerts.push({type: 'danger', message: err});
+      console.warn('[ExamResult] ', JSON.stringify(err));
+    });
   }
 
   get userId() {
@@ -143,8 +151,8 @@ export class ExamResultComponent implements OnInit {
   get passed() {
     return this.erForm.get('passed');
   }
-  /* get file() {
-    return this.erForm.get('file');
-  } */
 
+  close(alert: Alert) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
+  }
 }

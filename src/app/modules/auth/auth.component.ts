@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
+import { Alert } from '../types/Alert';
 
 const signUp = gql`mutation signup($firstName: String!, $lastName: String!, $email: String!, $password: String!){
-  signup(userInput: {firstName: $firstName, lastName: $lastName, email: $email, password: $password})
-  {_id}}`;
+  signup(userInput: {firstName: $firstName, lastName: $lastName, email: $email, password: $password})}`;
 
 @Component({
   selector: 'app-auth',
@@ -17,8 +17,7 @@ const signUp = gql`mutation signup($firstName: String!, $lastName: String!, $ema
 export class AuthComponent implements OnInit {
   userForm: FormGroup;
   login = true;
-  successMessages = [];
-  errors = [];
+  alerts: Alert[] = [];
 
   constructor(private router: Router, private authService: AuthService, private fb: FormBuilder, private apollo: Apollo) { }
 
@@ -35,8 +34,21 @@ export class AuthComponent implements OnInit {
   async confirm() {
     if (this.userForm.valid) {
       if (this.login) {
-        this.authService.login(this.email.value, this.password.value);
-        this.router.navigate(['/']);
+          
+        try {
+          this.authService.login(this.email.value, this.password.value)
+        .then(() => {
+          console.log('Was zur hölle passiert hier?');
+          this.alerts.push({type: 'success', message: 'Login successful! You will be redirected shortly!'});
+        })
+        .catch(err => {
+          console.log('Ich werd hier noch verrückt!');
+          this.alerts.push({type:"danger", message: err});
+        });
+      } catch (err) { console.log('Jub, so läufts!'); }
+        if(this.authService.alerts) this.alerts.push(...this.authService.alerts);
+
+          
       } else {
         //this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
         console.log('[Auth] Sending account creation request...');
@@ -49,14 +61,13 @@ export class AuthComponent implements OnInit {
             password: this.password.value
           }
         }).subscribe((response) => { 
-          this.successMessages.push('Success! You should receive an confirmation email!');
+          this.alerts.push({type:"success", message: 'Success! You should receive an confirmation email!'});
           console.log('[Auth] Success! You should receive an confirmation email!');
         }, (err) => {
-          if(err.graphQLErrors.length)  this.errors.push('Code: '+err.graphQLErrors[0].message.statusCode + ' - ' + err.graphQLErrors[0].message.error + ' - ' + err.graphQLErrors[0].message.message);
-          this.errors.push(err);
+          if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
+          else this.alerts.push({type: 'danger', message: err});
         });
       }
-    } else {
     }
   }
 
@@ -74,5 +85,8 @@ export class AuthComponent implements OnInit {
   }
   get password() {
     return this.userForm.get('password');
+  }
+  close(alert: Alert) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 }

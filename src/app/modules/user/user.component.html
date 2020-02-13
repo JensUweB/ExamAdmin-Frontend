@@ -103,11 +103,10 @@
     </div>
   </div>
   <br>
-  <div class="row" *ngIf="errors">
+  <div class="row" *ngIf="alerts">
     <div class="col">
-      <ngb-alert [dismissible]="false" type="danger" *ngFor="let error of errors">
-        <p>We got an error message from our api:</p>
-        <p><strong>{{error}}</strong></p>
+      <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+        <p><strong>{{alert.message}}</strong></p>
       </ngb-alert>
     </div>
   </div>
@@ -184,14 +183,14 @@
   <div class="modal-body">
     <p i18n>Hello, {{user.firstName}}!<br>
       Here you can add a new martial art to your profile, if you want!</p>
-      <form [formGroup]="maForm">
-        <select class="form-control" formControlName="maId">
-          <option *ngFor="let ma of martialArts let i = index" [value]="i">{{ma.styleName}} {{ma.name}}</option>
-        </select>
-        <select class="form-control" formControlName="rankName">
-          <option *ngFor="let rank of martialArts[maId.value].ranks" [value]="rank.name">{{rank.name}}</option>
-        </select>
-      </form>
+    <form [formGroup]="maForm">
+      <select class="form-control" formControlName="maId">
+        <option *ngFor="let ma of martialArts let i = index" [value]="i">{{ma.styleName}} {{ma.name}}</option>
+      </select>
+      <select class="form-control" formControlName="rankName">
+        <option *ngFor="let rank of martialArts[maId.value].ranks" [value]="rank.name">{{rank.name}}</option>
+      </select>
+    </form>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-success" (click)="onMaSubmit(); c('Save click')" i18n>Add Martial Art</button>

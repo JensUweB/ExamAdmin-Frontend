@@ -58,7 +58,7 @@
                 <div class="row">
                     <div class="col-sm">
                         <b>Protocol upload - Please choose a file.</b>
-                        {{file}}
+                        <div *ngIf="file">{{file}}</div>
                     </div>
                     <div class="col-sm">
                         <input class="form-control" type="file" (change)="fileChanged($event)">
@@ -70,11 +70,11 @@
                         <button class="btn btn-success" (click)="onSubmit()">Send</button>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="alerts">
                     <div class="col">
-                        <ngb-alert [dismissible]="false" type="danger" *ngFor="let error of errors">
-                            <p><strong>{{error}}</strong></p>
-                          </ngb-alert>
+                      <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+                        <p><strong>{{alert.message}}</strong></p>
+                      </ngb-alert>
                     </div>
                 </div>
         </div>

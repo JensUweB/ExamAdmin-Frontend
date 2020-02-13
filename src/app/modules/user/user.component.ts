@@ -8,6 +8,7 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ClubService } from '../club/club.service';
 import { MartialArtsService } from '../martialArts/martialArts.service';
+import { Alert } from '../types/Alert';
 
 const queryExamResults = gql`query getAllExamResults{getAllExamResults{_id, user, exam, date, passed, reportUri , martialArt{name, styleName},rank}}`;
 
@@ -32,8 +33,7 @@ export class UserComponent implements OnInit {
   maForm: FormGroup;
   userForm: FormGroup;
   maError;
-  errors = [];
-  warnings = [];
+  alerts: Alert[] = [];
 
   constructor(
     private apollo: Apollo,
@@ -75,27 +75,32 @@ export class UserComponent implements OnInit {
     }).subscribe((response) => { 
       if(response.errors) console.log('[User] ',response.errors );
     }, (err) => {
-      if(err.graphQLErrors.length)  this.errors.push('Code: '+err.graphQLErrors[0].message.statusCode + ' - ' + err.graphQLErrors[0].message.error + ' - ' + err.graphQLErrors[0].message.message);
-      else this.errors.push(err);
+      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
+      else this.alerts.push({type: 'danger', message: err});
     });
   }
 
   onMaSubmit() {
     //this.user.martialArts.push({_id: this.martialArts[this.maId.value], rankName: this.rankName.value});
     console.log(this.martialArts[this.maId.value].ranks.filter(rank => rank.name == this.rankName.value)[0].number);
+    let number = this.martialArts[this.maId.value].ranks.filter(rank => rank.name == this.rankName.value)[0].number;
+    let id = this.martialArts[this.maId.value]._id;
+
     this.apollo.mutate<any>({
       mutation: maMutation,
       variables: {
-        id: this.martialArts[this.maId.value]._id,
+        id,
         name: this.rankName.value,
-        number: this.martialArts[this.maId.value].ranks.filter(rank => rank.name == this.rankName.value)[0].number
+        number
       }
     }).subscribe((response) => { 
+      this.authService.user.martialArts.push({_id: id, rankName: this.rankName.value, rankNumber: number});
+      this.alerts.push({type:"success", message: 'Success! You added a new martial art to your profile!'});
       console.log('[UserComp] Success!');
     }, (err) => {
-      if(err.graphQLErrors.length)  this.errors.push('Code: '+err.graphQLErrors[0].message.statusCode + ' - ' + err.graphQLErrors[0].message.error + ' - ' + err.graphQLErrors[0].message.message);
-      else this.errors.push(err);
-      console.log('[Usercomp] GraphQl Error: ',err);
+      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
+      else this.alerts.push({type: 'danger', message: err});
+      console.log('[Usercomp] GraphQl Error: ',JSON.stringify(err));
     });
   }
 
@@ -114,8 +119,7 @@ export class UserComponent implements OnInit {
         });
         console.log('[UserComp] Done!');
       }, (err) => {
-        if(err.graphQLErrors.length)  this.errors.push('Code: '+err.graphQLErrors[0].message.statusCode + ' - ' + err.graphQLErrors[0].message.error + ' - ' + err.graphQLErrors[0].message.message);
-        else this.errors.push(err);
+        this.alerts.push({type: 'danger', message: err});
       });
 
     }
@@ -138,8 +142,10 @@ export class UserComponent implements OnInit {
             binaryData.push(response);
             let downloadLink = document.createElement('a');
             downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-            if (filename)
+            //downloadLink.target = '_blank';
+            if (filename){
                 downloadLink.setAttribute('download', filename);
+            }
             document.body.appendChild(downloadLink);
             downloadLink.click();
         }
@@ -155,6 +161,9 @@ export class UserComponent implements OnInit {
 
   get rankName() {
     return this.maForm.get('rankName');
+  }
+  close(alert: Alert) {
+    this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 
 }

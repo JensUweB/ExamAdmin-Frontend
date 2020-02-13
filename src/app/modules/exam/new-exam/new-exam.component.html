@@ -169,17 +169,11 @@
         </div>
     </div>
 </form>
-<div class="row">
-    <div class="col-sm" *ngIf="isSubmitted && !errors.length">
-        <div class="alert alert-success" role="alert" i18n>
-            Your new exam was successfully created! Good for you!
-        </div>
-    </div>
-    <div class="col-sm" *ngIf="errors.length">
-        <div class="alert alert-danger" role="alert" *ngFor="let error of errors" i18n>
-            <p>Sorry, but we got an error message from our api:</p>
-            <b>{{error}}</b>
-        </div>
+<div class="row" *ngIf="alerts">
+    <div class="col">
+      <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+        <p><strong>{{alert.message}}</strong></p>
+      </ngb-alert>
     </div>
 </div>
 <br>

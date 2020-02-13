@@ -29,18 +29,10 @@
         </div>
     </div>
 </div>
-<div class="row" *ngIf="errors">
-    <div class="col">
-        <ngb-alert [dismissible]="false" type="danger" *ngFor="let error of errors">
-            <p>We got an error message from our api:</p>
-            <p><strong>{{error}}</strong></p>
-        </ngb-alert>
-    </div>
-</div>
-<div class="row" *ngIf="successMessages">
-    <div class="col">
-      <ngb-alert [dismissible]="false" type="success" *ngFor="let msg of successMessages">
-        <p><strong>{{msg}}</strong></p>
-      </ngb-alert>
-    </div>
+<div class="row" *ngIf="alerts">
+  <div class="col">
+    <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+      <p><strong>{{alert.message}}</strong></p>
+    </ngb-alert>
   </div>
+</div>
