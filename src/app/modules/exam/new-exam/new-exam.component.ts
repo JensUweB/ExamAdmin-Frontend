@@ -8,12 +8,16 @@ import { Subscription } from 'rxjs';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Alert } from '../../types/Alert';
+import { ExamService } from '../exam.service';
+import { Exam } from '../../models/exam.model';
 
 const newExamQuery = gql`mutation createExam
-($title: String!, $description: String!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!, $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
+($title: String!, $description: String!, $price: Float!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!, 
+$isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
 {createExam(input: {
   title: $title
   description: $description
+  price: $price
   examPlace: $address
   examDate: $examDate
   regEndDate: $regEndDate
@@ -41,6 +45,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
   constructor(
     private apollo: Apollo, 
     private authService: AuthService, 
+    private examService: ExamService,
     config: NgbTimepickerConfig, 
     private fb: FormBuilder
   ) {
@@ -71,7 +76,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
       examTime: [null, [Validators.required]],
       regEndDate: [null, [Validators.required]],
       regEndTime: [null, [Validators.required]],
-      fee: [null, [Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')]],
+      price: [0, [Validators.pattern('[-+]?([0-9]*\.[0-9]+|[0-9]+)')]],
       isPublic: false,
     });
 
@@ -89,6 +94,9 @@ export class NewExamComponent implements OnInit, OnDestroy{
   }
   get description () {
     return this.examForm.get('description');
+  }
+  get price () {
+    return this.examForm.get('price');
   }
   get examPlace () {
     return this.examForm.get('examPlace');
@@ -108,10 +116,6 @@ export class NewExamComponent implements OnInit, OnDestroy{
   get regEndTime () {
     return this.examForm.get('regEndTime');
   }
-  get fee () {
-    return this.examForm.get('fee');
-  }
-
   get isPublic () {
     return this.examForm.get('isPublic');
   }
@@ -135,6 +139,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
         variables: {
           title: this.title.value,
           description: this.description.value,
+          price: this.price.value,
           address: this.examPlace.value,
           examDate: examDate,
           regEndDate: regEndDate,
@@ -144,6 +149,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
           maId: this.martialArts[this.martialArt.value]._id
         }
       }).subscribe(response => {
+        this.examService.fetchExams();
         this.alerts.push({type:"success", message: 'Success! A new exam was created.'});
         if(response.data) console.log('[NewExamComp] New exam successfull created!');
       }, (err) => {
