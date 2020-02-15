@@ -62,9 +62,17 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm" i18n>
+                    Price:
+                </div>
                 <div class="col-sm">
-                    <button *ngIf="!hasCheckedIn" class="btn btn-success" (click)="onCheckIn()" i18n>Check in</button>
-                    <button *ngIf="hasCheckedIn" class="btn btn-warning" (click)="onCheckOut()" i18n>Check out</button>
+                    {{exam.price}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <button *ngIf="!hasCheckedIn" class="btn btn-success" (click)="onCheckIn()" i18n>Sign in</button>
+                    <button *ngIf="hasCheckedIn" class="btn btn-warning" (click)="onCheckOut()" i18n>Sign out</button>
                 </div>
             </div>
             <div class="row" *ngIf="alerts">
@@ -106,16 +114,16 @@
             </div>
         </div>
         <div *ngIf="editExam">
-        <form>
+        <form [formGroup]="examForm">
             <div class="row">
                 <div class="col-sm">
-                    <input class="form-control" type="text" value="{{exam.title}}" id="title">
+                    <input formControlName="title" class="form-control" type="text">
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-sm">
-                    <textarea class="form-control" value="{{exam.description}}" id="description" rows="4" cols="50"></textarea>
+                    <textarea formControlName="description" class="form-control" rows="4" cols="50"></textarea>
                 </div>
             </div>
             <hr>
@@ -133,7 +141,7 @@
                     Registration End Date:
                 </div>
                 <div class="col-sm">
-                    <input class="form-control" type="text" value="{{exam.regEndDate}}" id="regEndDate">
+                    <input formControlName="regEndDate" class="form-control" type="text">
                 </div>
             </div>
             <hr>
@@ -142,7 +150,7 @@
                     Exam Date:
                 </div>
                 <div class="col-sm">
-                    <input class="form-control" type="text" value="{{exam.examDate}}" id="examDate">
+                    <input formControlName="examDate" class="form-control" type="text">
                 </div>
             </div>
             <hr>
@@ -151,8 +159,8 @@
                     Club:
                 </div>
                 <div class="col-sm">
-                    <select class="form-control" *ngFor="let club of clubs">
-                        <option value="{{club._id}}">{{club.name}}</option>
+                    <select formControlName="club" class="form-control">
+                        <option *ngFor="let club of clubs" [value]="club._id" >{{club.name}}</option>
                     </select>
                 </div>
             </div>
@@ -162,14 +170,23 @@
                     Address:
                 </div>
                 <div class="col-sm">
-                    <input class="form-control" type="text" value="{{exam.examPlace}}" id="examPlace">
+                    <input formControlName="examPlace" class="form-control" type="text">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm" i18n>
+                    Price:
+                </div>
+                <div class="col-sm">
+                    <input formControlName="price" class="form-control" type="number">
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-sm">
-                    <button class="btn btn-success">Update</button>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-success" (click)="onUpdate()">Update</button>
+                    <button class="btn btn-danger" (click)="openPopup(deletePopup)">Delete</button>
                     <button class="btn btn-warning" (click)="editExam=false">Cancel</button>
                 </div>
             </div>
@@ -177,3 +194,19 @@
         </div>
     </div>
 </div>
+<!-- Delete Confirmation Popup -->
+<ng-template #deletePopup let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title" i18n>Add a Martial Art</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p i18n>Do you really want to delete this exam?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="onDelete(); c('Save click')" i18n>Confirm Delete</button>
+      <button type="button" class="btn btn-success" (click)=" c('Save click')" i18n>Cancel</button>
+    </div>
+  </ng-template>
