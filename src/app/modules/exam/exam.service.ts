@@ -17,7 +17,7 @@ const clubsQuery = gql`query getClubById($id: String!){getClubById(id: $id){_id,
 export class ExamService implements OnInit, OnDestroy{
     
     private currentExam;
-    private exams: any;
+    exams: any;
     editExam = false;
     private querySubscription: Subscription;
     private examinerClubs = [];
@@ -26,6 +26,12 @@ export class ExamService implements OnInit, OnDestroy{
         private apollo: Apollo, 
     ) {
         console.log("[ExamService] Initializing service...");
+        this.fetchExams();
+        console.log("[ExamService] Initializing done!");
+        console.log("[ExamService] Received data: ",this.exams);
+    }
+
+    fetchExams() {
         this.querySubscription = this.apollo.watchQuery<any>({
             query: examsQuery,
             fetchPolicy: 'no-cache'
@@ -51,8 +57,6 @@ export class ExamService implements OnInit, OnDestroy{
                 });
             }
             }, (err) => {console.warn('[ExamService]: GraphQL Error:',err.graphQLErrors[0].message);});
-            console.log("[ExamService] Initializing done!");
-            console.log("[ExamService] Received data: ",this.exams);
     }
 
     setExam(exam) {
