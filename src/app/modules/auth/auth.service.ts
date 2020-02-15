@@ -51,6 +51,7 @@ export class AuthService implements OnInit, OnDestroy{
                 this._isAuthenticated.next(true);
                 localStorage.setItem('token',this.token);
                 localStorage.setItem('tokenExpDate',this.tokenExpireDate.toString());
+                this.router.navigate(['/']);
             } 
             if(response.errors) {
                 this.alerts.push({type: 'danger', message: response.errors[0].message})

@@ -7,8 +7,8 @@
                     <div class='flex flex-column'>
                         <input *ngIf="!login" formControlName="firstName" type="text" placeholder="Your first name">
                         <input *ngIf="!login" formControlName="lastName" type="text" placeholder="Your last name">
-                        <input formControlName="email" type="text" placeholder="Your email address" required>
-                        <input formControlName="password" type="password" placeholder="Password" required>
+                        <input formControlName="email" type="text" placeholder="Your email address">
+                        <input formControlName="password" type="password" placeholder="Password">
                         <div *ngIf="email.invalid && email.touched" class="alert alert-danger" i18n>
                             Please type in a correct email!
                         </div>

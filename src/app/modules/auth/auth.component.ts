@@ -36,15 +36,15 @@ export class AuthComponent implements OnInit {
       if (this.login) {
           
         try {
-          this.authService.login(this.email.value, this.password.value)
-        .then(() => {
+          this.authService.login(this.email.value, this.password.value);
+        /* .then(() => {
           console.log('Was zur hölle passiert hier?');
           this.alerts.push({type: 'success', message: 'Login successful! You will be redirected shortly!'});
         })
         .catch(err => {
           console.log('Ich werd hier noch verrückt!');
           this.alerts.push({type:"danger", message: err});
-        });
+        }); */
       } catch (err) { console.log('Jub, so läufts!'); }
         if(this.authService.alerts) this.alerts.push(...this.authService.alerts);
 
