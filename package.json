@@ -31,7 +31,7 @@
     "bootstrap": "^4.4.1",
     "font-awesome": "^4.7.0",
     "graphql": "^14.6.0",
-    "graphql-tag": "^2.10.1",
+    "graphql-tag": "^2.10.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
