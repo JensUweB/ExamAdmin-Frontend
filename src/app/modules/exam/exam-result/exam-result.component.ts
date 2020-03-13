@@ -107,12 +107,13 @@ export class ExamResultComponent implements OnInit {
   uploadFile(erId: string) {
     // Upload protocol file for the created exam result
     this.apollo.mutate<any>({
-      mutation: uploadFile,
+      mutation: gql`mutation uploadExamProtocol($examResultId: String!, $file: Upload!)
+                  {uploadExamProtocol(examResultId: $examResultId, protocol: $file)}`,
       variables: {
-        examResultId: erId,
-        file: this.file,
+        examResultId: erId, // The related exam result id for this file!
+        file: this.file,    // We got this.file directly from Angular forms!
       },
-      // Setting the context is very important i order for apollo-upload to work!
+      // Setting the context variable is very important in order for apollo-upload to work!
       context: {
          useMultipart: true
       }
