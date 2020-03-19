@@ -5,8 +5,6 @@ import {Apollo, ApolloModule} from 'apollo-angular';
 import {HttpLink, HttpLinkModule} from 'apollo-angular-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import { ApolloLink } from 'apollo-link';
-import { createUploadLink } from 'apollo-upload-client';
-import { ApolloClient } from 'apollo-client';
 
 
 @NgModule({
@@ -17,8 +15,7 @@ import { ApolloClient } from 'apollo-client';
   ]
 })
 export class GraphQLModule {
-  //link = createUploadLink({uri: 'http://localhost:3000/graphql?'});
-
+  
   constructor(apollo: Apollo, httpLink: HttpLink) {
     const uri = 'http://localhost:3000/graphql?';
     const http = httpLink.create({ uri });
