@@ -29,6 +29,26 @@ export class MartialArtsService implements OnInit {
     
           }, (err) => {console.warn('[MAService] GraphQL error: ',err.graphQLErrors[0].message)});
     }
+
+    fetch() {
+      this.apollo.watchQuery<any>({
+        query: maQuery,
+        fetchPolicy: 'no-cache'
+      }).valueChanges.subscribe((response) => { 
+        this.martialArts = response.data.getAllMartialArts;
+        console.log('[MAService] Got some data!');
+
+        this.martialArts.forEach(ma => {
+          ma.isHidden = true;
+          ma.examiners.forEach(examiner => {
+            let result = examiner.martialArts.filter(ele => ele._id.toString() != ma._id.toString());
+            if(result.length) examiner.martialArts = result;
+          });
+        });
+
+      }, (err) => {console.warn('[MAService] GraphQL error: ',err.graphQLErrors[0].message)});
+    }
+
     ngOnInit() {}
 
     getMartialArts() {

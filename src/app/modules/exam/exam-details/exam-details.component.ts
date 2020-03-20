@@ -9,6 +9,7 @@ import { Alert } from '../../types/Alert';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { getGraphQLError } from '../../helpers/error.helpers';
 
 const query = gql`mutation registerToExam($examId: String!){registerToExam(examId: $examId)}`;
 const unregister = gql`mutation unregisterFromExam($examId: String!){unregisterFromExam(examId: $examId)}`;
@@ -89,8 +90,8 @@ export class ExamDetailsComponent implements OnInit {
         console.log('[Exam] Ok, you now are listed as participant!');
       }
     }, (err) => {
-      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-      else this.alerts.push({type: 'danger', message: err});
+      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+       else this.alerts.push({type: 'danger', message: err});
       console.warn('[Exam]: GraphQL Error:',JSON.stringify(err));
     });
   }
@@ -108,7 +109,7 @@ export class ExamDetailsComponent implements OnInit {
         console.log('[Exam] Ok, you now are listed as participant!');
       }
     }, (err) => {
-      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
+      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: getGraphQLError(err)});
       else this.alerts.push({type: 'danger', message: err});
       console.warn('[Exam]: GraphQL Error:',JSON.stringify(err));
     });

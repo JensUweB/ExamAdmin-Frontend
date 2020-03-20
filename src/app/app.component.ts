@@ -15,11 +15,12 @@ export class AppComponent {
 
   constructor(
     private authService: AuthService, 
-    private examService: ExamService, 
-    private maService: MartialArtsService,
-    private clubService: ClubService
+    private examService: ExamService,
+    private maService: MartialArtsService
   ) {
-    if(localStorage.getItem('token')) this.authService.loadUser();
+    this.authService.loadUser();
+    this.examService.fetchExams();
+    this.maService.fetch();
   }
 
 }
