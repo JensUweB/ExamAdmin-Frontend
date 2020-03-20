@@ -16,6 +16,7 @@ import { environment } from '../environments/environment';
   ]
 })
 export class GraphQLModule {
+  
   constructor(apollo: Apollo, httpLink: HttpLink) {
     const uri = environment.backendurl;
     const http = httpLink.create({ uri });
