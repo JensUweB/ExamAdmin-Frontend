@@ -2,9 +2,100 @@
     <div class="col">
         <h1>Create a new martial art</h1>
 
-        <form [formGroup="form"]>
-            <input class="form-control" type="text" formControlName="maName">
-            <input class="form-control" type="text" formControlName="maStyle">
+        <hr />
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-2">
+                    <p>Martial Art Name:</p>
+                </div>
+                <div class="col-10">
+                    <input class="form-control" type="text" formControlName="name" placeholder="Karate">
+                    <div *ngIf="!maName.valid && maName.touched" class="alert alert-danger" role="alert">
+                        Please choose a name for this martial art!
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    Style Name:
+                </div>
+                <div class="col-10">
+                    <input class="form-control" type="text" formControlName="styleName" placeholder="Shotokan">
+                    <div *ngIf="!styleName.valid && styleName.touched" class="alert alert-danger" role="alert">
+                        Please choose a style name for this martial art!
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                   Description:
+                </div>
+                <div class="col-10">
+                    <textarea class="form-control" type="text" formControlName="description" placeholder="Tell us what this martial art is all about!"></textarea>
+                    <div *ngIf="!description.valid && description.touched" class="alert alert-danger" role="alert">
+                        Please choose a description for this martial art!
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-8">
+                    <h2>How many ranks do you have in total?</h2>
+                </div>
+                <div class="col-2">
+                    <input class="form-control" type="number" formControlName="rankCount">
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-success" (click)="setupRanks()">Add Ranks</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <p>If you have 6 "Kyu" or pupil ranks and 10 "Dan" or teacher ranks, the total amount of ranks would be 16.</p>
+                </div>
+            </div>
+            <hr />
+            <div *ngIf="rankCount.value && showRanks" formArrayName="ranks">
+                <div class="row">
+                    <div class="col-8">
+                        <b>Rank Name</b>
+                    </div>
+                    <div class="col-4">
+                        <b>Rank Number</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <p>Ranks are sortet from lowest to highest. The Grandmaster has always rank number one!</p>
+                    </div>
+                </div>
+                <div *ngFor="let rank of ranks.controls; let i = index" [formGroupName]="i">
+                    <div class="row">
+                        <div class="col-6">
+                            <input class="form-control" type="text" formControlName="name" [value]="rank.name">
+                        </div>
+                        <div class="col-4">
+                            <input class="form-control" type="number" formControlName="number" [value]="rank.number">
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-danger  btn-circle btn-sm" (click)="removeRank(i)"><h6>X</h6></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-success" (click)="onSubmit()">Create!</button>
+                </div>
+            </div>
         </form>
+        <div class="row" *ngIf="alerts">
+            <div class="col">
+              <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+                <p><strong>{{alert.message}}</strong></p>
+              </ngb-alert>
+            </div>
+        </div>
     </div>
 </div>
+<br/><br/>
