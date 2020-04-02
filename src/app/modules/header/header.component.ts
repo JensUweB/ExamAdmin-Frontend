@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
   }
 
   addMA() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/new-martialArt']);
   }
 
   addClub() {
