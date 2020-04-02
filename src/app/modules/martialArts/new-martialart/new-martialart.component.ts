@@ -47,8 +47,8 @@ export class NewMartialartComponent implements OnInit {
 
   addRankGroup(name: string, number: number) {
     return this.fb.group({
-      name: [name, Validators.required],
-      number: [number, Validators.required]
+      name: [name, [Validators.required]],
+      number: [number, [Validators.required, Validators.pattern("0-9")]]
     });
   }
 
