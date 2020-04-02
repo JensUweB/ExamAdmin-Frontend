@@ -16,7 +16,7 @@
           <div class="card-body" *ngIf="!ma.isHidden">
             <div class="row">
               <div class="col">
-                <p>{{ma.description}}</p>
+                <p>{{ma.description.substr(0,200)}}(...)</p>
               </div>
               <div class="col">
                 <table class="table table-striped">
@@ -34,6 +34,12 @@
                   </tbody>
                 </table>
               </div>
+            </div>
+            <div class="row">
+                <button class="btn btn-success" (click)="showDetails(ma)" i18n>Details</button>
+                <div>
+                  <button class="btn btn-warning" (click)="showEdit(ma)" i18n>Edit</button>
+                </div>
             </div>
           </div>
         </div>
