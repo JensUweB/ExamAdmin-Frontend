@@ -1,1 +1,58 @@
-<p>martialart-details works!</p>
+<div *ngIf="!editMode">
+    <div class="row">
+        <div class="col">
+            <h1>Martial Art Details</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <h2>{{ma.styleName}} {{ma.name}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <p>{{ma.description}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <h3>Ranks:</h3>
+            <table class="table table-striped">
+                <tr>
+                    <th>Name</th>
+                    <td *ngFor="let rank of ma.ranks">{{rank.name}}</td>
+                </tr>
+                <tr>
+                    <th>Number</th>
+                    <td *ngFor="let rank of ma.ranks">{{rank.number}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            <h3>Examiners:</h3>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Examiner Name</th>
+                    <th>Examiner Rank</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let examiner of ma.examiners">
+                    <td>{{examiner.firstName}} {{examiner.lastName}}</td>
+                    <td>{{examiner.martialArts[0].rankName}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+<div *ngIf="editMode">
+    <div class="row">
+        <div class="col">
+            <h1>Martial Art Edit Mode</h1>
+        </div>
+    </div>
+</div>
