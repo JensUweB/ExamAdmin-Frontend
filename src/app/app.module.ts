@@ -24,6 +24,7 @@ import { environment } from '../environments/environment';
 import { ClubService } from './modules/club/club.service';
 import { NewMartialartComponent } from './modules/martialArts/new-martialart/new-martialart.component';
 import { MartialartDetailsComponent } from './modules/martialArts/martialart-details/martialart-details.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { MartialartDetailsComponent } from './modules/martialArts/martialart-det
     GraphQLModule,
     FormsModule,
     ReactiveFormsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    DragDropModule
   ],
   providers: [ExamService, MartialArtsService, ClubService],
   bootstrap: [AppComponent]
