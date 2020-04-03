@@ -18,7 +18,7 @@ export class MartialArtsComponent implements OnInit {
     private maService: MartialArtsService,
     private router: Router
   ) {
-    this.martialArts = this.maService.getMartialArts();
+    this.martialArts = this.maService.martialArts;
     console.log('[MAComp] Data fetched!');
   }
 
