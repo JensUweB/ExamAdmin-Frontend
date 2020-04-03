@@ -66,9 +66,7 @@ export class ExamResultComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  //($userId: String!, $examId: String!, $maId: String!, $maName: String!, $maStyle: String!
-  //$examinerId: String!, $exFirstName: String!, $exLastName: String!, $rank: String!, $date: String!, $passed: Boolean!)
+  
   async onSubmit() {
     // create new exam result
     await this.apollo.mutate<any>({
@@ -104,7 +102,8 @@ export class ExamResultComponent implements OnInit {
     this.file = e.target.files[0];
   }
 
-  uploadFile(erId: string) {
+  async uploadFile(erId: string): Promise<Boolean> {
+    if(!this.file) return false;
 
     // Upload protocol file for the created exam result
     this.apollo.mutate<any>({
@@ -121,11 +120,13 @@ export class ExamResultComponent implements OnInit {
     }).subscribe(response => {
       if (response.data) {
         this.alerts.push({type:"success", message: 'Exam Result Procotol Upload finished!'});
+        return true;
       }
     }, (err) => {
       if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
       else this.alerts.push({type: 'danger', message: err});
       console.warn('[ExamResult] ', JSON.stringify(err));
+      return false;
     });
   }
 
