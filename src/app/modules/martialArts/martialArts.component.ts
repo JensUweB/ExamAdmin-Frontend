@@ -3,6 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
 import gql from 'graphql-tag';
 import { MartialArtsService } from './martialArts.service';
+import { MartialArt } from '../models/martialArt.model';
 
 
 @Component({
@@ -11,16 +12,26 @@ import { MartialArtsService } from './martialArts.service';
   styleUrls: ['./martialArts.component.scss']
 })
 export class MartialArtsComponent implements OnInit {
-  martialArts;
+  martialArts: MartialArt[];
 
   constructor(
-    private maService: MartialArtsService
+    private maService: MartialArtsService,
+    private router: Router
   ) {
     this.martialArts = this.maService.getMartialArts();
     console.log('[MAComp] Data fetched!');
   }
 
   ngOnInit() {
-    
+  }
+
+  showDetails(ma) {
+    this.maService.setCurrent(ma, false);
+    this.router.navigate(['/martialArt-details']);
+  }
+
+  showEdit(ma) {
+    this.maService.setCurrent(ma, true);
+    this.router.navigate(['/martialArt-details']);
   }
 }

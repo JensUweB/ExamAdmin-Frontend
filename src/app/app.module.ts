@@ -22,6 +22,8 @@ import { MartialArtsService } from './modules/martialArts/martialArts.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { ClubService } from './modules/club/club.service';
+import { NewMartialartComponent } from './modules/martialArts/new-martialart/new-martialart.component';
+import { MartialartDetailsComponent } from './modules/martialArts/martialart-details/martialart-details.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ClubService } from './modules/club/club.service';
     UmbrellaAssocComponent,
     ExamResultComponent,
     ExamDetailsComponent,
-    NewExamComponent
+    NewExamComponent,
+    NewMartialartComponent,
+    MartialartDetailsComponent
   ],
   imports: [
     BrowserModule,

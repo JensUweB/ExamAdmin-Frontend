@@ -4,7 +4,7 @@
       <h1 i18n="Headline">Martial Arts</h1>
     </div>
   </div>
-  <div class="row">
+  <div *ngIf="martialArts" class="row">
     <div class="col-sm">
       <div *ngFor="let ma of martialArts">
         <div class="card shadow">
@@ -16,7 +16,7 @@
           <div class="card-body" *ngIf="!ma.isHidden">
             <div class="row">
               <div class="col">
-                <p>{{ma.description}}</p>
+                <p>{{ma.description.substr(0,200)}}(...)</p>
               </div>
               <div class="col">
                 <table class="table table-striped">
@@ -35,8 +35,21 @@
                 </table>
               </div>
             </div>
+            <div class="row">
+                <button class="btn btn-success" (click)="showDetails(ma)" i18n>Details</button>
+                <div>
+                  <button class="btn btn-warning" (click)="showEdit(ma)" i18n>Edit</button>
+                </div>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!martialArts">
+    <div class="row">
+      <div class="col">
+        <b>Loading...</b>
       </div>
     </div>
   </div>

@@ -163,7 +163,7 @@ export class UserComponent implements OnInit {
     return this.maForm.get('rankName');
   }
   close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert), 1);
+    this.alerts.splice(this.alerts.indexOf(alert));
   }
 
 }

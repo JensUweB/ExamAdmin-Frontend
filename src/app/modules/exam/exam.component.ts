@@ -19,9 +19,11 @@ export class ExamComponent implements OnInit{
     private examService: ExamService
   ) {}
 
-  ngOnInit(): void {
-    this.plannedExams = this.examService.getExams();
+  async ngOnInit() {
+    console.log('[ExamComp] Initializing...');
+    this.plannedExams = await this.examService.getExams();
     this.user = this.authService.user;
+    console.log('[ExamComp] Done.');
   }
   showDetails(exam: any): void {
     this.examService.setExam(exam);

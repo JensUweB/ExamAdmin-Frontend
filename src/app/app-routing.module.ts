@@ -10,6 +10,8 @@ import { AuthGuard } from './modules/auth/auth.guard';
 import { ExamDetailsComponent } from './modules/exam/exam-details/exam-details.component';
 import { NewExamComponent } from './modules/exam/new-exam/new-exam.component';
 import { ExamResultComponent } from './modules/exam/exam-result/exam-result.component';
+import { NewMartialartComponent } from './modules/martialArts/new-martialart/new-martialart.component';
+import { MartialartDetailsComponent } from './modules/martialArts/martialart-details/martialart-details.component';
 
 
 const routes: Routes = [
@@ -21,6 +23,8 @@ const routes: Routes = [
   {path: 'exam-details', canActivate: [AuthGuard],  component: ExamDetailsComponent},
   {path: 'exam-results', canActivate: [AuthGuard], component: ExamResultComponent},
   {path: 'martialArts', canActivate: [AuthGuard], component: MartialArtsComponent},
+  {path: 'martialArt-details', canActivate: [AuthGuard], component: MartialartDetailsComponent},
+  {path: 'new-martialArt', canActivate: [AuthGuard], component: NewMartialartComponent},
   {path: 'clubs', canActivate: [AuthGuard], component: ClubComponent},
 ];
 

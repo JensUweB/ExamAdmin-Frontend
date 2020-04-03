@@ -58,7 +58,7 @@ export class AuthService implements OnInit, OnDestroy{
                 throw response.errors;
             }
         }, (err) => {
-            console.log('[AuthService] Error:',err);
+            console.log('[AuthService] Error:',JSON.stringify(err));
             this.alerts.push({type: 'danger', message: err});
             throw err;
         });
@@ -68,6 +68,7 @@ export class AuthService implements OnInit, OnDestroy{
         if(localStorage.getItem('token')){
             this.token = localStorage.getItem('token');
             console.log('[AuthService] Loading user data...');
+            console.log('Token: '+this.token);
             this.querySubscription = this.apollo.watchQuery<any>({
                 query: getUser,
                 fetchPolicy: 'no-cache'

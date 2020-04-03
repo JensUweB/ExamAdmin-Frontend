@@ -105,6 +105,7 @@ export class ExamResultComponent implements OnInit {
   }
 
   uploadFile(erId: string) {
+
     // Upload protocol file for the created exam result
     this.apollo.mutate<any>({
       mutation: gql`mutation uploadExamProtocol($examResultId: String!, $file: Upload!)
@@ -154,6 +155,6 @@ export class ExamResultComponent implements OnInit {
   }
 
   close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert), 1);
+    this.alerts.splice(this.alerts.indexOf(alert));
   }
 }
