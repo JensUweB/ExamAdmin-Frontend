@@ -50,7 +50,7 @@ export class UserComponent implements OnInit {
     config.backdrop = 'static';
     config.keyboard = false;
 
-    this.martialArts = maService.getMartialArts();
+    this.martialArts = maService.martialArts;
     this.maForm = this.fb.group({
       maId: 0,
       rankName: '',
