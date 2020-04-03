@@ -4,11 +4,11 @@ import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
 import { MartialArt } from '../models/martialArt.model';
 
-const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{firstName, lastName, martialArts{_id, rankName}}, ranks{name, number}}}`;
+const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{_id, firstName, lastName, martialArts{_id, rankName}}, ranks{name, number}}}`;
 
 @Injectable()
 export class MartialArtsService implements OnInit {
-    private martialArts: any[];
+    martialArts: any[];
     martialArt: MartialArt;
     editMode: Boolean;
     
@@ -38,10 +38,6 @@ export class MartialArtsService implements OnInit {
     }
 
     ngOnInit() {}
-
-    getMartialArts() {
-        return this.martialArts;
-    }
 
     setCurrent(ma: MartialArt, editMode: Boolean) {
       this.martialArt = ma;
