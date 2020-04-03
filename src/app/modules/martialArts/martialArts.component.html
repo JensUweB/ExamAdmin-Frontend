@@ -16,23 +16,7 @@
           <div class="card-body" *ngIf="!ma.isHidden">
             <div class="row">
               <div class="col">
-                <p>{{ma.description.substr(0,200)}}(...)</p>
-              </div>
-              <div class="col">
-                <table class="table table-striped">
-                  <thead class="thead-dark">
-                    <tr>
-                      <th i18n="Martial Arts Component">Examiner Name</th>
-                      <th i18n="Martial Arts Component">Examiner Rank</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let examiner of ma['examiners']">
-                      <td>{{examiner.firstName}} {{examiner.lastName}}</td>
-                      <td>{{examiner.martialArts[0].rankName}}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <p>{{ma.description.substr(0,250)}}(...)</p>
               </div>
             </div>
             <div class="row">
