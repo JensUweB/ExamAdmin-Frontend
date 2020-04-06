@@ -2,6 +2,7 @@ import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { ExamService } from './exam.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-exam',
@@ -9,6 +10,7 @@ import { ExamService } from './exam.service';
   styleUrls: ['./exam.component.scss']
 })
 export class ExamComponent implements OnInit{
+  private subscription: Subscription;
   plannedExams;
   user;
   showPlanned = true;
@@ -21,7 +23,7 @@ export class ExamComponent implements OnInit{
 
   async ngOnInit() {
     console.log('[ExamComp] Initializing...');
-    this.plannedExams = await this.examService.getExams();
+    this.subscription = this.examService.exams.subscribe(data => {this.plannedExams = data});
     this.user = this.authService.user;
     console.log('[ExamComp] Done.');
   }
@@ -35,6 +37,10 @@ export class ExamComponent implements OnInit{
     this.examService.setExam(exam);
     this.examService.editExam = true;
     this.router.navigate(['/exam-details']);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

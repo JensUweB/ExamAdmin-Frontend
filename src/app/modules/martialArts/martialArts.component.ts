@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
 import gql from 'graphql-tag';
 import { MartialArtsService } from './martialArts.service';
 import { MartialArt } from '../models/martialArt.model';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -11,18 +12,22 @@ import { MartialArt } from '../models/martialArt.model';
   templateUrl: './martialArts.component.html',
   styleUrls: ['./martialArts.component.scss']
 })
-export class MartialArtsComponent implements OnInit {
+export class MartialArtsComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
   martialArts: MartialArt[];
 
   constructor(
-    private maService: MartialArtsService,
+    public maService: MartialArtsService,
     private router: Router
   ) {
-    this.martialArts = this.maService.martialArts;
-    console.log('[MAComp] Data fetched!');
   }
 
   ngOnInit() {
+    this.subscription = this.maService.martialArts
+    .subscribe(data => { 
+      this.martialArts = data;
+    });
+    console.log('[MAComp] Data fetched!');
   }
 
   showDetails(ma) {
@@ -33,5 +38,9 @@ export class MartialArtsComponent implements OnInit {
   showEdit(ma) {
     this.maService.setCurrent(ma, true);
     this.router.navigate(['/martialArt-details']);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

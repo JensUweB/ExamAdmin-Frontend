@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Alert } from '../../types/Alert';
 import { Apollo } from 'apollo-angular';
@@ -9,6 +9,7 @@ import { MartialArt } from '../../models/martialArt.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subscription } from 'rxjs';
 
 const newMA = gql`mutation createMartialArt($name: String!, $styleName: String!, $description: String!, $ranks: [RankInput!], $userId: String!)
 {createMartialArt(input: {
@@ -32,13 +33,16 @@ const newMA = gql`mutation createMartialArt($name: String!, $styleName: String!,
   templateUrl: './new-martialart.component.html',
   styleUrls: ['./new-martialart.component.css']
 })
-export class NewMartialartComponent implements OnInit {
+export class NewMartialartComponent implements OnInit, OnDestroy {
 
   @Input() ma: MartialArt;
   @Output() cancelEdit = new EventEmitter();
+  private subscription: Subscription;
+  martialArts: MartialArt[];
   form: FormGroup;
   alerts: Alert[] = [];
   showRanks = false;
+  private user;
 
   constructor(
     private apollo: Apollo,
@@ -69,6 +73,11 @@ export class NewMartialartComponent implements OnInit {
       });
       this.setupRanks();
     }
+    this.subscription = this.authService.user.subscribe(data => {this.user = data});
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   addRankGroup(name: string, number: number) {
@@ -117,7 +126,7 @@ export class NewMartialartComponent implements OnInit {
         styleName: this.styleName.value,
         description: this.description.value,
         ranks: ranks,
-        userId: this.authService.user._id
+        userId: this.user._id
       },
     }).subscribe(response => {
       if (response.data) {
@@ -153,6 +162,7 @@ export class NewMartialartComponent implements OnInit {
       },
     }).subscribe(response => {
       if (response.data) {
+        this.maService.fetch();
         this.alerts.push({type:"success", message: 'Martial art was updated!'});
         console.log('[NewMartialArtComp] Done.');
       }
@@ -161,7 +171,6 @@ export class NewMartialartComponent implements OnInit {
       else this.alerts.push({type: 'danger', message: err});
       console.warn('[ExamResult] ', JSON.stringify(err));
     });
-    this.maService.fetch();
   }
 
   onCancel() {
@@ -169,7 +178,7 @@ export class NewMartialartComponent implements OnInit {
   }
 
   onDelete() {
-    this.maService.martialArts = this.maService.martialArts.filter(ma => ma._id != this.ma._id);
+    //this.maService.martialArts = this.martialArts.filter(ma => ma._id != this.ma._id);
 
     this.router.navigateByUrl('/martialArts');
   }

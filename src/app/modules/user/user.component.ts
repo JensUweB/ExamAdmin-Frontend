@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { AuthService } from '../auth/auth.service';
@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ClubService } from '../club/club.service';
 import { MartialArtsService } from '../martialArts/martialArts.service';
 import { Alert } from '../types/Alert';
+import { Subscription } from 'rxjs';
 
 const queryExamResults = gql`query getAllExamResults{getAllExamResults{_id, user, exam, date, passed, reportUri , martialArt{name, styleName},rank}}`;
 
@@ -23,7 +24,8 @@ const maMutation = gql`mutation addMartialArtRankToUser($id: String!, $name: Str
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy{
+  private subscription: Subscription;
   user;
   examResults = [];
   url;
@@ -94,7 +96,7 @@ export class UserComponent implements OnInit {
         number
       }
     }).subscribe((response) => { 
-      this.authService.user.martialArts.push({_id: id, rankName: this.rankName.value, rankNumber: number});
+      this.authService.loadUser();
       this.alerts.push({type:"success", message: 'Success! You added a new martial art to your profile!'});
       console.log('[UserComp] Success!');
     }, (err) => {
@@ -123,7 +125,7 @@ export class UserComponent implements OnInit {
       });
 
     }
-    this.user = this.authService.user;
+    this.subscription = this.authService.user.subscribe(data => {this.user = data});
     console.log('[UserComp] User from AuthService: ',this.authService.user);
   }
 
@@ -164,6 +166,10 @@ export class UserComponent implements OnInit {
   }
   close(alert: Alert) {
     this.alerts.splice(this.alerts.indexOf(alert));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

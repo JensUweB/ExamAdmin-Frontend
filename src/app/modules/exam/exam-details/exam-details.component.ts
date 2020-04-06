@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ExamService } from '../exam.service';
 import { Exam } from '../../models/exam.model';
 import { User } from '../../models/user.model';
@@ -10,6 +10,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { getGraphQLError } from '../../helpers/error.helpers';
+import { Subscription } from 'rxjs';
 
 const query = gql`mutation registerToExam($examId: String!){registerToExam(examId: $examId)}`;
 const unregister = gql`mutation unregisterFromExam($examId: String!){unregisterFromExam(examId: $examId)}`;
@@ -35,14 +36,15 @@ $examDate: DateTime, $regEndDate: DateTime, $isPublic: Boolean, $clubId: String!
   templateUrl: './exam-details.component.html',
   styleUrls: ['./exam-details.component.css']
 })
-export class ExamDetailsComponent implements OnInit {
- exam: Exam;
- user: User;
- hasCheckedIn: boolean;
- editExam: boolean;
- examForm: FormGroup;
- clubs;
- alerts: Alert[] = [];
+export class ExamDetailsComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
+  exam: Exam;
+  user: User;
+  hasCheckedIn: boolean;
+  editExam: boolean;
+  examForm: FormGroup;
+  clubs;
+  alerts: Alert[] = [];
 
   constructor(
     private examService: ExamService, 
@@ -56,7 +58,7 @@ export class ExamDetailsComponent implements OnInit {
   ngOnInit() {
     this.exam = this.examService.getExam();
     this.editExam = this.examService.editExam;
-    this.user = this.authService.user;
+    this.subscription = this.authService.user.subscribe(data => this.user = data);
     this.clubs = this.examService.getCurrentClubs();
 
     this.hasCheckedIn = this.exam.participants.some(user => user._id == this.user._id);
@@ -74,6 +76,9 @@ export class ExamDetailsComponent implements OnInit {
       isPublic: [this.exam.isPublic],
     });
 
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onCheckIn() {
@@ -142,8 +147,6 @@ export class ExamDetailsComponent implements OnInit {
   }
 
   onDelete() {
-    this.examService.exams = this.examService.exams.filter(exam => exam._id != this.exam._id);
-
     this.apollo.mutate<any>({
       mutation: deleteQuery,
       variables: {

@@ -34,6 +34,7 @@ $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
 })
 export class NewExamComponent implements OnInit, OnDestroy{
 
+  private subscription: Subscription;
   user: User;
   isExaminer = false;
   martialArts = [];
@@ -51,8 +52,6 @@ export class NewExamComponent implements OnInit, OnDestroy{
   ) {
     config.seconds = false;
     config.spinners = false;
-
-    this.user = authService.user;
 
     // Check, what martial arts the user is allowed to examine and creates an array with these martial arts
     this.user.martialArts.forEach(ma => {
@@ -81,6 +80,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
     });
 
     this.formSubscription = this.examForm.valueChanges.subscribe();
+    this.subscription = this.authService.user.subscribe(data => this.user = data);
   }
 
   get martialArt() {
@@ -122,6 +122,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
 
   ngOnDestroy() {
     this.formSubscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   //($title: String!, $description: String!, $examDate: Date!, $regEndDate: Date!, $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
