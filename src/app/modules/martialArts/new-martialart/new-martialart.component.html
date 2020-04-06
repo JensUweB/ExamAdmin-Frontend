@@ -30,7 +30,7 @@
                     Description:
                 </div>
                 <div class="col-10">
-                    <textarea class="form-control" type="text" formControlName="description"
+                    <textarea class="form-control" type="text" rows="6" formControlName="description"
                         placeholder="Tell us what this martial art is all about!"></textarea>
                     <div *ngIf="!description.valid && description.touched" class="alert alert-danger" role="alert">
                         Please choose a description for this martial art!
@@ -69,7 +69,7 @@
                         You can rearrange items with drag and drop!</p>
                     </div>
                 </div>
-                <div cdkDropList (cdkDropListDropped)="drop($event)">
+                <div style="cursor: pointer;" cdkDropList (cdkDropListDropped)="drop($event)">
                     <div cdkDrag *ngFor="let rank of ranks.controls; let i = index" [formGroupName]="i" class="shadow-sm">
                         <div class="row">
                             <div class="col-2"></div>
