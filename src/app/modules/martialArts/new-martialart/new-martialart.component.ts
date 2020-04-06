@@ -150,6 +150,12 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
       ranks[i].number = ranks.length-i;
     }
 
+    // Update the current details object
+    this.maService.martialArt.name = this.maName.value;
+    this.maService.martialArt.styleName = this.styleName.value;
+    this.maService.martialArt.ranks = this.ranks.value;
+    this.maService.martialArt.description = this.description.value;
+
     // Sending the form to the backend
     await this.apollo.mutate<any>({
       mutation: updateMA,
