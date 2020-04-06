@@ -33,7 +33,7 @@ export class MartialArtsService implements OnInit {
             if(result.length) examiner.martialArts = result;
           });
         });
-        console.log('[MAService] Got some data!',data);
+        console.log('[MAService] Got some data!');
         this._martialArts.next(data);
       }, (err) => {console.warn('[MAService] GraphQL error: ',err.graphQLErrors[0].message)});
     }

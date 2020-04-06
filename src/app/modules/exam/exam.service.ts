@@ -9,27 +9,17 @@ import { userInfo } from "os";
 const examsQuery = gql`
   query getPlannedExams {
     getPlannedExams {
-      _id
-      title
-      description
-      examDate
-      regEndDate
-      isPublic
-      examPlace
-      club {name}
+      _id,title,description,examDate,regEndDate,examPlace, price
       participants {
         _id
         firstName
         lastName
         martialArts {
-          _id {_id } rankName} } martialArt {
-        _id
-        name
-        styleName
+          _id {_id } rankName} } 
+        martialArt {
+        _id,name,styleName
       } examiner {
-        _id
-        firstName
-        lastName
+        _id,firstName,lastName
         clubs {club {_id }}}}}
 `;
 

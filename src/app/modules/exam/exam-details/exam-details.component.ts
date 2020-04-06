@@ -16,7 +16,7 @@ const query = gql`mutation registerToExam($examId: String!){registerToExam(examI
 const unregister = gql`mutation unregisterFromExam($examId: String!){unregisterFromExam(examId: $examId)}`;
 const deleteQuery = gql`mutation deleteExam($examId: String!){deleteExam(examId: $examId)}`;
 const updateQuery = gql`mutation updateExam($examId: String!, $title: String!, $description: String!, $price: Float!, $address: String!, 
-$examDate: DateTime, $regEndDate: DateTime, $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
+$examDate: DateTime, $regEndDate: DateTime, $userId: String, $maId: String!)
 {updateExam(
   examId: $examId, input: {
   title: $title
@@ -25,8 +25,6 @@ $examDate: DateTime, $regEndDate: DateTime, $isPublic: Boolean, $clubId: String!
   examPlace: $address
   examDate: $examDate
   regEndDate: $regEndDate
-  isPublic: $isPublic
-  club: $clubId
   examiner: $userId
   martialArt: $maId}){_id}}`;
 
@@ -60,20 +58,19 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
     this.editExam = this.examService.editExam;
     this.subscription = this.authService.user.subscribe(data => this.user = data);
     this.clubs = this.examService.getCurrentClubs();
-
     this.hasCheckedIn = this.exam.participants.some(user => user._id == this.user._id);
 
     this.examForm = this.fb.group({
-      title: [this.exam.title],
-      description: [this.exam.description],
-      examPlace: [this.exam.examPlace],
-      price: [this.exam.price],
-      examDate: [this.exam.examDate],
-      regEndDate: [this.exam.regEndDate],
-      club: [this.exam.club._id],
-      examiner: [this.exam.examiner._id],
-      martialArt: [this.exam.martialArt._id],
-      isPublic: [this.exam.isPublic],
+      title: [this.exam.title, Validators.required],
+      description: [this.exam.description, Validators.required],
+      examPlace: [this.exam.examPlace, Validators.required],
+      price: [this.exam.price, Validators.required],
+      examDate: [this.exam.examDate, Validators.required],
+      regEndDate: [this.exam.regEndDate, Validators.required],
+      //club: [this.exam.club._id],
+      examiner: [this.exam.examiner._id, Validators.required],
+      martialArt: [this.exam.martialArt._id, Validators.required],
+      //isPublic: [this.exam.isPublic],
     });
 
   }
@@ -121,29 +118,37 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
   }
 
   onUpdate() {
-    console.log('DATE:', this.examDate.value);
-    this.apollo.mutate<any>({
-      mutation: updateQuery,
-      variables: {
-        examId: this.exam._id,
-        title: this.title.value,
-        description: this.description.value,
-        price: this.price.value,
-        address: this.examPlace.value,
-        examDate: null,
-        regEndDate: null,
-        isPublic: this.isPublic.value,
-        clubId: this.club.value,
-        maId: this.martialArt.value
-      }
-    }).subscribe((response) => { 
-      this.alerts.push({type:"success", message: 'Update Successful!'});
-      console.log('[Auth] Update Successful!');
-    }, (err) => {
-      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-      else this.alerts.push({type: 'danger', message: err});
-      console.warn(JSON.stringify(err));
-    });
+    if(this.examForm.valid){
+
+      this.exam.title = this.title.value;
+      this.exam.description = this.description.value;
+      this.exam.price = this.price.value;
+      this.exam.examPlace = this.examPlace.value;
+      this.exam.examDate = this.examDate.value;
+      this.exam.regEndDate = this.regEndDate.value;
+
+      this.apollo.mutate<any>({
+        mutation: updateQuery,
+        variables: {
+          examId: this.exam._id,
+          title: this.title.value,
+          description: this.description.value,
+          price: this.price.value,
+          address: this.examPlace.value,
+          examDate: new Date(this.examDate.value),
+          regEndDate: new Date(this.regEndDate.value),
+          maId: this.martialArt.value
+        }
+      }).subscribe((response) => { 
+        this.examService.fetchExams();
+        this.alerts.push({type:"success", message: 'Update Successful!'});
+        console.log('[ExamDetails] Update Successful!');
+      }, (err) => {
+        if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
+        else this.alerts.push({type: 'danger', message: err});
+        console.warn(JSON.stringify(err));
+      });
+    }
   }
 
   onDelete() {
@@ -154,7 +159,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
       }
     }).subscribe((response) => { 
       this.alerts.push({type:"success", message: 'Delete Successful!'});
-      console.log('[Auth] Update Successful!');
+      console.log('[ExamDetails] Update Successful!');
       this.router.navigate(['/exams']);
     }, (err) => {
       if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});

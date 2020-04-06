@@ -126,7 +126,6 @@ export class UserComponent implements OnInit, OnDestroy{
 
     }
     this.subscription = this.authService.user.subscribe(data => {this.user = data});
-    console.log('[UserComp] User from AuthService: ',this.authService.user);
   }
 
   /**

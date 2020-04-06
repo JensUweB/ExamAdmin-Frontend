@@ -37,14 +37,14 @@
                     {{exam.examDate}}
                 </div>
             </div>
-            <div class="row">
+            <!--div class="row">
                 <div class="col-sm" i18n>
                     Club:
                 </div>
                 <div class="col-sm">
                     {{exam.club.name}}
                 </div>
-            </div>
+            </div-->
             <div class="row">
                 <div class="col-sm" i18n>
                     Address:
@@ -75,13 +75,6 @@
                     <button *ngIf="hasCheckedIn" class="btn btn-warning" (click)="onCheckOut()" i18n>Sign out</button>
                 </div>
             </div>
-            <div class="row" *ngIf="alerts">
-                <div class="col">
-                  <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
-                    <p><strong>{{alert.message}}</strong></p>
-                  </ngb-alert>
-                </div>
-            </div>
             <div *ngIf="exam.examiner._id == user._id">
                 <div class="row">
                     <div class="col-sm">
@@ -95,14 +88,14 @@
                                 <tr>
                                     <th i18n>Name</th>
                                     <th i18n>Rank</th>
-                                    <th>Exam Result</th>
+                                    <!--th>Exam Result</th-->
                                 </tr>
                             </thead>
                             <tbody *ngFor="let user of exam.participants">
                                 <tr>
                                     <td>{{user.firstName}} {{user.lastName}}</td>
                                     <td>{{user.martialArts[0].rankName}}</td>
-                                    <td><button class="btn btn-success">Add</button></td>
+                                    <!--td><button class="btn btn-success">Add</button></td-->
                                 </tr>
                             </tbody>
                         </table>
@@ -154,7 +147,7 @@
                 </div>
             </div>
             <hr>
-            <div class="row">
+            <!--div class="row">
                 <div class="col-sm" i18n>
                     Club:
                 </div>
@@ -163,7 +156,7 @@
                         <option *ngFor="let club of clubs" [value]="club._id" >{{club.name}}</option>
                     </select>
                 </div>
-            </div>
+            </div-->
             <hr>
             <div class="row">
                 <div class="col-sm" i18n>
@@ -191,6 +184,13 @@
                 </div>
             </div>
         </form>
+        </div>
+        <div class="row" *ngIf="alerts">
+            <div class="col">
+              <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+                <p><strong>{{alert.message}}</strong></p>
+              </ngb-alert>
+            </div>
         </div>
     </div>
 </div>
