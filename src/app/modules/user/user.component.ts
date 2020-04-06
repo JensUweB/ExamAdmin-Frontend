@@ -128,6 +128,11 @@ export class UserComponent implements OnInit, OnDestroy{
     this.subscription = this.authService.user.subscribe(data => {this.user = data});
   }
 
+  showMaDetails(ma) {
+    this.maService.setCurrent(ma, false);
+    this.router.navigateByUrl('/martialArt-details');
+  }
+
   /**
    * A Method to download and display any file
    * @param reportUri 
