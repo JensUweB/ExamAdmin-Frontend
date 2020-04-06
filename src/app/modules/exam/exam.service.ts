@@ -1,7 +1,7 @@
 import { Injectable, OnInit, OnDestroy } from "@angular/core";
 import gql from "graphql-tag";
 import { Apollo } from "apollo-angular";
-import { Subscription } from "rxjs";
+import { Subscription, BehaviorSubject } from "rxjs";
 import { normalizeDateTime } from "../helpers/date.helper";
 import { Exam } from "../models/exam.model";
 import { userInfo } from "os";
@@ -16,37 +16,21 @@ const examsQuery = gql`
       regEndDate
       isPublic
       examPlace
-      club {
-        name
-      }
+      club {name}
       participants {
         _id
         firstName
         lastName
         martialArts {
-          _id {
-            _id
-          }
-          rankName
-        }
-      }
-      martialArt {
+          _id {_id } rankName} } martialArt {
         _id
         name
         styleName
-      }
-      examiner {
+      } examiner {
         _id
         firstName
         lastName
-        clubs {
-          club {
-            _id
-          }
-        }
-      }
-    }
-  }
+        clubs {club {_id }}}}}
 `;
 
 const clubsQuery = gql`
@@ -61,7 +45,8 @@ const clubsQuery = gql`
 @Injectable()
 export class ExamService implements OnInit, OnDestroy {
   private currentExam;
-  exams: any;
+  private _exams: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  public readonly exams = this._exams.asObservable();
   editExam = false;
   private querySubscription: Subscription;
   private examinerClubs = [];
@@ -78,15 +63,15 @@ export class ExamService implements OnInit, OnDestroy {
       .valueChanges.subscribe(
         response => {
           if (response.data) {
-            this.exams = response.data.getPlannedExams;
+            let exams = response.data.getPlannedExams;
             console.log("[ExamService] Got some data. Preparing data...");
-            this.exams.forEach(exam => {
+            exams.forEach(exam => {
               exam.examDate = normalizeDateTime(exam.examDate);
               exam.regEndDate = normalizeDateTime(exam.regEndDate);
               exam.isHidden = true;
 
-              if (this.exams) {
-                this.exams.forEach(exam => {
+              if (exams) {
+                exams.forEach(exam => {
                   if (exam.participants) {
                     exam.participants.forEach(user => {
                       user.martialArts = user.martialArts.filter(
@@ -96,6 +81,7 @@ export class ExamService implements OnInit, OnDestroy {
                   }
                 });
               }
+              this._exams.next(exams);
               console.log("[ExamService] Data preparing done!");
             });
           }
@@ -141,20 +127,12 @@ export class ExamService implements OnInit, OnDestroy {
     return this.currentExam;
   }
 
-  getExams() {
-      if(this.exams){
-        return this.exams;
-      } else {
-          this.fetchExams();
-          return this.exams;
-      }
-  }
-
   getCurrentClubs() {
     return this.examinerClubs;
   }
 
   ngOnInit() {
+    this.fetchExams();
   }
 
   ngOnDestroy() {
