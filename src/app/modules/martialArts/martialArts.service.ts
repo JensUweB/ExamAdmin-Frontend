@@ -10,6 +10,7 @@ const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examin
 @Injectable()
 export class MartialArtsService implements OnInit {
     private _martialArts: BehaviorSubject<any[]> = new BehaviorSubject([]);
+    private maArray = [];
     public readonly martialArts = this._martialArts.asObservable();
     martialArt: MartialArt;
     editMode: Boolean;
@@ -34,6 +35,7 @@ export class MartialArtsService implements OnInit {
           });
         });
         console.log('[MAService] Got some data!');
+        this.maArray = data;
         this._martialArts.next(data);
       }, (err) => {console.warn('[MAService] GraphQL error: ',err.graphQLErrors[0].message)});
     }
@@ -43,7 +45,7 @@ export class MartialArtsService implements OnInit {
     }
 
     setCurrent(ma: MartialArt, editMode: Boolean) {
-      this.martialArt = ma;
+      this.martialArt = this.maArray.filter(item => item._id == ma._id)[0];
       this.editMode = editMode;
     }
 }
