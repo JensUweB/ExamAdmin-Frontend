@@ -17,8 +17,8 @@ const getUser = gql`{getUser{_id, firstName, lastName, email, martialArts{_id{_i
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnInit, OnDestroy{
-    private querySubscription: Subscription;
-    user: User;
+    private _user: BehaviorSubject<User> = new BehaviorSubject(null);    
+    public readonly user = this._user.asObservable();
     token: string;
     tokenExpireDate: Date;
     alerts: Alert[] = [];
@@ -45,7 +45,7 @@ export class AuthService implements OnInit, OnDestroy{
           }).valueChanges.subscribe((response) => {
             if(response.data){
                 console.log('[AuthService] Success! Got some data!');
-                this.user = response.data.login.user;
+                this._user.next(response.data.login.user);
                 this.token = response.data.login.token;
                 this.tokenExpireDate = response.data.login.tokenExpireDate;
                 this._isAuthenticated.next(true);
@@ -69,13 +69,13 @@ export class AuthService implements OnInit, OnDestroy{
             this.token = localStorage.getItem('token');
             console.log('[AuthService] Loading user data...');
             console.log('Token: '+this.token);
-            this.querySubscription = this.apollo.watchQuery<any>({
+            this.apollo.watchQuery<any>({
                 query: getUser,
                 fetchPolicy: 'no-cache'
               }).valueChanges.subscribe((response) => {
                 if(response.data){
                     console.log('[AuthService] Success! Got some data!');
-                    this.user = response.data.getUser;
+                    this._user.next(response.data.getUser);
                     this._isAuthenticated.next(true);
                 }
             }, (err) => {
@@ -86,7 +86,7 @@ export class AuthService implements OnInit, OnDestroy{
 
     logout() {
         this._isAuthenticated.next(false);
-        this.user = null;
+        this._user.next(null);
         this.token = null;
         this.tokenExpireDate = null;
         localStorage.setItem('token',null);
@@ -98,7 +98,7 @@ export class AuthService implements OnInit, OnDestroy{
     }
 
     ngOnDestroy() {
-        this.querySubscription.unsubscribe();
+        
     }
 
 }
