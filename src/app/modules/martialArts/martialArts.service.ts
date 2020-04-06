@@ -1,21 +1,23 @@
-import { OnInit, Injectable } from '@angular/core';
+import { OnInit, Injectable, Output, EventEmitter } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
 import { MartialArt } from '../models/martialArt.model';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 
 const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{_id, firstName, lastName, martialArts{_id, rankName}}, ranks{name, number}}}`;
 
 @Injectable()
 export class MartialArtsService implements OnInit {
-    martialArts: any[];
+    private _martialArts: BehaviorSubject<any[]> = new BehaviorSubject([]);
+    public readonly martialArts = this._martialArts.asObservable();
     martialArt: MartialArt;
     editMode: Boolean;
+    hasUpdated = new Subject();
     
     constructor(
         private apollo: Apollo, 
         private router: Router) {
-        this.fetch();
     }
 
     fetch() {
@@ -23,21 +25,22 @@ export class MartialArtsService implements OnInit {
         query: maQuery,
         fetchPolicy: 'no-cache'
       }).valueChanges.subscribe((response) => { 
-        this.martialArts = response.data.getAllMartialArts;
-        console.log('[MAService] Got some data!');
-
-        this.martialArts.forEach(ma => {
+        let data: Array<any> = response.data.getAllMartialArts;
+        data.forEach(ma => {
           ma.isHidden = true;
           ma.examiners.forEach(examiner => {
             let result = examiner.martialArts.filter(ele => ele._id.toString() == ma._id.toString());
             if(result.length) examiner.martialArts = result;
           });
         });
-
+        console.log('[MAService] Got some data!',data);
+        this._martialArts.next(data);
       }, (err) => {console.warn('[MAService] GraphQL error: ',err.graphQLErrors[0].message)});
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+      this.fetch();
+    }
 
     setCurrent(ma: MartialArt, editMode: Boolean) {
       this.martialArt = ma;
