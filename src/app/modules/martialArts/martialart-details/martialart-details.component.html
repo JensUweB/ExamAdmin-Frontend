@@ -58,14 +58,14 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Name</th>
                         <th>Number</th>
+                        <th>Name</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let rank of ma.ranks">
+                    <tr *ngFor="let rank of ma.ranks; let i = index">
+                        <td>{{i}}</td>
                         <td>{{rank.name}}</td>
-                        <td>{{rank.number}}</td>
                     </tr>
                 </tbody>
             </table>
