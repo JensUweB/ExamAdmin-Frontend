@@ -4,7 +4,7 @@
       <h1 i18n="Headline">Martial Arts</h1>
     </div>
   </div>
-  <div *ngIf="martialArts" class="row">
+  <div class="row">
     <div class="col-sm">
       <div *ngFor="let ma of martialArts">
         <div class="card shadow">
@@ -27,13 +27,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="!martialArts">
-    <div class="row">
-      <div class="col">
-        <b>Loading...</b>
       </div>
     </div>
   </div>
