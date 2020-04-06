@@ -50,6 +50,7 @@ export class MartialartDetailsComponent implements OnInit {
         if (response.data) {
           this.alerts.push({type:"success", message: 'New examiner was added!'});
           console.log('[NewMartialArtComp] Done.');
+          this.maService.fetch();
         }
       }, (err) => {
         if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
