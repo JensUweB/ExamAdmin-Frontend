@@ -94,7 +94,7 @@
       </div>
       <div *ngFor="let martialArt of user.martialArts" class="row">
         <div class="col-8">
-          <a href="/user/#">{{martialArt._id.styleName}} {{martialArt._id.name}}</a>
+          <a class="link" (click)="showMaDetails(martialArt._id)">{{martialArt._id.styleName}} {{martialArt._id.name}}</a>
         </div>
         <div class="col-4">
           <b>{{martialArt.rankName}}</b>
