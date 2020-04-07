@@ -80,8 +80,9 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  addRankGroup(name: string, number: number) {
+  addRankGroup(_id: string, name: string, number: number) {
     return this.fb.group({
+      _id: _id,
       name: [name, [Validators.required]],
       number: [number, [Validators.required]]
     });
@@ -92,14 +93,14 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
       const count: number = this.rankCount.value + 1;
       for(let i=0; i<count; i++) {
         if(i==0) {
-          this.ranks.push(this.addRankGroup("none",count));
+          this.ranks.push(this.addRankGroup(undefined, "none",count));
         } else {
-          this.ranks.push(this.addRankGroup((count-i)+". rank",count-i));
+          this.ranks.push(this.addRankGroup(undefined, (count-i)+". rank",count-i));
         }
       }
     } else {
       for(let i=0; i<this.ma.ranks.length; i++) {
-        this.ranks.push(this.addRankGroup(this.ma.ranks[i].name,+this.ma.ranks[i].number));
+        this.ranks.push(this.addRankGroup(this.ma.ranks[i]._id, this.ma.ranks[i].name, +this.ma.ranks[i].number));
       }
     }
     this.showRanks = true;
@@ -169,6 +170,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
     }).subscribe(response => {
       if (response.data) {
         this.maService.fetch();
+        this.authService.loadUser();
         this.alerts.push({type:"success", message: 'Martial art was updated!'});
         console.log('[NewMartialArtComp] Done.');
       }

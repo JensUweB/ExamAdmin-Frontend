@@ -7,6 +7,7 @@ export class MartialArt {
     description: string;
     examiners: any[];
     ranks: [{
+        _id: string,
         name: string,
         number: string
     }];
