@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MartialArt } from '../models/martialArt.model';
 import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 
-const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{_id, firstName, lastName, martialArts{_id, rankName}}, ranks{name, number}}}`;
+const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{_id, firstName, lastName, martialArts{_id{_id, ranks{name}}}}, ranks{_id, name, number}}}`;
 
 @Injectable()
 export class MartialArtsService implements OnInit {
@@ -26,18 +26,19 @@ export class MartialArtsService implements OnInit {
         query: maQuery,
         fetchPolicy: 'no-cache'
       }).valueChanges.subscribe((response) => { 
-        let data: Array<any> = response.data.getAllMartialArts;
+        let data = response.data.getAllMartialArts;
         data.forEach(ma => {
           ma.isHidden = true;
           ma.examiners.forEach(examiner => {
-            let result = examiner.martialArts.filter(ele => ele._id.toString() == ma._id.toString());
-            if(result.length) examiner.martialArts = result;
+            examiner.martialArts = examiner.martialArts.filter(ele => ele._id.toString() == ma._id.toString());
           });
         });
         console.log('[MAService] Got some data!');
         this.maArray = data;
         this._martialArts.next(data);
-      }, (err) => {console.warn('[MAService] GraphQL error: ',err.graphQLErrors[0].message)});
+      }, (err) => {
+        console.error('[MAService] ',err);
+      });
     }
 
     ngOnInit() {

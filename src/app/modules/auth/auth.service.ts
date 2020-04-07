@@ -10,10 +10,10 @@ const login = gql`
 query login($email: String!, $password: String!)
 {login(email: $email, password: $password)
 {token, tokenExpireDate, user{_id, firstName, lastName, email, martialArts{_id{_id, name, styleName, examiners{_id}, ranks{name, number}}, 
-                        rankName, rankNumber}, clubs{club{_id,name}}}}}`;
+                        rankId}, clubs{club{_id,name}}}}}`;
 
 const getUser = gql`{getUser{_id, firstName, lastName, email, martialArts{_id{_id, name, styleName, examiners{_id}, ranks{name, number}}, 
-                        rankName, rankNumber}, clubs{club{_id,name}}}}`;
+                        rankId}, clubs{club{_id,name}}}}`;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService implements OnInit, OnDestroy{
@@ -78,7 +78,8 @@ export class AuthService implements OnInit, OnDestroy{
                     this._isAuthenticated.next(true);
                 }
             }, (err) => {
-                console.warn('[AuthService] GraphQL Error:',err.graphQLErrors[0].message);
+                if(err.graphQLErrors[0]) console.warn('[AuthService] Error:',err.graphQLErrors[0].message);
+                else console.error('[AuthService] ',err);
             });
         }
     }

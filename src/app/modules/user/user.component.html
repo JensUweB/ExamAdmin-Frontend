@@ -97,7 +97,7 @@
           <a class="link" (click)="showMaDetails(martialArt._id)">{{martialArt._id.styleName}} {{martialArt._id.name}}</a>
         </div>
         <div class="col-4">
-          <b>{{martialArt.rankName}}</b>
+          <b>{{martialArt._id.ranks[0].name}}</b>
         </div>
       </div>
     </div>
@@ -185,10 +185,10 @@
       Here you can add a new martial art to your profile, if you want!</p>
     <form [formGroup]="maForm">
       <select class="form-control" formControlName="maId">
-        <option *ngFor="let ma of martialArts let i = index" [value]="i">{{ma.styleName}} {{ma.name}}</option>
+        <option *ngFor="let ma of martialArts; let i = index" [value]="i">{{ma.styleName}} {{ma.name}}</option>
       </select>
-      <select class="form-control" formControlName="rankName">
-        <option *ngFor="let rank of martialArts[maId.value].ranks" [value]="rank.name">{{rank.name}}</option>
+      <select *ngIf="maId.value" class="form-control" formControlName="rankId">
+        <option *ngFor="let rank of martialArts[maId.value].ranks" [value]="rank._id">{{rank.name}}</option>
       </select>
     </form>
   </div>

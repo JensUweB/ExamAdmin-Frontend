@@ -94,7 +94,8 @@
                             <tbody *ngFor="let user of exam.participants">
                                 <tr>
                                     <td>{{user.firstName}} {{user.lastName}}</td>
-                                    <td>{{user.martialArts[0].rankName}}</td>
+                                    <td *ngIf="user.martialArts[0]">{{user.martialArts[0].name}}</td>
+                                    <td *ngIf="!user.martialArts[0]" i18n>no rank</td>
                                     <!--td><button class="btn btn-success">Add</button></td-->
                                 </tr>
                             </tbody>

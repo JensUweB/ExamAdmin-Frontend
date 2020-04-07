@@ -5,7 +5,7 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClubService } from '../club/club.service';
 import { MartialArtsService } from '../martialArts/martialArts.service';
 import { Alert } from '../types/Alert';
@@ -14,10 +14,8 @@ import { Subscription } from 'rxjs';
 const queryExamResults = gql`query getAllExamResults{getAllExamResults{_id, user, exam, date, passed, reportUri , martialArt{name, styleName},rank}}`;
 
 const clubMutation = gql`mutation addUserToClub($id: String!){addUserToClub(clubId: $id){_id}}`;
-const maMutation = gql`mutation addMartialArtRankToUser($id: String!, $name: String!, $number: Float!)
-{addMartialArtRankToUser(userId: "", maRank: {
-  _id: $id, rankName: $name, rankNumber: $number})
-{_id}}`;
+const maMutation = gql`mutation addMartialArtRankToUser($id: String!, $rankId: String!)
+{addMartialArtRankToUser(userId: "", maRank: {_id: $id, rankId: $rankId}){_id}}`;
 
 @Component({
   selector: 'app-user',
@@ -25,7 +23,8 @@ const maMutation = gql`mutation addMartialArtRankToUser($id: String!, $name: Str
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit, OnDestroy{
-  private subscription: Subscription;
+  private authSubscription: Subscription;
+  private maSubscription: Subscription;
   user;
   examResults = [];
   url;
@@ -50,13 +49,11 @@ export class UserComponent implements OnInit, OnDestroy{
   ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
-    config.keyboard = false;
+    config.keyboard = true;
 
-    this.martialArts = maService.martialArts;
     this.maForm = this.fb.group({
-      maId: 0,
-      rankName: '',
-      rankNumber: ''
+      maId: ['', Validators.required],
+      rankId: ['', Validators.required],
     });
     this.clubs = this.clubService.clubs;
     this.clubForm = this.fb.group({
@@ -82,18 +79,15 @@ export class UserComponent implements OnInit, OnDestroy{
     });
   }
 
-  onMaSubmit() {
-    //this.user.martialArts.push({_id: this.martialArts[this.maId.value], rankName: this.rankName.value});
-    console.log(this.martialArts[this.maId.value].ranks.filter(rank => rank.name == this.rankName.value)[0].number);
-    let number = this.martialArts[this.maId.value].ranks.filter(rank => rank.name == this.rankName.value)[0].number;
+  async onMaSubmit() {
+    if(!this.maForm.valid) { return false; }
     let id = this.martialArts[this.maId.value]._id;
 
     this.apollo.mutate<any>({
       mutation: maMutation,
       variables: {
         id,
-        name: this.rankName.value,
-        number
+        rankId: this.rankId.value,
       }
     }).subscribe((response) => { 
       this.authService.loadUser();
@@ -125,7 +119,8 @@ export class UserComponent implements OnInit, OnDestroy{
       });
 
     }
-    this.subscription = this.authService.user.subscribe(data => {this.user = data});
+    this.authSubscription = this.authService.user.subscribe(data => this.user = data);
+    this.maSubscription = this.maService.martialArts.subscribe(data => this.martialArts = data);
   }
 
   showMaDetails(ma) {
@@ -165,15 +160,16 @@ export class UserComponent implements OnInit, OnDestroy{
     return this.maForm.get('maId');
   }
 
-  get rankName() {
-    return this.maForm.get('rankName');
+  get rankId() {
+    return this.maForm.get('rankId');
   }
   close(alert: Alert) {
     this.alerts.splice(this.alerts.indexOf(alert));
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.authSubscription.unsubscribe();
+    this.maSubscription.unsubscribe();
   }
 
 }

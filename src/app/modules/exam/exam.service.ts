@@ -7,20 +7,16 @@ import { Exam } from "../models/exam.model";
 import { userInfo } from "os";
 
 const examsQuery = gql`
-  query getPlannedExams {
-    getPlannedExams {
-      _id,title,description,examDate,regEndDate,examPlace, price
-      participants {
-        _id
-        firstName
-        lastName
-        martialArts {
-          _id {_id } rankName} } 
-        martialArt {
-        _id,name,styleName
-      } examiner {
-        _id,firstName,lastName
-        clubs {club {_id }}}}}
+query {getPlannedExams {
+  _id,title,description,examDate,regEndDate,examPlace, price
+  participants {
+    _id,firstName,lastName
+    martialArts {
+      _id {_id }, rankId} } 
+    martialArt {
+    _id,name,styleName, ranks{_id, name}
+  } examiner {
+    _id,firstName,lastName}}}
 `;
 
 const clubsQuery = gql`
@@ -64,30 +60,27 @@ export class ExamService implements OnInit, OnDestroy {
                 exams.forEach(exam => {
                   if (exam.participants) {
                     exam.participants.forEach(user => {
-                      user.martialArts = user.martialArts.filter(
-                        ma => ma._id._id == exam.martialArt._id
-                      );
+                      user.martialArts = user.martialArts.filter(ma => ma._id._id == exam.martialArt._id);
+                      if(user.martialArts[0]) user.martialArts = {...exam.martialArt.ranks.filter(rank => rank._id == user.martialArts[0].rankId)};
                     });
                   }
                 });
               }
               this._exams.next(exams);
-              console.log("[ExamService] Data preparing done!");
+              console.log('[ExamService] Done.');
+              console.log('[ExamService]',this.exams);
             });
           }
         },
         err => {
-          console.warn(
-            "[ExamService]: GraphQL Error:",
-            err.graphQLErrors[0].message
-          );
+          console.error("[ExamService]: ",err);
         }
       );
   }
 
   setExam(exam) {
     this.currentExam = exam;
-
+    /*
     this.currentExam.examiner.clubs.forEach(ele => {
       this.apollo
         .watchQuery<any>({
@@ -111,6 +104,7 @@ export class ExamService implements OnInit, OnDestroy {
           }
         );
     });
+    */
   }
 
   getExam() {
