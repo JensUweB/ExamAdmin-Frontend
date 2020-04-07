@@ -64,6 +64,7 @@ export class AuthComponent implements OnInit {
           this.alerts.push({type:"success", message: 'Success! You should receive an confirmation email!'});
           console.log('[Auth] Success! You should receive an confirmation email!');
         }, (err) => {
+          console.log('[Auth] Oops. Something went wrong: ',err);
           if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
           else this.alerts.push({type: 'danger', message: JSON.stringify(err)});
         });
