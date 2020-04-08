@@ -38,7 +38,7 @@
                 <tbody>
                     <tr *ngFor="let examiner of ma.examiners">
                         <td>{{examiner.firstName}} {{examiner.lastName}}</td>
-                        <td>{{examiner.martialArts[0].rankName}}</td>
+                        <td>{{examiner.martialArts.name}}</td>
                         <td><button class="btn btn-sm btn-danger pull-right" (click)="onRemove(examiner._id)">Remove</button></td>
                     </tr>
                 </tbody>

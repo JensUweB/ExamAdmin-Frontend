@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { MartialArt } from '../models/martialArt.model';
 import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 
-const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{_id, firstName, lastName, martialArts{_id{_id, ranks{name}}}}, ranks{_id, name, number}}}`;
+const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{_id, firstName, lastName, martialArts{_id{_id, ranks{name}},rankId}}, ranks{_id, name, number}}}`;
 
 @Injectable()
 export class MartialArtsService implements OnInit {
@@ -30,7 +30,8 @@ export class MartialArtsService implements OnInit {
         data.forEach(ma => {
           ma.isHidden = true;
           ma.examiners.forEach(examiner => {
-            examiner.martialArts = examiner.martialArts.filter(ele => ele._id.toString() == ma._id.toString());
+            examiner.martialArts = examiner.martialArts.filter(ele => ele._id._id == ma._id.toString());
+            if(examiner.martialArts.length) examiner.martialArts = {...ma.ranks.filter(rank => rank._id == examiner.martialArts[0].rankId)[0]};
           });
         });
         console.log('[MAService] Got some data!');
