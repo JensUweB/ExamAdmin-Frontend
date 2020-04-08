@@ -52,7 +52,7 @@ export class MartialartDetailsComponent implements OnInit {
           this.maService.setCurrent(this.ma, false);
           this.ma = this.maService.martialArt;
           this.alerts.push({type:"success", message: 'New examiner was added!'});
-          console.log('[NewMartialArtComp] Done.');
+          console.log('[MADetailsComp] Done. ');
         }
       }, (err) => {
         if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
