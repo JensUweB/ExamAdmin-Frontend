@@ -37,7 +37,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
 
   private subscription: Subscription;
   private maSubscription: Subscription;
-  formSubscription: Subscription;
+  //formSubscription: Subscription;
   user: User;
   isExaminer = false;
   martialArts: MartialArt[] = [];
@@ -128,7 +128,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy() {
-    this.formSubscription.unsubscribe();
+    //this.formSubscription.unsubscribe();
     this.subscription.unsubscribe();
     this.maSubscription.unsubscribe();
   }
