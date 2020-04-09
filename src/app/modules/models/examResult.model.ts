@@ -16,7 +16,7 @@ export class ExamResult {
         lastName: string
     }
     rank: string;
-    date: string;
+    date: Date;
     reportUri: string;
     passed: boolean;
 }
