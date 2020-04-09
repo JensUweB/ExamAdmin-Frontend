@@ -4,6 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
 import { MartialArt } from '../models/martialArt.model';
 import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
+import { isArray } from 'util';
 
 const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{_id, firstName, lastName, martialArts{_id{_id, ranks{name}},rankId}}, ranks{_id, name, number}}}`;
 
@@ -19,6 +20,7 @@ export class MartialArtsService implements OnInit {
     constructor(
         private apollo: Apollo, 
         private router: Router) {
+          this.fetch();
     }
 
     fetch() {
@@ -30,8 +32,12 @@ export class MartialArtsService implements OnInit {
         data.forEach(ma => {
           ma.isHidden = true;
           ma.examiners.forEach(examiner => {
-            examiner.martialArts = examiner.martialArts.filter(ele => ele._id._id == ma._id.toString());
-            if(examiner.martialArts.length) examiner.martialArts = {...ma.ranks.filter(rank => rank._id == examiner.martialArts[0].rankId)[0]};
+            if(Array.isArray(examiner.martialArts)) {
+              examiner.martialArts = examiner.martialArts.filter(ele => ele._id._id == ma._id.toString());
+              if(examiner.martialArts[0]) {
+                examiner.martialArts = {...ma.ranks.filter(rank => rank._id == examiner.martialArts[0].rankId)[0]};
+              }
+            }
           });
         });
         console.log('[MAService] Got some data!');
@@ -42,8 +48,9 @@ export class MartialArtsService implements OnInit {
       });
     }
 
+    // ngOnInit does not work at all
     ngOnInit() {
-      this.fetch();
+      this.fetch(); 
     }
 
     setCurrent(ma: MartialArt, editMode: Boolean) {
