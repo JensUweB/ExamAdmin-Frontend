@@ -40,7 +40,7 @@
                   <label for="oldPassword" i18n>Old Password:</label>
                 </div>
                 <div class="col-sm">
-                  <input class="form-control" type="password" placeholder="your current password" formControlName="password"
+                  <input class="form-control" type="password" i18n-placeholder placeholder="your current password" formControlName="password"
                     name="oldPassword">
                 </div>
               </div>
@@ -49,7 +49,7 @@
                   <label for="newPassword" i18n>New Password:</label>
                 </div>
                 <div class="col-sm">
-                  <input class="form-control" type="password" placeholder="new password" formControlName="newPassword">
+                  <input class="form-control" type="password" i18n-placeholder placeholder="new password" formControlName="newPassword">
                 </div>
               </div>
               <div class="row">
@@ -57,7 +57,7 @@
                   <label for="repeatPassword" i18n>Repeat Password:</label>
                 </div>
                 <div class="col-sm">
-                  <input class="form-control" type="password" placeholder="confirm new password" formControlName="newPassword2">
+                  <input class="form-control" type="password" i18n-placeholder placeholder="confirm new password" formControlName="newPassword2">
                 </div>
               </div>
               <div class="row">
@@ -90,7 +90,7 @@
           <h4 i18n>Your Martial Arts:</h4>
         </div>
         <div class="col-4">
-          <button type="button" class="btn btn-sm btn-success" (click)="openPopup(maPopup)">Add</button>
+          <button type="button" class="btn btn-sm btn-success" (click)="openPopup(maPopup)" i18n="Button">Add</button>
         </div>
       </div>
       <div *ngFor="let martialArt of user.martialArts" class="row">

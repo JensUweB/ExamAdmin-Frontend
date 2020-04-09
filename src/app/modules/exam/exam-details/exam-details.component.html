@@ -71,8 +71,8 @@
             </div>
             <div class="row">
                 <div class="col-sm">
-                    <button *ngIf="!hasCheckedIn" class="btn btn-success" (click)="onCheckIn()" i18n>Sign in</button>
-                    <button *ngIf="hasCheckedIn" class="btn btn-warning" (click)="onCheckOut()" i18n>Sign out</button>
+                    <button *ngIf="!hasCheckedIn" class="btn btn-success" (click)="onCheckIn()" i18n="Button">Sign in</button>
+                    <button *ngIf="hasCheckedIn" class="btn btn-warning" (click)="onCheckOut()" i18n="Button">Sign out</button>
                 </div>
             </div>
             <div *ngIf="exam.examiner._id == user._id">

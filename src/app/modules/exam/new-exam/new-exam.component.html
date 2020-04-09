@@ -29,7 +29,7 @@
             Exam Title:
         </div>
         <div class="col-8">
-            <input class="form-control" type="text" formControlName="title" placeholder="{{'Tell us, in a few words, what this exam is all about' i18n}}">
+            <input class="form-control" type="text" formControlName="title" i18n-placeholder placeholder="Tell us, in a few words, what this exam is all about">
             <div *ngIf="!title.valid && title.touched" class="alert alert-danger" role="alert" i18n>
                 Please enter a title with at least 10 characters!
             </div>
@@ -41,7 +41,7 @@
             Exam description:
         </div>
         <div class="col-8">
-            <textarea class="form-control" rows="4" cols="50" formControlName="description" placeholder="{{'Put every important detail into here' i18n}}"></textarea>
+            <textarea class="form-control" rows="4" cols="50" formControlName="description" i18n-placeholder placeholder="Put every important detail into here"></textarea>
             <div *ngIf="!description.valid && description.touched" class="alert alert-danger" role="alert" i18n>
                 Please enter a description with at least 15 characters!
             </div>
@@ -53,7 +53,7 @@
             Address:
         </div>
         <div class="col-8">
-            <input class="form-control" rows="4" cols="50" formControlName="examPlace" placeholder="{{'The Address of the exam' i18n}}">
+            <input class="form-control" rows="4" cols="50" formControlName="examPlace" i18n-placeholder placeholder="The Address of the exam">
             <div *ngIf="!examPlace.valid && examPlace.touched" class="alert alert-danger" role="alert" i18n>
                 Please enter an address!
             </div>
