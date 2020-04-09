@@ -25,6 +25,7 @@ import { ClubService } from './modules/club/club.service';
 import { NewMartialartComponent } from './modules/martialArts/new-martialart/new-martialart.component';
 import { MartialartDetailsComponent } from './modules/martialArts/martialart-details/martialart-details.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { UserService } from './modules/user/user.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     DragDropModule
   ],
-  providers: [ExamService, MartialArtsService, ClubService],
+  providers: [ExamService, MartialArtsService, ClubService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
