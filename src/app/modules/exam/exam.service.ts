@@ -37,7 +37,9 @@ export class ExamService implements OnInit, OnDestroy {
   private querySubscription: Subscription;
   private examinerClubs = [];
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) {
+    this.fetchExams();
+  }
 
   fetchExams() {
     console.log('[ExamService] Fetching data...');
@@ -60,8 +62,13 @@ export class ExamService implements OnInit, OnDestroy {
                 exams.forEach(exam => {
                   if (exam.participants) {
                     exam.participants.forEach(user => {
-                      user.martialArts = user.martialArts.filter(ma => ma._id._id == exam.martialArt._id);
-                      if(user.martialArts[0]) user.martialArts = {...exam.martialArt.ranks.filter(rank => rank._id == user.martialArts[0].rankId)};
+                      if(Array.isArray(user.martialArts)) {
+                        user.martialArts = user.martialArts.filter(ma => ma._id._id == exam.martialArt._id);
+                        
+                        if(user.martialArts[0]) {
+                          user.martialArts = {...exam.martialArt.ranks.filter(rank => rank._id == user.martialArts[0].rankId)};
+                        }
+                      }
                     });
                   }
                 });
@@ -72,7 +79,7 @@ export class ExamService implements OnInit, OnDestroy {
           }
         },
         err => {
-          console.error("[ExamService]: ",err);
+          console.error("[ExamService]: ",JSON.stringify(err));
         }
       );
   }
@@ -114,6 +121,7 @@ export class ExamService implements OnInit, OnDestroy {
     return this.examinerClubs;
   }
 
+    // ngOnInit does not work at all
   ngOnInit() {
     this.fetchExams();
   }
