@@ -10,7 +10,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./exam.component.scss']
 })
 export class ExamComponent implements OnInit{
-  private subscription: Subscription;
+  private examSubscription: Subscription;
+  private userSubscription: Subscription;
   plannedExams;
   user;
   showPlanned = true;
@@ -23,8 +24,8 @@ export class ExamComponent implements OnInit{
 
   async ngOnInit() {
     console.log('[ExamComp] Initializing...');
-    this.subscription = this.examService.exams.subscribe(data => {this.plannedExams = data});
-    this.user = this.authService.user;
+    this.examSubscription = this.examService.exams.subscribe(data => this.plannedExams = data);
+    this.userSubscription = this.authService.user.subscribe(data => this.user = data);
     console.log('[ExamComp] Done.');
   }
   showDetails(exam: any): void {
@@ -40,7 +41,8 @@ export class ExamComponent implements OnInit{
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.examSubscription.unsubscribe();
+    this.userSubscription.unsubscribe();
   }
 
 }
