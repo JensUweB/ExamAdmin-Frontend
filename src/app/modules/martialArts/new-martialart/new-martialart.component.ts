@@ -92,11 +92,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
     if(!this.ma) {
       const count: number = this.rankCount.value + 1;
       for(let i=0; i<count; i++) {
-        if(i==0) {
-          this.ranks.push(this.addRankGroup(undefined, "none",count));
-        } else {
           this.ranks.push(this.addRankGroup(undefined, (count-i)+". rank",count-i));
-        }
       }
     } else {
       for(let i=0; i<this.ma.ranks.length; i++) {
