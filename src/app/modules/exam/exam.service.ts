@@ -2,7 +2,7 @@ import { Injectable, OnInit, OnDestroy } from "@angular/core";
 import gql from "graphql-tag";
 import { Apollo } from "apollo-angular";
 import { Subscription, BehaviorSubject } from "rxjs";
-import { normalizeDateTime } from "../helpers/date.helper";
+import { normalizeDate } from "../helpers/date.helper";
 import { Exam } from "../models/exam.model";
 import { userInfo } from "os";
 
@@ -52,8 +52,8 @@ export class ExamService implements OnInit, OnDestroy {
             let exams = response.data.getPlannedExams;
             console.log("[ExamService] Got some data. Preparing data...");
             exams.forEach(exam => {
-              exam.examDate = normalizeDateTime(exam.examDate);
-              exam.regEndDate = normalizeDateTime(exam.regEndDate);
+              exam.examDate = normalizeDate(exam.examDate);
+              exam.regEndDate = normalizeDate(exam.regEndDate);
               exam.isHidden = true;
 
               if (exams) {
@@ -68,7 +68,6 @@ export class ExamService implements OnInit, OnDestroy {
               }
               this._exams.next(exams);
               console.log('[ExamService] Done.');
-              console.log('[ExamService]',this.exams);
             });
           }
         },
