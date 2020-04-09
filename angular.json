@@ -62,7 +62,12 @@
               "ngswConfigPath": "ngsw-config.json"
             },
             "de": {
-              "localize": ["de"]
+              "aot": true,
+              "outputPath": "dist/ExamAdmin/",
+              "i18nFile": "src/locale/messages-de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "i18nMissingTranslation": "warning"
             }
           }
         },
@@ -76,7 +81,7 @@
               "browserTarget": "examadmin:build:production"
             },
             "de": {
-              "browserTarget": "ponyracer:build:de"
+              "browserTarget": "examadmin:build:de"
             }
           }
         },
