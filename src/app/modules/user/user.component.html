@@ -10,61 +10,62 @@
       <form>
         <div class="row">
           <div class="col-sm">
-            <div class="row">
-              <div class="col-sm">
-                <label for="firstName" i18n>First Name:</label>
+            <form [formGroup]="userForm">
+              <div class="row">
+                <div class="col-sm">
+                  <label for="firstName" i18n>First Name:</label>
+                </div>
+                <div class="col-sm">
+                  <input class="form-control" type="text" formControlName="firstName">
+                </div>
               </div>
-              <div class="col-sm">
-                <input class="form-control" type="text" placeholder="{{user.firstName}}" name="firstName">
+              <div class="row">
+                <div class="col-sm">
+                  <label for="lastName" i18n>Last Name:</label>
+                </div>
+                <div class="col-sm">
+                  <input class="form-control" type="text" formControlName="lastName">
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-sm">
-                <label for="lastName" i18n>Last Name:</label>
+              <div class="row">
+                <div class="col-sm">
+                  <label for="email" i18n>E-Mail:</label>
+                </div>
+                <div class="col-sm">
+                  <input class="form-control" type="text" formControlName="email">
+                </div>
               </div>
-              <div class="col-sm">
-                <input class="form-control" type="text" placeholder="{{user.lastName}}" name="lastName">
+              <div class="row">
+                <div class="col-sm">
+                  <label for="oldPassword" i18n>Old Password:</label>
+                </div>
+                <div class="col-sm">
+                  <input class="form-control" type="password" placeholder="your current password" formControlName="password"
+                    name="oldPassword">
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-sm">
-                <label for="email" i18n>E-Mail:</label>
+              <div class="row">
+                <div class="col-sm">
+                  <label for="newPassword" i18n>New Password:</label>
+                </div>
+                <div class="col-sm">
+                  <input class="form-control" type="password" placeholder="new password" formControlName="newPassword">
+                </div>
               </div>
-              <div class="col-sm">
-                <input class="form-control" type="text" placeholder="{{user.email}}" name="email">
+              <div class="row">
+                <div class="col-sm">
+                  <label for="repeatPassword" i18n>Repeat Password:</label>
+                </div>
+                <div class="col-sm">
+                  <input class="form-control" type="password" placeholder="confirm new password" formControlName="newPassword2">
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-sm">
-                <label for="oldPassword" i18n>Old Password:</label>
+              <div class="row">
+                <div class="col-sm">
+                  <button class="btn btn-sm btn-primary" (click)="onUserUpdate()">Update!</button>
+                </div>
               </div>
-              <div class="col-sm">
-                <input class="form-control" type="password" placeholder="old password" id="oldPassword"
-                  name="oldPassword">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm">
-                <label for="newPassword" i18n>New Password:</label>
-              </div>
-              <div class="col-sm">
-                <input class="form-control" type="password" placeholder="new password" id="password" name="newPassword">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm">
-                <label for="repeatPassword" i18n>Repeat Password:</label>
-              </div>
-              <div class="col-sm">
-                <input class="form-control" type="password" placeholder="confirm new password" id="password2"
-                  name="repeatPassword">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm">
-                <input class="form-control" type="submit" value="Change!" class="btn btn-sm btn-primary">
-              </div>
-            </div>
+            </form>
           </div>
         </div>
       </form>

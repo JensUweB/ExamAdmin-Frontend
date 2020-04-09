@@ -1,10 +1,10 @@
 <div *ngIf="!editMode">
     <div class="row">
         <div class="col">
-            <h1>Martial Art Details</h1>
+            <h1 i18n>Martial Art Details</h1>
         </div>
         <div class="col">
-            <button class="btn btn-warning pull-right" (click)="showEdit()" i18n>Edit</button>
+            <button class="btn btn-warning pull-right" (click)="showEdit()" i18n="Button">Edit</button>
         </div>
     </div>
     <div class="row">
@@ -19,10 +19,10 @@
     </div>
     <div class="row">
         <div class="col-sm">
-            <h3>Examiners:</h3>
+            <h3 i18n>Examiners:</h3>
         </div>
         <div class="col-sm">
-            <button class="btn btn-success pull-right" (click)="openPopup(examinerPopup)">Add</button>
+            <button class="btn btn-success pull-right" (click)="openPopup(examinerPopup)" i18n="Button">Add</button>
         </div>
     </div>
     <div class="row">
@@ -30,8 +30,8 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Name</th>
-                        <th>Rank</th>
+                        <th i18n>Name</th>
+                        <th i18n>Rank</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -39,7 +39,7 @@
                     <tr *ngFor="let examiner of ma.examiners">
                         <td>{{examiner.firstName}} {{examiner.lastName}}</td>
                         <td>{{examiner.martialArts.name}}</td>
-                        <td><button class="btn btn-sm btn-danger pull-right" (click)="onRemove(examiner._id)">Remove</button></td>
+                        <td><button class="btn btn-sm btn-danger pull-right" (click)="onRemove(examiner._id)" i18n="Button">Remove</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -58,8 +58,8 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Number</th>
-                        <th>Name</th>
+                        <th i18n>Number</th>
+                        <th i18n>Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,7 +75,7 @@
 <div *ngIf="editMode">
     <div class="row">
         <div class="col">
-            <h1>Martial Art Edit Mode</h1>
+            <h1 i18n="Headline">Martial Art Edit Mode</h1>
             <app-new-martialart [ma]="ma" (cancelEdit)="cancelEdit()"></app-new-martialart>
         </div>
     </div>
@@ -83,7 +83,7 @@
 <!-- Add Examiner Popup -->
 <ng-template #examinerPopup let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title" i18n>Add Examiner</h4>
+        <h4 class="modal-title" id="modal-basic-title" i18n="Popup Headline">Add Examiner</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -95,7 +95,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-success" (click)="onSubmit(); c('Save click')" i18n>Confirm</button>
-        <button type="button" class="btn btn-warning" (click)=" c('Save click')" i18n>Cancel</button>
+        <button type="button" class="btn btn-success" (click)="onSubmit(); c('Save click')" i18n="Button">Confirm</button>
+        <button type="button" class="btn btn-warning" (click)=" c('Save click')" i18n="Button">Cancel</button>
     </div>
 </ng-template>

@@ -2,10 +2,10 @@
     <div class="col">
         <div class="row">
             <div class="col-8">
-                <h1 i18n>Exam Details</h1>
+                <h1 i18n="Headline">Exam Details</h1>
             </div>
             <div class="col -4" *ngIf="exam.examiner._id == user._id">
-                <button class="btn btn-warning" (click)="editExam=true" style="float: right">Edit</button>
+                <button class="btn btn-warning" (click)="editExam=true" style="float: right" i18n="Button">Edit</button>
             </div>
         </div>
         
@@ -96,7 +96,7 @@
                                     <td>{{user.firstName}} {{user.lastName}}</td>
                                     <td *ngIf="user.martialArts[0]">{{user.martialArts[0].name}}</td>
                                     <td *ngIf="!user.martialArts[0]" i18n>no rank</td>
-                                    <!--td><button class="btn btn-success">Add</button></td-->
+                                    <!--td><button class="btn btn-success" i18n="Button">Add</button></td-->
                                 </tr>
                             </tbody>
                         </table>
@@ -179,9 +179,9 @@
             <hr>
             <div class="row">
                 <div class="col-sm">
-                    <button class="btn btn-success" (click)="onUpdate()">Update</button>
-                    <button class="btn btn-danger" (click)="openPopup(deletePopup)">Delete</button>
-                    <button class="btn btn-warning" (click)="editExam=false">Cancel</button>
+                    <button class="btn btn-success" (click)="onUpdate()" i18n="Button">Update</button>
+                    <button class="btn btn-danger" (click)="openPopup(deletePopup)" i18n="Button">Delete</button>
+                    <button class="btn btn-warning" (click)="editExam=false" i18n="Button">Cancel</button>
                 </div>
             </div>
         </form>
@@ -198,7 +198,7 @@
 <!-- Delete Confirmation Popup -->
 <ng-template #deletePopup let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title" i18n>Delete Exam</h4>
+      <h4 class="modal-title" id="modal-basic-title" i18n="Popup Headline">Delete Exam</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -207,7 +207,7 @@
       <p i18n>Do you really want to delete this exam?</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-danger" (click)="onDelete(); c('Save click')" i18n>Confirm Delete</button>
-      <button type="button" class="btn btn-success" (click)=" c('Save click')" i18n>Cancel</button>
+      <button type="button" class="btn btn-danger" (click)="onDelete(); c('Save click')" i18n="Popup Button">Confirm Delete</button>
+      <button type="button" class="btn btn-success" (click)=" c('Save click')" i18n="Popup Button">Cancel</button>
     </div>
   </ng-template>

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm">
-    <h1 i18n>Exams</h1>
+    <h1 i18n="Headline">Exams</h1>
   </div>
   <div class="col-sm">
     <!--button class="btn btn-primary" (click)="showPlanned = !showPlanned">{{showPlanned ? 'Show my previously created exams' : 'Show upcomming exams'}}</button-->
@@ -51,7 +51,7 @@
             <div class="row">
               <div class="col-sm">
                 <!--b i18n>Club:</b-->
-                <b>Adress:</b>
+                <b i18n>Adress:</b>
               </div>
               <div class="col-sm">
                 <!--{{result.club.name}}<br-->
@@ -75,9 +75,9 @@
               </div>
             </div>
             <div class="row">
-                <button class="btn btn-success" (click)="showDetails(result)" i18n>Details</button>
+                <button class="btn btn-success" (click)="showDetails(result)" i18n="Butotn">Details</button>
                 <div *ngIf="result.examiner._id == user._id">
-                  <button class="btn btn-warning" (click)="showEdit(result)" i18n>Edit</button>
+                  <button class="btn btn-warning" (click)="showEdit(result)" i18n="Button">Edit</button>
                 </div>
             </div>
           </div>
