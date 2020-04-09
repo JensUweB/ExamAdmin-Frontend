@@ -6,7 +6,7 @@ export class Exam {
     _id: string;
     title: string;
     description: string;
-    price: number;
+    price: string;
     examDate: string;
     regEndDate: string;
     isPublic: boolean;
