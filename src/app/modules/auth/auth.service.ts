@@ -5,6 +5,7 @@ import { BehaviorSubject, Subscription, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { Alert } from '../types/Alert';
+import { logError, getGraphQLError } from '../helpers/error.helpers';
 
 const login = gql`
 query login($email: String!, $password: String!)
@@ -31,11 +32,16 @@ export class AuthService implements OnInit, OnDestroy{
         
     }
 
+    printError(err) {
+      logError('[UserComponent]',err);
+      this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+    }
+
     async login(email: string, password: string): Promise<any> {
         let returnCode: number;
         let error;
         console.log('[AuthService] Logging in...');
-        this.apollo.watchQuery<any>({
+        await this.apollo.watchQuery<any>({
             query: login,
             variables: {
                 email: email, 
@@ -58,9 +64,7 @@ export class AuthService implements OnInit, OnDestroy{
                 throw response.errors;
             }
         }, (err) => {
-            console.log('[AuthService] Error:',JSON.stringify(err));
-            this.alerts.push({type: 'danger', message: err});
-            throw err;
+            this.printError(err);
         });
     }
 
@@ -78,8 +82,7 @@ export class AuthService implements OnInit, OnDestroy{
                     this._isAuthenticated.next(true);
                 }
             }, (err) => {
-                if(err.graphQLErrors[0]) console.warn('[AuthService] Error:',err.graphQLErrors[0].message);
-                else console.error('[AuthService] ',err);
+                this.printError(err);
             });
         }
     }

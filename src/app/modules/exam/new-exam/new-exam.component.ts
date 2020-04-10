@@ -11,6 +11,7 @@ import { Alert } from '../../types/Alert';
 import { ExamService } from '../exam.service';
 import { Exam } from '../../models/exam.model';
 import { MartialArtsService } from '../../martialArts/martialArts.service';
+import { logError, getGraphQLError } from '../../helpers/error.helpers';
 
 const newExamQuery = gql`mutation createExam
 ($title: String!, $description: String!, $price: String!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!, 
@@ -84,10 +85,13 @@ export class NewExamComponent implements OnInit, OnDestroy{
       });
     });
 
-    
-
     if (this.martialArts.length > 0) this.isExaminer = true;
     console.log('[NewExamComp] ', this.martialArts);
+  }
+
+  printError(err) {
+    logError('[UserComponent]',err);
+    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   get martialArt() {
@@ -165,8 +169,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
         this.alerts.push({type:"success", message: 'Success! A new exam was created.'});
         if(response.data) console.log('[NewExamComp] New exam successfull created!');
       }, (err) => {
-        this.alerts.push({type: 'danger', message: err});
-        console.warn('[NewExamComp]: GraphQL Error:',JSON.stringify(err));
+        this.printError(err);
       });
       this.isSubmitted = true;
     } else {

@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Alert } from '../types/Alert';
+import { logError, getGraphQLError } from '../helpers/error.helpers';
 
 const signUp = gql`mutation signup($firstName: String!, $lastName: String!, $email: String!, $password: String!){
   signup(userInput: {firstName: $firstName, lastName: $lastName, email: $email, password: $password})}`;
@@ -31,12 +32,17 @@ export class AuthComponent implements OnInit {
     });
   }
 
+  printError(err) {
+    logError('[UserComponent]',err);
+    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+  }
+
   async confirm() {
     if (this.userForm.valid) {
       if (this.login) {
           
         try {
-          this.authService.login(this.email.value, this.password.value);
+          await this.authService.login(this.email.value, this.password.value);
         /* .then(() => {
           console.log('Was zur hölle passiert hier?');
           this.alerts.push({type: 'success', message: 'Login successful! You will be redirected shortly!'});
@@ -64,9 +70,7 @@ export class AuthComponent implements OnInit {
           this.alerts.push({type:"success", message: 'Success! You should receive an confirmation email!'});
           console.log('[Auth] Success! You should receive an confirmation email!');
         }, (err) => {
-          console.log('[Auth] Oops. Something went wrong: ',err);
-          if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-          else this.alerts.push({type: 'danger', message: JSON.stringify(err)});
+          this.printError(err);
         });
       }
     }

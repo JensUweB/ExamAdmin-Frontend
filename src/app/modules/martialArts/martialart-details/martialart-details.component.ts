@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import gql from 'graphql-tag';
 import { Alert } from '../../types/Alert';
+import { logError, getGraphQLError } from '../../helpers/error.helpers';
 
 const query = gql`mutation addExaminer($maId: String!, $email: String!)
 {addExaminer(maId: $maId, email: $email){_id}}`;
@@ -55,9 +56,7 @@ export class MartialartDetailsComponent implements OnInit {
           console.log('[MADetailsComp] Done. ');
         }
       }, (err) => {
-        if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-        else this.alerts.push({type: 'danger', message: err});
-        console.warn('[ExamResult] ', JSON.stringify(err));
+        this.printError(err);
       });
      }
    }
@@ -76,13 +75,16 @@ export class MartialartDetailsComponent implements OnInit {
           console.log('[NewMartialArtComp] Done.');
         }
       }, (err) => {
-        if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-        else this.alerts.push({type: 'danger', message: err});
-        console.warn('[ExamResult] ', JSON.stringify(err));
+        this.printError(err);
       });
    }
 
   ngOnInit(): void {
+  }
+
+  printError(err) {
+    logError('[UserComponent]',err);
+    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   showEdit() {
