@@ -9,7 +9,7 @@ import { Alert } from '../../types/Alert';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { getGraphQLError } from '../../helpers/error.helpers';
+import { getGraphQLError, logError } from '../../helpers/error.helpers';
 import { Subscription } from 'rxjs';
 
 const query = gql`mutation registerToExam($examId: String!){registerToExam(examId: $examId)}`;
@@ -36,6 +36,8 @@ $examDate: DateTime, $regEndDate: DateTime, $userId: String, $maId: String!)
 })
 export class ExamDetailsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
+  rank: any;
+  canRegister: Boolean;
   exam: Exam;
   user: User;
   hasCheckedIn: boolean;
@@ -60,6 +62,26 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
     this.clubs = this.examService.getCurrentClubs();
     this.hasCheckedIn = this.exam.participants.some(user => user._id == this.user._id);
 
+    if(this.exam.minRank!== undefined) {
+      // Get the rank object of exam.minRank
+      this.rank = this.exam.martialArt.ranks.filter(rank => {
+        return rank._id == this.exam.minRank;
+      })[0];
+
+      if(this.rank !== undefined) {
+        // Check if the user has the required min rank or better
+        this.canRegister = this.user.martialArts.some(ma => {
+          return +ma._id.ranks[0].number <= +this.rank.number;
+        });
+      } else {
+        this.canRegister = true;
+      }
+
+    } else {
+      this.canRegister = true;
+    }
+    
+
     this.examForm = this.fb.group({
       title: [this.exam.title, Validators.required],
       description: [this.exam.description, Validators.required],
@@ -78,6 +100,11 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  printError(err) {
+    logError('[UserComponent]',err);
+    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+  }
+
   onCheckIn() {
     this.apollo.mutate<any>({
       mutation: query,
@@ -92,9 +119,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
         console.log('[Exam] Ok, you now are listed as participant!');
       }
     }, (err) => {
-      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: getGraphQLError(err)});
-       else this.alerts.push({type: 'danger', message: err});
-      console.warn('[Exam]: GraphQL Error:',JSON.stringify(err));
+      this.printError(err);
     });
   }
   onCheckOut() {
@@ -144,9 +169,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
         this.alerts.push({type:"success", message: 'Update Successful!'});
         console.log('[ExamDetails] Update Successful!');
       }, (err) => {
-        if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-        else this.alerts.push({type: 'danger', message: err});
-        console.warn(JSON.stringify(err));
+        this.printError(err);
       });
     }
   }
@@ -162,9 +185,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
       console.log('[ExamDetails] Update Successful!');
       this.router.navigate(['/exams']);
     }, (err) => {
-      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-      else this.alerts.push({type: 'danger', message: err});
-      console.warn(JSON.stringify(err));
+      this.printError(err);
     });
   }
 
