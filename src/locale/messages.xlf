@@ -355,6 +355,13 @@
           <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="82f0e19ac208b3adc102d4f801ba9cb7e6aba1a3" datatype="html">
+        <source>Your first name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="ed063906e10eab2a1b2e2dc31b42f2648d97a52e" datatype="html">
         <source>Your last name</source>
         <context-group purpose="location">
@@ -394,25 +401,37 @@
           <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="78c3ae282fa5e424e6a165424045f95c7e1004d1" datatype="html">
-        <source>
-                            <x id="INTERPOLATION" equiv-text="{{login ? &apos;login&apos; : &apos;create account&apos;}}"/>
-                        </source>
+      <trans-unit id="6765b4c916060f6bc42d9bb69e80377dbcb5e4e9" datatype="html">
+        <source>Login</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
           <context context-type="linenumber">20</context>
         </context-group>
         <note priority="1" from="description">Login Button</note>
       </trans-unit>
-      <trans-unit id="1e2af0a2dd6f1b9ce656f994b8fd9f3b0f0b68bb" datatype="html">
-        <source>
-                            <x id="INTERPOLATION" equiv-text="{{login ? &apos;need to create an account?&apos; : &apos;already have an account?&apos;}}"/>
-                        </source>
+      <trans-unit id="e19fcf996343543e13789f17b550ab0c08124b5c" datatype="html">
+        <source>Create Account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <note priority="1" from="description">SignUp Button</note>
+      </trans-unit>
+      <trans-unit id="da9fb7a6aa2db825c498c873cccad6cfe41cf727" datatype="html">
+        <source>Need to create an account?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
           <context context-type="linenumber">23</context>
         </context-group>
-        <note priority="1" from="description">Switch Button</note>
+        <note priority="1" from="description">Login Mode</note>
+      </trans-unit>
+      <trans-unit id="a21b4e4b7c48dc611c3774abf8d163519991638d" datatype="html">
+        <source>Already have an account?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <note priority="1" from="description">SignUp Mode</note>
       </trans-unit>
       <trans-unit id="450e28e57284212c18cd3beb79b91cfea5a0d122" datatype="html">
         <source>My Profile</source>
@@ -636,7 +655,7 @@
         <source>Martial Arts</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialArts.component.html</context>
-          <context context-type="linenumber">4</context>
+          <context context-type="linenumber">3</context>
         </context-group>
         <note priority="1" from="description">Headline</note>
       </trans-unit>
@@ -644,7 +663,7 @@
         <source>Details</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialArts.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">22</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
@@ -655,7 +674,7 @@
         <source>Edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialArts.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">24</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
@@ -1045,6 +1064,16 @@
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="621d32d1fe69d07af5ba73be9eaaefa9e0d90117" datatype="html">
+        <source>
+            Exam Title:
+        </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <note priority="1" from="description">label for exam title field</note>
       </trans-unit>
       <trans-unit id="3e6bce5284dc912533291799de1d61653352db14" datatype="html">
         <source>Tell us, in a few words, what this exam is all about</source>
