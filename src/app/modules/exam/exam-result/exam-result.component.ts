@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import gql from 'graphql-tag';
 import { AuthService } from '../../auth/auth.service';
 import { Apollo } from 'apollo-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Alert } from '../../types/Alert';
 import { logError, getGraphQLError } from '../../helpers/error.helpers';
+import { Subscription } from 'rxjs';
 
 const query = gql`{getOpenExams{_id, title, examDate, martialArt{_id, name, styleName, ranks{name}}, 
 participants{_id, firstName, lastName}}}`;
@@ -22,7 +23,8 @@ const uploadFile = gql`mutation uploadExamProtocol($examResultId: String!, $file
   templateUrl: './exam-result.component.html',
   styleUrls: ['./exam-result.component.css']
 })
-export class ExamResultComponent implements OnInit {
+export class ExamResultComponent implements OnInit, OnDestroy {
+  private userSubscription: Subscription;
   exams;
   erForm: FormGroup;
   file: Blob;
@@ -66,6 +68,11 @@ export class ExamResultComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userSubscription = this.authService.user.subscribe(data => this.user = data);
+  }
+
+  ngOnDestroy(): void {
+    if(this.userSubscription) {this.userSubscription.unsubscribe();}
   }
 
   printError(err) {

@@ -116,7 +116,6 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
         this.hasCheckedIn = true;
         this.exam.participants.push(this.user);
         this.alerts.push({type:"success", message: 'Success! You are now registered as participant.'});
-        console.log('[Exam] Ok, you now are listed as participant!');
       }
     }, (err) => {
       this.printError(err);
@@ -130,10 +129,10 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
       }
     }).subscribe(response => {
       if(response.data){ 
+        console.log('Response: ',response.data);
         this.hasCheckedIn = false;
         this.exam.participants = this.exam.participants.filter(user => user._id != this.user._id);
         this.alerts.push({type: 'success', message: 'Success! You are now removed from the participants list.'});
-        console.log('[Exam] Ok, you now are listed as participant!');
       }
     }, (err) => {
       if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: getGraphQLError(err)});

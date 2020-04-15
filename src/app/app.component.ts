@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthService } from './modules/auth/auth.service';
 import { ExamService } from './modules/exam/exam.service';
 import { MartialArtsService } from './modules/martialArts/martialArts.service';
-import { ClubService } from './modules/club/club.service';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +10,13 @@ import { ClubService } from './modules/club/club.service';
 })
 export class AppComponent {
   title = 'Exam-Admin Frontend';
-
-
+  
   constructor(
-    private authService: AuthService, 
-    private examService: ExamService,
-    private maService: MartialArtsService
+    private authService: AuthService
   ) {
-    this.authService.loadUser();
-    this.examService.fetchExams();
-    this.maService.fetch();
+    if(localStorage.getItem('token')) {
+      this.authService.loadUser();
+    }
   }
 
 }

@@ -62,9 +62,9 @@ export class NewExamComponent implements OnInit, OnDestroy{
     this.examForm = this.fb.group({
       martialArt: [null, [Validators.required]],
       //club: undefined,
-      title: ['', [Validators.required, Validators.minLength(10)]],
-      description: ['', [Validators.required, Validators.minLength(15)]],
-      examPlace: ['', [Validators.required, Validators.minLength(10)]],
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      description: ['', [Validators.required, Validators.minLength(5)]],
+      examPlace: ['', [Validators.required, Validators.minLength(5)]],
       minRank: [null, [Validators.required]],
       examDate: [null, [Validators.required]],
       examTime: [null, [Validators.required]],

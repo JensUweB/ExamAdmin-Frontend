@@ -30,6 +30,7 @@ export class MartialArtsService implements OnInit {
     }
 
     fetch() {
+      console.log('[MAService] Fetching Data...')
       this.apollo.watchQuery<any>({
         query: maQuery,
         fetchPolicy: 'no-cache'
@@ -46,7 +47,7 @@ export class MartialArtsService implements OnInit {
             }
           });
         });
-        console.log('[MAService] Got some data!');
+        console.log('[MAService] Done!');
         this.maArray = data;
         this._martialArts.next(data);
       }, (err) => {

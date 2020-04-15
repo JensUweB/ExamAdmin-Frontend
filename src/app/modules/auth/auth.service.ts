@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { Alert } from '../types/Alert';
 import { logError, getGraphQLError } from '../helpers/error.helpers';
+import { ExamService } from '../exam/exam.service';
+import { MartialArtsService } from '../martialArts/martialArts.service';
 
 const login = gql`
 query login($email: String!, $password: String!)
@@ -26,7 +28,12 @@ export class AuthService implements OnInit, OnDestroy{
 
     public _isAuthenticated = new BehaviorSubject(false);
 
-    constructor(private apollo: Apollo, private router: Router) {}
+    constructor(
+        private apollo: Apollo, 
+        private router: Router,
+        private examService: ExamService,
+        private maService: MartialArtsService
+    ) {}
 
     ngOnInit() {
         
@@ -57,6 +64,8 @@ export class AuthService implements OnInit, OnDestroy{
                 this._isAuthenticated.next(true);
                 localStorage.setItem('token',this.token);
                 localStorage.setItem('tokenExpDate',this.tokenExpireDate.toString());
+                this.maService.fetch();
+                this.examService.fetchExams();
                 this.router.navigate(['/']);
             } 
             if(response.errors) {
@@ -80,6 +89,8 @@ export class AuthService implements OnInit, OnDestroy{
                     console.log('[AuthService] Success! Got some data!');
                     this._user.next(response.data.getUser);
                     this._isAuthenticated.next(true);
+                    this.maService.fetch();
+                    this.examService.fetchExams();
                 }
             }, (err) => {
                 this.printError(err);
