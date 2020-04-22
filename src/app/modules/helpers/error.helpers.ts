@@ -50,3 +50,17 @@ export function logError(module: string, err: any) {
         }
     }
 }
+
+export function getStatusCode(err: any): number {
+    //err.graphQLErrors[0].message.statusCode
+    if(err) {
+        if(err.graphQLErrors) {
+            if(err.graphQLErrors.length > 0) {
+                if(err.graphQLErrors[0].message) {
+                    return +err.graphQLErrors[0].message.statusCode;
+                }
+            }
+        }
+    }
+    return 500;
+}
