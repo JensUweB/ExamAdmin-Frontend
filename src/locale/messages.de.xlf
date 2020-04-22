@@ -720,15 +720,6 @@ Kampfkunst</target>
           <context context-type="linenumber">59</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="f776cac1358e912b8d41bf88bb25c1c3834ffe1f" datatype="html">
-        <source>Nothing found!</source>
-        <target>Nichts gefunden!</target>
-        <note priority="1" from="description">Alternative Headline</note>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/exam-result/exam-result.component.html</context>
-          <context context-type="linenumber">81</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="ac5beed7d881bab02e5d06ffe52f98d490f2b46b" datatype="html">
         <source>Exam Details</source>
         <target>Prüfungsdetails</target>
@@ -1657,6 +1648,24 @@ Beschreibung:
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
           <context context-type="linenumber">92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="452aa8313e8a0df5de73af304c63e5b331986de0" datatype="html">
+        <source>Nothing exams with missing results found!</source>
+        <target>Keine Prüfung mit fehlenden Ergebnissen gefunden!</target>
+        <note priority="1" from="description">Alternative Headline</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-result/exam-result.component.html</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a1f87a5e70b69760112785e2135c861e3fb6e197" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>This may mean that you have not yet created an exam or that results have already been added to all participants.<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/></source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Das kann bedeuten, dass du noch keine Prüfung erstellt hast oder bereits allen Teilnehmern Ergebnisse Hinzugefügt wurden.<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/></target>
+        <note priority="1" from="description">Alternative Headline description</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-result/exam-result.component.html</context>
+          <context context-type="linenumber">82</context>
         </context-group>
       </trans-unit>
     </body>
