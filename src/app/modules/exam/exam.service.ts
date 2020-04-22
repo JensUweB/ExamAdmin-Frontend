@@ -3,18 +3,19 @@ import gql from "graphql-tag";
 import { Apollo } from "apollo-angular";
 import { Subscription, BehaviorSubject } from "rxjs";
 import { normalizeDate } from "../helpers/date.helper";
-import { Exam } from "../models/exam.model";
-import { userInfo } from "os";
+import { logError } from '../helpers/error.helpers';
 
 const examsQuery = gql`
 query {getPlannedExams {
-  _id,title,description,examDate,regEndDate,examPlace, price
+  _id,title,description,examDate,regEndDate,examPlace, price, minRank
   participants {
     _id,firstName,lastName
     martialArts {
-      _id {_id }, rankId} } 
+      _id {_id }, rankId
+    } 
+  } 
     martialArt {
-    _id,name,styleName, ranks{_id, name}
+    _id,name,styleName, ranks{_id, name, number}
   } examiner {
     _id,firstName,lastName}}}
 `;
@@ -39,6 +40,11 @@ export class ExamService implements OnInit, OnDestroy {
 
   constructor(private apollo: Apollo) {
     this.fetchExams();
+  }
+
+  printError(err) {
+    logError('[UserComponent]',err);
+    //this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   fetchExams() {
@@ -79,7 +85,7 @@ export class ExamService implements OnInit, OnDestroy {
           }
         },
         err => {
-          console.error("[ExamService]: ",JSON.stringify(err));
+          this.printError(err);
         }
       );
   }

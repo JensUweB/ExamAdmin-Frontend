@@ -7,6 +7,7 @@ export class Exam {
     title: string;
     description: string;
     price: string;
+    minRank: string;
     examDate: string;
     regEndDate: string;
     isPublic: boolean;

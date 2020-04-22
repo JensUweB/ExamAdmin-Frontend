@@ -1,33 +1,36 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1 i18n="Headline">Martial Arts</h1>
-    </div>
+<div class="row">
+  <div class="col-md-12">
+    <h1 i18n="Headline">Martial Arts</h1>
   </div>
-  <div class="row">
-    <div class="col-sm">
-      <div *ngFor="let ma of martialArts">
-        <div class="card shadow">
-          <div class="card-header bg-dark">
-            <button class="btn btn-link" (click)="ma.isHidden = !ma.isHidden">
-              <b>{{ma.styleName}} {{ma.name}}</b>
-            </button>
-          </div>
-          <div class="card-body" *ngIf="!ma.isHidden">
-            <div class="row">
-              <div class="col">
-                <p>{{ma.description.substr(0,250)}}(...)</p>
-              </div>
+</div>
+<div *ngIf="isLoaded" class="row">
+  <div class="col-sm">
+    <div *ngFor="let ma of martialArts">
+      <div class="card shadow">
+        <div class="card-header bg-dark">
+          <button class="btn btn-link" (click)="ma.isHidden = !ma.isHidden">
+            <b>{{ma.styleName}} {{ma.name}}</b>
+          </button>
+        </div>
+        <div class="card-body" *ngIf="!ma.isHidden">
+          <div class="row">
+            <div class="col">
+              <p>{{ma.description.substr(0,250)}}(...)</p>
             </div>
-            <div class="row">
-                <button class="btn btn-success" (click)="showDetails(ma)" i18n>Details</button>
-                <div>
-                  <button class="btn btn-warning" (click)="showEdit(ma)" i18n>Edit</button>
-                </div>
+          </div>
+          <div class="row">
+            <button class="btn btn-success" (click)="showDetails(ma)" i18n>Details</button>
+            <div>
+              <button class="btn btn-warning" (click)="showEdit(ma)" i18n>Edit</button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div *ngIf="!isLoaded" class="row">
+    <div class="col">
+      <b>Loading, please wait...</b>
     </div>
   </div>
 </div>

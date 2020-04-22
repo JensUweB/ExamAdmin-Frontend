@@ -12,6 +12,7 @@ import { Alert } from '../types/Alert';
 import { Subscription } from 'rxjs';
 import { UserService } from './user.service';
 import { normalizeDate } from '../helpers/date.helper';
+import { getGraphQLError, logError } from '../helpers/error.helpers';
 
 const queryExamResults = gql`query getAllExamResults{getAllExamResults{_id, user, exam, date, passed, reportUri , martialArt{name, styleName},rank}}`;
 
@@ -88,8 +89,7 @@ export class UserComponent implements OnInit, OnDestroy{
     }).subscribe((response) => { 
       if(response.errors) console.log('[User] ',response.errors );
     }, (err) => {
-      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-      else this.alerts.push({type: 'danger', message: err});
+      this.printError(err);
     });
   }
 
@@ -108,9 +108,7 @@ export class UserComponent implements OnInit, OnDestroy{
       this.alerts.push({type:"success", message: 'Success! You added a new martial art to your profile!'});
       console.log('[UserComp] Success!');
     }, (err) => {
-      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-      else this.alerts.push({type: 'danger', message: err});
-      console.log('[Usercomp] GraphQl Error: ',JSON.stringify(err));
+      this.printError(err);
     });
   }
 
@@ -126,12 +124,17 @@ export class UserComponent implements OnInit, OnDestroy{
         ele.date = normalizeDate(ele.date);
       });
     }, (err) => {
-      this.alerts.push({type: 'danger', message: err});
+      this.printError(err);
     });
 
     this.authSubscription = await this.authService.user.subscribe(data => this.user = data);
     this.maSubscription = await this.maService.martialArts.subscribe(data => this.martialArts = data);
     console.log('[UserComp] Done!');
+  }
+
+  printError(err) {
+    logError('[UserComponent]',err);
+    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   showMaDetails(ma) {

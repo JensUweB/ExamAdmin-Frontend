@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MartialArt } from '../models/martialArt.model';
 import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { isArray } from 'util';
+import { logError } from '../helpers/error.helpers';
 
 const maQuery = gql`{getAllMartialArts{_id, name, styleName, description, examiners{_id, firstName, lastName, martialArts{_id{_id, ranks{name}},rankId}}, ranks{_id, name, number}}}`;
 
@@ -23,7 +24,13 @@ export class MartialArtsService implements OnInit {
           this.fetch();
     }
 
+    printError(err) {
+      logError('[UserComponent]',err);
+      //this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+    }
+
     fetch() {
+      console.log('[MAService] Fetching Data...')
       this.apollo.watchQuery<any>({
         query: maQuery,
         fetchPolicy: 'no-cache'
@@ -40,11 +47,11 @@ export class MartialArtsService implements OnInit {
             }
           });
         });
-        console.log('[MAService] Got some data!');
+        console.log('[MAService] Done!');
         this.maArray = data;
         this._martialArts.next(data);
       }, (err) => {
-        console.error('[MAService] ',err);
+        this.printError(err);
       });
     }
 

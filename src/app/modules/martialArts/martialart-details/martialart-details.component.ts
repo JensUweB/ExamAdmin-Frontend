@@ -7,6 +7,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import gql from 'graphql-tag';
 import { Alert } from '../../types/Alert';
+import { logError, getGraphQLError } from '../../helpers/error.helpers';
+import { AuthService } from '../../auth/auth.service';
+import { Subscription } from 'rxjs';
 
 const query = gql`mutation addExaminer($maId: String!, $email: String!)
 {addExaminer(maId: $maId, email: $email){_id}}`;
@@ -20,18 +23,32 @@ const queryRemove = gql`mutation removeExaminer($maId: String!, $userId: String!
 })
 export class MartialartDetailsComponent implements OnInit {
   @Output() ma: MartialArt;
+  private userSubscription: Subscription;
+  user: User;
   alerts: Alert[] = [];
   editMode: Boolean;
   examinerForm: FormGroup;
+  isExaminer = false;
 
   constructor(
     private maService: MartialArtsService,
+    private authService: AuthService,
     private apollo: Apollo,
     private fb: FormBuilder,
     private modalService: NgbModal,
   ) {
     this.ma = maService.martialArt;
     this.editMode = maService.editMode;
+    this.userSubscription = authService.user.subscribe(data => {
+      this.user = data;
+
+      if(this.user) {
+        this.isExaminer = this.ma.examiners.some(item => item._id == this.user._id);
+      }
+    });
+
+    // Check if current user is an examiner
+    
 
     this.examinerForm = this.fb.group({
       email: ['', Validators.required],
@@ -55,9 +72,7 @@ export class MartialartDetailsComponent implements OnInit {
           console.log('[MADetailsComp] Done. ');
         }
       }, (err) => {
-        if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-        else this.alerts.push({type: 'danger', message: err});
-        console.warn('[ExamResult] ', JSON.stringify(err));
+        this.printError(err);
       });
      }
    }
@@ -76,13 +91,16 @@ export class MartialartDetailsComponent implements OnInit {
           console.log('[NewMartialArtComp] Done.');
         }
       }, (err) => {
-        if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-        else this.alerts.push({type: 'danger', message: err});
-        console.warn('[ExamResult] ', JSON.stringify(err));
+        this.printError(err);
       });
    }
 
   ngOnInit(): void {
+  }
+
+  printError(err) {
+    logError('[UserComponent]',err);
+    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   showEdit() {

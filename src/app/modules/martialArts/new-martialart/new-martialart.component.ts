@@ -10,6 +10,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
+import { logError, getGraphQLError } from '../../helpers/error.helpers';
 
 const newMA = gql`mutation createMartialArt($name: String!, $styleName: String!, $description: String!, $ranks: [RankInput!], $userId: String!)
 {createMartialArt(input: {
@@ -80,6 +81,11 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  printError(err) {
+    logError('[UserComponent]',err);
+    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+  }
+
   addRankGroup(_id: string, name: string, number: number) {
     return this.fb.group({
       _id: _id,
@@ -90,7 +96,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
 
   setupRanks() {
     if(!this.ma) {
-      const count: number = this.rankCount.value + 1;
+      const count: number = this.rankCount.value;
       for(let i=0; i<count; i++) {
           this.ranks.push(this.addRankGroup(undefined, (count-i)+". rank",count-i));
       }
@@ -131,9 +137,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
         console.log('[NewMartialArtComp] Done.');
       }
     }, (err) => {
-      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-      else this.alerts.push({type: 'danger', message: err});
-      console.warn('[ExamResult] ', JSON.stringify(err));
+      this.printError(err);
     });
     this.maService.fetch();
   }
@@ -171,9 +175,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
         console.log('[NewMartialArtComp] Done.');
       }
     }, (err) => {
-      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-      else this.alerts.push({type: 'danger', message: err});
-      console.warn('[ExamResult] ', JSON.stringify(err));
+      this.printError(err);
     });
   }
 

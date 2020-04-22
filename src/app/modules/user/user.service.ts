@@ -3,6 +3,7 @@ import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 import { Alert } from "../types/Alert";
 import { Injectable } from '@angular/core';
+import { getGraphQLError, logError } from '../helpers/error.helpers';
 
 const updateUserMutation = gql`
   mutation updateUser(
@@ -31,6 +32,11 @@ export class UserService {
 
   constructor(private apollo: Apollo, private authService: AuthService) {}
 
+  printError(err) {
+    logError('[UserComponent]',err);
+    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+  }
+
   /**
    * 
    * @param input: { newPassword, firstname, lastName, email, clubs[ ], martialArts[ ] }
@@ -47,8 +53,7 @@ export class UserService {
           console.log("[UserService] Done!");
         },
         (err) => {
-          this.alerts.push({ type: "danger", message: err });
-          console.error('[UserService]: ',JSON.stringify(err));
+          this.printError(err);
         }
       );
   }

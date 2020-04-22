@@ -70,9 +70,25 @@
                 </div>
             </div>
             <div class="row">
+              <div class="col-sm" i18n>
+                Minimum Rank:
+              </div>
+              <div *ngIf="exam.minRank" class="col-sm">
+                {{rank.name}}
+              </div>
+              <div *ngIf="!exam.minRank" class="col-sm">
+                <p i18n>No minimum rank</p>
+              </div>
+            </div>
+            <div class="row">
                 <div class="col-sm">
-                    <button *ngIf="!hasCheckedIn" class="btn btn-success" (click)="onCheckIn()" i18n="Button">Sign in</button>
-                    <button *ngIf="hasCheckedIn" class="btn btn-warning" (click)="onCheckOut()" i18n="Button">Sign out</button>
+                    <button *ngIf="!hasCheckedIn && canRegister" class="btn btn-success" (click)="onCheckIn()" i18n="Button">Sign in</button>
+                    <button *ngIf="hasCheckedIn && canRegister" class="btn btn-warning" (click)="onCheckOut()" i18n="Button">Sign out</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <p *ngIf="!canRegister"><b i18n>I'm sorry, but you do not have the required minimum rank.</b></p>
                 </div>
             </div>
             <div *ngIf="exam.examiner._id == user._id">

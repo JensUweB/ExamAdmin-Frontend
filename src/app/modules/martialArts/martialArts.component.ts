@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
 import gql from 'graphql-tag';
@@ -15,19 +15,23 @@ import { Subscription } from 'rxjs';
 export class MartialArtsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   martialArts: MartialArt[];
+  isLoaded = false;
 
   constructor(
     public maService: MartialArtsService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.maService.fetch();
     this.subscription = this.maService.martialArts
     .subscribe(data => { 
       this.martialArts = data;
+      if(data.length) this.isLoaded = true;
+      console.log('[MAComponent] Data fetched!');
     });
-    console.log('[MAComp] Data fetched!');
   }
 
   showDetails(ma) {
