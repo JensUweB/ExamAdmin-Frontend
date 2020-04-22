@@ -1403,12 +1403,13 @@
         </context-group>
         <note priority="1" from="description">Popup Headline</note>
       </trans-unit>
-      <trans-unit id="aef7a376e923a78941735d5df11c82d757c624cb" datatype="html">
-        <source>Please enter the email adress of the person you want to add as examiner:</source>
+      <trans-unit id="f03d1f3c03023bbc626436c0a7f0044c16869c1c" datatype="html">
+        <source>Please enter the email adress of an <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>existing<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> account to add as examiner:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
           <context context-type="linenumber">92</context>
         </context-group>
+        <note priority="1" from="description">Add Examiner description text</note>
       </trans-unit>
       <trans-unit id="841078927d0a6d343c3bb14fbda2dae18a85cad7" datatype="html">
         <source>example@localhost.net</source>

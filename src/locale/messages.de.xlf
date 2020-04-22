@@ -532,7 +532,7 @@ Kampfkunst</target>
       <trans-unit id="60f20da57a685b6bdd256b13e7ee6f0590933e5b" datatype="html">
         <source>Hello, <x id="INTERPOLATION" equiv-text="{{user.firstName}}"/>!<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
       Here you can add a new club to your profile, if you want!</source>
-        <target/>
+        <target></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
           <context context-type="linenumber">160</context>
@@ -565,7 +565,7 @@ Kampfkunst</target>
       <trans-unit id="d3c0d5393af2c8bf55c81ad3841c4d1b441bc9ca" datatype="html">
         <source>Hello, <x id="INTERPOLATION" equiv-text="{{user.firstName}}"/>!<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
       Here you can add a new martial art to your profile, if you want!</source>
-        <target/>
+        <target></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
           <context context-type="linenumber">185</context>
@@ -1256,7 +1256,7 @@ Beschreibung:
       <trans-unit id="16c17db923e440d0919d1dd1b428b8eb9f668279" datatype="html">
         <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Hints:<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> Ranks are sortet from lowest to highest. You should to stick to this order so that this app can work properly.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
                         You can rearrange items with drag and drop!</source>
-        <target/>
+        <target></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
           <context context-type="linenumber">66</context>
@@ -1350,14 +1350,6 @@ Beschreibung:
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
           <context context-type="linenumber">86</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="aef7a376e923a78941735d5df11c82d757c624cb" datatype="html">
-        <source>Please enter the email adress of the person you want to add as examiner:</source>
-        <target>Bitte geben Sie die E-Mail-Adresse der Person ein, die Sie als Prüfer hinzufügen möchten:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
-          <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
       <trans-unit id="68e710782ccb5398b3acb8844caf0b199da2c3da" datatype="html">
@@ -1656,6 +1648,15 @@ Beschreibung:
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
           <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f03d1f3c03023bbc626436c0a7f0044c16869c1c" datatype="html">
+        <source>Please enter the email adress of an <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>existing<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> account to add as examiner:</source>
+        <target>Bitte gib die E-Mail Addresse eines <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Existierenden<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> Accounts zum Hinzufügen als Prüfer ein:</target>
+        <note priority="1" from="description">Add Examiner description text</note>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
+          <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
     </body>
