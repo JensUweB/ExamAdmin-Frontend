@@ -674,7 +674,7 @@
         <source>Edit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialArts.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam.component.html</context>
@@ -788,7 +788,7 @@
         <source>Send</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-result/exam-result.component.html</context>
-          <context context-type="linenumber">69</context>
+          <context context-type="linenumber">68</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
@@ -796,7 +796,7 @@
         <source>No exam results found!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-result/exam-result.component.html</context>
-          <context context-type="linenumber">81</context>
+          <context context-type="linenumber">80</context>
         </context-group>
         <note priority="1" from="description">Alternative Headline</note>
       </trans-unit>
@@ -804,7 +804,7 @@
         <source>This means that either you have not yet created an exam, or each participant already has their exam result.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-result/exam-result.component.html</context>
-          <context context-type="linenumber">82</context>
+          <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ac5beed7d881bab02e5d06ffe52f98d490f2b46b" datatype="html">
@@ -1171,22 +1171,13 @@
           <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="ac0a0660b065daf46917d7d9353b347f802ebeb0" datatype="html">
-        <source>
-                Please set a min rank! You can set it to &quot;none&quot;, if there is no min rank.
-            </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">105</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="ffa3f4f17a84dceaba546918c13fddc556cf076b" datatype="html">
         <source>
             Exam Date:
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">111</context>
+          <context context-type="linenumber">108</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0181162430e66f159fb488fbafa86a70db0c59ff" datatype="html">
@@ -1195,7 +1186,7 @@
             </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">122</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3d16a875addd3cef798af530708b8f592fa9ff69" datatype="html">
@@ -1204,7 +1195,7 @@
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">129</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1643766f74b28a213d91dae30e712d5cf5a9988e" datatype="html">
@@ -1213,7 +1204,7 @@
             </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="28f263dc3eab2d17ca17f9a8874dda3fd4ba40ae" datatype="html">
@@ -1222,7 +1213,7 @@
         </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5f3308f900227aaee8faca9e36274d156a301e80" datatype="html">
@@ -1231,14 +1222,14 @@
             </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">158</context>
+          <context context-type="linenumber">155</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9a74e0a8ca4d3f1422a20abf723cfd91e060cfed" datatype="html">
         <source>Create New Exam</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">166</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
@@ -1402,6 +1393,13 @@
           <context context-type="linenumber">42</context>
         </context-group>
         <note priority="1" from="description">Button</note>
+      </trans-unit>
+      <trans-unit id="6e1e107579bd7c4905aa78c52fb4c80721131fba" datatype="html">
+        <source>Ranks:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="fbcb0d75afbe6aec04269381598a737f4bd19db7" datatype="html">
         <source>Number</source>
