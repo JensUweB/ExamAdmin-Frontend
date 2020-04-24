@@ -18,7 +18,7 @@
                     </div>
                     <div class='flex mt3'>
                         <button *ngIf="login" class="btn btn-success" (click)="confirm()" i18n="Login Button">Login</button>
-                        <button *ngIf="!login" class="btn btn-success" (click)="confirm()" i18n="SignUp Button">Create Account</button>
+                        <button *ngIf="!login" class="btn btn-success" [disabled]="disableSignup" (click)="confirm()" i18n="SignUp Button">Create Account</button>
                         <br>
                         <button *ngIf="login" class="btn btn-primary" (click)="login = !login" i18n="Login Mode">Need to create an account?</button>
                         <button *ngIf="!login" class="btn btn-primary" (click)="login = !login" i18n="SignUp Mode">Already have an account?</button>
