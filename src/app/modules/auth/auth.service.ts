@@ -73,7 +73,7 @@ export class AuthService implements OnInit, OnDestroy{
                 throw response.errors;
             }
         }, (err) => {
-            this.printError(err);
+            throw err;
         });
     }
 
