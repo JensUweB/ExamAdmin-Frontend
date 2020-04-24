@@ -76,14 +76,16 @@
               <div *ngIf="exam.minRank" class="col-sm">
                 {{rank.name}}
               </div>
-              <div *ngIf="!exam.minRank" class="col-sm">
+              <div *ngIf="!exam.minRank || exam.minRank == null || exam.minRank == '' " class="col-sm">
                 <p i18n>No minimum rank</p>
               </div>
             </div>
+            {{exam.minRank | json}}
             <div class="row">
                 <div class="col-sm">
-                    <button *ngIf="!hasCheckedIn && canRegister" class="btn btn-success" (click)="onCheckIn()" i18n="Button">Sign in</button>
-                    <button *ngIf="hasCheckedIn && canRegister" class="btn btn-warning" (click)="onCheckOut()" i18n="Button">Sign out</button>
+                    <button *ngIf="!hasCheckedIn && canRegister && !isExaminer" class="btn btn-success" (click)="onCheckIn()" i18n="Button">Sign in</button>
+                    <button *ngIf="hasCheckedIn && canRegister && !isExaminer" class="btn btn-warning" (click)="onCheckOut()" i18n="Button">Sign out</button>
+                    <p *ngIf="isExaminer" i18n><b>Hello, examiner! You can see your participants listed below.</b></p>
                 </div>
             </div>
             <div class="row">
