@@ -28,7 +28,6 @@ export class MartialartDetailsComponent implements OnInit {
   alerts: Alert[] = [];
   editMode: Boolean;
   examinerForm: FormGroup;
-  isExaminer = false;
 
   constructor(
     private maService: MartialArtsService,
@@ -41,10 +40,6 @@ export class MartialartDetailsComponent implements OnInit {
     this.editMode = maService.editMode;
     this.userSubscription = authService.user.subscribe(data => {
       this.user = data;
-
-      if(this.user) {
-        this.isExaminer = this.ma.examiners.some(item => item._id == this.user._id);
-      }
     });
 
     // Check if current user is an examiner

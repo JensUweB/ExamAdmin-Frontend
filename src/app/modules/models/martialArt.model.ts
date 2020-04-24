@@ -11,4 +11,5 @@ export class MartialArt {
         name: string,
         number: string
     }];
+    canEdit: boolean;
 }
