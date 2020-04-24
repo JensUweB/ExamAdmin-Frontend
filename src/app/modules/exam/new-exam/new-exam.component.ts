@@ -15,7 +15,7 @@ import { logError, getGraphQLError } from '../../helpers/error.helpers';
 
 const newExamQuery = gql`mutation createExam
 ($title: String!, $description: String!, $price: String!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!, 
-$isPublic: Boolean, $minRank: String! $userId: String, $maId: String!)
+$isPublic: Boolean, $minRank: String $userId: String, $maId: String!)
 {createExam(input: {
   title: $title
   description: $description
@@ -147,7 +147,8 @@ export class NewExamComponent implements OnInit, OnDestroy{
       var regEndDate = new Date(this.regEndDate.value.year, this.regEndDate.value.month, this.regEndDate.value.day, this.regEndTime.value.hour,this.regEndTime.value.minute,this.regEndTime.value.second, 0);
 
       console.log(this.regEndDate.value.year, this.examDate.value.month, this.examDate.value.day, this.examTime.value.hour,this.examTime.value.minute,this.examTime.value.second, 0);
-
+      let minrank = this.minRank.value;
+      if(minrank == 'none') { minrank = undefined; }
       // Send mutation to api
       this.apollo.mutate<any>({
         mutation: newExamQuery,
@@ -158,7 +159,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
           address: this.examPlace.value,
           examDate: examDate,
           regEndDate: regEndDate,
-          minRank: this.minRank.value,
+          minRank: minrank,
           isPublic: this.isPublic.value,
           //clubId: this.club.value,
           userId: this.user._id,

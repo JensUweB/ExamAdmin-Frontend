@@ -38,6 +38,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   rank: any;
   canRegister: Boolean;
+  isExaminer = false;
   exam: Exam;
   user: User;
   hasCheckedIn: boolean;
@@ -76,10 +77,11 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
       } else {
         this.canRegister = true;
       }
-
     } else {
       this.canRegister = true;
     }
+
+    if(this.exam.examiner._id == this.user._id) this.isExaminer = true;
     
 
     this.examForm = this.fb.group({

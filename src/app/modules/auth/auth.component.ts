@@ -19,6 +19,7 @@ export class AuthComponent implements OnInit {
   userForm: FormGroup;
   login = true;
   alerts: Alert[] = [];
+  disableSignup = false;
 
   constructor(private router: Router, private authService: AuthService, private fb: FormBuilder, private apollo: Apollo) { }
 
@@ -43,17 +44,7 @@ export class AuthComponent implements OnInit {
           
         try {
           await this.authService.login(this.email.value, this.password.value);
-        /* .then(() => {
-          console.log('Was zur hölle passiert hier?');
-          this.alerts.push({type: 'success', message: 'Login successful! You will be redirected shortly!'});
-        })
-        .catch(err => {
-          console.log('Ich werd hier noch verrückt!');
-          this.alerts.push({type:"danger", message: err});
-        }); */
-      } catch (err) { console.log('Jub, so läufts!'); }
-        if(this.authService.alerts) this.alerts.push(...this.authService.alerts);
-
+        } catch (err) { this.printError(err); }
           
       } else {
         //this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
@@ -67,6 +58,7 @@ export class AuthComponent implements OnInit {
             password: this.password.value
           }
         }).subscribe((response) => { 
+          this.disableSignup = true;
           this.alerts.push({type:"success", message: 'Success! You should receive an confirmation email!'});
           console.log('[Auth] Success! You should receive an confirmation email!');
         }, (err) => {

@@ -267,16 +267,6 @@ Mein Profil</target>
           <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="45208c0af3183dba0aeb1a2dbddf55e6b96a9d86" datatype="html">
-        <source>
-            Authenticate</source>
-        <target>
-Authentifizieren</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="1701a1ae85a0011e78956a1d6ea76e076f5fa7e6" datatype="html">
         <source>
             Exams</source>
@@ -458,7 +448,7 @@ Kampfkunst</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">106</context>
+          <context context-type="linenumber">108</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
@@ -742,7 +732,7 @@ Kampfkunst</target>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">152</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b7b0f148d99b69ecfa4b6ee8d30a560a10439648" datatype="html">
@@ -758,7 +748,7 @@ Prüfungsdatum:
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">159</context>
+          <context context-type="linenumber">161</context>
         </context-group>
       </trans-unit>
       <trans-unit id="68f141fb2f77f5a0ec9eaa1eca2fba161a4184fe" datatype="html">
@@ -774,7 +764,7 @@ Anschrift:
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">179</context>
+          <context context-type="linenumber">181</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d3db995be2707dac0ea603a3330fae6b6e23a181" datatype="html">
@@ -802,7 +792,7 @@ Preis:
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">188</context>
+          <context context-type="linenumber">190</context>
         </context-group>
       </trans-unit>
       <trans-unit id="287d3301a32a65a1b31116bda5d3a6463158c42a" datatype="html">
@@ -811,7 +801,7 @@ Preis:
         <note priority="1" from="description">Button</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">85</context>
+          <context context-type="linenumber">86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5d22c795daf43877a5f708dca2bccd549eb0471d" datatype="html">
@@ -820,7 +810,7 @@ Preis:
         <note priority="1" from="description">Button</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">86</context>
+          <context context-type="linenumber">87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="49ff8305f6d82abcbdf12cf0814a06a6748ce216" datatype="html">
@@ -828,7 +818,7 @@ Preis:
         <target>Teilnehmer:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="linenumber">99</context>
         </context-group>
       </trans-unit>
       <trans-unit id="cff1428d10d59d14e45edec3c735a27b5482db59" datatype="html">
@@ -836,7 +826,7 @@ Preis:
         <target>Name</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">105</context>
+          <context context-type="linenumber">107</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
@@ -852,7 +842,7 @@ Preis:
         <target>kein Rang</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">116</context>
         </context-group>
       </trans-unit>
       <trans-unit id="22b9cb3567ef53d2549fef112bc9eedaf1c48d0d" datatype="html">
@@ -860,7 +850,7 @@ Preis:
         <target>Keine Teilnehmer gefunden.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">123</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bfedc3b3c7c9631f313b58d2335e490c7645a813" datatype="html">
@@ -871,7 +861,7 @@ Preis:
 Kampfkunst:     </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">143</context>
         </context-group>
       </trans-unit>
       <trans-unit id="047f50bc5b5d17b5bec0196355953e1a5c590ddb" datatype="html">
@@ -880,7 +870,7 @@ Kampfkunst:     </target>
         <note priority="1" from="description">Button</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">200</context>
         </context-group>
       </trans-unit>
       <trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
@@ -889,7 +879,7 @@ Kampfkunst:     </target>
         <note priority="1" from="description">Button</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">199</context>
+          <context context-type="linenumber">201</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
@@ -902,11 +892,11 @@ Kampfkunst:     </target>
         <note priority="1" from="description">Button</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">200</context>
+          <context context-type="linenumber">202</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">227</context>
+          <context context-type="linenumber">229</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
@@ -927,7 +917,7 @@ Kampfkunst:     </target>
         <note priority="1" from="description">Popup Headline</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">217</context>
+          <context context-type="linenumber">219</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a50b274ebf5811b7694ed3b42197c203c43a3e58" datatype="html">
@@ -935,7 +925,7 @@ Kampfkunst:     </target>
         <target>Möchten Sie diese Prüfung wirklich löschen?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">223</context>
+          <context context-type="linenumber">225</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a6ecf76f074e2098ee024b6c2586a0475a2d6dd3" datatype="html">
@@ -944,7 +934,7 @@ Kampfkunst:     </target>
         <note priority="1" from="description">Popup Button</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">226</context>
+          <context context-type="linenumber">228</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
@@ -1076,7 +1066,7 @@ Bitte setzen Sie einen Mindestrang! Sie können es auf &quot;keine&quot; setzen,
                         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">104</context>
+          <context context-type="linenumber">105</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ffa3f4f17a84dceaba546918c13fddc556cf076b" datatype="html">
@@ -1088,7 +1078,7 @@ Prüfungsdatum:
                 </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">110</context>
+          <context context-type="linenumber">111</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0181162430e66f159fb488fbafa86a70db0c59ff" datatype="html">
@@ -1100,7 +1090,7 @@ Bitte legen Sie Uhrzeit und Datum fest, an dem die Prüfung beginnen soll!
                         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">124</context>
+          <context context-type="linenumber">125</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3d16a875addd3cef798af530708b8f592fa9ff69" datatype="html">
@@ -1112,7 +1102,7 @@ Registrierungsenddatum:
                 </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">131</context>
+          <context context-type="linenumber">132</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1643766f74b28a213d91dae30e712d5cf5a9988e" datatype="html">
@@ -1124,7 +1114,7 @@ Bitte legen Sie Uhrzeit und Datum fest, an dem die Registrierung geschlossen wer
                         </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">145</context>
+          <context context-type="linenumber">146</context>
         </context-group>
       </trans-unit>
       <trans-unit id="28f263dc3eab2d17ca17f9a8874dda3fd4ba40ae" datatype="html">
@@ -1136,7 +1126,7 @@ Teilnahmegebühr
                 </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">152</context>
+          <context context-type="linenumber">153</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9a74e0a8ca4d3f1422a20abf723cfd91e060cfed" datatype="html">
@@ -1145,7 +1135,7 @@ Teilnahmegebühr
         <note priority="1" from="description">Button</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">168</context>
+          <context context-type="linenumber">169</context>
         </context-group>
       </trans-unit>
       <trans-unit id="b51444afaf29ddd671f581517f0be1de8f5aae76" datatype="html">
@@ -1242,15 +1232,6 @@ Beschreibung:
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
           <context context-type="linenumber">61</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="16c17db923e440d0919d1dd1b428b8eb9f668279" datatype="html">
-        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Hints:<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> Ranks are sortet from lowest to highest. You should to stick to this order so that this app can work properly.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
-                        You can rearrange items with drag and drop!</source>
-        <target></target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a441dc7416659c2ea100d1e73507e02c2744ae8d" datatype="html">
@@ -1492,7 +1473,7 @@ Beschreibung:
         <target>Bitte gib einen Preis ein! 0,00€ oder 0.00€ wäre z.B. in Ordnung.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">158</context>
         </context-group>
       </trans-unit>
       <trans-unit id="116ad38c0328f259d2d49bfa301123a0055015f9" datatype="html">
@@ -1573,7 +1554,7 @@ Beschreibung:
         <target>Tut mir leid, aber du besitzest nicht den geforderten Mindestrang</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f78e714c59d2b73eeb7a731e3b5ef6c8f5b8c5ad" datatype="html">
@@ -1650,22 +1631,59 @@ Beschreibung:
           <context context-type="linenumber">92</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="452aa8313e8a0df5de73af304c63e5b331986de0" datatype="html">
-        <source>Nothing exams with missing results found!</source>
-        <target>Keine Prüfung mit fehlenden Ergebnissen gefunden!</target>
+      <trans-unit id="0c9c961106aa08491fd16f983f7226a063ca2fc4" datatype="html">
+        <source>
+          Login / Register</source>
+        <target>Login / Registrieren</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/header/header.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fdfbff9b1fdd881e18adfc98d8d087ca948e2ec9" datatype="html">
+        <source>
+                        <x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Hints:<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> Ranks are sortet from lowest to highest. You should stick to this order to avoid errors.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+                        You can rearrange items with drag and drop!<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/>
+                    </source>
+        <target>
+                        <x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Hinweis:<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> Die Ränge sind aufsteigend sortiert. Um Fehler zu vermeiden, solltest du diese Reihenfolge einhalten.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+                        Du kannst Elemente durch ziehen neu anordnen!<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3600b8b318689e3800921370c71ddb2cb18c1d73" datatype="html">
+        <source>No exam results found!</source>
+        <target>Keine Prüfungsergebnisse gefunden!</target>
         <note priority="1" from="description">Alternative Headline</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-result/exam-result.component.html</context>
           <context context-type="linenumber">81</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a1f87a5e70b69760112785e2135c861e3fb6e197" datatype="html">
-        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>This may mean that you have not yet created an exam or that results have already been added to all participants.<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/></source>
-        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Das kann bedeuten, dass du noch keine Prüfung erstellt hast oder bereits allen Teilnehmern Ergebnisse Hinzugefügt wurden.<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/></target>
-        <note priority="1" from="description">Alternative Headline description</note>
+      <trans-unit id="cc5dd5b68f7b2dba6aa029ac60719b169259ac20" datatype="html">
+        <source>This means that either you have not yet created an exam, or each participant already has their exam result.</source>
+        <target>Dies bedeutet, dass du entweder noch keine Prüfung erstellt hast, oder jeder Teilnehmer bereits sein Prüfungsergebnis hat.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/exam-result/exam-result.component.html</context>
           <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ee79377a6c76c8df3c4ad01fa382733a55b2fc0a" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Hello, examiner! You can see your participants listed below.<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/></source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Hallo, Prüfer! Ihre Teilnehmer sind unten aufgelistet.<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/exam-details/exam-details.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eb96e3b5c0dc4da6437c4f28b5bd7c76708d2998" datatype="html">
+        <source>no min rank</source>
+        <target>Kein Mindestrang</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">102</context>
         </context-group>
       </trans-unit>
     </body>
