@@ -90,7 +90,9 @@
           <h4 i18n>Your Martial Arts:</h4>
         </div>
         <div class="col-4">
-          <button type="button" class="btn btn-sm btn-success" (click)="openPopup(maPopup)" i18n="Button">Add</button>
+          <button class="hover-shadow" mat-icon-button color="primary" aria-label="Add a martial art to your profile" (click)="openPopup(maPopup)">
+            <mat-icon>add</mat-icon>
+          </button>
         </div>
       </div>
       <div *ngFor="let martialArt of user.martialArts" class="row">

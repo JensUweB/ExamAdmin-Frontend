@@ -4,7 +4,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './modules/header/header.component';
+//import { HeaderComponent } from './modules/header/header.component';
 import { AuthComponent } from './modules/auth/auth.component';
 import { UserComponent } from './modules/user/user.component';
 import { MartialArtsComponent } from './modules/martialArts/martialArts.component';
@@ -26,12 +26,23 @@ import { NewMartialartComponent } from './modules/martialArts/new-martialart/new
 import { MartialartDetailsComponent } from './modules/martialArts/martialart-details/martialart-details.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UserService } from './modules/user/user.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatIconModule} from '@angular/material/icon';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MainNavComponent } from './modules/main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartComponent,
-    HeaderComponent,
+    //HeaderComponent,
     AuthComponent,
     UserComponent,
     MartialArtsComponent,
@@ -42,17 +53,28 @@ import { UserService } from './modules/user/user.service';
     ExamDetailsComponent,
     NewExamComponent,
     NewMartialartComponent,
-    MartialartDetailsComponent
+    MartialartDetailsComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
     AppRoutingModule,
     NgbModule,
     GraphQLModule,
     FormsModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    DragDropModule
+    DragDropModule,
+    MatNativeDateModule,
+    MatIconModule,
+    LayoutModule,
+    MatMenuModule,
+    MatExpansionModule
   ],
   providers: [ExamService, MartialArtsService, ClubService, UserService],
   bootstrap: [AppComponent]
