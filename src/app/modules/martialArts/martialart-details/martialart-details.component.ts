@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ChangeDetectorRef } from '@angular/core';
 import { MartialArt } from '../../models/martialArt.model';
 import { MartialArtsService } from '../martialArts.service';
 import { User } from '../../models/user.model';
@@ -10,6 +10,7 @@ import { Alert } from '../../types/Alert';
 import { logError, getGraphQLError } from '../../helpers/error.helpers';
 import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 const query = gql`mutation addExaminer($maId: String!, $email: String!)
 {addExaminer(maId: $maId, email: $email){_id}}`;
@@ -35,6 +36,7 @@ export class MartialartDetailsComponent implements OnInit {
     private apollo: Apollo,
     private fb: FormBuilder,
     private modalService: NgbModal,
+    private router: Router,
   ) {
     this.ma = maService.martialArt;
     this.editMode = maService.editMode;
@@ -50,21 +52,27 @@ export class MartialartDetailsComponent implements OnInit {
     });
    }
 
-   onSubmit() {
+   async onSubmit() {
      if(this.examinerForm.valid) {
+      console.log('[MADetailsComp] Adding new examiner... ');
       this.apollo.mutate<any>({
         mutation: query,
         variables: {
           maId: this.ma._id,
           email: this.email.value,
         },
-      }).subscribe(response => {
+      }).subscribe(async response => {
         if (response.data) {
-          this.maService.fetch();
-          this.maService.setCurrent(this.ma, false);
-          this.ma = this.maService.martialArt;
+          // Fetch updates and pull the updated martial art to this component
+          console.log('[MADetailsComp] Fetching updates... ');
+          this.maService.fetch()
+          .then(() => {
+            this.maService.setCurrent(this.ma, false);
+            this.ma = this.maService.martialArt;
+            this.router.navigateByUrl('martialArt-details');
+            console.log('[MADetailsComp] Done. ');
+          });
           this.alerts.push({type:"success", message: 'New examiner was added!'});
-          console.log('[MADetailsComp] Done. ');
         }
       }, (err) => {
         this.printError(err);
@@ -91,6 +99,7 @@ export class MartialartDetailsComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   printError(err) {

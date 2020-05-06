@@ -29,9 +29,9 @@ export class MartialArtsService implements OnInit {
       //this.alerts.push({type: 'danger', message: getGraphQLError(err)});
     }
 
-    fetch() {
+    async fetch() {
       console.log('[MAService] Fetching Data...')
-      this.apollo.watchQuery<any>({
+      await this.apollo.watchQuery<any>({
         query: maQuery,
         fetchPolicy: 'no-cache'
       }).valueChanges.subscribe((response) => { 
