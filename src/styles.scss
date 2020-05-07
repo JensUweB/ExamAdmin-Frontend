@@ -14,10 +14,11 @@
 $examadmin-primary: mat-palette($mat-indigo);
 $examadmin-accent: mat-palette($mat-cyan);
 $primary-color: #3f51b5;
-$accent-color: #00FFFF;
+$accent-color: #00bcd4;
 
 // The warn palette is optional (defaults to red).
 $examadmin-warn: mat-palette($mat-red);
+$warnhover-color: darkred;
 
 // Create the theme object (a Sass map containing all of the palettes).
 $examadmin-theme: mat-light-theme($examadmin-primary, $examadmin-accent, $examadmin-warn);
@@ -49,6 +50,16 @@ footer {
 }
 button {
     margin: 5px;
+}
+.mat-btn-primary:hover {
+    background-color: transparent;
+    color: $primary-color;
+}
+.mat-btn:hover {
+    background-color: $accent-color;
+}
+.mat-btn-warn:hover {
+    background-color: $warnhover-color;
 }
 // Custom round  buttons. Code Snippets from: https://www.geeksforgeeks.org/how-to-get-circular-buttons-in-bootstrap-4/
 .btn-circle.btn-sm { 
@@ -95,14 +106,3 @@ button {
         margin: 1px;
     }
 }
-
-/* mat-expansion-panel-header {
-    background-color: $primary-color;
-}
-mat-expansion-panel-header:hover {
-    background-color: $accent-color;
-}
-
-mat-panel-title {
-    color: white;
-} */
