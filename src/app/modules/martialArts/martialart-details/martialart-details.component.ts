@@ -29,6 +29,8 @@ export class MartialartDetailsComponent implements OnInit {
   alerts: Alert[] = [];
   editMode: Boolean;
   examinerForm: FormGroup;
+  displayedColumns = ['name', 'rank'];
+  displayedRankColumns = ['number', 'rank'];
 
   constructor(
     private maService: MartialArtsService,
@@ -45,7 +47,6 @@ export class MartialartDetailsComponent implements OnInit {
     });
 
     // Check if current user is an examiner
-    
 
     this.examinerForm = this.fb.group({
       email: ['', Validators.required],
