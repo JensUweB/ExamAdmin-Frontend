@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { version } from '../../../../package.json';
 
 @Component({
   selector: 'app-main-nav',
@@ -11,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent implements OnInit, OnDestroy{
+  // get the app version string
+  public version: string = version;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
