@@ -40,6 +40,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatTooltipModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
   providers: [ExamService, MartialArtsService, ClubService, UserService],
   bootstrap: [AppComponent]
