@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MartialArt } from '../../models/martialArt.model';
 import { MartialArtsService } from '../martialArts.service';
 import { User } from '../../models/user.model';
@@ -11,6 +11,8 @@ import { logError, getGraphQLError } from '../../helpers/error.helpers';
 import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 const query = gql`mutation addExaminer($maId: String!, $email: String!)
 {addExaminer(maId: $maId, email: $email){_id}}`;
@@ -29,6 +31,7 @@ export class MartialartDetailsComponent implements OnInit {
   alerts: Alert[] = [];
   editMode: Boolean;
   examinerForm: FormGroup;
+  isExaminer = false;
   displayedColumns = ['name', 'rank'];
   displayedRankColumns = ['number', 'rank'];
 
@@ -44,9 +47,11 @@ export class MartialartDetailsComponent implements OnInit {
     this.editMode = maService.editMode;
     this.userSubscription = authService.user.subscribe(data => {
       this.user = data;
+      // Check if current user is an examiner
+      if(this.user) {
+        this.isExaminer = this.ma.examiners.some(item => item._id == this.user._id);
+      }
     });
-
-    // Check if current user is an examiner
 
     this.examinerForm = this.fb.group({
       email: ['', Validators.required],

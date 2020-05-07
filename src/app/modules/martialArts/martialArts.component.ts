@@ -63,4 +63,8 @@ export class MartialArtsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
     this.userSubscription.unsubscribe();
   }
+
+  isValidString(str: String) {
+    return str.length > 250;
+  }
 }

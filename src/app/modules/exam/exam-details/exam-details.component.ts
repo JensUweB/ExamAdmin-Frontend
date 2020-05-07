@@ -32,7 +32,7 @@ $examDate: DateTime, $regEndDate: DateTime, $userId: String, $maId: String!)
 @Component({
   selector: 'app-exam-details',
   templateUrl: './exam-details.component.html',
-  styleUrls: ['./exam-details.component.css']
+  styleUrls: ['./exam-details.component.scss']
 })
 export class ExamDetailsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
@@ -46,6 +46,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
   examForm: FormGroup;
   clubs;
   alerts: Alert[] = [];
+  displayedColumns = ['name', 'rank'];
 
   constructor(
     private examService: ExamService, 
