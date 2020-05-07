@@ -69,7 +69,18 @@
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
   <footer class="footer">
-    <mat-toolbar color="primary"><span>&copy; 2020 - Jens Uwe Becker - Root-ITSolutions</span></mat-toolbar>
+    <mat-toolbar color="primary">
+      <div class="row" style="width: 100%">
+        <div class="col-sm">
+          Version: {{version}}
+        </div>
+        <div class="col-sm">
+          &copy; 2020 - Jens Uwe Becker - Root-ITSolutions
+        </div>
+        <div class="col-sm">
+        </div>
+      </div>
+    </mat-toolbar>
   </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
