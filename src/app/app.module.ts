@@ -4,7 +4,6 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-//import { HeaderComponent } from './modules/header/header.component';
 import { AuthComponent } from './modules/auth/auth.component';
 import { UserComponent } from './modules/user/user.component';
 import { MartialArtsComponent } from './modules/martialArts/martialArts.component';
@@ -37,12 +36,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartComponent,
-    //HeaderComponent,
     AuthComponent,
     UserComponent,
     MartialArtsComponent,
@@ -74,7 +76,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatIconModule,
     LayoutModule,
     MatMenuModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [ExamService, MartialArtsService, ClubService, UserService],
   bootstrap: [AppComponent]
