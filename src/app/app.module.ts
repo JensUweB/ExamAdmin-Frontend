@@ -23,25 +23,10 @@ import { environment } from '../environments/environment';
 import { ClubService } from './modules/club/club.service';
 import { NewMartialartComponent } from './modules/martialArts/new-martialart/new-martialart.component';
 import { MartialartDetailsComponent } from './modules/martialArts/martialart-details/martialart-details.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UserService } from './modules/user/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatIconModule} from '@angular/material/icon';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MainNavComponent } from './modules/main-nav/main-nav.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCardModule} from '@angular/material/card';
+import { MaterialModule } from './material-module';
 
 @NgModule({
   declarations: [
@@ -63,28 +48,13 @@ import {MatCardModule} from '@angular/material/card';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
+    MaterialModule,
     AppRoutingModule,
     NgbModule,
     GraphQLModule,
     FormsModule,
     ReactiveFormsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    DragDropModule,
-    MatNativeDateModule,
-    MatIconModule,
-    LayoutModule,
-    MatMenuModule,
-    MatExpansionModule,
-    MatTooltipModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatProgressSpinnerModule,
-    MatCardModule
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [ExamService, MartialArtsService, ClubService, UserService],
   bootstrap: [AppComponent]
