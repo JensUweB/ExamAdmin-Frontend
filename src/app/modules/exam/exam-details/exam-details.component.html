@@ -1,5 +1,6 @@
 <div class="container" *ngIf="exam">
-    <br/>
+    <div class="mat-typography">
+        <br/>
     <div class="row">
         <div class="col">
             <div class="row">
@@ -7,7 +8,7 @@
                     <h1 i18n="Headline">Exam Details</h1>
                 </div>
                 <div class="col -4" *ngIf="exam.examiner._id == user._id">
-                    <button mat-mini-fab color="primary" class="mat-btn" (click)="editExam=true" style="float: right"><mat-icon>edit</mat-icon></button>
+                    <button mat-mini-fab color="primary" class="mat-btn pull-right" *ngIf="!editExam" (click)="editExam=true"><mat-icon>edit</mat-icon></button>
                 </div>
             </div>
             
@@ -209,9 +210,9 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm">
-                        <button class="btn btn-success" (click)="onUpdate()" i18n="Button">Update</button>
-                        <button class="btn btn-danger" (click)="openPopup(deletePopup)" i18n="Button">Delete</button>
-                        <button class="btn btn-warning" (click)="editExam=false" i18n="Button">Cancel</button>
+                        <button mat-raised-button color="primary" class="mat-btn" (click)="onUpdate()" i18n="Button"><mat-icon>update</mat-icon> Update</button>
+                        <button mat-raised-button color="warn" class="mat-btn-warn" (click)="openPopup(deletePopup)" i18n="Button"><mat-icon>delete</mat-icon> Delete</button>
+                        <button mat-raised-button color="warn" class="mat-btn-warn" (click)="editExam=false" i18n="Button"><mat-icon>cancel</mat-icon> Cancel</button>
                     </div>
                 </div>
             </form>
@@ -237,10 +238,11 @@
           <p i18n>Do you really want to delete this exam?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" (click)="onDelete(); c('Save click')" i18n="Popup Button">Confirm Delete</button>
-          <button type="button" class="btn btn-success" (click)=" c('Save click')" i18n="Popup Button">Cancel</button>
+          <button mat-raised-button color="warn" class="mat-btn-warn" (click)="onDelete(); c('Save click')" i18n="Popup Button"><mat-icon>delete</mat-icon> Confirm Delete</button>
+          <button mat-raised-button color="primary" class="mat-btn" (click)=" c('Save click')" i18n="Popup Button"><mat-icon>cancel</mat-icon> Cancel</button>
         </div>
       </ng-template>
+    </div>
 </div>
 <div class="row" *ngIf="!exam">
     <div class="col"></div>
