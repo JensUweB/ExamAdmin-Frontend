@@ -11,22 +11,34 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$examadmin-primary: mat-palette($mat-indigo);
-$examadmin-accent: mat-palette($mat-cyan);
-$primary-color: #3f51b5;
-$accent-color: #00bcd4;
+$theme-light-primary: mat-palette($mat-indigo);
+$theme-light-accent: mat-palette($mat-cyan);
+$theme-light-warn: mat-palette($mat-red);
+$theme-light: mat-light-theme($theme-light-primary, $theme-light-accent, $theme-light-warn);
 
-// The warn palette is optional (defaults to red).
-$examadmin-warn: mat-palette($mat-red);
-$warnhover-color: darkred;
+@include angular-material-theme($theme-light);
+$primary: map-get($theme-light, primary);
+$accent: map-get($theme-light, accent);
+$warn: map-get($theme-light, warn);
 
-// Create the theme object (a Sass map containing all of the palettes).
-$examadmin-theme: mat-light-theme($examadmin-primary, $examadmin-accent, $examadmin-warn);
+// Dark Theme
+$theme-dark-primary: mat-palette($mat-blue);
+$theme-dark-accent: mat-palette($mat-cyan);
+$theme-dark-warn: mat-palette($mat-red);
+$theme-dark: mat-dark-theme($theme-dark-primary, $theme-dark-accent, $theme-dark-warn);
+//@include angular-material-theme($dark-theme);
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($examadmin-theme);
+.theme-light {
+    @include angular-material-theme($theme-light);
+    $primary: map-get($theme-light, primary);
+    $accent: map-get($theme-light, accent);
+}
+.theme-dark {
+    @include angular-material-theme($theme-dark);
+    $primary: map-get($theme-dark, primary);
+    $accent: map-get($theme-dark, accent);
+    $warn: map-get($theme-dark, warn);
+}
 
 /* You can add global styles to this file, and also import other style files */
 html, body {
@@ -36,10 +48,12 @@ body {
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
+a .link {
+    color: mat-color($primary, A100);
+}
 .container {
    margin-bottom: 50px;
    min-height: 80%;
-   background-color: whitesmoke;
    //box-shadow: 2px 2px 6px #ccc;
 }
 footer {
@@ -53,13 +67,13 @@ button {
 }
 .mat-btn-primary:hover {
     background-color: transparent;
-    color: $primary-color;
+    color: mat-color($primary);
 }
 .mat-btn:hover {
-    background-color: $accent-color;
+    background-color: mat-color($accent);
 }
 .mat-btn-warn:hover {
-    background-color: $warnhover-color;
+    background-color: mat-color($warn, A700);
 }
 // Custom round  buttons. Code Snippets from: https://www.geeksforgeeks.org/how-to-get-circular-buttons-in-bootstrap-4/
 .btn-circle.btn-sm { 
