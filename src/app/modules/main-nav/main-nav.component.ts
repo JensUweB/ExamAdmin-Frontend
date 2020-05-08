@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostBinding } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { version } from '../../../../package.json';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-main-nav',
@@ -14,7 +15,9 @@ import { version } from '../../../../package.json';
 export class MainNavComponent implements OnInit, OnDestroy{
   // get the app version string
   public version: string = version;
-
+  public theme: "theme-light";
+  @HostBinding('class') componentCssClass;
+  
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -23,7 +26,12 @@ export class MainNavComponent implements OnInit, OnDestroy{
     isAuthenticated = false;
     userSub: Subscription;
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService, private router: Router) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver, 
+    private authService: AuthService, 
+    private router: Router,
+    private overlayContainer: OverlayContainer
+  ) {}
 
   ngOnInit() {
     this.userSub = this.authService._isAuthenticated.subscribe(ele => {
@@ -37,6 +45,11 @@ export class MainNavComponent implements OnInit, OnDestroy{
 
   onLogout() {
     this.authService.logout();
+  }
+
+  onThemeChange(theme) {
+    this.overlayContainer.getContainerElement().classList.add(theme);
+    this.componentCssClass = theme;
   }
 
   addExam() {

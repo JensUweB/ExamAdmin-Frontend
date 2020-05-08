@@ -9,26 +9,33 @@
     [opened]="(isHandset$ | async) === false">
       <mat-toolbar color="primary">Menu</mat-toolbar>
       <mat-nav-list>
-        <a mat-list-item href="/">Start</a>
-        <a mat-list-item routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated">My Profile</a>
-        <a mat-list-item routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated">Login / Register</a>
-        <a mat-list-item routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated">Exams</a>
-        <a mat-list-item routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated">Martial Arts</a>
+        <a mat-list-item routerLink="/">Start</a>
+        <a mat-list-item routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>My Profile</a>
+        <a mat-list-item routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated" i18n>Login / Register</a>
+        <a mat-list-item routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Exams</a>
+        <a mat-list-item routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Martial Arts</a>
+        <mat-form-field>
+          <mat-label>Select Theme</mat-label>
+          <mat-select>
+            <mat-option value="light" (click)="onThemeChange('theme-light')">Light Theme</mat-option>
+            <mat-option value="dark" (click)="onThemeChange('theme-dark')">Dark Theme</mat-option>
+          </mat-select>
+        </mat-form-field>
         <button class="hover-shadow" mat-menu-item [matMenuTriggerFor]="dropMenuSide">
           <mat-icon>settings</mat-icon>
         </button>
         <mat-menu #dropMenuSide="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item (click)="addMA()">
             <mat-icon>add</mat-icon>
-            <span>Martial Art</span>
+            <span i18n>Martial Art</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item (click)="addExam()">
             <mat-icon>add</mat-icon>
-            <span>Exam</span>
+            <span i18n>Exam</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item (click)="addExamResult()">
             <mat-icon>add</mat-icon>
-            <span>Exam Result</span>
+            <span i18n>Exam Result</span>
           </button>
         </mat-menu>
         <a mat-raised-button color="warn" class="mat-btn-warn" *ngIf="isAuthenticated" (click)="onLogout()" style="margin-left: 15px;" i18n>Logout</a>
@@ -44,32 +51,41 @@
       <span class="spacer"></span>
       <div *ngIf="!(isHandset$ | async)">
         <a routerLink="/" color="accent">Start</a>
-        <a routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated">My Profile</a>
-        <a routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated">Login / Register</a>
-        <a routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated">Exams</a>
-        <a routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated">Martial Arts</a>
+        <a routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>My Profile</a>
+        <a routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated" i18n>Login / Register</a>
+        <a routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Exams</a>
+        <a routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Martial Arts</a>
+        <mat-form-field>
+          <mat-label>Select Theme</mat-label>
+          <mat-select>
+            <mat-option value="light" (click)="onThemeChange('theme-light')">Light Theme</mat-option>
+            <mat-option value="dark" (click)="onThemeChange('theme-dark')">Dark Theme</mat-option>
+          </mat-select>
+        </mat-form-field>
         <button class="hover-shadow" mat-icon-button [matMenuTriggerFor]="dropMenu" *ngIf="isAuthenticated">
           <mat-icon>settings</mat-icon>
         </button>
         <mat-menu #dropMenu="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item (click)="addMA()">
             <mat-icon>add</mat-icon>
-            <span>Martial Art</span>
+            <span i18n>Martial Art</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item (click)="addExam()">
             <mat-icon>add</mat-icon>
-            <span>Exam</span>
+            <span i18n>Exam</span>
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item (click)="addExamResult()">
             <mat-icon>add</mat-icon>
-            <span>Exam Result</span>
+            <span i18n>Exam Result</span>
           </button>
         </mat-menu>
         <a mat-raised-button color="warn" class="mat-btn-warn" *ngIf="isAuthenticated" (click)="onLogout()" i18n>Logout</a>
       </div>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <router-outlet></router-outlet>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
   <footer class="footer">
     <mat-toolbar color="primary">
       <div class="row" style="width: 100%">
