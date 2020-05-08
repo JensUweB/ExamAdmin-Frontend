@@ -8,6 +8,31 @@
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
+// custom mixin
+@mixin app-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    a.link {
+        color: mat-color($primary);
+    }
+    a.link:hover {
+        color: mat-color($accent);
+    }
+
+    .mat-btn-primary:hover {
+        background-color: transparent;
+        color: mat-color($primary);
+    }
+    .mat-btn:hover {
+        background-color: mat-color($accent);
+    }
+    .mat-btn-warn:hover {
+        background-color: mat-color($warn, A700);
+    }
+}
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
@@ -17,9 +42,7 @@ $theme-light-warn: mat-palette($mat-red);
 $theme-light: mat-light-theme($theme-light-primary, $theme-light-accent, $theme-light-warn);
 
 @include angular-material-theme($theme-light);
-$primary: map-get($theme-light, primary);
-$accent: map-get($theme-light, accent);
-$warn: map-get($theme-light, warn);
+@include app-theme($theme-light);
 
 // Dark Theme
 $theme-dark-primary: mat-palette($mat-blue);
@@ -30,14 +53,11 @@ $theme-dark: mat-dark-theme($theme-dark-primary, $theme-dark-accent, $theme-dark
 
 .theme-light {
     @include angular-material-theme($theme-light);
-    $primary: map-get($theme-light, primary);
-    $accent: map-get($theme-light, accent);
+    @include app-theme($theme-light);
 }
 .theme-dark {
     @include angular-material-theme($theme-dark);
-    $primary: map-get($theme-dark, primary);
-    $accent: map-get($theme-dark, accent);
-    $warn: map-get($theme-dark, warn);
+    @include app-theme($theme-dark);
 }
 
 /* You can add global styles to this file, and also import other style files */
@@ -47,9 +67,6 @@ html, body {
 body { 
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
-}
-a .link {
-    color: mat-color($primary, A100);
 }
 .container {
    margin-bottom: 50px;
@@ -64,16 +81,6 @@ footer {
 }
 button {
     margin: 5px;
-}
-.mat-btn-primary:hover {
-    background-color: transparent;
-    color: mat-color($primary);
-}
-.mat-btn:hover {
-    background-color: mat-color($accent);
-}
-.mat-btn-warn:hover {
-    background-color: mat-color($warn, A700);
 }
 // Custom round  buttons. Code Snippets from: https://www.geeksforgeeks.org/how-to-get-circular-buttons-in-bootstrap-4/
 .btn-circle.btn-sm { 
