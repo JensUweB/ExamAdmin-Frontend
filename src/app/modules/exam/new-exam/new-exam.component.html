@@ -1,178 +1,183 @@
-<div class="row">
-    <div class="col-sm">
-        <div *ngIf="!isExaminer">
-            <h1 i18n="Alternative Headline">Sorry, but you are not an examiner!</h1>
-        </div>
-        <div *ngIf="isExaminer">
-            <h1 i18n="Headline">Create a new exam!</h1>
-            <p i18n>With the form below you can create a new exam!</p>
-        </div>
-    </div>
-</div>
-<form [formGroup]="examForm">
+<div class="mat-typography">
     <div class="row">
-        <div class="col-4" i18n>
-            Exam Martial Art:
-        </div>
-        <div class="col-8">
-            <select class="form-control" formControlName="martialArt">
-                <option *ngFor="let ma of martialArts; let i = index" [value]="i">{{ma.styleName}} {{ma.name}}</option>
-            </select>
-            <div *ngIf="!martialArt.valid && martialArt.touched" class="alert alert-danger" role="alert" i18n>
-                Please choose a martial art for this exam!
+        <div class="col-sm">
+            <div *ngIf="!isExaminer">
+                <h1 i18n="Alternative Headline">Sorry, but you are not an examiner!</h1>
+            </div>
+            <div *ngIf="isExaminer">
+                <h1 i18n="Headline">Create a new exam!</h1>
+                <p i18n>With the form below you can create a new exam!</p>
             </div>
         </div>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-4" i18n="label for exam title field">
-            Exam Title:
-        </div>
-        <div class="col-8">
-            <input class="form-control" type="text" formControlName="title" i18n-placeholder placeholder="Tell us, in a few words, what this exam is all about">
-            <div *ngIf="!title.valid && title.touched" class="alert alert-danger" role="alert" i18n>
-                Please enter a title with at least 10 characters!
+    <form [formGroup]="examForm">
+        <div class="row">
+            <div class="col-4" i18n>
+                Exam Martial Art:
             </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-4" i18n>
-            Exam description:
-        </div>
-        <div class="col-8">
-            <textarea class="form-control" rows="4" cols="50" formControlName="description" i18n-placeholder placeholder="Put every important detail into here"></textarea>
-            <div *ngIf="!description.valid && description.touched" class="alert alert-danger" role="alert" i18n>
-                Please enter a description with at least 15 characters!
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-4" i18n>
-            Address:
-        </div>
-        <div class="col-8">
-            <input class="form-control" rows="4" cols="50" formControlName="examPlace" i18n-placeholder placeholder="The Address of the exam">
-            <div *ngIf="!examPlace.valid && examPlace.touched" class="alert alert-danger" role="alert" i18n>
-                Please enter an address!
-            </div>
-        </div>
-    </div>
-    <hr>
-    <!--div class="row">
-        <div class="col-4">
-            Club:
-        </div>
-        <div class="col-8">
-            <select class="form-control" formControlName="club">
-                <option value="">none</option>
-                <option *ngFor="let ele of user.clubs" [value]="ele.club._id">{{ele.club.name}}</option>
-            </select>
-            <div *ngIf="!club.valid && club.touched" class="alert alert-danger" role="alert">
-                Pleas choose a responsible club for this exam or choose none!
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-4">
-            Visibility:
-        </div>
-        <div class="col-8">
-            <div class="row">
-                <div class="col-2">
-                    <fieldset>
-                            <input class="form-control" type="checkbox" formControlName="isPublic" value="false" checked>
-                    </fieldset>
-                </div>
-                <div class="col-8">
-                    Enable public registration?
+            <div class="col-8">
+                <select class="form-control" formControlName="martialArt">
+                    <option *ngFor="let ma of martialArts; let i = index" [value]="i">{{ma.styleName}} {{ma.name}}</option>
+                </select>
+                <div *ngIf="!martialArt.valid && martialArt.touched" class="alert alert-danger" role="alert" i18n>
+                    Please choose a martial art for this exam!
                 </div>
             </div>
         </div>
-    </div>
-    <hr-->
-    <div class="row">
-        <div class="col-4" i18n>
-            Minimum Rank for Registration:
-        </div>
-        <div class="col-8">
-            <select class="form-control" formControlName="minRank" *ngIf="martialArt.value">
-                <option [value]="'none'" i18n>no min rank</option>
-                <option *ngFor="let rank of martialArts[martialArt.value].ranks" [value]="rank._id">{{rank.name}}</option>
-            </select>
-        </div>
-    </div>  
-    <div class="row">
-        <div class="col-4" i18n>
-            Exam Date:
-        </div>
-        <div class="col-8">
-            <div class="row">
-                <div class="col-6">
-                    <ngb-timepicker formControlName="examTime"></ngb-timepicker>
+        <hr>
+        <div class="row">
+            <div class="col-4" i18n="label for exam title field">
+                Exam Title:
+            </div>
+            <div class="col-8">
+                <input class="form-control" type="text" formControlName="title" i18n-placeholder placeholder="Tell us, in a few words, what this exam is all about">
+                <div *ngIf="!title.valid && title.touched" class="alert alert-danger" role="alert" i18n>
+                    Please enter a title with at least 10 characters!
                 </div>
-                <div class="col-6">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" formControlName="examDate" ngbDatepicker #d="ngbDatepicker">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-4" i18n>
+                Exam description:
+            </div>
+            <div class="col-8">
+                <textarea class="form-control" rows="4" cols="50" formControlName="description" i18n-placeholder placeholder="Put every important detail into here"></textarea>
+                <div *ngIf="!description.valid && description.touched" class="alert alert-danger" role="alert" i18n>
+                    Please enter a description with at least 15 characters!
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-4" i18n>
+                Address:
+            </div>
+            <div class="col-8">
+                <input class="form-control" rows="4" cols="50" formControlName="examPlace" i18n-placeholder placeholder="The Address of the exam">
+                <div *ngIf="!examPlace.valid && examPlace.touched" class="alert alert-danger" role="alert" i18n>
+                    Please enter an address!
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!--div class="row">
+            <div class="col-4">
+                Club:
+            </div>
+            <div class="col-8">
+                <select class="form-control" formControlName="club">
+                    <option value="">none</option>
+                    <option *ngFor="let ele of user.clubs" [value]="ele.club._id">{{ele.club.name}}</option>
+                </select>
+                <div *ngIf="!club.valid && club.touched" class="alert alert-danger" role="alert">
+                    Pleas choose a responsible club for this exam or choose none!
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-4">
+                Visibility:
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-2">
+                        <fieldset>
+                                <input class="form-control" type="checkbox" formControlName="isPublic" value="false" checked>
+                        </fieldset>
+                    </div>
+                    <div class="col-8">
+                        Enable public registration?
                     </div>
                 </div>
             </div>
-            <div *ngIf="!examTime.valid && examTime.touched || !examDate.valid && examDate.touched" class="alert alert-danger" role="alert" i18n>
-                Please set time and date when the exam should start!
+        </div>
+        <hr-->
+        <div class="row">
+            <div class="col-4" i18n>
+                Minimum Rank for Registration:
             </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-4" i18n>
-            Registration End Date:
-        </div>
-        <div class="col-8">
-            <div class="row">
-                <div class="col-6">
-                    <ngb-timepicker formControlName="regEndTime"></ngb-timepicker>
-                </div>
-                <div class="col-6">
-                    <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="regEndDate"formControlName="regEndDate" ngbDatepicker #d="ngbDatepicker">
+            <div class="col-8">
+                <select class="form-control" formControlName="minRank" *ngIf="martialArt.value">
+                    <option [value]="'none'" i18n>no min rank</option>
+                    <option *ngFor="let rank of martialArts[martialArt.value].ranks" [value]="rank._id">{{rank.name}}</option>
+                </select>
+            </div>
+        </div>  
+        <div class="row">
+            <div class="col-4" i18n>
+                Exam Date:
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-6">
+                        <ngb-timepicker formControlName="examTime"></ngb-timepicker>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+                                <input matInput [matDatepicker]="examDatePicker" name="dp" formControlName="examDate">
+                                <mat-datepicker-toggle matSuffix [for]="examDatePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #examDatePicker></mat-datepicker>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div *ngIf="!regEndTime.valid && regEndTime.touched || !regEndDate.valid && regEndDate.touched" class="alert alert-danger" role="alert" i18n>
-                Please set time and date when registration should close!
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-4" i18n>
-            Participation Fee
-        </div>
-        <div class="col-8">
-            <input class="form-control" type="text" formControlName="price" placeholder="20,00 €">
-            <div *ngIf="!price.valid && price.touched" class="alert alert-danger" role="alert" i18n>
-                Please enter a price! 0,00€ or 0.00€ would be ok.
+                <div *ngIf="!examTime.valid && examTime.touched || !examDate.valid && examDate.touched" class="alert alert-danger" role="alert" i18n>
+                    Please set time and date when the exam should start!
+                </div>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-4">
-
+        <div *ngIf="examDate.value">{{examDate.value}}</div>
+        <hr>
+        <div class="row">
+            <div class="col-4" i18n>
+                Registration End Date:
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-6">
+                        <ngb-timepicker formControlName="regEndTime"></ngb-timepicker>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="regEndDate"formControlName="regEndDate" ngbDatepicker #d="ngbDatepicker">
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!regEndTime.valid && regEndTime.touched || !regEndDate.valid && regEndDate.touched" class="alert alert-danger" role="alert" i18n>
+                    Please set time and date when registration should close!
+                </div>
+            </div>
         </div>
-        <div class="col-8">
-           <button class="btn btn-success" value="Create New Exam!" (click)="onSubmit()" i18n="Button">Create New Exam</button>
+        <hr>
+        <div class="row">
+            <div class="col-4" i18n>
+                Participation Fee
+            </div>
+            <div class="col-8">
+                <input class="form-control" type="text" formControlName="price" placeholder="20,00 €">
+                <div *ngIf="!price.valid && price.touched" class="alert alert-danger" role="alert" i18n>
+                    Please enter a price! 0,00€ or 0.00€ would be ok.
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-4">
+    
+            </div>
+            <div class="col-8">
+               <button mat-raised-button color="primary" class="mat-btn" (click)="onSubmit()" i18n="Button"><mat-icon>send</mat-icon> Create New Exam</button>
+            </div>
+        </div>
+    </form>
+    <div class="row" *ngIf="alerts">
+        <div class="col">
+          <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+            <p><strong>{{alert.message}}</strong></p>
+          </ngb-alert>
         </div>
     </div>
-</form>
-<div class="row" *ngIf="alerts">
-    <div class="col">
-      <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
-        <p><strong>{{alert.message}}</strong></p>
-      </ngb-alert>
-    </div>
+    <br>
+    <br>
 </div>
-<br>
-<br>

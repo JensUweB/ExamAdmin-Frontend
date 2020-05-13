@@ -65,12 +65,12 @@ export class NewExamComponent implements OnInit, OnDestroy{
       title: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', [Validators.required, Validators.minLength(5)]],
       examPlace: ['', [Validators.required, Validators.minLength(5)]],
-      minRank: [null, [Validators.required]],
-      examDate: [null, [Validators.required]],
-      examTime: [null, [Validators.required]],
-      regEndDate: [null, [Validators.required]],
-      regEndTime: [null, [Validators.required]],
-      price: ['0,00 €', [Validators.required]],
+      minRank: [null, Validators.required],
+      examDate: [null, Validators.required],
+      examTime: [null, Validators.required],
+      regEndDate: [null, Validators.required],
+      regEndTime: [null, Validators.required],
+      price: ['0,00 €', Validators.required],
       isPublic: true,
     });
 
@@ -116,7 +116,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
     return this.examForm.get('minRank');
   }
   get examDate () {
-    return this.examForm.get('examDate');
+     return this.examForm.get('examDate');
   }
   get examTime () {
     return this.examForm.get('examTime');
@@ -174,7 +174,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
       });
       this.isSubmitted = true;
     } else {
-      console.log('[NewExamComp] Your form is NOT valid!');
+      this.printError('Your form is not valid!');
     }
   }
   close(alert: Alert) {

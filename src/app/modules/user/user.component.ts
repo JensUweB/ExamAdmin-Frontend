@@ -38,6 +38,7 @@ export class UserComponent implements OnInit, OnDestroy{
   userForm: FormGroup;
   maError;
   alerts: Alert[] = [];
+  displayedColumns = ['name', 'rank', 'result', 'date', 'file'];
 
   constructor(
     private apollo: Apollo,

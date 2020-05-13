@@ -122,27 +122,51 @@
   </div>
   <div class="row">
     <div class="col" *ngIf="examResults.length">
-      <table class="table table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th i18n>Martial Art</th>
-            <th i18n>Rank</th>
-            <th i18n>Result</th>
-            <th i18n>Date</th>
-            <th i18n>Protocol</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let result of examResults">
-            <th>{{result.martialArt.styleName}} {{result.martialArt.name}}</th>
-            <th>{{result.rank}}</th>
-            <th *ngIf="result.passed" i18n>passed</th>
-            <th *ngIf="!result.passed" i18n>failed</th>
-            <th>{{result.date}}</th>
-            <th><a class="btn btn-sm btn-warning" (click)="downloadFile(result.reportUri, null)" i18n>download</a></th>
-          </tr>
-        </tbody>
-      </table>
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="examResults" class="full-width">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef i18n> Martial Art</th>
+                <td mat-cell *matCellDef="let result"> {{result.martialArt.styleName}} {{result.martialArt.name}} </td>
+            </ng-container>
+
+            <!-- Rank Column -->
+            <ng-container matColumnDef="rank">
+                <th mat-header-cell *matHeaderCellDef i18n>Rank</th>
+                <td mat-cell *matCellDef="let result">{{result.rank}}</td>
+            </ng-container>
+
+            <!-- Passed Column -->
+            <ng-container matColumnDef="result">
+                <th mat-header-cell *matHeaderCellDef i18n>Passed</th>
+                <td mat-cell *matCellDef="let result">
+                  <div *ngIf="result.passed" i18n>passed</div>
+                  <div *ngIf="!result.passed" i18n>failed</div>
+                </td>
+            </ng-container>
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef i18n>Date</th>
+                <td mat-cell *matCellDef="let result">{{result.date}}</td>
+            </ng-container>
+
+            <!-- Protocol Column -->
+            <ng-container matColumnDef="file">
+              <th mat-header-cell *matHeaderCellDef i18n>Protocol</th>
+              <td mat-cell *matCellDef="let result"><a mat-raised-button color="primary" class="mat-btn" (click)="downloadFile(result.reportUri, null)" i18n><mat-icon>cloud_download</mat-icon> download</a></td>
+          </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let result; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator #paginator
+            [length]="examResults?.length"
+            [pageIndex]="0"
+            [pageSize]="10"
+            [pageSizeOptions]="[10, 25, 50, 100]">
+        </mat-paginator>
+      </div>
     </div>
     <div class="col" *ngIf="!examResults.length">
       <b i18n>Sorry, but you don't have any exam results yet!</b>
@@ -171,7 +195,7 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="onClubSubmit(); c('Save click')" i18n>Add Club</button>
+    <button mat-raised-button color="primary" class="mat-btn" (click)="onClubSubmit(); c('Save click')" i18n>Add Club</button>
   </div>
 </ng-template>
 
@@ -196,6 +220,6 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="onMaSubmit(); c('Save click')" i18n>Add Martial Art</button>
+    <button mat-raised-button color="primary" class="mat-btn" (click)="onMaSubmit(); c('Save click')" i18n>Add Martial Art</button>
   </div>
 </ng-template>

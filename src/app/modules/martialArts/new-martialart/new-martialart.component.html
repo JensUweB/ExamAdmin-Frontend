@@ -46,7 +46,7 @@
                     <input class="form-control" type="number" formControlName="rankCount">
                 </div>
                 <div class="col-2">
-                    <button class="btn btn-success pull-right" (click)="setupRanks()" i18n="Button">Add Ranks</button>
+                    <button mat-raised-button color="primary" class="mat-btn pull-right" (click)="setupRanks()" i18n="Button"><mat-icon>add</mat-icon> Add Ranks</button>
                 </div>
             </div>
             <div class="row">
@@ -76,9 +76,7 @@
                                 <input class="form-control" type="number" formControlName="number" step="0" [value]="rank.number" hidden>
                             </div>
                             <div class="col-2">
-                                <button class="btn btn-danger  btn-circle btn-sm" (click)="removeRank(i)">
-                                    <h6>X</h6>
-                                </button>
+                                <button mat-icon-button color="warn" class="mat-icon-warn" (click)="removeRank(i)"><mat-icon>delete</mat-icon></button>
                             </div>
                         </div>
                     </div>
@@ -86,11 +84,11 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <button *ngIf="!ma" class="btn btn-success pull-right" (click)="onSubmit()" i18n="Button">Create!</button>
+                    <button *ngIf="!ma" mat-raised-button color="primary" class="mat-btn pull-right" (click)="onSubmit()" i18n="Button"><mat-icon>send</mat-icon> Create</button>
                     <div *ngIf="ma">
-                        <button class="btn btn-success" (click)="onUpdate()" i18n="Button">Update!</button>
-                        <button class="btn btn-warning pull-right" (click)="onCancel()" i18n="Button">Cancel</button>
-                        <button class="btn btn-danger pull-right" (click)="openPopup(deletePopup)" i18n="Button">Delete</button>
+                        <button mat-raised-button color="primary" class="mat-btn" (click)="onUpdate()" i18n="Button"><mat-icon>update</mat-icon> Update</button>
+                        <button mat-raised-button color="warn" class="mat-btn-warn pull-right" (click)="onCancel()" i18n="Button"><mat-icon>cancel</mat-icon> Cancel</button>
+                        <button mat-raised-button color="warn" class="mat-btn-warn pull-right" (click)="openPopup(deletePopup)" i18n="Button"><mat-icon>delete</mat-icon> Delete</button>
                     </div>
                 </div>
             </div>
