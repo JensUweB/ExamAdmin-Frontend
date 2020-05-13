@@ -15,10 +15,10 @@
         <a mat-list-item routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Exams</a>
         <a mat-list-item routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Martial Arts</a>
         <mat-form-field>
-          <mat-label>Select Theme</mat-label>
+          <mat-label i18n>Select Theme</mat-label>
           <mat-select>
-            <mat-option value="light" (click)="onThemeChange('theme-light')">Light Theme</mat-option>
-            <mat-option value="dark" (click)="onThemeChange('theme-dark')">Dark Theme</mat-option>
+            <mat-option value="light" (click)="onThemeChange('theme-light')" i18n>Light Theme</mat-option>
+            <mat-option value="dark" (click)="onThemeChange('theme-dark')" i18n>Dark Theme</mat-option>
           </mat-select>
         </mat-form-field>
         <button class="hover-shadow" mat-menu-item [matMenuTriggerFor]="dropMenuSide">
