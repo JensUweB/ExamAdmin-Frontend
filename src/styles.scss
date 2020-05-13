@@ -31,6 +31,9 @@
     .mat-btn-warn:hover {
         background-color: mat-color($warn, A700);
     }
+    .mat-icon-warn:hover {
+        color: mat-color($warn, A700);
+    }
 }
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
@@ -45,8 +48,8 @@ $theme-light: mat-light-theme($theme-light-primary, $theme-light-accent, $theme-
 @include app-theme($theme-light);
 
 // Dark Theme
-$theme-dark-primary: mat-palette($mat-blue);
-$theme-dark-accent: mat-palette($mat-cyan);
+$theme-dark-primary: mat-palette($mat-grey, 700);
+$theme-dark-accent: mat-palette($mat-grey, 600);
 $theme-dark-warn: mat-palette($mat-red);
 $theme-dark: mat-dark-theme($theme-dark-primary, $theme-dark-accent, $theme-dark-warn);
 //@include angular-material-theme($dark-theme);
@@ -111,7 +114,9 @@ button {
 .pull-right {
     float: right;
 }
-
+.full-width {
+    width: 100%;
+}
 .hover-shadow:hover {
   background-color: rgba(0, 0, 0, 0.2);
 }
