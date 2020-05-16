@@ -884,7 +884,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="linenumber">90</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
@@ -896,7 +896,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">91</context>
+          <context context-type="linenumber">92</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
@@ -912,7 +912,7 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">91</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
@@ -1096,7 +1096,7 @@
             </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">132</context>
+          <context context-type="linenumber">133</context>
         </context-group>
       </trans-unit>
       <trans-unit id="db44c7b537a61f2171046399c65208f4bcb7b395" datatype="html">
@@ -1105,7 +1105,7 @@
                 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">146</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d5ecd97ce783791909a620db3027da44d6538287" datatype="html">
@@ -1114,7 +1114,7 @@
             </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">153</context>
+          <context context-type="linenumber">154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="399ca0e384083218704633c7aa7cf556b9009624" datatype="html">
@@ -1123,14 +1123,14 @@
                 </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">158</context>
+          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8e985242c97797caa547cc6b3ed09c5706891600" datatype="html">
         <source><x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>send<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/> Create New Exam</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">169</context>
+          <context context-type="linenumber">170</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
@@ -1142,79 +1142,116 @@
         </context-group>
         <note priority="1" from="description">Headline</note>
       </trans-unit>
-      <trans-unit id="8a4221bf82fed46c7992d883bbcd67712a41616c" datatype="html">
-        <source>
-                    <x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>Martial Art Name:<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/>
-                </source>
+      <trans-unit id="12d8e7afc79d802c448a4a5cafbe076c194a1302" datatype="html">
+        <source>* Required fields</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="e0e5f357c5c7335d92286c4372596d106db5edc5" datatype="html">
-        <source>
-                        Please choose a name for this martial art!
-                    </source>
+      <trans-unit id="ff790d290272277069270e8ee7a17f0dec3e2403" datatype="html">
+        <source>Martial Art Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="245631efbcbe6b156511fe064b5018b6f4da7eb5" datatype="html">
+        <source>Karate</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f88031731dc25246a39f89f05aff2320c888ed28" datatype="html">
+        <source>The name of your martial art</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
           <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="a394f0dec2c8c73c305a963b81b73e052b4cbd0d" datatype="html">
-        <source>
-                    Style Name:
-                </source>
+      <trans-unit id="704fcc8730fa7d16a04d7856d60b9cd5f88dd51b" datatype="html">
+        <source>You must enter a valid name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ece75e49d5fe43267313d99460b89f53eb996580" datatype="html">
+        <source>Style Name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
           <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="3c0e2a0dd4ac9912f5920c2fb437d0b9576056cc" datatype="html">
-        <source>
-                        Please choose a style name for this martial art!
-                    </source>
+      <trans-unit id="1fae87711beca9f1bb6a20b0d7c37aa82b08a247" datatype="html">
+        <source>Shotokan</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">19</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="cce3eb7031bf6c15985c543417abc46a772948d4" datatype="html">
-        <source>
-                    Description:
-                </source>
+      <trans-unit id="4c5efdfc7a7f02dad8cc8a006de3558ac0d4dac9" datatype="html">
+        <source>The style name of your martial art</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">29</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="23b062536b6b03f8253fd673fc41710277e651cd" datatype="html">
+        <source>You must enter a valid style name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="eec715de352a6b114713b30b640d319fa78207a0" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
+          <context context-type="linenumber">27</context>
         </context-group>
       </trans-unit>
       <trans-unit id="116ad38c0328f259d2d49bfa301123a0055015f9" datatype="html">
         <source>Tell us something about this martial art!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">29</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="09be093d43465c68d5a5bc025765f4bb4cc5a955" datatype="html">
-        <source>
-                        Please choose a description for this martial art!
-                    </source>
+      <trans-unit id="6564b206657c0c74ae66ae3687b4f6ee7ec2d5f3" datatype="html">
+        <source>Describe this martial art!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">35</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b09ccd12f874caa07adaf9795fc653905cdc4f7c" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{description.value.length}}"/> / 1000</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a74d254882bdbd695dfa615508bc73c27c47e748" datatype="html">
+        <source>You must enter a valid description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4e0b15b1695cc35a816fced11da886a054365f1e" datatype="html">
         <source>How many ranks do you want to add?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1c4e8257cb4e04e1d1fbb0ae35f163e52b3e2f74" datatype="html">
         <source><x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>add<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/> Add Ranks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">49</context>
+          <context context-type="linenumber">47</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
@@ -1222,14 +1259,14 @@
         <source>You can add as many ranks as you need.</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">54</context>
+          <context context-type="linenumber">55</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0c1e17956453ad772dbe82d6946f62748c692f3e" datatype="html">
         <source>Ranks</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">62</context>
         </context-group>
       </trans-unit>
       <trans-unit id="fdfbff9b1fdd881e18adfc98d8d087ca948e2ec9" datatype="html">
@@ -1239,14 +1276,14 @@
                     </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">65</context>
+          <context context-type="linenumber">66</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c9ce0a121326d6bf82b161a21500a8c8b00729f1" datatype="html">
         <source><x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>send<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/> Create</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">87</context>
+          <context context-type="linenumber">88</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
@@ -1254,7 +1291,7 @@
         <source>Delete Martial Art</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">108</context>
+          <context context-type="linenumber">109</context>
         </context-group>
         <note priority="1" from="description">Popup Headline</note>
       </trans-unit>
@@ -1262,14 +1299,14 @@
         <source>Do you really want to delete this martial art?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">114</context>
+          <context context-type="linenumber">115</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a6ecf76f074e2098ee024b6c2586a0475a2d6dd3" datatype="html">
         <source>Confirm Delete</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">117</context>
+          <context context-type="linenumber">118</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
@@ -1277,11 +1314,11 @@
         <source>Cancel</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
-          <context context-type="linenumber">118</context>
+          <context context-type="linenumber">119</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
-          <context context-type="linenumber">126</context>
+          <context context-type="linenumber">132</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
@@ -1330,18 +1367,39 @@
         </context-group>
         <note priority="1" from="description">Add Examiner description text</note>
       </trans-unit>
+      <trans-unit id="4232ed3bfd276d9e1b052f3d3d77c4c3b021db00" datatype="html">
+        <source>User E-Mail Adress</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="841078927d0a6d343c3bb14fbda2dae18a85cad7" datatype="html">
         <source>example@localhost.net</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
-          <context context-type="linenumber">121</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="87e178415563396321d17a9630765d9734891930" datatype="html">
+        <source>An E-Mail adress from an existing user account</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
+          <context context-type="linenumber">125</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e11a3e9e02a52a818868b88f4e48624667fa5890" datatype="html">
+        <source>You must enter a valid email adress</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="68e710782ccb5398b3acb8844caf0b199da2c3da" datatype="html">
         <source>Confirm</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/martialart-details/martialart-details.component.html</context>
-          <context context-type="linenumber">125</context>
+          <context context-type="linenumber">131</context>
         </context-group>
         <note priority="1" from="description">Button</note>
       </trans-unit>
