@@ -12,7 +12,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { logError, getGraphQLError } from '../../helpers/error.helpers';
 
-const newMA = gql`mutation createMartialArt($name: String!, $styleName: String!, $description: String!, $ranks: [RankInput!], $userId: String!)
+const newMA = gql`mutation createMartialArt
+($name: String!, $styleName: String!, $description: String!, $ranks: [RankInput!], $userId: String!)
 {createMartialArt(input: {
   	name: $name
     styleName: $styleName
@@ -21,13 +22,14 @@ const newMA = gql`mutation createMartialArt($name: String!, $styleName: String!,
   examiners: [$userId]
   }){_id}}`;
 
-  const updateMA = gql`mutation updateMartialArt($id: String!, $name: String!, $styleName: String!, $description: String!, $ranks: [RankInput!])
-  {updateMartialArt(input: {
-      name: $name
-      styleName: $styleName
-      description: $description
-      ranks: $ranks
-  }, id: $id){_id}}`;
+const updateMA = gql`mutation updateMartialArt
+($id: String!, $name: String!, $styleName: String!, $description: String!, $ranks: [RankInput!])
+{updateMartialArt(input: {
+    name: $name
+    styleName: $styleName
+    description: $description
+    ranks: $ranks
+}, id: $id){_id}}`;
 
 @Component({
   selector: 'app-new-martialart',

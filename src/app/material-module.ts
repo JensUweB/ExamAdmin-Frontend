@@ -20,6 +20,10 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import { OverlayModule} from '@angular/cdk/overlay';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 const MaterialComponents = [
     MatToolbarModule,
@@ -41,7 +45,10 @@ const MaterialComponents = [
     MatCardModule,
     MatSelectModule,
     OverlayModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule
 ]
 
 @NgModule({
