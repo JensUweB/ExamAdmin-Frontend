@@ -121,24 +121,24 @@
     </div>
   </div>
   <div class="row">
-    <div class="col" *ngIf="examResults.length">
+    <div class="col" *ngIf="examResults">
       <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="examResults" class="full-width">
+        <table mat-table [dataSource]="dataSource" class="full-width" matSort>
             <!-- Name Column -->
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef i18n> Martial Art</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Martial Art</th>
                 <td mat-cell *matCellDef="let result"> {{result.martialArt.styleName}} {{result.martialArt.name}} </td>
             </ng-container>
 
             <!-- Rank Column -->
             <ng-container matColumnDef="rank">
-                <th mat-header-cell *matHeaderCellDef i18n>Rank</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Rank</th>
                 <td mat-cell *matCellDef="let result">{{result.rank}}</td>
             </ng-container>
 
             <!-- Passed Column -->
             <ng-container matColumnDef="result">
-                <th mat-header-cell *matHeaderCellDef i18n>Passed</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Passed</th>
                 <td mat-cell *matCellDef="let result">
                   <div *ngIf="result.passed" i18n>passed</div>
                   <div *ngIf="!result.passed" i18n>failed</div>
@@ -147,7 +147,7 @@
 
             <!-- Date Column -->
             <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef i18n>Date</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Date</th>
                 <td mat-cell *matCellDef="let result">{{result.date}}</td>
             </ng-container>
 
@@ -160,15 +160,15 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let result; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator #paginator
+        <mat-paginator #examResultPagination
             [length]="examResults?.length"
             [pageIndex]="0"
-            [pageSize]="10"
-            [pageSizeOptions]="[10, 25, 50, 100]">
+            [pageSize]="5"
+            [pageSizeOptions]="[5, 10, 25, 50]">
         </mat-paginator>
       </div>
     </div>
-    <div class="col" *ngIf="!examResults.length">
+    <div class="col" *ngIf="!examResults">
       <b i18n>Sorry, but you don't have any exam results yet!</b>
     </div>
   </div>

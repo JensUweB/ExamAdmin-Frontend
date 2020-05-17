@@ -28,7 +28,7 @@
                 <textarea matInput type="text" [formControl]="description" minlength="5" maxlength="1000" 
                     rows="5" i18n-placeholder placeholder="Tell us something about this martial art!" required>
                 </textarea>
-                <mat-icon matPrefix>short_text</mat-icon>
+                <mat-icon matPrefix>description</mat-icon>
                 <mat-hint align="start" i18n>Describe this martial art!</mat-hint>
                 <mat-hint align="end" i18n>{{description.value.length}} / 1000</mat-hint>
                 <mat-error *ngIf="styleName.invalid" i18n>You must enter a valid description</mat-error>
