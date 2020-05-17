@@ -267,57 +267,116 @@
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="c83b838d845690bcb897f775f53b5316535306dc" datatype="html">
+        <source>First Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="27502f41821d8d4341ce6ec9124c263e06f242f1" datatype="html">
+        <source>John</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="82f0e19ac208b3adc102d4f801ba9cb7e6aba1a3" datatype="html">
         <source>Your first name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="46a60c59839ddcb594bec2c7282cc6012e380d73" datatype="html">
+        <source>Please enter your first name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="166b2cc65003221ff5f3ec05d5baca41e6821396" datatype="html">
+        <source>Last Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b8fe0cc8262599c0180524be0c46271b8f01b1aa" datatype="html">
+        <source>Doe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">24</context>
         </context-group>
       </trans-unit>
       <trans-unit id="ed063906e10eab2a1b2e2dc31b42f2648d97a52e" datatype="html">
         <source>Your last name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7ea7f4d66c1f2646fd50701799835c4389f0d5e5" datatype="html">
-        <source>Your email address</source>
+      <trans-unit id="1b9457ddacfcfbe9801c833ebeaaf85f59af10b1" datatype="html">
+        <source>Please enter your last name</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6d3b88a3ae6ff3d987f86395605397ec736dee9c" datatype="html">
+        <source>E-Mail</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="05387bf6addbf9e491450c55512ecf27966277ce" datatype="html">
+        <source>john.doe@provider.com</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f4d0fb654cfc4a6c859899f4f28ed4cedef3992c" datatype="html">
+        <source>Your email adress</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d4e4fbb251a52174139785ffee76209b3ca2ee48" datatype="html">
+        <source>Please enter your email adress</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">39</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c32ef07f8803a223a83ed17024b38e8d82292407" datatype="html">
         <source>Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="7f7d57bff8ed920c9de40ce347e03eec2cd5280a" datatype="html">
-        <source>
-                                Please type in a correct email!
-                            </source>
+      <trans-unit id="5b5b91438db5731debea388908f788bab8d3d404" datatype="html">
+        <source>Your password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">48</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="5059a4048a835b2372bdc898220267d24d3910bd" datatype="html">
-        <source>
-                                You need to type in your password...
-                            </source>
+      <trans-unit id="6e6feac587daba45e6313a4d59c0905f26c462e1" datatype="html">
+        <source>Please enter at least 5 characters. There is no max password length!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
-          <context context-type="linenumber">16</context>
+          <context context-type="linenumber">49</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6765b4c916060f6bc42d9bb69e80377dbcb5e4e9" datatype="html">
         <source>Login</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
-          <context context-type="linenumber">21</context>
+          <context context-type="linenumber">55</context>
         </context-group>
         <note priority="1" from="description">Login Button</note>
       </trans-unit>
@@ -325,7 +384,7 @@
         <source>Create Account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">56</context>
         </context-group>
         <note priority="1" from="description">SignUp Button</note>
       </trans-unit>
@@ -333,7 +392,7 @@
         <source>Need to create an account?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
-          <context context-type="linenumber">24</context>
+          <context context-type="linenumber">58</context>
         </context-group>
         <note priority="1" from="description">Login Mode</note>
       </trans-unit>
@@ -341,7 +400,7 @@
         <source>Already have an account?</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">59</context>
         </context-group>
         <note priority="1" from="description">SignUp Mode</note>
       </trans-unit>
