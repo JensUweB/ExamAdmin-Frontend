@@ -11,7 +11,6 @@ import { MartialArtsService } from '../martialArts/martialArts.service';
 import { Alert } from '../types/Alert';
 import { Subscription } from 'rxjs';
 import { UserService } from './user.service';
-import { normalizeDate } from '../helpers/date.helper';
 import { getGraphQLError, logError } from '../helpers/error.helpers';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';

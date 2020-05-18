@@ -5,61 +5,66 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-6">
+    <div class="col">
       <h3 i18n>Personal data:</h3>
       <form>
         <div class="row">
           <div class="col-sm">
             <form [formGroup]="userForm">
-              <div class="row">
-                <div class="col-sm">
-                  <label for="firstName" i18n>First Name:</label>
-                </div>
-                <div class="col-sm">
-                  <input class="form-control" type="text" formControlName="firstName">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm">
-                  <label for="lastName" i18n>Last Name:</label>
-                </div>
-                <div class="col-sm">
-                  <input class="form-control" type="text" formControlName="lastName">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm">
-                  <label for="email" i18n>E-Mail:</label>
-                </div>
-                <div class="col-sm">
-                  <input class="form-control" type="text" formControlName="email">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm">
-                  <label for="oldPassword" i18n>Old Password:</label>
-                </div>
-                <div class="col-sm">
-                  <input class="form-control" type="password" i18n-placeholder placeholder="your current password" formControlName="password"
-                    name="oldPassword">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm">
-                  <label for="newPassword" i18n>New Password:</label>
-                </div>
-                <div class="col-sm">
-                  <input class="form-control" type="password" i18n-placeholder placeholder="new password" formControlName="newPassword">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm">
-                  <label for="repeatPassword" i18n>Repeat Password:</label>
-                </div>
-                <div class="col-sm">
-                  <input class="form-control" type="password" i18n-placeholder placeholder="confirm new password" formControlName="newPassword2">
-                </div>
-              </div>
+              <!-- First Name -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your first name</mat-label>
+                <input matInput type="text" [formControl]="firstName" minlength="3" required>
+                <mat-icon matPrefix>title</mat-icon>
+                <mat-hint i18n>Your first name</mat-hint>
+                <mat-error *ngIf="firstName.invalid" i18n>You must enter a valid name</mat-error>
+              </mat-form-field>
+              <br/>
+              <!-- Last Name -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your last name</mat-label>
+                <input matInput type="text" [formControl]="lastName" minlength="3" required>
+                <mat-icon matPrefix>title</mat-icon>
+                <mat-hint i18n>Your last name</mat-hint>
+                <mat-error *ngIf="lastName.invalid" i18n>You must enter a valid name</mat-error>
+              </mat-form-field>
+              <br/>
+              <!-- Email -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your last name</mat-label>
+                <input matInput type="email" [formControl]="email" minlength="3" required>
+                <mat-icon matPrefix>email</mat-icon>
+                <mat-hint i18n>Your email</mat-hint>
+                <mat-error *ngIf="email.invalid" i18n>You must enter a valid email</mat-error>
+              </mat-form-field>
+              <br/>
+              <!-- Current Password -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your current password</mat-label>
+                <input matInput type="password" [formControl]="password" minlength="3" i18n-placeholder placeholder="your current password" required>
+                <mat-icon matPrefix>security</mat-icon>
+                <mat-hint i18n>Your current password</mat-hint>
+                <mat-error *ngIf="password.invalid" i18n>You must enter your current password</mat-error>
+              </mat-form-field>
+              <br/>
+              <!-- New Password -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your current password</mat-label>
+                <input matInput type="password" [formControl]="newPassword" minlength="3" i18n-placeholder placeholder="new password">
+                <mat-icon matPrefix>security</mat-icon>
+                <mat-hint i18n>Choose a new pasword, if you like</mat-hint>
+                <mat-error *ngIf="newPassword.invalid" i18n>You must enter a password</mat-error>
+              </mat-form-field>
+              <br/>
+              <!-- Repeat New Password -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your current password</mat-label>
+                <input matInput type="password" [formControl]="newPassword2" minlength="3" i18n-placeholder placeholder="repeat new password">
+                <mat-icon matPrefix>security</mat-icon>
+                <mat-hint i18n>Repeat your new pasword</mat-hint>
+                <mat-error *ngIf="newPassword2.invalid" i18n>You must enter a password</mat-error>
+              </mat-form-field>
+              <br/><br/>
               <div class="row">
                 <div class="col-sm">
                   <button  mat-raised-button color="primary" class="mat-btn" (click)="onUserUpdate()"><mat-icon>update</mat-icon> Update</button>
@@ -70,7 +75,7 @@
         </div>
       </form>
     </div>
-    <div class="col-6">
+    <div class="col">
       <!--div class="row">
         <div class="col-8">
           <h4 i18n>Your Clubs:</h4>
@@ -85,6 +90,7 @@
         </div>
       </div>
       <hr-->
+    <br/>
       <div class="row">
         <div class="col-8">
           <h4 i18n>Your Martial Arts:</h4>
