@@ -240,7 +240,7 @@
         <target>Kampfkunst hinzufügen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">223</context>
+          <context context-type="linenumber">229</context>
         </context-group>
       </trans-unit>
       <trans-unit id="bb694b49d408265c91c62799c2b3a7e3151c824d" datatype="html">
@@ -279,60 +279,12 @@
           <context context-type="linenumber">9</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="96c6ead4da45d7ca45a9703171301f0c79c82d16" datatype="html">
-        <source>First Name:</source>
-        <target>Vorname:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ba6702bed331082fd18a5755c9b05fe40be188f5" datatype="html">
-        <source>Last Name:</source>
-        <target>Nachname:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="844aa28b618184686c190f3622ad71ee7c0d8631" datatype="html">
-        <source>E-Mail:</source>
-        <target>Email:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="43a87c03e76b2fc18c03c8da28721de261d73a14" datatype="html">
-        <source>Old Password:</source>
-        <target>Altes Passwort:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="694da3ca77397d1aa9c2df10681144eee0e7113d" datatype="html">
-        <source>New Password:</source>
-        <target>Neues Passwort:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ab24d1cc9c59c4813bacc6fe433fc60e462f14cb" datatype="html">
-        <source>Repeat Password:</source>
-        <target>Wiederhole Neues Passwort:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">57</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="dd845a7902c8addabef95c90b5e9ce4849cd2eee" datatype="html">
         <source>Your Martial Arts:</source>
         <target>Deine Kampfkünste:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">90</context>
+          <context context-type="linenumber">96</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4a26abd8849633f30c01a456860e9cae72275730" datatype="html">
@@ -340,7 +292,7 @@
         <target>Prüfungsergebnisse:</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">120</context>
+          <context context-type="linenumber">126</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e8d5e1bafa3da2ac582620bde835ca2de7b4881b" datatype="html">
@@ -360,7 +312,7 @@
         <target>Rang</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">135</context>
+          <context context-type="linenumber">141</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2f933b826a570836cab04f683970a2d22068458c" datatype="html">
@@ -368,7 +320,7 @@
         <target>Datum</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">150</context>
+          <context context-type="linenumber">156</context>
         </context-group>
       </trans-unit>
       <trans-unit id="acc04ca445d64958d843622f9ce95c0378198c24" datatype="html">
@@ -376,7 +328,7 @@
         <target>Protokoll</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">156</context>
+          <context context-type="linenumber">162</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3a03d3c2e459f8f8fa7202c0fce465d6165f9e2b" datatype="html">
@@ -384,7 +336,7 @@
         <target>bestanden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">143</context>
+          <context context-type="linenumber">149</context>
         </context-group>
       </trans-unit>
       <trans-unit id="41435d5a5692c8e412c74deaee95d99dbd3617e1" datatype="html">
@@ -392,7 +344,7 @@
         <target>gescheitert</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">144</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
       <trans-unit id="a4350355c130ca52a4bd322afa1e2b89f9d13b9e" datatype="html">
@@ -400,7 +352,7 @@
         <target>Entschuldigung, aber du hast noch keine Prüfungsergebnisse!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">172</context>
+          <context context-type="linenumber">178</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4f4939b9f76bdb663ab14b47d0e97fd19ac9d308" datatype="html">
@@ -408,7 +360,7 @@
         <target>Füge einen Verein hinzu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">180</context>
+          <context context-type="linenumber">186</context>
         </context-group>
       </trans-unit>
       <trans-unit id="60f20da57a685b6bdd256b13e7ee6f0590933e5b" datatype="html">
@@ -417,7 +369,7 @@
         <target></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">186</context>
+          <context context-type="linenumber">192</context>
         </context-group>
       </trans-unit>
       <trans-unit id="f8e3a6ed21d0335910b92fbb87f49812ab1dd167" datatype="html">
@@ -425,7 +377,7 @@
         <target>Vereinsliste</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">190</context>
+          <context context-type="linenumber">196</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c0bb66f11fab4ab8ee9b6a05514bfe6ea84fe463" datatype="html">
@@ -433,7 +385,7 @@
         <target>Verein hinzufügen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">198</context>
+          <context context-type="linenumber">204</context>
         </context-group>
       </trans-unit>
       <trans-unit id="68f1a5387c64e72e94e17d2f95add4039de99fc9" datatype="html">
@@ -441,7 +393,7 @@
         <target>Fügen Sie eine Kampfkunst hinzu</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">205</context>
+          <context context-type="linenumber">211</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d3c0d5393af2c8bf55c81ad3841c4d1b441bc9ca" datatype="html">
@@ -450,7 +402,7 @@
         <target></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">211</context>
+          <context context-type="linenumber">217</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e669986593533a7d553ed0d3d691e9565bef7ac7" datatype="html">
@@ -844,6 +796,18 @@
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
           <context context-type="linenumber">26</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="c32ef07f8803a223a83ed17024b38e8d82292407" datatype="html">
         <source>Password</source>
@@ -898,7 +862,7 @@
         <target>Dein Aktuelles Passwort</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">44</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4f94eaa3c972a07aae0605dc6d98e780c2804d3a" datatype="html">
@@ -906,15 +870,7 @@
         <target>Neues Passwort</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">52</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="bde7edc223495ecda9b77c1dfe9ae0e34addcecd" datatype="html">
-        <source>confirm new password</source>
-        <target>Neues Passwort Bestätigen</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">53</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4e0b15b1695cc35a816fced11da886a054365f1e" datatype="html">
@@ -992,6 +948,14 @@
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
           <context context-type="linenumber">16</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="f03d1f3c03023bbc626436c0a7f0044c16869c1c" datatype="html">
         <source>Please enter the email adress of an <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>existing<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> account to add as examiner:</source>
@@ -1061,7 +1025,7 @@
         <target>Kampfkunst</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">129</context>
+          <context context-type="linenumber">135</context>
         </context-group>
       </trans-unit>
       <trans-unit id="9a554203d54f2e6fa1f9ccffbf8a8180ec671358" datatype="html">
@@ -1069,7 +1033,7 @@
         <target>Bestanden</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">141</context>
+          <context context-type="linenumber">147</context>
         </context-group>
       </trans-unit>
       <trans-unit id="eefac7ee75a4a1944a53c6995f782c51c39e856d" datatype="html">
@@ -1078,7 +1042,7 @@
 <x id="START_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;mat-icon&gt;"/>cloud_download<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon" equiv-text="&lt;/mat-icon&gt;"/> herunterladen</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
-          <context context-type="linenumber">157</context>
+          <context context-type="linenumber">163</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5e3fd380e51ad1ed54b936f83396ff00c5894b3e" datatype="html">
@@ -1585,6 +1549,14 @@
         <source>You must enter a valid name</source>
         <target>Du musst einen gültigen Namen eingeben</target>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
           <context context-type="linenumber">13</context>
         </context-group>
@@ -1771,6 +1743,86 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
           <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0b892c7805a1c5afc0b7c21c3449760860fe7f3d" datatype="html">
+        <source>Your email</source>
+        <target>Deine E-Mail</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="04d51a0ba355d33a069553d8107cf8496dc0e39e" datatype="html">
+        <source>You must enter a valid email</source>
+        <target>Du musst eine gültige E-Mail Adresse eingeben</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3a83d433c5d27e1d06ece0475fac8ba409b6c9ac" datatype="html">
+        <source>Your current password</source>
+        <target>Dein aktuelles Passwort</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3d0d09219d3193de6f7fe9914d152f34e1da382b" datatype="html">
+        <source>You must enter your current password</source>
+        <target>Du musst dein aktuelles Passwort eingeben</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c7b1a784ff370f1b4ddd1f2bc66906aee5fb78d1" datatype="html">
+        <source>Choose a new pasword, if you like</source>
+        <target>Wähle ein neues Passwort, wenn du möchtest</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="62f4d1220b344f48c80d64b0a2f38d43ac5ad215" datatype="html">
+        <source>You must enter a password</source>
+        <target>Du musst ein Passwort eingeben</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="31a326ed5799343d3a2de9f7a610a84837291687" datatype="html">
+        <source>repeat new password</source>
+        <target>Neues Passwort Wiederholen</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="62009b4b2375b0f9cfde60b01013fce27a5299ec" datatype="html">
+        <source>Repeat your new pasword</source>
+        <target>Wiederhole dein neues Passwort</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
+          <context context-type="linenumber">64</context>
         </context-group>
       </trans-unit>
     </body>
