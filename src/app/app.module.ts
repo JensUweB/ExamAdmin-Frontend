@@ -9,7 +9,6 @@ import { UserComponent } from './modules/user/user.component';
 import { MartialArtsComponent } from './modules/martialArts/martialArts.component';
 import { ExamComponent } from './modules/exam/exam.component';
 import { ClubComponent } from './modules/club/club.component';
-import { UmbrellaAssocComponent } from './modules/umbrellaAssoc/umbrellaAssoc.component';
 import { StartComponent } from './modules/start/start.component';
 import { ExamResultComponent } from './modules/exam/exam-result/exam-result.component';
 import { GraphQLModule } from './apollo.config';
@@ -37,7 +36,6 @@ import { MaterialModule } from './material-module';
     MartialArtsComponent,
     ExamComponent,
     ClubComponent,
-    UmbrellaAssocComponent,
     ExamResultComponent,
     ExamDetailsComponent,
     NewExamComponent,
