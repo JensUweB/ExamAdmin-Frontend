@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container mat-typography">
   <mat-sidenav 
     #drawer 
     class="sidenav"
@@ -39,6 +39,11 @@
           </button>
         </mat-menu>
         <a mat-raised-button color="warn" class="mat-btn-warn" *ngIf="isAuthenticated" (click)="onLogout()" style="margin-left: 15px;" i18n>Logout</a>
+        <div class="sidebar-footer">
+          <hr>
+          <h3>Version: {{version}}</h3>
+          <h3>&copy; 2020 - Root-ITSolutions</h3>
+        </div>
       </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

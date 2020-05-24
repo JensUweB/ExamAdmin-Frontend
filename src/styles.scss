@@ -85,6 +85,11 @@ footer {
 button {
     margin: 5px;
 }
+.sidebar-footer {
+    position: fixed;
+    bottom: 0;
+    margin-left: 10px;
+}
 // Usefull tool-classes
 .pull-right {
     float: right;
@@ -105,5 +110,10 @@ button {
     }
     button {
         margin: 1px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .footer {
+        display: none;
     }
 }
