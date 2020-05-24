@@ -12,54 +12,70 @@
     </div>
     <form [formGroup]="examForm">
         <div class="row">
-            <div class="col-4" i18n>
-                Exam Martial Art:
+            <div class="col">
+                <!-- Exam Martial Art -->
+                <mat-form-field class="full-width">
+                    <mat-label i18n>Martial Art</mat-label>
+                    <mat-select [formControl]="martialArt" required>
+                        <mat-option *ngFor="let ma of martialArts; let i = index" [value]="i">{{ma.styleName}} {{ma.name}}</mat-option>
+                    </mat-select>
+                    <!-- <mat-icon matPrefix>title</mat-icon> -->
+                    <mat-hint i18n>The martial art for this exam</mat-hint>
+                    <mat-error *ngIf="martialArt.invalid" i18n>Please choose a martial art for this exam!</mat-error>
+                </mat-form-field>
             </div>
-            <div class="col-8">
-                <select class="form-control" formControlName="martialArt">
-                    <option *ngFor="let ma of martialArts; let i = index" [value]="i">{{ma.styleName}} {{ma.name}}</option>
-                </select>
-                <div *ngIf="!martialArt.valid && martialArt.touched" class="alert alert-danger" role="alert" i18n>
-                    Please choose a martial art for this exam!
-                </div>
+            <div class="col">
+                <!-- Exam Minimum Rank -->
+                <mat-form-field class="full-width" *ngIf="martialArt.value">
+                    <mat-label i18n>Minimum Rank</mat-label>
+                    <mat-select [formControl]="minRank" required>
+                        <mat-option [value]="'none'" i18n>no min rank</mat-option>
+                        <mat-option *ngFor="let rank of martialArts[martialArt.value].ranks" [value]="rank._id">{{rank.name}}</mat-option>
+                    </mat-select>
+                    <!-- <mat-icon matPrefix>title</mat-icon> -->
+                    <mat-hint i18n>The minimum rank for this exam</mat-hint>
+                    <mat-error *ngIf="minRank.invalid" i18n>Please choose a minimum rank for this exam!</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col">
+                <!-- Exam Title -->
+                <mat-form-field class="full-width">
+                    <mat-label i18n>Exam Title</mat-label>
+                    <input matInput type="text" [formControl]="title" minlength="5" i18n-placeholder placeholder="Tell us, in a few words, what this exam is all about" required>
+                    <mat-icon matPrefix>title</mat-icon>
+                    <mat-hint align="start" i18n>The title of this exam</mat-hint>
+                    <mat-hint align="end" i18n>{{title.value.length}}</mat-hint>
+                    <mat-error *ngIf="title.invalid" i18n>Please enter at least 5 characters!</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <!-- Exam Address -->
+                <mat-form-field class="full-width">
+                    <mat-label i18n>Exam Address</mat-label>
+                    <input matInput type="text" [formControl]="examPlace" minlength="5" i18n-placeholder placeholder="The Address of the exam" required>
+                    <mat-icon matPrefix>short_text</mat-icon>
+                    <mat-hint align="start" i18n>The address of this exam</mat-hint>
+                    <mat-hint align="end" i18n>{{examPlace.value.length}}</mat-hint>
+                    <mat-error *ngIf="examPlace.invalid" i18n>Please enter at least 5 characters!</mat-error>
+                </mat-form-field>
             </div>
         </div>
         <hr>
-        <div class="row">
-            <div class="col-4" i18n="label for exam title field">
-                Exam Title:
-            </div>
-            <div class="col-8">
-                <input class="form-control" type="text" formControlName="title" i18n-placeholder placeholder="Tell us, in a few words, what this exam is all about">
-                <div *ngIf="!title.valid && title.touched" class="alert alert-danger" role="alert" i18n>
-                    Please enter a title with at least 10 characters!
-                </div>
-            </div>
-        </div>
+        <!-- Description -->
+        <mat-form-field class="full-width">
+            <mat-label i18n>Description</mat-label>
+            <textarea matInput type="text" [formControl]="description" minlength="5" maxlength="1000" 
+                rows="5" i18n-placeholder placeholder="Put every important detail into here" required>
+            </textarea>
+            <mat-icon matPrefix>description</mat-icon>
+            <mat-hint align="start" i18n>Describe this exam!</mat-hint>
+            <mat-hint align="end" i18n>{{description.value.length}} / 1000</mat-hint>
+            <mat-error *ngIf="description.invalid" i18n>Please enter at least 5 characters.</mat-error>
+        </mat-form-field>
         <hr>
-        <div class="row">
-            <div class="col-4" i18n>
-                Exam description:
-            </div>
-            <div class="col-8">
-                <textarea class="form-control" rows="4" cols="50" formControlName="description" i18n-placeholder placeholder="Put every important detail into here"></textarea>
-                <div *ngIf="!description.valid && description.touched" class="alert alert-danger" role="alert" i18n>
-                    Please enter a description with at least 15 characters!
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-4" i18n>
-                Address:
-            </div>
-            <div class="col-8">
-                <input class="form-control" rows="4" cols="50" formControlName="examPlace" i18n-placeholder placeholder="The Address of the exam">
-                <div *ngIf="!examPlace.valid && examPlace.touched" class="alert alert-danger" role="alert" i18n>
-                    Please enter an address!
-                </div>
-            </div>
-        </div>
         <hr>
         <!--div class="row">
             <div class="col-4">
@@ -95,78 +111,46 @@
         </div>
         <hr-->
         <div class="row">
-            <div class="col-4" i18n>
-                Minimum Rank for Registration:
+            <div class="col">
+                <!-- Exam Date -->
+                <mat-form-field class="full-width">
+                    <mat-label i18n>Exam Date</mat-label>
+                    <input matInput [ngxMatDatetimePicker]="examDatePicker" placeholder="Choose a date" formControlName="examDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="examDatePicker"></mat-datepicker-toggle>
+                    <ngx-mat-datetime-picker #examDatePicker showSpinners="true" showSeconds="false" stepHour="1"
+                      stepMinute="1" touchUi="false" color="primary" hideTime="false">
+                    </ngx-mat-datetime-picker>
+                    <mat-hint i18n>The date when the exam should start</mat-hint>
+                    <mat-error *ngIf="examDate.invalid" i18n>Please choose a date and time</mat-error>
+                </mat-form-field>
             </div>
-            <div class="col-8">
-                <select class="form-control" formControlName="minRank" *ngIf="martialArt.value">
-                    <option [value]="'none'" i18n>no min rank</option>
-                    <option *ngFor="let rank of martialArts[martialArt.value].ranks" [value]="rank._id">{{rank.name}}</option>
-                </select>
-            </div>
-        </div>  
-        <div class="row">
-            <div class="col-4" i18n>
-                Exam Date:
-            </div>
-            <div class="col-8">
-                <div class="row">
-                    <div class="col-6">
-                        <ngb-timepicker formControlName="examTime"></ngb-timepicker>
-                    </div>
-                    <div class="col-6">
-                        <div class="input-group">
-                                <input matInput [matDatepicker]="examDatePicker" name="dp" formControlName="examDate">
-                                <mat-datepicker-toggle matSuffix [for]="examDatePicker"></mat-datepicker-toggle>
-                                <mat-datepicker #examDatePicker></mat-datepicker>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="!examTime.valid && examTime.touched || !examDate.valid && examDate.touched" class="alert alert-danger" role="alert" i18n>
-                    Please set time and date when the exam should start!
-                </div>
-            </div>
-        </div>
-        <div *ngIf="examDate.value">{{examDate.value}}</div>
-        <hr>
-        <div class="row">
-            <div class="col-4" i18n>
-                Registration End Date:
-            </div>
-            <div class="col-8">
-                <div class="row">
-                    <div class="col-6">
-                        <ngb-timepicker formControlName="regEndTime"></ngb-timepicker>
-                    </div>
-                    <div class="col-6">
-                        <div class="input-group">
-                            <input class="form-control" placeholder="yyyy-mm-dd" name="regEndDate"formControlName="regEndDate" ngbDatepicker #d="ngbDatepicker">
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="!regEndTime.valid && regEndTime.touched || !regEndDate.valid && regEndDate.touched" class="alert alert-danger" role="alert" i18n>
-                    Please set time and date when registration should close!
-                </div>
+            <div class="col">
+                <!-- Registration End Date -->
+                <mat-form-field class="full-width">
+                    <mat-label i18n>Registration End Date</mat-label>
+                    <input matInput [ngxMatDatetimePicker]="regEndDatePicker" placeholder="Choose a date" formControlName="regEndDate" required>
+                    <mat-datepicker-toggle matSuffix [for]="regEndDatePicker"></mat-datepicker-toggle>
+                    <ngx-mat-datetime-picker #regEndDatePicker showSpinners="true" showSeconds="false" stepHour="1"
+                      stepMinute="1" touchUi="false" color="primary" hideTime="false">
+                    </ngx-mat-datetime-picker>
+                    <mat-hint i18n>The date when the registration should close</mat-hint>
+                    <mat-error *ngIf="regEndDate.invalid" i18n>Please choose a date and time</mat-error>
+                </mat-form-field>
             </div>
         </div>
         <hr>
         <div class="row">
-            <div class="col-4" i18n>
-                Participation Fee
+            <div class="col">
+                <!-- Price -->
+                <mat-form-field class="full-width">
+                    <mat-label i18n>Price</mat-label>
+                    <input matInput type="text" [formControl]="price" placeholder="20,00 €" required>
+                    <mat-icon matPrefix>attach_money</mat-icon>
+                    <mat-hint i18n>How much does this exam cost?</mat-hint>
+                    <mat-error *ngIf="price.invalid" i18n>You must enter something. 0 would be ok.</mat-error>
+                </mat-form-field>
             </div>
-            <div class="col-8">
-                <input class="form-control" type="text" formControlName="price" placeholder="20,00 €">
-                <div *ngIf="!price.valid && price.touched" class="alert alert-danger" role="alert" i18n>
-                    Please enter a price! 0,00€ or 0.00€ would be ok.
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-4">
-    
-            </div>
-            <div class="col-8">
+            <div class="col">
                <button mat-raised-button color="primary" class="mat-btn" (click)="onSubmit()" i18n="Button"><mat-icon>send</mat-icon> Create New Exam</button>
             </div>
         </div>

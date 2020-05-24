@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { User } from '../../models/user.model';
 import { MartialArt } from '../../models/martialArt.model';
@@ -45,6 +45,8 @@ export class NewExamComponent implements OnInit, OnDestroy{
   examForm: FormGroup;
   isSubmitted: boolean = false;
   alerts: Alert[] = [];
+  @ViewChild('examDatePicker') examDatePicker: any;
+  @ViewChild('regEndDatePicker') regEndDatePicker: any;
 
   constructor(
     private apollo: Apollo, 
