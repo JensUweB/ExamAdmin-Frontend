@@ -299,6 +299,10 @@
         <source>Martial Art</source>
         <target>Kampfkunst</target>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/main-nav/main-nav.component.html</context>
           <context context-type="linenumber">30</context>
         </context-group>
@@ -822,7 +826,7 @@
         <target>Erzähle uns kurz, worum es in dieser Prüfung geht.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="d488a1e0089b3aea01e8bda49f978f987e3efa77" datatype="html">
@@ -830,7 +834,7 @@
         <target>Gib alle wichtigen Details hier ein!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">45</context>
+          <context context-type="linenumber">71</context>
         </context-group>
       </trans-unit>
       <trans-unit id="524f1fdc275514488b8bfb31814003a38b787c57" datatype="html">
@@ -838,7 +842,7 @@
         <target>Die Anschrift des Prüfungsortes</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">57</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="116ad38c0328f259d2d49bfa301123a0055015f9" datatype="html">
@@ -1009,7 +1013,7 @@
         <target>Kein Mindestrang</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">103</context>
+          <context context-type="linenumber">32</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6e1e107579bd7c4905aa78c52fb4c80721131fba" datatype="html">
@@ -1302,7 +1306,7 @@
         <note priority="1" from="description">Button</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">170</context>
+          <context context-type="linenumber">154</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1c4e8257cb4e04e1d1fbb0ae35f163e52b3e2f74" datatype="html">
@@ -1345,172 +1349,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/main-nav/main-nav.component.html</context>
           <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ac8a934d7f71f5612c44b2d6aa6ea18379c94285" datatype="html">
-        <source>
-                Exam Martial Art:
-            </source>
-        <target>
-                Geprüfte Kampfkunst:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b2b8da0c2e1c05e92b5b39893876039409296fbd" datatype="html">
-        <source>
-                    Please choose a martial art for this exam!
-                </source>
-        <target>
-                    Bitte wähle eine Kampfkunst für diese Prüfung aus!</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="bf05c65080b3d55d19fc812b7301052f42193607" datatype="html">
-        <source>
-                Exam Title:
-            </source>
-        <target>
-                Prüfungstitel:</target>
-        <note priority="1" from="description">label for exam title field</note>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9189a57bbe19e519361605df67e6499569104e62" datatype="html">
-        <source>
-                    Please enter a title with at least 10 characters!
-                </source>
-        <target>
-                    Bitte gib einen Titel mit mindestens 5 Zeichen ein!</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="fa509dbf7c272ea826168d88430f26551038955d" datatype="html">
-        <source>
-                Exam description:
-            </source>
-        <target>
-                Prüfungsbeschreibung:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="83e9cbb40aef80d1303f3c3b34b80c2c5fd0f415" datatype="html">
-        <source>
-                    Please enter a description with at least 15 characters!
-                </source>
-        <target>
-                    Bitte gib eine Beschreibung mit mindestens 5 Zeichen ein!</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9c3f2fdb90853d1472104c3b914ce620dabdb09e" datatype="html">
-        <source>
-                Address:
-            </source>
-        <target>
-                Anschrift:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="9248e76fb20883350302053e68eeadb643d4bf55" datatype="html">
-        <source>
-                    Please enter an address!
-                </source>
-        <target>
-                    Bitte gib eine Anschrift ein!</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b259f21d003007e37dabe11138199aa10d2f8ef3" datatype="html">
-        <source>
-                Minimum Rank for Registration:
-            </source>
-        <target>
-                Mindestrang für die Teilnahme:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">98</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="92b6f55d6429f7d9d6c21d7410224edfd1c69753" datatype="html">
-        <source>
-                Exam Date:
-            </source>
-        <target>
-                Prüfungsdatum:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">109</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="fa44ce61b581ccc5a588ae3cde65cfa9eb80467c" datatype="html">
-        <source>
-                    Please set time and date when the exam should start!
-                </source>
-        <target>
-                    Bitte gib Datum und Uhrzeit des Prüfungsbeginns ein!</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">125</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="de1b16e4f1124558e507b161e25d984d803c3d5f" datatype="html">
-        <source>
-                Registration End Date:
-            </source>
-        <target>
-                Anmeldeschluss:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">133</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="db44c7b537a61f2171046399c65208f4bcb7b395" datatype="html">
-        <source>
-                    Please set time and date when registration should close!
-                </source>
-        <target>
-                    Bitte gib an, wann die Anmeldephase Enden soll!                         </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">147</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d5ecd97ce783791909a620db3027da44d6538287" datatype="html">
-        <source>
-                Participation Fee
-            </source>
-        <target>
-                Teilnahmegebühr</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">154</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="399ca0e384083218704633c7aa7cf556b9009624" datatype="html">
-        <source>
-                    Please enter a price! 0,00€ or 0.00€ would be ok.
-                </source>
-        <target>
-                    Bitte gib einen Preis ein! 0,00 € wäre auch in Ordnung.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
-          <context context-type="linenumber">159</context>
         </context-group>
       </trans-unit>
       <trans-unit id="12d8e7afc79d802c448a4a5cafbe076c194a1302" datatype="html">
@@ -1597,6 +1435,10 @@
         <source>Description</source>
         <target>Beschreibung</target>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
           <context context-type="linenumber">27</context>
         </context-group>
@@ -1612,6 +1454,10 @@
       <trans-unit id="b09ccd12f874caa07adaf9795fc653905cdc4f7c" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{description.value.length}}"/> / 1000</source>
         <target><x id="INTERPOLATION" equiv-text="{{description.value.length}}"/> / 1000</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/martialArts/new-martialart/new-martialart.component.html</context>
           <context context-type="linenumber">33</context>
@@ -1823,6 +1669,190 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/user/user.component.html</context>
           <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d3c743ba2e98d00993f80922426b753ff0f00fcc" datatype="html">
+        <source>The martial art for this exam</source>
+        <target>Die Kampfkunst dieser Prüfung</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="95362009d8f6dec6cd559610701990ab463f8b51" datatype="html">
+        <source>Please choose a martial art for this exam!</source>
+        <target>Bitte wähle die Kampfkunst für diese Prüfung!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e170872f0ff31d757b112aee2e37f0b4773b948f" datatype="html">
+        <source>Minimum Rank</source>
+        <target>Mindestrang</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d5ab691235f194c53a15afa19938438a223c083a" datatype="html">
+        <source>The minimum rank for this exam</source>
+        <target>Der Mindestrang für diese Prüfung</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7e0be783f6420584e7fc40863dd26ebf80e82b8f" datatype="html">
+        <source>Please choose a minimum rank for this exam!</source>
+        <target>Bitte wähle einen Mindestrang für die Prüfung aus!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fd87282e3b9eb7f9672eee9c00846dc6a6fa27f9" datatype="html">
+        <source>Exam Title</source>
+        <target>Prüfungstitel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7498f9dccb42bcb57d4cae664c4e7619de429eec" datatype="html">
+        <source>The title of this exam</source>
+        <target>Der Titel der Prüfung</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ccc9d3d442dcc7bd11bf2128a8e1eb97d47e3b5e" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{title.value.length}}"/></source>
+        <target><x id="INTERPOLATION" equiv-text="{{title.value.length}}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="25c06c77442976f44d5541eca591c933df73b820" datatype="html">
+        <source>Please enter at least 5 characters!</source>
+        <target>Bitte gib mindestens 5 Zeichen ein!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e0eabd870504f031c5c765b9e697f464ef9a488a" datatype="html">
+        <source>Exam Address</source>
+        <target>Prüfungsanschrift</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9c2eec99cb395cc10bc438f6e439228ea1c4ea62" datatype="html">
+        <source>The address of this exam</source>
+        <target>Die Anschrift für diese Prüfung</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="310175d24423ed69634e99b32ae35a8a2c5a7e7f" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{examPlace.value.length}}"/></source>
+        <target><x id="INTERPOLATION" equiv-text="{{examPlace.value.length}}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4a5c72805c8bf71d1fcfa438e610209be4566e97" datatype="html">
+        <source>Describe this exam!</source>
+        <target>Beschreibe diese Prüfung!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f91a00eaaac9127ceb3fb3691182fe60cc54622" datatype="html">
+        <source>Please enter at least 5 characters.</source>
+        <target>Bitte gib mindestens 5 Zeichen ein!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e4b5abc8e8e044f6dbb5457dafb19e590e6041e8" datatype="html">
+        <source>Exam Date</source>
+        <target>Prüfungsdatum</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">117</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7249b92dc83ef01f8aba2a92715a19e747017b6c" datatype="html">
+        <source>The date when the exam should start</source>
+        <target>Das Datum, wann die Prüfung stattfinden soll</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">123</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="db2fe8359c54721d44fa496a30b03f13685c5432" datatype="html">
+        <source>Please choose a date and time</source>
+        <target>Bitte wähle Datum und Uhrzeit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">124</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0a8e5717d45758a178af3eee8907839fa957b59e" datatype="html">
+        <source>Registration End Date</source>
+        <target>Anmeldeschluss</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">130</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6e7537ecd110baadb14c2031d692669a9b798872" datatype="html">
+        <source>The date when the registration should close</source>
+        <target>Das Datum, wann die Anmeldung geschlossen wird.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">136</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4d6ee53858628de558a18623894a03c8673bce9e" datatype="html">
+        <source>Price</source>
+        <target>Preis</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">146</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="928e22f73a68ccaaabf8c3bb7e4d965496a40032" datatype="html">
+        <source>How much does this exam cost?</source>
+        <target>Wieviel soll diese Prüfung kosten?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">149</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e12c8011e78ca8b53b63458bc7be4aaeda747433" datatype="html">
+        <source>You must enter something. 0 would be ok.</source>
+        <target>Du musst etwas eingeben. 0  wäre ok.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/exam/new-exam/new-exam.component.html</context>
+          <context context-type="linenumber">150</context>
         </context-group>
       </trans-unit>
     </body>
