@@ -3,10 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   url: 'http://localhost',
   port: 4200,
   backendurl: 'http://localhost:3000/graphql',
+  sentryApiKey: 'https://9b9ccec61919429885f635a4358d21cb@o400008.ingest.sentry.io/5257912'
 };
 
 /*

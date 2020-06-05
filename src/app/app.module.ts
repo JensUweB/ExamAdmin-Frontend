@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +26,7 @@ import { UserService } from './modules/user/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './modules/main-nav/main-nav.component';
 import { MaterialModule } from './material-module';
+import { SentryErrorHandler } from './modules/services/sentry-error-handler.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,17 @@ import { MaterialModule } from './material-module';
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [ExamService, MartialArtsService, ClubService, UserService],
+  providers: [
+    ExamService,
+    MartialArtsService,
+    ClubService,
+    UserService,
+    // Sends error report to sentry, if unhandled error occurs
+    {
+      provide: ErrorHandler,
+      useClass: environment.production ? SentryErrorHandler : ErrorHandler,
+    }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
