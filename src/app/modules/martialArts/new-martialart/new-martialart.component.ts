@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { logError, getGraphQLError } from '../../helpers/error.helpers';
+import { environment } from 'src/environments/environment';
 
 const newMA = gql`mutation createMartialArt
 ($name: String!, $styleName: String!, $description: String!, $ranks: [RankInput!], $userId: String!)
@@ -115,7 +116,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
   }
 
   async onSubmit() {
-    console.log('[NewMartialArtComp] Creating new martial art...');
+    if(!environment.production) console.log('[NewMartialArtComp] Creating new martial art...');
 
     // Cycle through the ranks array and set the correct rank numbers
     let ranks = this.ranks.value;
@@ -136,7 +137,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
     }).subscribe(response => {
       if (response.data) {
         this.alerts.push({type:"success", message: 'New martial art was created!'});
-        console.log('[NewMartialArtComp] Done.');
+        if(!environment.production) console.log('[NewMartialArtComp] Done.');
       }
     }, (err) => {
       this.printError(err);
@@ -145,7 +146,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
   }
 
   async onUpdate() {
-    console.log('[NewMartialArtComp] Updating martial art...');
+    if(!environment.production) console.log('[NewMartialArtComp] Updating martial art...');
 
     // Cycle through the ranks array and set the correct rank numbers
     let ranks = this.ranks.value;

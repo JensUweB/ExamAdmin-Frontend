@@ -20,9 +20,7 @@ export class MartialArtsService implements OnInit {
     
     constructor(
         private apollo: Apollo, 
-        private router: Router) {
-          this.fetch();
-    }
+        private router: Router) {}
 
     printError(err) {
       logError('[UserComponent]',err);

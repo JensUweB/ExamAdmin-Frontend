@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { environment } from 'src/environments/environment';
 
 const query = gql`mutation addExaminer($maId: String!, $email: String!)
 {addExaminer(maId: $maId, email: $email){_id}}`;
@@ -60,7 +61,7 @@ export class MartialartDetailsComponent implements OnInit {
 
    async onSubmit() {
      if(this.examinerForm.valid) {
-      console.log('[MADetailsComp] Adding new examiner... ');
+      if(!environment.production) ('[MADetailsComp] Adding new examiner... ');
       this.apollo.mutate<any>({
         mutation: query,
         variables: {
@@ -70,13 +71,13 @@ export class MartialartDetailsComponent implements OnInit {
       }).subscribe(async response => {
         if (response.data) {
           // Fetch updates and pull the updated martial art to this component
-          console.log('[MADetailsComp] Fetching updates... ');
+          if(!environment.production) console.log('[MADetailsComp] Fetching updates... ');
           this.maService.fetch()
           .then(() => {
             this.maService.setCurrent(this.ma, false);
             this.ma = this.maService.martialArt;
             this.router.navigateByUrl('martialArt-details');
-            console.log('[MADetailsComp] Done. ');
+            if(!environment.production) console.log('[MADetailsComp] Done. ');
           });
           this.alerts.push({type:"success", message: 'New examiner was added!'});
         }
@@ -97,7 +98,7 @@ export class MartialartDetailsComponent implements OnInit {
         if (response.data) {
           this.ma.examiners = this.ma.examiners.filter(user => user._id != userId);
           this.alerts.push({type:"success", message: 'Examiner was removed!'});
-          console.log('[NewMartialArtComp] Done.');
+          if(!environment.production) console.log('[NewMartialArtComp] Done.');
         }
       }, (err) => {
         this.printError(err);

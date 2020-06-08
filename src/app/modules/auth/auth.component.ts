@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Alert } from '../types/Alert';
 import { logError, getGraphQLError } from '../helpers/error.helpers';
+import { environment } from 'src/environments/environment';
 
 const signUp = gql`mutation signup($firstName: String!, $lastName: String!, $email: String!, $password: String!){
   signup(userInput: {firstName: $firstName, lastName: $lastName, email: $email, password: $password})}`;
@@ -48,7 +49,7 @@ export class AuthComponent implements OnInit {
           
       } else {
         //this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
-        console.log('[Auth] Sending account creation request...');
+        if(!environment.production) console.log('[Auth] Sending account creation request...');
         this.apollo.mutate<any>({
           mutation: signUp,
           variables: {
@@ -60,7 +61,7 @@ export class AuthComponent implements OnInit {
         }).subscribe((response) => { 
           this.disableSignup = true;
           this.alerts.push({type:"success", message: 'Success! You should receive an confirmation email!'});
-          console.log('[Auth] Success! You should receive an confirmation email!');
+          if(!environment.production) console.log('[Auth] Success! You should receive an confirmation email!');
         }, (err) => {
           this.printError(err);
         });

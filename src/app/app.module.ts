@@ -53,7 +53,7 @@ import { SentryErrorHandler } from './modules/services/sentry-error-handler.serv
     GraphQLModule,
     FormsModule,
     ReactiveFormsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: false /* environment.production */ })
   ],
   providers: [
     ExamService,

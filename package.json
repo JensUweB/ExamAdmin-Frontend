@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "int:extract": "ng xi18n --output-path src/locale/",
-    "postinstall": "ngcc"
+    "postinstall": "ngcc",
+    "precache": "sw-precache --verbose --config=sw-precache-config.js"
   },
   "private": true,
   "dependencies": {

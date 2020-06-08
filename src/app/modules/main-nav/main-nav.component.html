@@ -38,6 +38,9 @@
             <span i18n>Exam Result</span>
           </button>
         </mat-menu>
+        <button mat-icon-button aria-label="Help Icon Button">
+          <mat-icon>help_outline</mat-icon>
+        </button>
         <a mat-raised-button color="warn" class="mat-btn-warn" *ngIf="isAuthenticated" (click)="onLogout()" style="margin-left: 15px;" i18n>Logout</a>
         <div class="sidebar-footer">
           <hr>
@@ -84,6 +87,9 @@
             <span i18n>Exam Result</span>
           </button>
         </mat-menu>
+        <button mat-icon-button (mouseenter)="helpHover = true" (mouseleave)="helpHover = false" (click)="openDialog()">
+          <mat-icon>{{helpHover ? 'help' : 'help_outline'}}</mat-icon>
+        </button>
         <a mat-raised-button color="warn" class="mat-btn-warn" *ngIf="isAuthenticated" (click)="onLogout()" i18n>Logout</a>
       </div>
     </mat-toolbar>

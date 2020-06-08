@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { ExamService } from './exam.service';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-exam',
@@ -23,11 +24,11 @@ export class ExamComponent implements OnInit{
   ) {}
 
   async ngOnInit() {
-    console.log('[ExamComponent] Initializing...');
+    if(!environment.production) console.log('[ExamComponent] Initializing...');
     await this.examService.fetchExams();
     this.examSubscription = this.examService.exams.subscribe(data => this.plannedExams = data);
     this.userSubscription = this.authService.user.subscribe(data => this.user = data);
-    console.log('[ExamComponent] Done.');
+    if(!environment.production) console.log('[ExamComponent] Done.');
   }
   showDetails(exam: any): void {
     this.examService.setExam(exam);

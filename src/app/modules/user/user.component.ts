@@ -16,6 +16,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ExamResult } from '../models/examResult.model';
 import { MatSort } from '@angular/material/sort';
+import { environment } from 'src/environments/environment';
 
 
 const clubMutation = gql`mutation addUserToClub($id: String!){addUserToClub(clubId: $id){_id}}`;
@@ -99,7 +100,6 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     if (this.dataSource.paginator) {
-      console.log('PAGINATION!!');
       this.dataSource.paginator.firstPage();
     }
   }
@@ -134,7 +134,7 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit{
     }).subscribe((response) => { 
       this.authService.loadUser();
       this.alerts.push({type:"success", message: 'Success! You added a new martial art to your profile!'});
-      console.log('[UserComp] Success!');
+      if(!environment.production)console.log('[UserComp] Success!');
     }, (err) => {
       this.printError(err);
     });

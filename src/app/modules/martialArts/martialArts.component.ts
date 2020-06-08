@@ -7,6 +7,7 @@ import { MartialArt } from '../models/martialArt.model';
 import { Subscription } from 'rxjs';
 import { User } from '../models/user.model';
 import { AuthService } from '../auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -43,7 +44,7 @@ export class MartialArtsComponent implements OnInit, OnDestroy {
         // Check for each martial art if user is allowed to change it
         this.martialArts.forEach(ma => ma.canEdit = ma.examiners.some(item => item._id == this.user._id));
       }
-      console.log('[MAComponent] Data fetched!');
+      if(!environment.production) console.log('[MAComponent] Data fetched!');
     });
   }
 

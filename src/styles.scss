@@ -29,10 +29,10 @@
         background-color: mat-color($accent);
     }
     .mat-btn-warn:hover {
-        background-color: mat-color($warn, A700);
+        background-color: mat-color($warn, A700) !important;
     }
     .mat-icon-warn:hover {
-        color: mat-color($warn, A700);
+        color: mat-color($warn, A700) !important;
     }
 }
 
