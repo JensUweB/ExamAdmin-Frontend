@@ -11,6 +11,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "int:extract": "ng xi18n --output-path src/locale/",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
     "postinstall": "ngcc",
     "precache": "sw-precache --verbose --config=sw-precache-config.js"
   },
@@ -46,7 +48,8 @@
     "graphql-tag": "^2.10.3",
     "rxjs": "^6.5.5",
     "tslib": "^1.11.2",
-    "zone.js": "~0.10.3"
+    "zone.js": "~0.10.3",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.901.7",
@@ -68,5 +71,6 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.7.5"
-  }
+  },
+  "snyk": true
 }
