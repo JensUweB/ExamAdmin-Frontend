@@ -28,7 +28,7 @@
     "@angular/router": "^9.1.2",
     "@angular/service-worker": "^9.1.2",
     "@ng-bootstrap/ng-bootstrap": "^5.3.0",
-    "apollo-angular": "^1.8.0",
+    "apollo-angular": "^1.9.1",
     "apollo-angular-link-http": "^1.10.0",
     "apollo-cache-inmemory": "^1.6.5",
     "apollo-client": "^2.6.8",
