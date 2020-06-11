@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { User } from '../../models/user.model';
 import { MartialArt } from '../../models/martialArt.model';
@@ -12,6 +12,7 @@ import { ExamService } from '../exam.service';
 import { Exam } from '../../models/exam.model';
 import { MartialArtsService } from '../../martialArts/martialArts.service';
 import { logError, getGraphQLError } from '../../helpers/error.helpers';
+import { environment } from 'src/environments/environment';
 
 const newExamQuery = gql`mutation createExam
 ($title: String!, $description: String!, $price: String!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!, 
@@ -45,6 +46,8 @@ export class NewExamComponent implements OnInit, OnDestroy{
   examForm: FormGroup;
   isSubmitted: boolean = false;
   alerts: Alert[] = [];
+  @ViewChild('examDatePicker') examDatePicker: any;
+  @ViewChild('regEndDatePicker') regEndDatePicker: any;
 
   constructor(
     private apollo: Apollo, 
@@ -65,12 +68,12 @@ export class NewExamComponent implements OnInit, OnDestroy{
       title: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', [Validators.required, Validators.minLength(5)]],
       examPlace: ['', [Validators.required, Validators.minLength(5)]],
-      minRank: [null, [Validators.required]],
-      examDate: [null, [Validators.required]],
-      examTime: [null, [Validators.required]],
-      regEndDate: [null, [Validators.required]],
-      regEndTime: [null, [Validators.required]],
-      price: ['0,00 €', [Validators.required]],
+      minRank: [null, Validators.required],
+      examDate: [null, Validators.required],
+      examTime: [null, Validators.required],
+      regEndDate: [null, Validators.required],
+      regEndTime: [null, Validators.required],
+      price: ['0,00 €', Validators.required],
       isPublic: true,
     });
 
@@ -86,7 +89,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
     });
 
     if (this.martialArts.length > 0) this.isExaminer = true;
-    console.log('[NewExamComp] ', this.martialArts);
+    if(!environment.production) console.log('[NewExamComp] ', this.martialArts);
   }
 
   printError(err) {
@@ -116,7 +119,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
     return this.examForm.get('minRank');
   }
   get examDate () {
-    return this.examForm.get('examDate');
+     return this.examForm.get('examDate');
   }
   get examTime () {
     return this.examForm.get('examTime');
@@ -140,13 +143,12 @@ export class NewExamComponent implements OnInit, OnDestroy{
   //($title: String!, $description: String!, $examDate: Date!, $regEndDate: Date!, $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
   async onSubmit() {
     if(this.examForm.valid) {
-      console.log('[NewExamComp] Your form is valid!');
+      if(!environment.production) console.log('[NewExamComp] Your form is valid!');
 
       // Build correct date objects
       var examDate = new Date(this.regEndDate.value.year, this.examDate.value.month, this.examDate.value.day, this.examTime.value.hour,this.examTime.value.minute,this.examTime.value.second, 0);
       var regEndDate = new Date(this.regEndDate.value.year, this.regEndDate.value.month, this.regEndDate.value.day, this.regEndTime.value.hour,this.regEndTime.value.minute,this.regEndTime.value.second, 0);
 
-      console.log(this.regEndDate.value.year, this.examDate.value.month, this.examDate.value.day, this.examTime.value.hour,this.examTime.value.minute,this.examTime.value.second, 0);
       let minrank = this.minRank.value;
       if(minrank == 'none') { minrank = undefined; }
       // Send mutation to api
@@ -168,13 +170,15 @@ export class NewExamComponent implements OnInit, OnDestroy{
       }).subscribe(response => {
         this.examService.fetchExams();
         this.alerts.push({type:"success", message: 'Success! A new exam was created.'});
-        if(response.data) console.log('[NewExamComp] New exam successfull created!');
+        if(response.data){ 
+          if(!environment.production) console.log('[NewExamComp] New exam successfull created!');
+        }
       }, (err) => {
         this.printError(err);
       });
       this.isSubmitted = true;
     } else {
-      console.log('[NewExamComp] Your form is NOT valid!');
+      this.printError('Your form is not valid!');
     }
   }
   close(alert: Alert) {

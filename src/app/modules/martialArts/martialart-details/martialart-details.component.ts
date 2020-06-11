@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { MartialArt } from '../../models/martialArt.model';
 import { MartialArtsService } from '../martialArts.service';
 import { User } from '../../models/user.model';
@@ -10,6 +10,10 @@ import { Alert } from '../../types/Alert';
 import { logError, getGraphQLError } from '../../helpers/error.helpers';
 import { AuthService } from '../../auth/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { environment } from 'src/environments/environment';
 
 const query = gql`mutation addExaminer($maId: String!, $email: String!)
 {addExaminer(maId: $maId, email: $email){_id}}`;
@@ -29,6 +33,8 @@ export class MartialartDetailsComponent implements OnInit {
   editMode: Boolean;
   examinerForm: FormGroup;
   isExaminer = false;
+  displayedColumns = ['name', 'rank'];
+  displayedRankColumns = ['number', 'rank'];
 
   constructor(
     private maService: MartialArtsService,
@@ -36,40 +42,44 @@ export class MartialartDetailsComponent implements OnInit {
     private apollo: Apollo,
     private fb: FormBuilder,
     private modalService: NgbModal,
+    private router: Router,
   ) {
     this.ma = maService.martialArt;
     this.editMode = maService.editMode;
     this.userSubscription = authService.user.subscribe(data => {
       this.user = data;
-
+      // Check if current user is an examiner
       if(this.user) {
         this.isExaminer = this.ma.examiners.some(item => item._id == this.user._id);
       }
     });
-
-    // Check if current user is an examiner
-    
 
     this.examinerForm = this.fb.group({
       email: ['', Validators.required],
     });
    }
 
-   onSubmit() {
+   async onSubmit() {
      if(this.examinerForm.valid) {
+      if(!environment.production) ('[MADetailsComp] Adding new examiner... ');
       this.apollo.mutate<any>({
         mutation: query,
         variables: {
           maId: this.ma._id,
           email: this.email.value,
         },
-      }).subscribe(response => {
+      }).subscribe(async response => {
         if (response.data) {
-          this.maService.fetch();
-          this.maService.setCurrent(this.ma, false);
-          this.ma = this.maService.martialArt;
+          // Fetch updates and pull the updated martial art to this component
+          if(!environment.production) console.log('[MADetailsComp] Fetching updates... ');
+          this.maService.fetch()
+          .then(() => {
+            this.maService.setCurrent(this.ma, false);
+            this.ma = this.maService.martialArt;
+            this.router.navigateByUrl('martialArt-details');
+            if(!environment.production) console.log('[MADetailsComp] Done. ');
+          });
           this.alerts.push({type:"success", message: 'New examiner was added!'});
-          console.log('[MADetailsComp] Done. ');
         }
       }, (err) => {
         this.printError(err);
@@ -88,7 +98,7 @@ export class MartialartDetailsComponent implements OnInit {
         if (response.data) {
           this.ma.examiners = this.ma.examiners.filter(user => user._id != userId);
           this.alerts.push({type:"success", message: 'Examiner was removed!'});
-          console.log('[NewMartialArtComp] Done.');
+          if(!environment.production) console.log('[NewMartialArtComp] Done.');
         }
       }, (err) => {
         this.printError(err);
@@ -96,6 +106,7 @@ export class MartialartDetailsComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   printError(err) {

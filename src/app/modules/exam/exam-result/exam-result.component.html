@@ -57,7 +57,6 @@
                 <div class="row">
                     <div class="col-sm">
                         <b i18n>Protocol upload - Please choose a file.</b>
-                        <div *ngIf="file">{{file}}</div>
                     </div>
                     <div class="col-sm">
                         <input class="form-control" type="file" (change)="fileChanged($event)">
@@ -66,7 +65,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm">
-                        <button class="btn btn-success" (click)="onSubmit()" i18n="Button">Send</button>
+                        <button mat-raised-button color="primary" class="mat-btn" (click)="onSubmit()" i18n="Button"><mat-icon>send</mat-icon> Send</button>
                     </div>
                 </div>
                 <div class="row" *ngIf="alerts">

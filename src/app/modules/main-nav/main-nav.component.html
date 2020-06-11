@@ -1,0 +1,115 @@
+<mat-sidenav-container class="sidenav-container mat-typography">
+  <mat-sidenav 
+    #drawer 
+    class="sidenav"
+    [ngClass]="{hidden: !(isHandset$ | async)}"
+    fixedInViewport="false"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+      <mat-toolbar color="primary">Menu</mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/">Start</a>
+        <a mat-list-item routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>My Profile</a>
+        <a mat-list-item routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated" i18n>Login / Register</a>
+        <a mat-list-item routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Exams</a>
+        <a mat-list-item routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Martial Arts</a>
+        <mat-form-field>
+          <mat-label i18n>Select Theme</mat-label>
+          <mat-select>
+            <mat-option value="light" (click)="onThemeChange('theme-light')" i18n>Light Theme</mat-option>
+            <mat-option value="dark" (click)="onThemeChange('theme-dark')" i18n>Dark Theme</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button class="hover-shadow" mat-menu-item [matMenuTriggerFor]="dropMenuSide">
+          <mat-icon>settings</mat-icon>
+        </button>
+        <mat-menu #dropMenuSide="matMenu">
+          <button mat-menu-item (click)="addMA()">
+            <mat-icon>add</mat-icon>
+            <span i18n>Martial Art</span>
+          </button>
+          <button mat-menu-item (click)="addExam()">
+            <mat-icon>add</mat-icon>
+            <span i18n>Exam</span>
+          </button>
+          <button mat-menu-item (click)="addExamResult()">
+            <mat-icon>add</mat-icon>
+            <span i18n>Exam Result</span>
+          </button>
+        </mat-menu>
+        <button mat-icon-button aria-label="Help Icon Button">
+          <mat-icon>help_outline</mat-icon>
+        </button>
+        <a mat-raised-button color="warn" class="mat-btn-warn" *ngIf="isAuthenticated" (click)="onLogout()" style="margin-left: 15px;" i18n>Logout</a>
+        <div class="sidebar-footer">
+          <hr>
+          <h3>Version: {{version}}</h3>
+          <h3>&copy; 2020 - Root-ITSolutions</h3>
+        </div>
+      </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>examAdmin</span>
+      <span class="spacer"></span>
+      <div *ngIf="!(isHandset$ | async)">
+        <a routerLink="/" color="accent">Start</a>
+        <a routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>My Profile</a>
+        <a routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated" i18n>Login / Register</a>
+        <a routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Exams</a>
+        <a routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Martial Arts</a>
+        <mat-form-field>
+          <mat-label>Select Theme</mat-label>
+          <mat-select>
+            <mat-option value="light" (click)="onThemeChange('theme-light')">Light Theme</mat-option>
+            <mat-option value="dark" (click)="onThemeChange('theme-dark')">Dark Theme</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button class="hover-shadow" mat-icon-button [matMenuTriggerFor]="dropMenu" *ngIf="isAuthenticated">
+          <mat-icon>settings</mat-icon>
+        </button>
+        <mat-menu #dropMenu="matMenu">
+          <button mat-menu-item (click)="addMA()">
+            <mat-icon>add</mat-icon>
+            <span i18n>Martial Art</span>
+          </button>
+          <button mat-menu-item (click)="addExam()">
+            <mat-icon>add</mat-icon>
+            <span i18n>Exam</span>
+          </button>
+          <button mat-menu-item (click)="addExamResult()">
+            <mat-icon>add</mat-icon>
+            <span i18n>Exam Result</span>
+          </button>
+        </mat-menu>
+        <button mat-icon-button (mouseenter)="helpHover = true" (mouseleave)="helpHover = false" (click)="openDialog()">
+          <mat-icon>{{helpHover ? 'help' : 'help_outline'}}</mat-icon>
+        </button>
+        <a mat-raised-button color="warn" class="mat-btn-warn" *ngIf="isAuthenticated" (click)="onLogout()" i18n>Logout</a>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  <footer class="footer">
+    <mat-toolbar color="primary">
+      <div class="row" style="width: 100%">
+        <div class="col-sm">
+          Version: {{version}}
+        </div>
+        <div class="col-sm">
+          &copy; 2020 - Jens Uwe Becker - Root-ITSolutions
+        </div>
+        <div class="col-sm">
+        </div>
+      </div>
+    </mat-toolbar>
+  </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

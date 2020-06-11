@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Alert } from '../../types/Alert';
 import { logError, getGraphQLError } from '../../helpers/error.helpers';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const query = gql`{getOpenExams{_id, title, examDate, martialArt{_id, name, styleName, ranks{name}}, 
 participants{_id, firstName, lastName}}}`;
@@ -38,7 +39,7 @@ export class ExamResultComponent implements OnInit, OnDestroy {
     private apollo: Apollo,
     private fb: FormBuilder
   ) {
-    console.log('[ExamResult] Fetching data...');
+    if(!environment.production) console.log('[ExamResult] Fetching data...');
     this.user = authService.user;
     this.apollo.watchQuery<any>({
       query: query,
@@ -46,8 +47,7 @@ export class ExamResultComponent implements OnInit, OnDestroy {
     }).valueChanges.subscribe((response) => {
       if (response.data) {
         this.exams = response.data.getOpenExams;
-        console.log(this.exams);
-        console.log('[ExamResult] Data: ', response.data);
+        if(!environment.production) console.log('[ExamResult] Done.');
       }
     }, (err) => { 
       if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});

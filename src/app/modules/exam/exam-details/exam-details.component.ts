@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { getGraphQLError, logError } from '../../helpers/error.helpers';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const query = gql`mutation registerToExam($examId: String!){registerToExam(examId: $examId)}`;
 const unregister = gql`mutation unregisterFromExam($examId: String!){unregisterFromExam(examId: $examId)}`;
@@ -32,7 +33,7 @@ $examDate: DateTime, $regEndDate: DateTime, $userId: String, $maId: String!)
 @Component({
   selector: 'app-exam-details',
   templateUrl: './exam-details.component.html',
-  styleUrls: ['./exam-details.component.css']
+  styleUrls: ['./exam-details.component.scss']
 })
 export class ExamDetailsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
@@ -46,6 +47,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
   examForm: FormGroup;
   clubs;
   alerts: Alert[] = [];
+  displayedColumns = ['name', 'rank'];
 
   constructor(
     private examService: ExamService, 
@@ -131,7 +133,6 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
       }
     }).subscribe(response => {
       if(response.data){ 
-        console.log('Response: ',response.data);
         this.hasCheckedIn = false;
         this.exam.participants = this.exam.participants.filter(user => user._id != this.user._id);
         this.alerts.push({type: 'success', message: 'Success! You are now removed from the participants list.'});
@@ -168,7 +169,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
       }).subscribe((response) => { 
         this.examService.fetchExams();
         this.alerts.push({type:"success", message: 'Update Successful!'});
-        console.log('[ExamDetails] Update Successful!');
+        if(!environment.production) console.log('[ExamDetails] Update Successful!');
       }, (err) => {
         this.printError(err);
       });
@@ -183,7 +184,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
       }
     }).subscribe((response) => { 
       this.alerts.push({type:"success", message: 'Delete Successful!'});
-      console.log('[ExamDetails] Update Successful!');
+      if(!environment.production) console.log('[ExamDetails] Update Successful!');
       this.router.navigate(['/exams']);
     }, (err) => {
       this.printError(err);

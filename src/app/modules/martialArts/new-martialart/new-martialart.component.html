@@ -1,52 +1,53 @@
 <div class="row">
     <div class="col">
         <h1 *ngIf="!ma" i18n="Headline">Create a new martial art</h1>
+        <p i18n>* Required fields</p>
         <hr />
         <form [formGroup]="form">
-            <div class="row">
-                <div class="col-2" i18n>
-                    <p>Martial Art Name:</p>
-                </div>
-                <div class="col-10">
-                    <input class="form-control" type="text" formControlName="name" placeholder="Karate">
-                    <div *ngIf="!maName.valid && maName.touched" class="alert alert-danger" role="alert" i18n>
-                        Please choose a name for this martial art!
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2" i18n>
-                    Style Name:
-                </div>
-                <div class="col-10">
-                    <input class="form-control" type="text" formControlName="styleName" placeholder="Shotokan">
-                    <div *ngIf="!styleName.valid && styleName.touched" class="alert alert-danger" role="alert" i18n>
-                        Please choose a style name for this martial art!
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2" i18n>
-                    Description:
-                </div>
-                <div class="col-10">
-                    <textarea class="form-control" type="text" rows="6" formControlName="description"
-                     i18n-placeholder placeholder="Tell us something about this martial art!"></textarea>
-                    <div *ngIf="!description.valid && description.touched" class="alert alert-danger" role="alert" i18n>
-                        Please choose a description for this martial art!
-                    </div>
-                </div>
-            </div>
+            <!-- Martial Art Name -->
+            <mat-form-field class="full-width">
+                <mat-label i18n>Martial Art Name</mat-label>
+                <input matInput type="text" [formControl]="maName" minlength="5" i18n-placeholder placeholder="Karate" required>
+                <mat-icon matPrefix>title</mat-icon>
+                <mat-hint i18n>The name of your martial art</mat-hint>
+                <mat-error *ngIf="maName.invalid" i18n>You must enter a valid name</mat-error>
+            </mat-form-field>
+            <br/><br/>
+            <!-- Martial Art Style Name -->
+            <mat-form-field class="full-width">
+                <mat-label i18n>Style Name</mat-label>
+                <input matInput type="text" [formControl]="styleName" minlength="5" i18n-placeholder placeholder="Shotokan" required>
+                <mat-icon matPrefix>title</mat-icon>
+                <mat-hint i18n>The style name of your martial art</mat-hint>
+                <mat-error *ngIf="styleName.invalid" i18n>You must enter a valid style name</mat-error>
+            </mat-form-field>
+            <br/><br/>
+            <!-- Martial Art Description -->
+            <mat-form-field class="full-width">
+                <mat-label i18n>Description</mat-label>
+                <textarea matInput type="text" [formControl]="description" minlength="5" maxlength="1000" 
+                    rows="5" i18n-placeholder placeholder="Tell us something about this martial art!" required>
+                </textarea>
+                <mat-icon matPrefix>description</mat-icon>
+                <mat-hint align="start" i18n>Describe this martial art!</mat-hint>
+                <mat-hint align="end" i18n>{{description.value.length}} / 1000</mat-hint>
+                <mat-error *ngIf="styleName.invalid" i18n>You must enter a valid description</mat-error>
+            </mat-form-field>
             <hr />
             <div class="row">
                 <div class="col-8">
                     <h2 i18n>How many ranks do you want to add?</h2>
                 </div>
-                <div class="col-2">
-                    <input class="form-control" type="number" formControlName="rankCount">
-                </div>
-                <div class="col-2">
-                    <button class="btn btn-success pull-right" (click)="setupRanks()" i18n="Button">Add Ranks</button>
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-sm">
+                            <input class="form-control" type="number" formControlName="rankCount">
+                        </div>
+                        <div class="col-sm">
+                            <button mat-raised-button color="primary" class="mat-btn pull-right" (click)="setupRanks()" i18n="Button"><mat-icon>add</mat-icon> Add Ranks</button>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div class="row">
@@ -76,9 +77,7 @@
                                 <input class="form-control" type="number" formControlName="number" step="0" [value]="rank.number" hidden>
                             </div>
                             <div class="col-2">
-                                <button class="btn btn-danger  btn-circle btn-sm" (click)="removeRank(i)">
-                                    <h6>X</h6>
-                                </button>
+                                <button mat-icon-button color="warn" class="mat-icon-warn" (click)="removeRank(i)"><mat-icon>delete</mat-icon></button>
                             </div>
                         </div>
                     </div>
@@ -86,11 +85,11 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <button *ngIf="!ma" class="btn btn-success pull-right" (click)="onSubmit()" i18n="Button">Create!</button>
+                    <button *ngIf="!ma" mat-raised-button color="primary" class="mat-btn pull-right" (click)="onSubmit()" i18n="Button"><mat-icon>send</mat-icon> Create</button>
                     <div *ngIf="ma">
-                        <button class="btn btn-success" (click)="onUpdate()" i18n="Button">Update!</button>
-                        <button class="btn btn-warning pull-right" (click)="onCancel()" i18n="Button">Cancel</button>
-                        <button class="btn btn-danger pull-right" (click)="openPopup(deletePopup)" i18n="Button">Delete</button>
+                        <button mat-raised-button color="primary" class="mat-btn" (click)="onUpdate()" i18n="Button"><mat-icon>update</mat-icon> Update</button>
+                        <button mat-raised-button color="warn" class="mat-btn-warn pull-right" (click)="onCancel()" i18n="Button"><mat-icon>cancel</mat-icon> Cancel</button>
+                        <button mat-raised-button color="warn" class="mat-btn-warn pull-right" (click)="openPopup(deletePopup)" i18n="Button"><mat-icon>delete</mat-icon> Delete</button>
                     </div>
                 </div>
             </div>
@@ -119,5 +118,5 @@
       <button type="button" class="btn btn-danger" (click)="onDelete(); c('Save click')" i18n="Button">Confirm Delete</button>
       <button type="button" class="btn btn-success" (click)=" c('Save click')" i18n="Button">Cancel</button>
     </div>
-  </ng-template>
-<br /><br />
+</ng-template>
+<br/><br/>

@@ -38,9 +38,7 @@ export class ExamService implements OnInit, OnDestroy {
   private querySubscription: Subscription;
   private examinerClubs = [];
 
-  constructor(private apollo: Apollo) {
-    this.fetchExams();
-  }
+  constructor(private apollo: Apollo) {}
 
   printError(err) {
     logError('[UserComponent]',err);

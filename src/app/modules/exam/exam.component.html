@@ -1,29 +1,25 @@
-<div class="row">
-  <div class="col-sm">
-    <h1 i18n="Headline">Exams</h1>
-  </div>
-  <div class="col-sm">
-    <!--button class="btn btn-primary" (click)="showPlanned = !showPlanned">{{showPlanned ? 'Show my previously created exams' : 'Show upcomming exams'}}</button-->
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    <div id="accordion" *ngFor="let result of plannedExams">
-      <div class="card shadow">
-        <div class="card-header bg-dark" id="headingOne">
-          <div class="row">
-            <div class="col-sm">
-              <button class="btn btn-link" (click)="result.isHidden = !result.isHidden">
-                <b class="card-title">{{result.title}}</b>
-              </button>
-            </div>
-            <div class="col-sm align-middle">
-              <b>{{result.examDate}}</b>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="!result.isHidden">
-          <div class="card-body">
+<div class="container" *ngIf="plannedExams">
+  <div class="mat-typography">
+    <div class="row">
+      <div class="col-sm">
+        <h1 i18n="Headline">Exams</h1>
+      </div>
+      <div class="col-sm">
+        <!--button class="btn btn-primary" (click)="showPlanned = !showPlanned">{{showPlanned ? 'Show my previously created exams' : 'Show upcomming exams'}}</button-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let result of plannedExams">
+            <mat-expansion-panel-header>
+              <mat-panel-title style="min-width: 50%;">
+                {{result.title}}
+              </mat-panel-title>
+              <mat-panel-description i18n>
+                {{result.examDate}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
             <div class="row">
               <div class="col-sm">
                 <b i18n>Martial Art:</b>
@@ -74,15 +70,19 @@
                 {{result.price}}
               </div>
             </div>
-            <div class="row">
-                <button class="btn btn-success" (click)="showDetails(result)" i18n="Butotn">Details</button>
-                <div *ngIf="result.examiner._id == user._id">
-                  <button class="btn btn-warning" (click)="showEdit(result)" i18n="Button">Edit</button>
-                </div>
-            </div>
-          </div>
-        </div>
+            <mat-action-row>
+              <button mat-raised-button color="primary" class="mat-btn" (click)="showDetails(result)" i18n="Butotn"><mat-icon>details</mat-icon> Details</button>
+              <button *ngIf="result.examiner._id == user._id" mat-raised-button color="primary" class="mat-btn" (click)="showEdit(result)" i18n="Button"><mat-icon>edit</mat-icon> Edit</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
     </div>
   </div>
+</div>
+<div class="row" *ngIf="!plannedExams">
+    <div class="col"></div>
+    <div class="col">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
 </div>

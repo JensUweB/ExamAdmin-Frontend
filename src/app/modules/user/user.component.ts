@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { AuthService } from '../auth/auth.service';
@@ -11,10 +11,13 @@ import { MartialArtsService } from '../martialArts/martialArts.service';
 import { Alert } from '../types/Alert';
 import { Subscription } from 'rxjs';
 import { UserService } from './user.service';
-import { normalizeDate } from '../helpers/date.helper';
 import { getGraphQLError, logError } from '../helpers/error.helpers';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { ExamResult } from '../models/examResult.model';
+import { MatSort } from '@angular/material/sort';
+import { environment } from 'src/environments/environment';
 
-const queryExamResults = gql`query getAllExamResults{getAllExamResults{_id, user, exam, date, passed, reportUri , martialArt{name, styleName},rank}}`;
 
 const clubMutation = gql`mutation addUserToClub($id: String!){addUserToClub(clubId: $id){_id}}`;
 const maMutation = gql`mutation addMartialArtRankToUser($id: String!, $rankId: String!)
@@ -25,9 +28,10 @@ const maMutation = gql`mutation addMartialArtRankToUser($id: String!, $rankId: S
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, OnDestroy{
+export class UserComponent implements OnInit, OnDestroy, AfterViewInit{
   private authSubscription: Subscription;
   private maSubscription: Subscription;
+  private erSubscription: Subscription;
   user;
   examResults = [];
   url;
@@ -38,6 +42,10 @@ export class UserComponent implements OnInit, OnDestroy{
   userForm: FormGroup;
   maError;
   alerts: Alert[] = [];
+  dataSource: MatTableDataSource<ExamResult[]>;
+  displayedColumns = ['name', 'rank', 'result', 'date', 'file'];
+  @ViewChild('examResultPagination', {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
     private apollo: Apollo,
@@ -49,7 +57,8 @@ export class UserComponent implements OnInit, OnDestroy{
     private http: HttpClient,
     private modalService: NgbModal,
     config: NgbModalConfig,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
   ) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
@@ -63,7 +72,11 @@ export class UserComponent implements OnInit, OnDestroy{
     this.clubForm = this.fb.group({
       clubId: ''
     });*/
-    this.ngOnInit();
+    
+    this.authSubscription = this.authService.user.subscribe(data => this.user = data);
+    this.maSubscription = this.maService.martialArts.subscribe(data => this.martialArts = data);
+    this.erSubscription = this.userService.examResults.subscribe(data => this.examResults = data);
+    
     this.userForm = this.fb.group({
       firstName: [this.user.firstName, Validators.required],
       lastName: [this.user.lastName, Validators.required],
@@ -74,6 +87,21 @@ export class UserComponent implements OnInit, OnDestroy{
       clubs: null,
       martialArts: null
     });
+
+  }
+  
+  ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    // Material Table Stuff
+    this.dataSource = new MatTableDataSource(this.examResults);
+    this.cdr.detectChanges();
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   openPopup(content) {
@@ -106,30 +134,10 @@ export class UserComponent implements OnInit, OnDestroy{
     }).subscribe((response) => { 
       this.authService.loadUser();
       this.alerts.push({type:"success", message: 'Success! You added a new martial art to your profile!'});
-      console.log('[UserComp] Success!');
+      if(!environment.production)console.log('[UserComp] Success!');
     }, (err) => {
       this.printError(err);
     });
-  }
-
-  async ngOnInit() {
-    console.log('[UserComp] Querying Data...');
-
-    this.apollo.watchQuery<any>({
-      query: queryExamResults,
-      fetchPolicy: 'no-cache'
-    }).valueChanges.subscribe((response) => {
-      this.examResults = response.data.getAllExamResults;
-      this.examResults.forEach(ele => {
-        ele.date = normalizeDate(ele.date);
-      });
-    }, (err) => {
-      this.printError(err);
-    });
-
-    this.authSubscription = await this.authService.user.subscribe(data => this.user = data);
-    this.maSubscription = await this.maService.martialArts.subscribe(data => this.martialArts = data);
-    console.log('[UserComp] Done!');
   }
 
   printError(err) {
@@ -226,6 +234,7 @@ export class UserComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     this.authSubscription.unsubscribe();
     this.maSubscription.unsubscribe();
+    this.erSubscription.unsubscribe();
   }
 
 }

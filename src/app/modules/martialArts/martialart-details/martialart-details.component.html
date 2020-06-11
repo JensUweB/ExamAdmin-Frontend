@@ -1,101 +1,141 @@
-<div *ngIf="!editMode">
-    <div class="row">
-        <div class="col">
-            <h1 i18n>Martial Art Details</h1>
+<div class="container" *ngIf="ma">
+    <div *ngIf="!editMode">
+        <br/>
+        <div class="row">
+            <div class="col">
+                <h1 i18n>Martial Art Details</h1>
+            </div>
+            <div class="col">
+                <button *ngIf="ma.canEdit" mat-mini-fab color="primary" class="mat-btn pull-right" (click)="showEdit()" matTooltip="Edit this martial art">
+                  <mat-icon>edit</mat-icon>
+                </button>
+            </div>
         </div>
-        <div class="col">
-            <button *ngIf="isExaminer" class="btn btn-warning pull-right" (click)="showEdit()" i18n="Button">Edit</button>
+        <div class="row">
+            <div class="col-sm">
+                <h2>{{ma.styleName}} {{ma.name}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <p>{{ma.description}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2 i18n>Examiners:</h2>
+            </div>
+            <div class="col">
+                <button *ngIf="ma.canEdit" class="mat-btn pull-right" mat-mini-fab color="primary" (click)="openPopup(examinerPopup)" matTooltip="Add an examiner">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="ma.examiners" class="full-width">
+                        <!-- Name Column -->
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Name</th>
+                            <td mat-cell *matCellDef="let element"> {{element.firstName}} {{element.lastName}} </td>
+                        </ng-container>
+
+                        <!-- Rank Column -->
+                        <ng-container matColumnDef="rank">
+                            <th mat-header-cell *matHeaderCellDef>Rank</th>
+                            <td mat-cell *matCellDef="let element"> {{element.martialArts.name}} 
+                                <button *ngIf="isExaminer" mat-mini-fab color="warn" class="mat-btn-warn pull-right" (click)="onRemove(element._id)" matToolTip="Delete this examiner">
+                                  <mat-icon>delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let element; columns: displayedColumns;"></tr>
+                    </table>
+                    <!-- <mat-paginator #paginator
+                        [length]="ma.examiners?.length"
+                        [pageIndex]="0"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[10, 25, 50, 100]">
+                    </mat-paginator> -->
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row" *ngIf="alerts">
+            <div class="col">
+                <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+                    <p><strong>{{alert.message}}</strong></p>
+                </ngb-alert>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm">
+                <h2 i18n>Ranks:</h2>
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="ma.ranks" class="full-width">
+                        <!-- Number Column -->
+                        <ng-container matColumnDef="number">
+                            <th mat-header-cell *matHeaderCellDef>Number</th>
+                            <td mat-cell *matCellDef="let element"> {{ma.ranks.length - element.number}} </td>
+                        </ng-container>
+
+                        <!-- Rank Column -->
+                        <ng-container matColumnDef="rank">
+                            <th mat-header-cell *matHeaderCellDef>Rank</th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedRankColumns"></tr>
+                        <tr mat-row *matRowDef="let element; columns: displayedRankColumns;"></tr>
+                    </table>
+                    <!-- <mat-paginator 
+                        [pageSizeOptions]="[10, 25, 50, 100]">
+                    </mat-paginator> -->
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm">
-            <h2>{{ma.styleName}} {{ma.name}}</h2>
+    <div *ngIf="editMode">
+        <div class="row">
+            <div class="col">
+                <h1 i18n="Headline">Martial Art Edit Mode</h1>
+                <app-new-martialart [ma]="ma" (cancelEdit)="cancelEdit()"></app-new-martialart>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm">
-            <p>{{ma.description}}</p>
+    <!-- Add Examiner Popup -->
+    <ng-template #examinerPopup let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h2 class="modal-title" id="modal-basic-title" i18n="Popup Headline">Add Examiner</h2>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm">
-            <h3 i18n>Examiners:</h3>
+        <div class="modal-body">
+            <p i18n="Add Examiner description text">Please enter the email adress of an <b>existing</b> account to add as examiner:</p>
+            <form [formGroup]="examinerForm">
+                <mat-form-field class="full-width">
+                    <mat-label i18n>User E-Mail Adress</mat-label>
+                    <input matInput type="email" [formControl]="email" i18n-placeholder placeholder="example@localhost.net" required>
+                    <mat-icon matSuffix>email</mat-icon>
+                    <mat-hint i18n>An E-Mail adress from an existing user account</mat-hint>
+                    <mat-error *ngIf="email.invalid" i18n>You must enter a valid email adress</mat-error>
+                </mat-form-field>
+            </form>
         </div>
-        <div class="col-sm">
-            <button *ngIf="isExaminer" class="btn btn-success pull-right" (click)="openPopup(examinerPopup)" i18n="Button">Add</button>
+        <div class="modal-footer">
+            <button mat-raised-button color="primary" class="mat-btn" (click)="onSubmit(); c('Save click')" i18n="Button">Confirm</button>
+            <button mat-raised-button color="primary" class="mat-btn" (click)=" c('Save click')" i18n="Button">Cancel</button>
         </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th i18n>Name</th>
-                        <th i18n>Rank</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let examiner of ma.examiners">
-                        <td>{{examiner.firstName}} {{examiner.lastName}}</td>
-                        <td>{{examiner.martialArts.name}}</td>
-                        <td><button *ngIf="isExaminer" class="btn btn-sm btn-danger pull-right" (click)="onRemove(examiner._id)" i18n="Button">Remove</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row" *ngIf="alerts">
-        <div class="col">
-            <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
-                <p><strong>{{alert.message}}</strong></p>
-            </ngb-alert>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm">
-            <h3>Ranks:</h3>
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th i18n>Number</th>
-                        <th i18n>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let rank of ma.ranks; let i = index">
-                        <td>{{i}}</td>
-                        <td>{{rank.name}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    </ng-template>
+</div>
+<div class="row" *ngIf="!ma">
+    <div class="col"></div>
+    <div class="col">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </div>
 </div>
-<div *ngIf="editMode">
-    <div class="row">
-        <div class="col">
-            <h1 i18n="Headline">Martial Art Edit Mode</h1>
-            <app-new-martialart [ma]="ma" (cancelEdit)="cancelEdit()"></app-new-martialart>
-        </div>
-    </div>
-</div>
-<!-- Add Examiner Popup -->
-<ng-template #examinerPopup let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title" i18n="Popup Headline">Add Examiner</h4>
-        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p i18n="Add Examiner description text">Please enter the email adress of an <b>existing</b> account to add as examiner:</p>
-        <form [formGroup]="examinerForm">
-            <input class="form-control" type="email" formControlName="email" i18n-placeholder placeholder="example@localhost.net">
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-success" (click)="onSubmit(); c('Save click')" i18n="Button">Confirm</button>
-        <button type="button" class="btn btn-warning" (click)=" c('Save click')" i18n="Button">Cancel</button>
-    </div>
-</ng-template>

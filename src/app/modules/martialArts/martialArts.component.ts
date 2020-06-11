@@ -5,6 +5,9 @@ import gql from 'graphql-tag';
 import { MartialArtsService } from './martialArts.service';
 import { MartialArt } from '../models/martialArt.model';
 import { Subscription } from 'rxjs';
+import { User } from '../models/user.model';
+import { AuthService } from '../auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -14,25 +17,38 @@ import { Subscription } from 'rxjs';
 })
 export class MartialArtsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
+  private userSubscription: Subscription;
+  user: User;
   martialArts: MartialArt[];
   isLoaded = false;
+  canEdit = false;
 
   constructor(
     public maService: MartialArtsService,
+    private authService: AuthService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {
   }
 
   async ngOnInit() {
+    this.userSubscription = this.authService.user.subscribe(data => {
+      this.user = data;
+    });
     await this.maService.fetch();
     this.subscription = this.maService.martialArts
     .subscribe(data => { 
       this.martialArts = data;
-      if(data.length) this.isLoaded = true;
-      console.log('[MAComponent] Data fetched!');
+      if(data.length) {
+        this.isLoaded = true;
+        // Check for each martial art if user is allowed to change it
+        this.martialArts.forEach(ma => ma.canEdit = ma.examiners.some(item => item._id == this.user._id));
+      }
+      if(!environment.production) console.log('[MAComponent] Data fetched!');
     });
   }
+
+
 
   showDetails(ma) {
     this.maService.setCurrent(ma, false);
@@ -46,5 +62,10 @@ export class MartialArtsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.userSubscription.unsubscribe();
+  }
+
+  isValidString(str: String) {
+    return str.length > 250;
   }
 }

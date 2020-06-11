@@ -1,11 +1,80 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// custom mixin
+@mixin app-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    a.link {
+        color: mat-color($primary);
+    }
+    a.link:hover {
+        color: mat-color($accent);
+    }
+
+    .mat-btn-primary:hover {
+        background-color: transparent;
+        color: mat-color($primary);
+    }
+    .mat-btn:hover {
+        background-color: mat-color($accent);
+    }
+    .mat-btn-warn:hover {
+        background-color: mat-color($warn, A700) !important;
+    }
+    .mat-icon-warn:hover {
+        color: mat-color($warn, A700) !important;
+    }
+}
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$theme-light-primary: mat-palette($mat-indigo);
+$theme-light-accent: mat-palette($mat-cyan);
+$theme-light-warn: mat-palette($mat-red);
+$theme-light: mat-light-theme($theme-light-primary, $theme-light-accent, $theme-light-warn);
+
+@include angular-material-theme($theme-light);
+@include app-theme($theme-light);
+
+// Dark Theme
+$theme-dark-primary: mat-palette($mat-grey, 700);
+$theme-dark-accent: mat-palette($mat-grey, 600);
+$theme-dark-warn: mat-palette($mat-red);
+$theme-dark: mat-dark-theme($theme-dark-primary, $theme-dark-accent, $theme-dark-warn);
+//@include angular-material-theme($dark-theme);
+
+.theme-light {
+    @include angular-material-theme($theme-light);
+    @include app-theme($theme-light);
+}
+.theme-dark {
+    @include angular-material-theme($theme-dark);
+    @include app-theme($theme-dark);
+}
+
 /* You can add global styles to this file, and also import other style files */
-body {
-    min-height: 100%;
+html, body {
+    height: 100%;
+}
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
 .container {
    margin-bottom: 50px;
    min-height: 80%;
-   background-color: whitesmoke;
+   //box-shadow: 2px 2px 6px #ccc;
 }
 footer {
     max-height: 50px;
@@ -16,34 +85,20 @@ footer {
 button {
     margin: 5px;
 }
-// Custom round  buttons. Code Snippets from: https://www.geeksforgeeks.org/how-to-get-circular-buttons-in-bootstrap-4/
-.btn-circle.btn-sm { 
-    width: 30px; 
-    height: 30px; 
-    padding: 6px 0px; 
-    border-radius: 15px; 
-    font-size: 8px; 
-    text-align: center; 
-} 
-.btn-circle.btn-md { 
-    width: 50px; 
-    height: 50px; 
-    padding: 7px 10px; 
-    border-radius: 25px; 
-    font-size: 10px; 
-    text-align: center; 
-} 
-.btn-circle.btn-xl { 
-    width: 70px; 
-    height: 70px; 
-    padding: 10px 16px; 
-    border-radius: 35px; 
-    font-size: 12px; 
-    text-align: center; 
-} 
+.sidebar-footer {
+    position: fixed;
+    bottom: 0;
+    margin-left: 10px;
+}
 // Usefull tool-classes
 .pull-right {
     float: right;
+}
+.full-width {
+    width: 100%;
+}
+.hover-shadow:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 @media screen and (max-width: 600px) {
@@ -54,6 +109,11 @@ button {
         width: 100%;
     }
     button {
-        margin: 0;
+        margin: 1px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .footer {
+        display: none;
     }
 }
