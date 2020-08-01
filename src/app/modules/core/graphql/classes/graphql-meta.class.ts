@@ -101,10 +101,7 @@ export class GraphQLMeta {
       if (type) {
         functions = (type as any).getFields();
       }
-    }
-
-    // If function type is not set
-    else {
+    } else {
       ['Subscription', 'Mutation', 'Query'].forEach((item) => {
         const type: any = this.schema.getType(item);
         if (type) {

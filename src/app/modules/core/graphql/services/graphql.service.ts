@@ -77,19 +77,13 @@ export class GraphQLService {
             // Direct data
             if (!config.model) {
               subscriber.next(data);
-            }
-
-            // Map data as array
-            else if (Array.isArray(data)) {
+            } else if (Array.isArray(data)) {
               subscriber.next(
                 data.map((item) => {
                   return config.model.map(item);
                 })
               );
-            }
-
-            // Map data
-            else {
+            } else {
               subscriber.next(config.model.map(data));
             }
 
@@ -144,10 +138,7 @@ export class GraphQLService {
           return '[' + result.join(', ') + ']';
         }
       }
-    }
-
-    // Process object
-    else if (typeof args === 'object') {
+    } else if (typeof args === 'object') {
       for (const [key, value] of Object.entries(args)) {
         if (allowed && !allowed[key]) {
           continue;
@@ -161,10 +152,7 @@ export class GraphQLService {
           return '{' + result.join(', ') + '}';
         }
       }
-    }
-
-    // Others
-    else {
+    } else {
       return JSON.stringify(args);
     }
   }
@@ -198,10 +186,7 @@ export class GraphQLService {
         return '';
       }
       return '\n' + ' '.repeat(spaces).repeat(tab) + fields;
-    }
-
-    // Process array
-    else if (Array.isArray(fields)) {
+    } else if (Array.isArray(fields)) {
       for (const item of fields) {
         if (typeof item === 'object') {
           result = result + this.prepareFields(item, { tab: tab + 1, allowed });
@@ -217,10 +202,7 @@ export class GraphQLService {
             allowed: typeof allowed?.[item] === 'object' ? allowed?.[item] : item,
           });
       }
-    }
-
-    // Process object
-    else if (typeof fields === 'object') {
+    } else if (typeof fields === 'object') {
       for (const [key, val] of Object.entries(fields)) {
         if (allowed && !allowed[key]) {
           continue;

@@ -30,26 +30,26 @@ export class AuthComponent implements OnInit {
       firstName: [''],
       lastName: [''],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required ], //Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')
+      password: ['', Validators.required ], // Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')
     });
   }
 
   printError(err) {
-    logError('[UserComponent]',err);
+    logError('[UserComponent]', err);
     this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   async confirm() {
     if (this.userForm.valid) {
       if (this.login) {
-          
+
         try {
           await this.authService.login(this.email.value, this.password.value);
         } catch (err) { this.printError(err); }
-          
+
       } else {
-        //this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
-        if(!environment.production) console.log('[Auth] Sending account creation request...');
+        // this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
+        if (!environment.production) { console.log('[Auth] Sending account creation request...'); }
         this.apollo.mutate<any>({
           mutation: signUp,
           variables: {
@@ -58,10 +58,10 @@ export class AuthComponent implements OnInit {
             email: this.email.value,
             password: this.password.value
           }
-        }).subscribe((response) => { 
+        }).subscribe((response) => {
           this.disableSignup = true;
-          this.alerts.push({type:"success", message: 'Success! You should receive an confirmation email!'});
-          if(!environment.production) console.log('[Auth] Success! You should receive an confirmation email!');
+          this.alerts.push({type: 'success', message: 'Success! You should receive an confirmation email!'});
+          if (!environment.production) { console.log('[Auth] Success! You should receive an confirmation email!'); }
         }, (err) => {
           this.printError(err);
         });
@@ -76,7 +76,7 @@ export class AuthComponent implements OnInit {
     return this.userForm.get('email');
   }
   get firstName() {
-    return this.userForm.get('firstName')
+    return this.userForm.get('firstName');
   }
   get lastName() {
     return this.userForm.get('lastName');

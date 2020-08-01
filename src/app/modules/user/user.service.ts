@@ -1,11 +1,12 @@
-import { AuthService } from "../auth/auth.service";
-import { Apollo } from "apollo-angular";
-import gql from "graphql-tag";
-import { Alert } from "../types/Alert";
+import { AuthService } from '../auth/auth.service';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
+import { Alert } from '../types/Alert';
 import { Injectable } from '@angular/core';
 import { getGraphQLError, logError } from '../helpers/error.helpers';
 import { BehaviorSubject } from 'rxjs';
 import { normalizeDate } from '../helpers/date.helper';
+import { GraphQLService } from '../core/graphql/services/graphql.service';
 
 const updateUserMutation = gql`
   mutation updateUser(
@@ -28,7 +29,9 @@ const updateUserMutation = gql`
     }
   }
 `;
-const queryExamResults = gql`query getAllExamResults{getAllExamResults{_id, user, exam, date, passed, reportUri , martialArt{name, styleName},rank}}`;
+const queryExamResults = gql`query getAllExamResults{getAllExamResults{
+  _id, user, exam, date, passed, reportUri , martialArt{name, styleName},rank}
+}`;
 
 @Injectable()
 export class UserService {
@@ -37,29 +40,29 @@ export class UserService {
   private _examResults: BehaviorSubject<any[]> = new BehaviorSubject([]);
   public readonly examResults = this._examResults.asObservable();
 
-  constructor(private apollo: Apollo, private authService: AuthService) {
+  constructor(private apollo: Apollo, private authService: AuthService, graphQlService: GraphQLService) {
     this.fetch();
   }
 
   printError(err) {
-    logError('[UserComponent]',err);
+    logError('[UserComponent]', err);
     this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   /**
-   * 
+   *
    * @param input: { newPassword, firstname, lastName, email, clubs[ ], martialArts[ ] }
    */
-  async updateUser(input: Object) {
+  async updateUser(input: object) {
     await this.apollo
       .watchQuery<any>({
         query: updateUserMutation,
-        fetchPolicy: "no-cache",
+        fetchPolicy: 'no-cache',
         variables: input
       })
       .valueChanges.subscribe(
         (response) => {
-          console.log("[UserService] Done!");
+          console.log('[UserService] Done!');
         },
         (err) => {
           this.printError(err);

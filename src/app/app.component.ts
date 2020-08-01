@@ -10,11 +10,11 @@ import { MartialArtsService } from './modules/martialArts/martialArts.service';
 })
 export class AppComponent {
   title = 'Exam-Admin Frontend';
-  
+
   constructor(
     private authService: AuthService
   ) {
-    if(localStorage.getItem('token')) {
+    if (localStorage.getItem('token')) {
       this.authService.loadUser();
     }
   }

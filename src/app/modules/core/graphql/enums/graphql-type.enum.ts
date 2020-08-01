@@ -6,4 +6,4 @@ export enum GraphQLType {
     MUTATION = 'mutation',
     SUBSCRIPTION = 'subscription',
   }
-  
+

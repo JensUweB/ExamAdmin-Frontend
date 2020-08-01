@@ -30,7 +30,7 @@ export class MartialartDetailsComponent implements OnInit {
   private userSubscription: Subscription;
   user: User;
   alerts: Alert[] = [];
-  editMode: Boolean;
+  editMode: boolean;
   examinerForm: FormGroup;
   isExaminer = false;
   displayedColumns = ['name', 'rank'];
@@ -49,8 +49,8 @@ export class MartialartDetailsComponent implements OnInit {
     this.userSubscription = authService.user.subscribe(data => {
       this.user = data;
       // Check if current user is an examiner
-      if(this.user) {
-        this.isExaminer = this.ma.examiners.some(item => item._id == this.user._id);
+      if (this.user) {
+        this.isExaminer = this.ma.examiners.some(item => item._id === this.user._id);
       }
     });
 
@@ -60,8 +60,8 @@ export class MartialartDetailsComponent implements OnInit {
    }
 
    async onSubmit() {
-     if(this.examinerForm.valid) {
-      if(!environment.production) ('[MADetailsComp] Adding new examiner... ');
+     if (this.examinerForm.valid) {
+      if (!environment.production) { console.log('[MADetailsComp] Adding new examiner... '); }
       this.apollo.mutate<any>({
         mutation: query,
         variables: {
@@ -71,15 +71,15 @@ export class MartialartDetailsComponent implements OnInit {
       }).subscribe(async response => {
         if (response.data) {
           // Fetch updates and pull the updated martial art to this component
-          if(!environment.production) console.log('[MADetailsComp] Fetching updates... ');
+          if (!environment.production) { console.log('[MADetailsComp] Fetching updates... '); }
           this.maService.fetch()
           .then(() => {
             this.maService.setCurrent(this.ma, false);
             this.ma = this.maService.martialArt;
             this.router.navigateByUrl('martialArt-details');
-            if(!environment.production) console.log('[MADetailsComp] Done. ');
+            if (!environment.production) { console.log('[MADetailsComp] Done. '); }
           });
-          this.alerts.push({type:"success", message: 'New examiner was added!'});
+          this.alerts.push({type: 'success', message: 'New examiner was added!'});
         }
       }, (err) => {
         this.printError(err);
@@ -92,13 +92,13 @@ export class MartialartDetailsComponent implements OnInit {
         mutation: queryRemove,
         variables: {
           maId: this.ma._id,
-          userId: userId,
+          userId,
         },
       }).subscribe(response => {
         if (response.data) {
-          this.ma.examiners = this.ma.examiners.filter(user => user._id != userId);
-          this.alerts.push({type:"success", message: 'Examiner was removed!'});
-          if(!environment.production) console.log('[NewMartialArtComp] Done.');
+          this.ma.examiners = this.ma.examiners.filter(user => user._id !== userId);
+          this.alerts.push({type: 'success', message: 'Examiner was removed!'});
+          if (!environment.production) { console.log('[NewMartialArtComp] Done.'); }
         }
       }, (err) => {
         this.printError(err);
@@ -110,7 +110,7 @@ export class MartialartDetailsComponent implements OnInit {
   }
 
   printError(err) {
-    logError('[UserComponent]',err);
+    logError('[UserComponent]', err);
     this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 

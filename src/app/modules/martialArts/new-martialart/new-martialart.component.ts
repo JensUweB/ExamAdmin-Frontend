@@ -59,7 +59,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if(!this.ma) {
+    if (!this.ma) {
       this.form = this.fb.group({
         name: ['', Validators.required],
         styleName: ['', Validators.required],
@@ -77,7 +77,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
       });
       this.setupRanks();
     }
-    this.subscription = this.authService.user.subscribe(data => {this.user = data});
+    this.subscription = this.authService.user.subscribe(data => {this.user = data; });
   }
 
   ngOnDestroy() {
@@ -85,27 +85,27 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
   }
 
   printError(err) {
-    logError('[UserComponent]',err);
+    logError('[UserComponent]', err);
     this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
-  addRankGroup(_id: string, name: string, number: number) {
+  addRankGroup(_id: string, name: string, num: number) {
     return this.fb.group({
-      _id: _id,
+      _id,
       name: [name, [Validators.required]],
-      number: [number, [Validators.required]]
+      number: [num, [Validators.required]]
     });
   }
 
   setupRanks() {
-    if(!this.ma) {
+    if (!this.ma) {
       const count: number = this.rankCount.value;
-      for(let i=0; i<count; i++) {
-          this.ranks.push(this.addRankGroup(undefined, (count-i)+". rank",count-i));
+      for (let i = 0; i < count; i++) {
+          this.ranks.push(this.addRankGroup(undefined, (count - i) + '. rank', count - i));
       }
     } else {
-      for(let i=0; i<this.ma.ranks.length; i++) {
-        this.ranks.push(this.addRankGroup(this.ma.ranks[i]._id, this.ma.ranks[i].name, +this.ma.ranks[i].number));
+      for (const rank of this.ma.ranks) {
+        this.ranks.push(this.addRankGroup(rank._id, rank.name, + rank.number));
       }
     }
     this.showRanks = true;
@@ -116,12 +116,12 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
   }
 
   async onSubmit() {
-    if(!environment.production) console.log('[NewMartialArtComp] Creating new martial art...');
+    if (!environment.production) { console.log('[NewMartialArtComp] Creating new martial art...'); }
 
     // Cycle through the ranks array and set the correct rank numbers
-    let ranks = this.ranks.value;
-    for(let i=0; i<ranks.length; i++) {
-      ranks[i].number = ranks.length-i;
+    const ranks = this.ranks.value;
+    for (let i = 0; i < ranks.length; i++) {
+      ranks[i].number = ranks.length - i;
     }
 
     // Sending the form to the backend
@@ -131,13 +131,13 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
         name: this.maName.value,
         styleName: this.styleName.value,
         description: this.description.value,
-        ranks: ranks,
+        ranks,
         userId: this.user._id
       },
     }).subscribe(response => {
       if (response.data) {
-        this.alerts.push({type:"success", message: 'New martial art was created!'});
-        if(!environment.production) console.log('[NewMartialArtComp] Done.');
+        this.alerts.push({type: 'success', message: 'New martial art was created!'});
+        if (!environment.production) { console.log('[NewMartialArtComp] Done.'); }
       }
     }, (err) => {
       this.printError(err);
@@ -146,12 +146,12 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
   }
 
   async onUpdate() {
-    if(!environment.production) console.log('[NewMartialArtComp] Updating martial art...');
+    if (!environment.production) { console.log('[NewMartialArtComp] Updating martial art...'); }
 
     // Cycle through the ranks array and set the correct rank numbers
-    let ranks = this.ranks.value;
-    for(let i=0; i<ranks.length; i++) {
-      ranks[i].number = ranks.length-i;
+    const ranks = this.ranks.value;
+    for (let i = 0; i < ranks.length; i++) {
+      ranks[i].number = ranks.length - i;
     }
 
     // Update the current details object
@@ -168,13 +168,13 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
         name: this.maName.value,
         styleName: this.styleName.value,
         description: this.description.value,
-        ranks: ranks
+        ranks
       },
     }).subscribe(response => {
       if (response.data) {
         this.maService.fetch();
         this.authService.loadUser();
-        this.alerts.push({type:"success", message: 'Martial art was updated!'});
+        this.alerts.push({type: 'success', message: 'Martial art was updated!'});
         console.log('[NewMartialArtComp] Done.');
       }
     }, (err) => {
@@ -183,11 +183,11 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
   }
 
   onCancel() {
-    this.cancelEdit.emit("true");
+    this.cancelEdit.emit('true');
   }
 
   onDelete() {
-    //this.maService.martialArts = this.martialArts.filter(ma => ma._id != this.ma._id);
+    // this.maService.martialArts = this.martialArts.filter(ma => ma._id != this.ma._id);
 
     this.router.navigateByUrl('/martialArts');
   }
@@ -201,15 +201,15 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
   }
 
   get ranks() {
-    return <FormArray>this.form.get('ranks');
+    return this.form.get('ranks') as FormArray;
   }
 
   get maName() {
-    return <FormArray>this.form.get('name');
+    return this.form.get('name') as FormArray;
   }
 
   get styleName() {
-    return <FormArray>this.form.get('styleName');
+    return this.form.get('styleName') as FormArray;
   }
 
   get description() {
