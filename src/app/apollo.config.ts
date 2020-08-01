@@ -16,7 +16,7 @@ import { environment } from '../environments/environment';
   ]
 })
 export class GraphQLModule {
-  
+
   constructor(apollo: Apollo, httpLink: HttpLink) {
     const uri = environment.backendurl;
     const http = httpLink.create({ uri });
@@ -27,7 +27,7 @@ export class GraphQLModule {
         operation.setContext({
           headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
         });
-        if(!environment.production) console.log('[Apollo] Found local token. Adding bearer token!');
+        if (!environment.production) { console.log('[Apollo] Found local token. Adding bearer token!'); }
       }
       return forward(operation);
     });

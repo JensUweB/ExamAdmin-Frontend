@@ -8,13 +8,17 @@ import { logError, getGraphQLError } from '../../helpers/error.helpers';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-const query = gql`{getOpenExams{_id, title, examDate, martialArt{_id, name, styleName, ranks{name}}, 
+const query = gql`{getOpenExams{_id, title, examDate, martialArt{_id, name, styleName, ranks{name}},
 participants{_id, firstName, lastName}}}`;
 
-const createExamResult = gql`mutation createExamResult($userId: String!, $examId: String!, $maId: String!, $maName: String!, $maStyle: String!
- $examinerId: String!, $exFirstName: String!, $exLastName: String!, $rank: String!, $date: String!, $passed: Boolean!)
-{createExamResult(input: {user: $userId, exam: $examId, martialArt: {_id: $maId, name: $maName, styleName: $maStyle}, 
-examiner: {_id: $examinerId, firstName: $exFirstName, lastName: $exLastName}, rank: $rank, date: $date, passed: $passed}){_id}}`;
+const createExamResult = gql`mutation createExamResult($userId: String!, $examId: String!,
+  $maId: String!, $maName: String!, $maStyle: String!
+ $examinerId: String!, $exFirstName: String!, $exLastName: String!,
+ $rank: String!, $date: String!, $passed: Boolean!)
+{createExamResult(input: {user: $userId, exam: $examId,
+  martialArt: {_id: $maId, name: $maName, styleName: $maStyle},
+examiner: {_id: $examinerId, firstName: $exFirstName, lastName: $exLastName},
+ rank: $rank, date: $date, passed: $passed}){_id}}`;
 
 const uploadFile = gql`mutation uploadExamProtocol($examResultId: String!, $file: Upload!)
 {uploadExamProtocol(examResultId: $examResultId, protocol: $file)}`;
@@ -30,7 +34,7 @@ export class ExamResultComponent implements OnInit, OnDestroy {
   erForm: FormGroup;
   file: Blob;
   errors = [];
-  erId: String;
+  erId: string;
   user;
   alerts: Alert[] = [];
 
@@ -39,20 +43,23 @@ export class ExamResultComponent implements OnInit, OnDestroy {
     private apollo: Apollo,
     private fb: FormBuilder
   ) {
-    if(!environment.production) console.log('[ExamResult] Fetching data...');
+    if (!environment.production) { console.log('[ExamResult] Fetching data...'); }
     this.user = authService.user;
     this.apollo.watchQuery<any>({
-      query: query,
+      query,
       fetchPolicy: 'no-cache'
     }).valueChanges.subscribe((response) => {
       if (response.data) {
         this.exams = response.data.getOpenExams;
-        if(!environment.production) console.log('[ExamResult] Done.');
+        if (!environment.production) { console.log('[ExamResult] Done.'); }
       }
-    }, (err) => { 
-      if(err.graphQLErrors[0]) this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-      else this.alerts.push({type: 'danger', message: err});
-      console.warn('[ExamResult]: GraphQL Error:', JSON.stringify(err)); 
+    }, (err) => {
+      if (err.graphQLErrors[0]) {
+        this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
+      } else {
+        this.alerts.push({type: 'danger', message: err});
+      }
+      console.warn('[ExamResult]: GraphQL Error:', JSON.stringify(err));
     });
 
     this.erForm = this.fb.group({
@@ -72,14 +79,14 @@ export class ExamResultComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.userSubscription) {this.userSubscription.unsubscribe();}
+    if (this.userSubscription) {this.userSubscription.unsubscribe(); }
   }
 
   printError(err) {
-    logError('[UserComponent]',err);
+    logError('[UserComponent]', err);
     this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
-  
+
   async onSubmit() {
     // create new exam result
     await this.apollo.mutate<any>({
@@ -99,13 +106,15 @@ export class ExamResultComponent implements OnInit, OnDestroy {
       }
     }).subscribe(response => {
       if (response.data) {
-        this.alerts.push({type:"success", message: 'Success! Exam Result created!'});
+        this.alerts.push({type: 'success', message: 'Success! Exam Result created!'});
         this.uploadFile(response.data.createExamResult._id);
       }
     }, (err) => {
       this.printError(err);
 
-      if (err.graphQLErrors[0].message.statusCode == 406) {this.erId = this.exams[this.examId.value]._id;}
+      if (err.graphQLErrors[0].message.statusCode === 406) {
+        this.erId = this.exams[this.examId.value]._id;
+      }
     });
   }
 
@@ -113,8 +122,8 @@ export class ExamResultComponent implements OnInit, OnDestroy {
     this.file = e.target.files[0];
   }
 
-  async uploadFile(erId: string): Promise<Boolean> {
-    if(!this.file) return false;
+  async uploadFile(erId: string): Promise<boolean> {
+    if (!this.file) { return false; }
 
     // Upload protocol file for the created exam result
     this.apollo.mutate<any>({
@@ -130,7 +139,7 @@ export class ExamResultComponent implements OnInit, OnDestroy {
       }
     }).subscribe(response => {
       if (response.data) {
-        this.alerts.push({type:"success", message: 'Exam Result Procotol Upload finished!'});
+        this.alerts.push({type: 'success', message: 'Exam Result Procotol Upload finished!'});
         return true;
       }
     }, (err) => {

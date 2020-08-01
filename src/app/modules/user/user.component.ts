@@ -28,7 +28,7 @@ const maMutation = gql`mutation addMartialArtRankToUser($id: String!, $rankId: S
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit, OnDestroy, AfterViewInit{
+export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
   private authSubscription: Subscription;
   private maSubscription: Subscription;
   private erSubscription: Subscription;
@@ -72,11 +72,11 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit{
     this.clubForm = this.fb.group({
       clubId: ''
     });*/
-    
+
     this.authSubscription = this.authService.user.subscribe(data => this.user = data);
     this.maSubscription = this.maService.martialArts.subscribe(data => this.martialArts = data);
     this.erSubscription = this.userService.examResults.subscribe(data => this.examResults = data);
-    
+
     this.userForm = this.fb.group({
       firstName: [this.user.firstName, Validators.required],
       lastName: [this.user.lastName, Validators.required],
@@ -89,7 +89,7 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit{
     });
 
   }
-  
+
   ngOnInit() {
   }
 
@@ -114,16 +114,16 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit{
       variables: {
         id: this.clubId.value
       }
-    }).subscribe((response) => { 
-      if(response.errors) console.log('[User] ',response.errors );
+    }).subscribe((response) => {
+      if (response.errors) { console.log('[User] ', response.errors ); }
     }, (err) => {
       this.printError(err);
     });
   }
 
   async onMaSubmit() {
-    if(!this.maForm.valid) { return false; }
-    let id = this.martialArts[this.maId.value]._id;
+    if (!this.maForm.valid) { return false; }
+    const id = this.martialArts[this.maId.value]._id;
 
     this.apollo.mutate<any>({
       mutation: maMutation,
@@ -131,17 +131,17 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit{
         id,
         rankId: this.rankId.value,
       }
-    }).subscribe((response) => { 
+    }).subscribe((response) => {
       this.authService.loadUser();
-      this.alerts.push({type:"success", message: 'Success! You added a new martial art to your profile!'});
-      if(!environment.production)console.log('[UserComp] Success!');
+      this.alerts.push({type: 'success', message: 'Success! You added a new martial art to your profile!'});
+      if (!environment.production) {console.log('[UserComp] Success!'); }
     }, (err) => {
       this.printError(err);
     });
   }
 
   printError(err) {
-    logError('[UserComponent]',err);
+    console.log('[UserComponent]', JSON.stringify(err));
     this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
@@ -151,7 +151,7 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   async onUserUpdate() {
-    if(this.userForm.valid && this.newPassword.value == this.newPassword2.value) {
+    if (this.userForm.valid && this.newPassword.value === this.newPassword2.value) {
       await this.userService.updateUser({
         firstName: this.firstName.value,
         lastName: this.lastName.value,
@@ -169,27 +169,27 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit{
 
   /**
    * A Method to download and display any file
-   * @param reportUri 
-   * @param filename 
+   * @param reportUri the uri of the file to download
+   * @param filename the name of the file
    */
-  downloadFile(reportUri: string, filename: string = null): void{
+  downloadFile(reportUri: string, filename: string = null): void {
     const token = this.authService.token;
-    const headers = new HttpHeaders().set('authorization','Bearer '+token);
-    this.http.get(reportUri,{headers, responseType: 'blob' as 'json'}).subscribe(
-        (response: any) =>{
-            let dataType = response.type;
-            let binaryData = [];
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + token);
+    this.http.get(reportUri, {headers, responseType: 'blob' as 'json'}).subscribe(
+        (response: any) => {
+            const dataType = response.type;
+            const binaryData = [];
             binaryData.push(response);
-            let downloadLink = document.createElement('a');
+            const downloadLink = document.createElement('a');
             downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
-            //downloadLink.target = '_blank';
-            if (filename){
+            // downloadLink.target = '_blank';
+            if (filename) {
                 downloadLink.setAttribute('download', filename);
             }
             document.body.appendChild(downloadLink);
             downloadLink.click();
         }
-  )}
+  ); }
 
   get clubId() {
     return this.clubForm.get('clubId');

@@ -15,7 +15,7 @@ import { logError, getGraphQLError } from '../../helpers/error.helpers';
 import { environment } from 'src/environments/environment';
 
 const newExamQuery = gql`mutation createExam
-($title: String!, $description: String!, $price: String!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!, 
+($title: String!, $description: String!, $price: String!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!,
 $isPublic: Boolean, $minRank: String $userId: String, $maId: String!)
 {createExam(input: {
   title: $title
@@ -35,26 +35,26 @@ $isPublic: Boolean, $minRank: String $userId: String, $maId: String!)
   templateUrl: './new-exam.component.html',
   styleUrls: ['./new-exam.component.css']
 })
-export class NewExamComponent implements OnInit, OnDestroy{
+export class NewExamComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
   private maSubscription: Subscription;
-  //formSubscription: Subscription;
+  // formSubscription: Subscription;
   user: User;
   isExaminer = false;
   martialArts: MartialArt[] = [];
   examForm: FormGroup;
-  isSubmitted: boolean = false;
+  isSubmitted = false;
   alerts: Alert[] = [];
   @ViewChild('examDatePicker') examDatePicker: any;
   @ViewChild('regEndDatePicker') regEndDatePicker: any;
 
   constructor(
-    private apollo: Apollo, 
-    private authService: AuthService, 
+    private apollo: Apollo,
+    private authService: AuthService,
     private maService: MartialArtsService,
     private examService: ExamService,
-    config: NgbTimepickerConfig, 
+    config: NgbTimepickerConfig,
     private fb: FormBuilder
   ) {
     config.seconds = false;
@@ -64,7 +64,7 @@ export class NewExamComponent implements OnInit, OnDestroy{
   async ngOnInit() {
     this.examForm = this.fb.group({
       martialArt: [null, [Validators.required]],
-      //club: undefined,
+      // club: undefined,
       title: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', [Validators.required, Validators.minLength(5)]],
       examPlace: ['', [Validators.required, Validators.minLength(5)]],
@@ -77,80 +77,85 @@ export class NewExamComponent implements OnInit, OnDestroy{
       isPublic: true,
     });
 
-    //this.formSubscription = this.examForm.valueChanges.subscribe();
+    // this.formSubscription = this.examForm.valueChanges.subscribe();
     this.maSubscription = this.maService.martialArts.subscribe(data => this.martialArts = data);
     this.subscription = this.authService.user
     .subscribe(data => {
       this.user = data;
       // Check, what martial arts the user is allowed to examine and creates an array with these martial arts
       this.martialArts = this.martialArts.filter(ma => {
-        return this.user.martialArts.some(item => item._id._id == ma._id);
+        return this.user.martialArts.some(item => item._id._id === ma._id);
       });
     });
 
-    if (this.martialArts.length > 0) this.isExaminer = true;
-    if(!environment.production) console.log('[NewExamComp] ', this.martialArts);
+    if (this.martialArts.length > 0) { this.isExaminer = true; }
+    if (!environment.production) { console.log('[NewExamComp] ', this.martialArts); }
   }
 
   printError(err) {
-    logError('[UserComponent]',err);
+    logError('[UserComponent]', err);
     this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   get martialArt() {
     return this.examForm.get('martialArt');
   }
-  get club () {
+  get club() {
     return this.examForm.get('club');
   }
-  get title () {
+  get title() {
     return this.examForm.get('title');
   }
-  get description () {
+  get description() {
     return this.examForm.get('description');
   }
-  get price () {
+  get price() {
     return this.examForm.get('price');
   }
-  get examPlace () {
+  get examPlace() {
     return this.examForm.get('examPlace');
   }
-  get minRank () {
+  get minRank() {
     return this.examForm.get('minRank');
   }
-  get examDate () {
+  get examDate() {
      return this.examForm.get('examDate');
   }
-  get examTime () {
+  get examTime() {
     return this.examForm.get('examTime');
   }
-  get regEndDate () {
+  get regEndDate() {
     return this.examForm.get('regEndDate');
   }
-  get regEndTime () {
+  get regEndTime() {
     return this.examForm.get('regEndTime');
   }
-  get isPublic () {
+  get isPublic() {
     return this.examForm.get('isPublic');
   }
 
   ngOnDestroy() {
-    //this.formSubscription.unsubscribe();
+    // this.formSubscription.unsubscribe();
     this.subscription.unsubscribe();
     this.maSubscription.unsubscribe();
   }
 
-  //($title: String!, $description: String!, $examDate: Date!, $regEndDate: Date!, $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
+  // ($title: String!, $description: String!, $examDate: Date!, $regEndDate: Date!,
+  // $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
   async onSubmit() {
-    if(this.examForm.valid) {
-      if(!environment.production) console.log('[NewExamComp] Your form is valid!');
+    if (this.examForm.valid) {
+      if (!environment.production) { console.log('[NewExamComp] Your form is valid!'); }
 
       // Build correct date objects
-      var examDate = new Date(this.regEndDate.value.year, this.examDate.value.month, this.examDate.value.day, this.examTime.value.hour,this.examTime.value.minute,this.examTime.value.second, 0);
-      var regEndDate = new Date(this.regEndDate.value.year, this.regEndDate.value.month, this.regEndDate.value.day, this.regEndTime.value.hour,this.regEndTime.value.minute,this.regEndTime.value.second, 0);
+      const examDate = new Date(this.regEndDate.value.year, this.examDate.value.month,
+        this.examDate.value.day, this.examTime.value.hour, this.examTime.value.minute,
+        this.examTime.value.second, 0);
+      const regEndDate = new Date(this.regEndDate.value.year, this.regEndDate.value.month,
+        this.regEndDate.value.day, this.regEndTime.value.hour, this.regEndTime.value.minute,
+        this.regEndTime.value.second, 0);
 
       let minrank = this.minRank.value;
-      if(minrank == 'none') { minrank = undefined; }
+      if (minrank === 'none') { minrank = undefined; }
       // Send mutation to api
       this.apollo.mutate<any>({
         mutation: newExamQuery,
@@ -159,19 +164,19 @@ export class NewExamComponent implements OnInit, OnDestroy{
           description: this.description.value,
           price: this.price.value,
           address: this.examPlace.value,
-          examDate: examDate,
-          regEndDate: regEndDate,
+          examDate,
+          regEndDate,
           minRank: minrank,
           isPublic: this.isPublic.value,
-          //clubId: this.club.value,
+          // clubId: this.club.value,
           userId: this.user._id,
           maId: this.martialArts[this.martialArt.value]._id
         }
       }).subscribe(response => {
         this.examService.fetchExams();
-        this.alerts.push({type:"success", message: 'Success! A new exam was created.'});
-        if(response.data){ 
-          if(!environment.production) console.log('[NewExamComp] New exam successfull created!');
+        this.alerts.push({type: 'success', message: 'Success! A new exam was created.'});
+        if (response.data) {
+          if (!environment.production) { console.log('[NewExamComp] New exam successfull created!'); }
         }
       }, (err) => {
         this.printError(err);

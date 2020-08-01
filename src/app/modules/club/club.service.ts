@@ -1,4 +1,4 @@
-import { OnInit, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Subscription } from 'rxjs';
 import gql from 'graphql-tag';
@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 const clubQuery = gql`{getAllClubs{_id, name}}`;
 
 @Injectable()
-export class ClubService implements OnInit {
+export class ClubService {
 
     private querySubscription: Subscription;
     clubs;
@@ -21,5 +21,4 @@ export class ClubService implements OnInit {
             }
         }, (err) => { console.warn('[ExamService]: GraphQL Error:', err.graphQLErrors[0].message); });
     }
-    ngOnInit() { }
 }

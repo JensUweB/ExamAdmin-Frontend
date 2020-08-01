@@ -26,7 +26,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 
 
-const MaterialComponents = [
+const materialComponents = [
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -50,17 +50,17 @@ const MaterialComponents = [
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
-    NgxMatDatetimePickerModule, 
-    NgxMatTimepickerModule, 
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
     NgxMatNativeDateModule
-]
+];
 
 @NgModule({
     imports: [
-        MaterialComponents
+        materialComponents
     ],
   exports: [
-    MaterialComponents
+    materialComponents
   ]
 })
 /**

@@ -2,7 +2,7 @@
   <mat-sidenav 
     #drawer 
     class="sidenav"
-    [ngClass]="{hidden: !(isHandset$ | async)}"
+    [ngClass]="{hidden: (isHandset$ | async) !== (false || null || undefined)}"
     fixedInViewport="false"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" 
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -57,7 +57,7 @@
       </button>
       <span>examAdmin</span>
       <span class="spacer"></span>
-      <div *ngIf="!(isHandset$ | async)">
+      <div *ngIf="(isHandset$ | async) !== (false || null || undefined)">
         <a routerLink="/" color="accent">Start</a>
         <a routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>My Profile</a>
         <a routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated" i18n>Login / Register</a>

@@ -37,14 +37,14 @@ export class MartialArtsComponent implements OnInit, OnDestroy {
     });
     await this.maService.fetch();
     this.subscription = this.maService.martialArts
-    .subscribe(data => { 
+    .subscribe(data => {
       this.martialArts = data;
-      if(data.length) {
+      if (data.length) {
         this.isLoaded = true;
         // Check for each martial art if user is allowed to change it
-        this.martialArts.forEach(ma => ma.canEdit = ma.examiners.some(item => item._id == this.user._id));
+        this.martialArts.forEach(ma => ma.canEdit = ma.examiners.some(item => item._id === this.user._id));
       }
-      if(!environment.production) console.log('[MAComponent] Data fetched!');
+      if (!environment.production) { console.log('[MAComponent] Data fetched!'); }
     });
   }
 
@@ -65,7 +65,7 @@ export class MartialArtsComponent implements OnInit, OnDestroy {
     this.userSubscription.unsubscribe();
   }
 
-  isValidString(str: String) {
+  isValidString(str: string) {
     return str.length > 250;
   }
 }
