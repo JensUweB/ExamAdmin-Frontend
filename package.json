@@ -34,7 +34,7 @@
     "@angular/service-worker": "^9.1.4",
     "@mat-datetimepicker/core": "^4.1.0",
     "@mat-datetimepicker/moment": "^4.1.0",
-    "@ng-bootstrap/ng-bootstrap": "^5.3.1",
+    "@ng-bootstrap/ng-bootstrap": "^6.2.0",
     "@sentry/browser": "^5.15.5",
     "apollo-angular": "^1.9.1",
     "apollo-angular-link-http": "^1.10.0",
