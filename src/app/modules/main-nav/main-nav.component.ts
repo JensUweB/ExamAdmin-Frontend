@@ -20,16 +20,16 @@ export interface DialogData {
   templateUrl: './main-nav.component.html',
   styleUrls: ['./main-nav.component.scss']
 })
-export class MainNavComponent implements OnInit, OnDestroy{
+export class MainNavComponent implements OnInit, OnDestroy {
   // get the app version string
   public version: string = version;
-  public theme: "theme-light";
+  public theme: 'theme-light';
   helpHover = false;
   settingsHover = false;
   user;
   userSub;
   @HostBinding('class') componentCssClass;
-  
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -39,15 +39,15 @@ export class MainNavComponent implements OnInit, OnDestroy{
     authSub: Subscription;
 
   constructor(
-    private breakpointObserver: BreakpointObserver, 
-    private authService: AuthService, 
+    private breakpointObserver: BreakpointObserver,
+    private authService: AuthService,
     private router: Router,
     private overlayContainer: OverlayContainer,
     public dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.authSub = this.authService._isAuthenticated.subscribe(ele => {
+    this.authSub = this.authService.isAuthenticatedBS.subscribe(ele => {
       this.isAuthenticated = !!ele;
     });
     this.userSub = this.authService.user.subscribe(data => this.user = data);
@@ -59,10 +59,10 @@ export class MainNavComponent implements OnInit, OnDestroy{
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(FeedbackDialog, {
+    const dialogRef = this.dialog.open(FeedbackDialogComponent, {
       width: '250px',
       data: {
-        username: this.user.firstName + ' ' + this.user.lastName, 
+        username: this.user.firstName + ' ' + this.user.lastName,
         email: this.user.email
       }
     });
@@ -99,13 +99,13 @@ export class MainNavComponent implements OnInit, OnDestroy{
 }
 
 @Component({
-  selector: 'feedback-dialog',
+  selector: 'app-feedback-dialog',
   templateUrl: 'feedback-dialog.html',
 })
-export class FeedbackDialog {
+export class FeedbackDialogComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<FeedbackDialog>,
+    public dialogRef: MatDialogRef<FeedbackDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onNoClick(): void {

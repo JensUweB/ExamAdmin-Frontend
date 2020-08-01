@@ -14,7 +14,7 @@ export class ExamResult {
         _id: string,
         firstName: string,
         lastName: string
-    }
+    };
     rank: string;
     date: Date;
     reportUri: string;

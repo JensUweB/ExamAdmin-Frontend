@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/browser';
-import { Injectable, ErrorHandler, OnDestroy, OnInit } from '@angular/core';
+import { Injectable, ErrorHandler } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
@@ -20,18 +20,20 @@ Sentry.init({
 @Injectable({
   providedIn: 'root',
 })
-export class SentryErrorHandler implements ErrorHandler, OnInit, OnDestroy {
+export class SentryErrorHandler implements ErrorHandler {
   protected disabled = !environment.production;
   protected disabledTime = 60 * 1000;
   private user;
   private userSub: Subscription;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    this.fetchUser();
+  }
 
-  ngOnInit() {
+  fetchUser() {
     this.userSub = this.authService.user.subscribe(data => {
       this.user = data;
-      if(this.user) {
+      if (this.user) {
         Sentry.configureScope(scope => {
           scope.setUser({
             id: data._id,
@@ -40,10 +42,7 @@ export class SentryErrorHandler implements ErrorHandler, OnInit, OnDestroy {
         });
       }
     });
-  }
-
-  ngOnDestroy() {
-    if(this.userSub) { this.userSub.unsubscribe(); }
+    if (this.userSub) { this.userSub.unsubscribe(); }
   }
 
   /**

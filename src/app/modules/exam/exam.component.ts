@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, OnDestroy, } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { ExamService } from './exam.service';
@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './exam.component.html',
   styleUrls: ['./exam.component.scss']
 })
-export class ExamComponent implements OnInit{
+export class ExamComponent implements OnInit, OnDestroy {
   private examSubscription: Subscription;
   private userSubscription: Subscription;
   plannedExams;
@@ -18,17 +18,17 @@ export class ExamComponent implements OnInit{
   showPlanned = true;
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private authService: AuthService,
     private examService: ExamService
   ) {}
 
   async ngOnInit() {
-    if(!environment.production) console.log('[ExamComponent] Initializing...');
+    if (!environment.production) { console.log('[ExamComponent] Initializing...'); }
     await this.examService.fetchExams();
     this.examSubscription = this.examService.exams.subscribe(data => this.plannedExams = data);
     this.userSubscription = this.authService.user.subscribe(data => this.user = data);
-    if(!environment.production) console.log('[ExamComponent] Done.');
+    if (!environment.production) { console.log('[ExamComponent] Done.'); }
   }
   showDetails(exam: any): void {
     this.examService.setExam(exam);

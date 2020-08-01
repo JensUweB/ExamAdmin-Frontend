@@ -1,8 +1,8 @@
-import { Injectable, OnInit, OnDestroy } from "@angular/core";
-import gql from "graphql-tag";
-import { Apollo } from "apollo-angular";
-import { Subscription, BehaviorSubject } from "rxjs";
-import { normalizeDate } from "../helpers/date.helper";
+import { Injectable } from '@angular/core';
+import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
+import { Subscription, BehaviorSubject } from 'rxjs';
+import { normalizeDate } from '../helpers/date.helper';
 import { logError } from '../helpers/error.helpers';
 
 const examsQuery = gql`
@@ -12,8 +12,8 @@ query {getPlannedExams {
     _id,firstName,lastName
     martialArts {
       _id {_id }, rankId
-    } 
-  } 
+    }
+  }
     martialArt {
     _id,name,styleName, ranks{_id, name, number}
   } examiner {
@@ -30,7 +30,7 @@ const clubsQuery = gql`
 `;
 
 @Injectable()
-export class ExamService implements OnInit, OnDestroy {
+export class ExamService {
   private currentExam;
   private _exams: BehaviorSubject<any[]> = new BehaviorSubject([]);
   public readonly exams = this._exams.asObservable();
@@ -41,8 +41,8 @@ export class ExamService implements OnInit, OnDestroy {
   constructor(private apollo: Apollo) {}
 
   printError(err) {
-    logError('[UserComponent]',err);
-    //this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+    logError('[UserComponent]', err);
+    // this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   fetchExams() {
@@ -50,27 +50,27 @@ export class ExamService implements OnInit, OnDestroy {
     this.querySubscription = this.apollo
       .watchQuery<any>({
         query: examsQuery,
-        fetchPolicy: "no-cache"
+        fetchPolicy: 'no-cache'
       })
       .valueChanges.subscribe(
         response => {
           if (response.data) {
-            let exams = response.data.getPlannedExams;
-            console.log("[ExamService] Got some data. Preparing data...");
+            const exams = response.data.getPlannedExams;
+            console.log('[ExamService] Got some data. Preparing data...');
             exams.forEach(exam => {
               exam.examDate = normalizeDate(exam.examDate);
               exam.regEndDate = normalizeDate(exam.regEndDate);
               exam.isHidden = true;
 
               if (exams) {
-                exams.forEach(exam => {
-                  if (exam.participants) {
-                    exam.participants.forEach(user => {
-                      if(Array.isArray(user.martialArts)) {
-                        user.martialArts = user.martialArts.filter(ma => ma._id._id == exam.martialArt._id);
-                        
-                        if(user.martialArts[0]) {
-                          user.martialArts = {...exam.martialArt.ranks.filter(rank => rank._id == user.martialArts[0].rankId)};
+                exams.forEach((item) => {
+                  if (item.participants) {
+                    item.participants.forEach(user => {
+                      if (Array.isArray(user.martialArts)) {
+                        user.martialArts = user.martialArts.filter(ma => ma._id._id === item.martialArt._id);
+
+                        if (user.martialArts[0]) {
+                          user.martialArts = {...item.martialArt.ranks.filter(rank => rank._id === user.martialArts[0].rankId)};
                         }
                       }
                     });
@@ -86,6 +86,7 @@ export class ExamService implements OnInit, OnDestroy {
           this.printError(err);
         }
       );
+    this.querySubscription.unsubscribe();
   }
 
   setExam(exam) {
@@ -123,14 +124,5 @@ export class ExamService implements OnInit, OnDestroy {
 
   getCurrentClubs() {
     return this.examinerClubs;
-  }
-
-    // ngOnInit does not work at all
-  ngOnInit() {
-    this.fetchExams();
-  }
-
-  ngOnDestroy() {
-    this.querySubscription.unsubscribe();
   }
 }
