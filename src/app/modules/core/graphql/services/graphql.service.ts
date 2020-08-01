@@ -1,234 +1,81 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { IGraphQLOptions } from '../interfaces/graphql-options.interface';
-import { GraphQLType } from '../enums/graphql-type.enum';
-import { Observable, throwError } from 'rxjs';
-import gql from 'graphql-tag';
+import { Observable } from 'rxjs';
+
+import { GraphQLBasicService } from './graphql-basic.service';
 import { GraphQLMetaService } from './graphql-meta.service';
+import { LoaderService } from './loader.service';
+import { IGraphQLOptions } from '../interfaces/graphql-options.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GraphQLService {
+export class GraphQLService extends GraphQLBasicService {
   /**
    * Include services
    */
-  constructor(protected apollo: Apollo, protected graphQLMetaService: GraphQLMetaService) {}
+  constructor(
+    protected apollo: Apollo,
+    protected graphqlMetaService: GraphQLMetaService,
+    protected loaderService: LoaderService
+  ) {
+    super(apollo, graphqlMetaService);
+  }
 
-  /**
-   * GraphQL request
-   */
   public graphQl(graphql: string, options: IGraphQLOptions = {}): Observable<any> {
-    // Check arguments
-    if (!graphql) {
-      throwError('Missing graphql argument');
-    }
+    this.handleLoader('start', options);
 
-    // Get config
-    const config = {
-      arguments: null,
-      fields: null,
-      log: true,
-      model: null,
-      type: GraphQLType.QUERY,
-      ...options,
-    };
-
-    // Convert class to Object for arguments
-    if (typeof config.arguments === 'function') {
-      config.arguments = new config.arguments();
-    }
-
-    // Convert class to Object for fields
-    if (typeof config.fields === 'function') {
-      config.fields = new config.fields();
-    }
-
-    // Send request
     return new Observable((subscriber) => {
-      // Get meta
-      this.graphQLMetaService.getMeta().subscribe((meta) => {
-        // Prepare fields
-        const allowedFields = meta.getFields(graphql, { type: config.type });
-        let fields = this.prepareFields(config.fields, { allowed: allowedFields });
-        if (fields && !fields.startsWith('{')) {
-          fields = '{' + fields + '\n}';
-        }
-
-        // Get allowed args
-        const allowedArgs = meta.getArgs(graphql, { type: config.type });
-        const args = this.prepareArguments(config.arguments, { allowed: allowedArgs }) || '';
-
-        // Log
-        if (config.log) {
-          console.log({ graphQL: graphql, args, fields, type: config.type });
-        }
-
-        // Prepare request
-        const documentNode = gql(config.type + '{\n' + graphql + args + fields + '\n}');
-        const request: any = {};
-        request[config.type] = documentNode;
-
-        const func = config.type === GraphQLType.MUTATION ? 'mutate' : config.type;
-        (this.apollo as any)[func](request).subscribe(
-          (result) => {
-            const data = result?.data?.[graphql] ? result.data[graphql] : result;
-
-            // Direct data
-            if (!config.model) {
-              subscriber.next(data);
-            } else if (Array.isArray(data)) {
-              subscriber.next(
-                data.map((item) => {
-                  return config.model.map(item);
-                })
-              );
-            } else {
-              subscriber.next(config.model.map(data));
-            }
-
-            // Done
-            subscriber.complete();
-          },
-          (error) => {
-            subscriber.error(error);
+      super.graphQl(graphql, options).subscribe(
+        (response) => {
+          if (response && response.errors) {
+            this.handleError(response.errors, options.excludedErrors);
+            subscriber.error(response);
+            this.handleLoader('stop', options);
             subscriber.complete();
           }
-        );
-      });
+
+          subscriber.next(response);
+          this.handleLoader('stop', options);
+          subscriber.complete();
+        },
+        (error) => {
+          this.handleError(error, options.excludedErrors);
+          subscriber.error(error);
+          this.handleLoader('stop', options);
+          subscriber.complete();
+        }
+      );
     });
   }
 
-  /**
-   * Prepare arguments for GraphQL request
-   */
-  protected prepareArguments(args: any, options: { level?: number; allowed?: any } = {}): string {
-    // Config
-    const { level, allowed } = {
-      level: 1,
-      allowed: null,
-      ...options,
-    };
-
-    // Check args
-    if (!args) {
-      return '';
-    }
-
-    // Process args
-    const result = [];
-
-    // Process array
-    if (Array.isArray(args)) {
-      const allowedKeys = allowed ? Object.keys(allowed) : null;
-      for (const item of args) {
-        let key = null;
-        if (allowed) {
-          if (allowed.length < 1) {
-            break;
-          }
-          key = allowedKeys.shift();
-        }
-        result.push(this.prepareArguments(item, { level: level + 1, allowed: key ? allowed[key] : null }));
+  handleLoader(state: 'start' | 'stop', options: IGraphQLOptions) {
+    if (options.loading) {
+      if (state === 'start') {
+        this.loaderService.start();
+      } else if (state === 'stop') {
+        this.loaderService.stop();
       }
-      if (result.length) {
-        if (level === 1) {
-          return '(' + result.join(', ') + ')';
-        } else {
-          return '[' + result.join(', ') + ']';
-        }
-      }
-    } else if (typeof args === 'object') {
-      for (const [key, value] of Object.entries(args)) {
-        if (allowed && !allowed[key]) {
-          continue;
-        }
-        result.push(key + ': ' + this.prepareArguments(value, { level: level + 1, allowed: allowed[key] }));
-      }
-      if (result.length) {
-        if (level === 1) {
-          return '(' + result.join(', ') + ')';
-        } else {
-          return '{' + result.join(', ') + '}';
-        }
-      }
-    } else {
-      return JSON.stringify(args);
     }
   }
 
-  /**
-   * Prepare fields for GraphQL request
-   */
-  protected prepareFields(fields: any, options: { tab?: number; spaces?: number; allowed?: any } = {}): string {
-    // Config
-    const { tab, spaces, allowed } = {
-      tab: 1,
-      spaces: 2,
-      allowed: null,
-      ...options,
-    };
-
-    // Check fields
-    if (!fields) {
-      return '';
-    }
-
-    // Init result
-    let result = '';
-
-    // Process string
-    if (typeof fields === 'string') {
-      if (
-        allowed &&
-        ((typeof allowed === 'string' && allowed !== fields) || (typeof allowed === 'object' && !allowed[fields]))
-      ) {
-        return '';
-      }
-      return '\n' + ' '.repeat(spaces).repeat(tab) + fields;
-    } else if (Array.isArray(fields)) {
-      for (const item of fields) {
-        if (typeof item === 'object') {
-          result = result + this.prepareFields(item, { tab: tab + 1, allowed });
-          continue;
-        }
-        if (allowed && !allowed?.[item]) {
-          continue;
-        }
-        result =
-          result +
-          this.prepareFields(item, {
-            tab: tab + 1,
-            allowed: typeof allowed?.[item] === 'object' ? allowed?.[item] : item,
-          });
-      }
-    } else if (typeof fields === 'object') {
-      for (const [key, val] of Object.entries(fields)) {
-        if (allowed && !allowed[key]) {
-          continue;
-        }
-        if (typeof val !== 'object' || !Object.keys(val).length) {
-          result = result + '\n' + ' '.repeat(spaces).repeat(tab) + key;
-        } else {
-          result =
-            result +
-            '\n' +
-            ' '.repeat(spaces).repeat(tab) +
-            key +
-            ' ' +
-            '{' +
-            this.prepareFields(val, {
-              tab: tab + 1,
-              allowed: typeof allowed?.[key] === 'object' ? allowed?.[key] : key,
-            }) +
-            '\n' +
-            ' '.repeat(spaces).repeat(tab) +
-            '}';
-        }
+  handleError(error: Error, excludedErrors = null) {
+    if (excludedErrors) {
+      if (Array.isArray(excludedErrors)) {
+        excludedErrors.forEach((excludedError) => {
+          if (error.message.includes(excludedError.toLowerCase())) {
+            return;
+          }
+        });
+      } else if (error.message.toLowerCase().includes(excludedErrors.toLowerCase())) {
+        return;
       }
     }
 
-    // Return result
-    return result;
+    this.displayError(error);
+  }
+
+  displayError(error) {
+    console.error(error);
   }
 }

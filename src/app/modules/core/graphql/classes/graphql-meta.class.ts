@@ -24,7 +24,7 @@ export class GraphQLMeta {
     const { cache, freeze, type } = {
       cache: true,
       freeze: true,
-      type: undefined,
+      type: GraphQLType.QUERY,
       ...options,
     };
 

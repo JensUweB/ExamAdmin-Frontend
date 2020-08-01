@@ -11,7 +11,7 @@ import { MartialArtsService } from '../martialArts/martialArts.service';
 import { GraphQLService } from '../core/graphql/services/graphql.service';
 import { GraphQLType } from '../core/graphql/enums/graphql-type.enum';
 
-const login = `
+const login = gql`
 query login($email: String!, $password: String!)
 {login(email: $email, password: $password)
 {token, tokenExpireDate, user{_id, firstName, lastName, email, martialArts{_id{_id, name, styleName, examiners{_id}, ranks{name, number}},
@@ -45,28 +45,7 @@ export class AuthService {
 
     async login(email: string, password: string): Promise<any> {
         console.log('[AuthService] Logging in...');
-        this.graphQlService.graphQl(login, {fields: {email, password}, type: GraphQLType.QUERY})
-        .subscribe((response) => {
-            if (response.data) {
-                console.log('[AuthService] Success! Got some data!');
-                this.userBS.next(response.data.login.user);
-                this.token = response.data.login.token;
-                this.tokenExpireDate = response.data.login.tokenExpireDate;
-                this.isAuthenticatedBS.next(true);
-                localStorage.setItem('token', this.token);
-                localStorage.setItem('tokenExpDate', this.tokenExpireDate.toString());
-                this.maService.fetch();
-                this.examService.fetchExams();
-                this.router.navigate(['/']);
-            }
-            if (response.errors) {
-                this.alerts.push({type: 'danger', message: response.errors[0].message});
-                throw response.errors;
-            }
-        }, (err) => {
-            this.printError(err);
-        });
-        /* await this.apollo.watchQuery<any>({
+        await this.apollo.watchQuery<any>({
             query: login,
             variables: {
                 email: email,
@@ -76,10 +55,10 @@ export class AuthService {
           }).valueChanges.subscribe((response) => {
             if(response.data){
                 console.log('[AuthService] Success! Got some data!');
-                this._user.next(response.data.login.user);
+                this.userBS.next(response.data.login.user);
                 this.token = response.data.login.token;
                 this.tokenExpireDate = response.data.login.tokenExpireDate;
-                this._isAuthenticated.next(true);
+                this.isAuthenticatedBS.next(true);
                 localStorage.setItem('token',this.token);
                 localStorage.setItem('tokenExpDate',this.tokenExpireDate.toString());
                 this.maService.fetch();
@@ -92,7 +71,7 @@ export class AuthService {
             }
         }, (err) => {
             this.printError(err);
-        }); */
+        });
     }
 
     async loadUser() {

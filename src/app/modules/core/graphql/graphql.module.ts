@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { GraphQLBasicService } from './services/graphql-basic.service';
 import { GraphQLService } from './services/graphql.service';
 
 
@@ -9,7 +10,8 @@ import { GraphQLService } from './services/graphql.service';
   imports: [
     CommonModule
   ],
-  exports: [
+  providers: [
+    GraphQLBasicService,
     GraphQLService
   ]
 })

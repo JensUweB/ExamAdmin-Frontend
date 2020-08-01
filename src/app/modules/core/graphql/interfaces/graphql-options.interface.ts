@@ -9,4 +9,6 @@ export interface IGraphQLOptions {
   log?: boolean;
   model?: any;
   type?: GraphQLType;
+  excludedErrors?: string | string[];
+  loading?: boolean;
 }

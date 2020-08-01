@@ -35,7 +35,7 @@ export class GraphQLMetaService {
 
   /**
    * Get schema for API
-   * See https://www.apollographql.com/blog/three-ways-to-represent-your-graphql-schema-a41f4175100d
+   * @See https://www.apollographql.com/blog/three-ways-to-represent-your-graphql-schema-a41f4175100d
    */
   public getSchema(options: { cache?: boolean; freeze?: boolean } = {}): Observable<GraphQLSchema> {
     // Get configurations
