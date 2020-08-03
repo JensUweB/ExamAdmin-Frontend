@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { BehaviorSubject, Subscription, throwError } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { Alert } from '../types/Alert';
-import { logError, getGraphQLError } from '../helpers/error.helpers';
+import { getStatusCode } from '../helpers/error.helpers';
 import { ExamService } from '../exam/exam.service';
 import { MartialArtsService } from '../martialArts/martialArts.service';
 import { GraphQLService } from '../core/graphql/services/graphql.service';
-import { GraphQLType } from '../core/graphql/enums/graphql-type.enum';
+import { ToastService } from '../core/services/toast.service';
 
 const login = gql`
 query login($email: String!, $password: String!)
@@ -33,18 +33,21 @@ export class AuthService {
     constructor(
         private apollo: Apollo,
         private router: Router,
+        private toastService: ToastService,
         private examService: ExamService,
         private maService: MartialArtsService,
         private graphQlService: GraphQLService
     ) {}
 
-    printError(err) {
-      logError('[AuthService]', err);
-      this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+   loginError(err) {
+      if(getStatusCode(err) === 401) {
+        this.toastService.error('Login Fehlgeschlagen!', 'E-Mail oder Paswort nicht korrekt!', 8000);
+      } else {
+          this.toastService.error('Server Fehler!','Es ist ein Server Fehler aufgetreten!');
+      }
     }
 
     async login(email: string, password: string): Promise<any> {
-        console.log('[AuthService] Logging in...');
         await this.apollo.watchQuery<any>({
             query: login,
             variables: {
@@ -54,7 +57,7 @@ export class AuthService {
             fetchPolicy: 'no-cache'
           }).valueChanges.subscribe((response) => {
             if(response.data){
-                console.log('[AuthService] Success! Got some data!');
+                this.toastService.success('Login','Login erfolgreich!');
                 this.userBS.next(response.data.login.user);
                 this.token = response.data.login.token;
                 this.tokenExpireDate = response.data.login.tokenExpireDate;
@@ -66,31 +69,28 @@ export class AuthService {
                 this.router.navigate(['/']);
             }
             if(response.errors) {
-                this.alerts.push({type: 'danger', message: response.errors[0].message})
-                throw response.errors;
+                this.loginError(response.errors);
             }
         }, (err) => {
-            this.printError(err);
+            this.loginError(err);
         });
     }
 
     async loadUser() {
         if (localStorage.getItem('token')) {
             this.token = localStorage.getItem('token');
-            console.log('[AuthService] Loading user data...');
             this.apollo.watchQuery<any>({
                 query: getUser,
                 fetchPolicy: 'no-cache'
               }).valueChanges.subscribe((response) => {
                 if (response.data) {
-                    console.log('[AuthService] Success! Got some data!');
                     this.userBS.next(response.data.getUser);
                     this.isAuthenticatedBS.next(true);
                     this.maService.fetch();
                     this.examService.fetchExams();
                 }
             }, (err) => {
-                this.printError(err);
+                this.loginError(err);
             });
         }
     }

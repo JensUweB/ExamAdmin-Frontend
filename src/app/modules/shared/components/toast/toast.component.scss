@@ -1,0 +1,39 @@
+$success: #28a745;
+$error: #dc3545;
+$info: #007bff;
+
+.toast {
+  min-width: 350px;
+  background-color: white !important;
+  border-top: 5px solid $success;
+
+  &-error {
+    border-top: 5px solid $error;
+  }
+
+  &-info {
+    border-top: 5px solid $info;
+  }
+}
+
+.toast-icon {
+  font-size: 35px;
+  color: $success;
+
+  &-error {
+    color: $error;
+  }
+
+  &-info {
+    color: $info;
+  }
+}
+
+.toast-headline {
+  font-weight: 600;
+  color: #3c3c3c;
+}
+
+.toast-subline {
+  font-weight: lighter;
+}

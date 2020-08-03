@@ -1,0 +1,18 @@
+<ngb-toast
+  *ngFor="let toast of toastService.toasts"
+  [header]="toast.headertext"
+  class="toast {{ 'toast-' + toast.content.type }}"
+  [autohide]="toast.autohide || true"
+  [delay]="toast.delay || 5000"
+  (hide)="toastService.remove(toast)"
+>
+  <div class="d-flex flex-row align-items-center">
+    <!-- <fa-icon class="toast-icon" icon="check-circle" *ngIf="toast.content.type === 'success'"></fa-icon>
+    <fa-icon class="toast-icon toast-icon-error" icon="times-circle" *ngIf="toast.content.type === 'error'"></fa-icon>
+    <fa-icon class="toast-icon toast-icon-info" icon="info-circle" *ngIf="toast.content.type === 'info'"></fa-icon> -->
+    <div class="d-flex flex-column ml-3">
+      <div class="toast-headline">{{ toast.content.headline }}</div>
+      <span class="toast-subline">{{ toast.content.description }}</span>
+    </div>
+  </div>
+</ngb-toast>

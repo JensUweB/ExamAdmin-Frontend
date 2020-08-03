@@ -5,8 +5,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Alert } from '../types/Alert';
-import { logError, getGraphQLError } from '../helpers/error.helpers';
-import { environment } from 'src/environments/environment';
+import { ToastService } from '../core/services/toast.service';
 
 const signUp = gql`mutation signup($firstName: String!, $lastName: String!, $email: String!, $password: String!){
   signup(userInput: {firstName: $firstName, lastName: $lastName, email: $email, password: $password})}`;
@@ -22,7 +21,12 @@ export class AuthComponent implements OnInit {
   alerts: Alert[] = [];
   disableSignup = false;
 
-  constructor(private router: Router, private authService: AuthService, private fb: FormBuilder, private apollo: Apollo) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private toastService: ToastService,
+    private fb: FormBuilder,
+    private apollo: Apollo) { }
 
   ngOnInit() {
     // Setup the form
@@ -30,26 +34,17 @@ export class AuthComponent implements OnInit {
       firstName: [''],
       lastName: [''],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required ], // Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')
+      password: ['', [Validators.required, Validators.minLength(6)] ], // Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')
     });
-  }
-
-  printError(err) {
-    logError('[UserComponent]', err);
-    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   async confirm() {
     if (this.userForm.valid) {
       if (this.login) {
-
-        try {
-          await this.authService.login(this.email.value, this.password.value);
-        } catch (err) { this.printError(err); }
+        this.authService.login(this.email.value, this.password.value);
 
       } else {
         // this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
-        if (!environment.production) { console.log('[Auth] Sending account creation request...'); }
         this.apollo.mutate<any>({
           mutation: signUp,
           variables: {
@@ -60,10 +55,10 @@ export class AuthComponent implements OnInit {
           }
         }).subscribe((response) => {
           this.disableSignup = true;
-          this.alerts.push({type: 'success', message: 'Success! You should receive an confirmation email!'});
-          if (!environment.production) { console.log('[Auth] Success! You should receive an confirmation email!'); }
+          this.toastService.success('Konto erstellt!', 'Ein neues Benutzerkonto wurde erfolgreich erstellt!', 6000);
         }, (err) => {
-          this.printError(err);
+          this.toastService.error('Server Fehler!','Es ist ein Server Fehler aufgetreten!');
+          console.error(err);
         });
       }
     }
