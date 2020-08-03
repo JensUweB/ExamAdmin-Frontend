@@ -27,7 +27,6 @@ export class GraphQLModule {
         operation.setContext({
           headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
         });
-        if (!environment.production) { console.log('[Apollo] Found local token. Adding bearer token!'); }
       }
       return forward(operation);
     });

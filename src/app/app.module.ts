@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent } from './modules/main-nav/main-nav.component';
 import { MaterialModule } from './material-module';
 import { SentryErrorHandler } from './modules/services/sentry-error-handler.service';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { SentryErrorHandler } from './modules/services/sentry-error-handler.serv
     GraphQLModule,
     FormsModule,
     ReactiveFormsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: false /* environment.production */ })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: false /* environment.production */ }),
+    SharedModule
   ],
   providers: [
     ExamService,
