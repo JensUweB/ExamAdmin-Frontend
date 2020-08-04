@@ -43,7 +43,7 @@
                                     <!-- Password -->
                                     <mat-form-field class="full-width">
                                         <mat-label i18n>Password</mat-label>
-                                        <input matInput type="password" [formControl]="password" minlength="5" required placeholder="mySuper@Secret123">
+                                        <input matInput type="password" [formControl]="password" minlength="5" placeholder="mySuper@Secret123">
                                         <mat-icon matPrefix>security</mat-icon>
                                         <mat-hint i18n>Your password</mat-hint>
                                         <mat-error *ngIf="password.invalid" i18n>Please enter at least 5 characters. There is no max password length!</mat-error>
@@ -52,11 +52,11 @@
                             </div>
                         </div>
                         <div class='flex mt3'>
-                            <button *ngIf="login" mat-raised-button color="primary" class="mat-btn" (click)="confirm()" i18n="Login Button">Login</button>
-                            <button *ngIf="!login" mat-raised-button color="primary" class="mat-btn" [disabled]="disableSignup" (click)="confirm()" i18n="SignUp Button">Create Account</button>
-                            <br>
-                            <button *ngIf="login" mat-raised-button color="primary" class="mat-btn" (click)="login = !login" i18n="Login Mode">Need to create an account?</button>
-                            <button *ngIf="!login" mat-raised-button color="primary" class="mat-btn" (click)="login = !login" i18n="SignUp Mode">Already have an account?</button>
+                            <button mat-raised-button color="primary" class="mat-btn float-left" (click)="confirm()" i18n="Login Button">
+                                {{login ? 'Login' : 'Create Account'}}</button>
+                            <button mat-raised-button color="primary" class="mat-btn float-left" (click)="login = !login" i18n="Login Mode">
+                                {{login ? 'Need to create an account?' : 'Already have an account?'}}</button>
+                            <button mat-raised-button color="primary" class="mat-btn float-left" (click)="resetPassword()" i18n>Forgot password?</button>
                         </div>
                     </form>
                 </div>

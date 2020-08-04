@@ -12,11 +12,13 @@ import { NewExamComponent } from './modules/exam/new-exam/new-exam.component';
 import { ExamResultComponent } from './modules/exam/exam-result/exam-result.component';
 import { NewMartialartComponent } from './modules/martialArts/new-martialart/new-martialart.component';
 import { MartialartDetailsComponent } from './modules/martialArts/martialart-details/martialart-details.component';
+import { PasswordResetComponent } from './modules/auth/components/password-reset/password-reset.component';
 
 
 const routes: Routes = [
   {path: '', component: StartComponent},
   {path: 'auth', component: AuthComponent},
+  {path: 'auth/password-reset/:token', component: PasswordResetComponent},
   {path: 'user', canActivate: [AuthGuard], component: UserComponent},
   {path: 'exams', canActivate: [AuthGuard], component: ExamComponent},
   {path: 'new-exams', canActivate: [AuthGuard], component: NewExamComponent},

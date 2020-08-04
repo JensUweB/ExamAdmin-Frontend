@@ -11,6 +11,8 @@ import { IGraphQLOptions } from '../interfaces/graphql-options.interface';
   providedIn: 'root',
 })
 export class GraphQLService extends GraphQLBasicService {
+  public token: string;
+
   /**
    * Include services
    */

@@ -1,12 +1,16 @@
-import { AuthService } from '../auth/auth.service';
-import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-import { Alert } from '../types/Alert';
-import { Injectable } from '@angular/core';
-import { getGraphQLError, logError } from '../helpers/error.helpers';
-import { BehaviorSubject } from 'rxjs';
-import { normalizeDate } from '../helpers/date.helper';
-import { GraphQLService } from '../core/graphql/services/graphql.service';
+import { AuthService } from "../auth/auth.service";
+import { Apollo } from "apollo-angular";
+import gql from "graphql-tag";
+import { Alert } from "../types/Alert";
+import { Injectable } from "@angular/core";
+import { getGraphQLError, logError } from "../helpers/error.helpers";
+import { BehaviorSubject, Observable } from "rxjs";
+import { normalizeDate } from "../helpers/date.helper";
+import { GraphQLService } from "../core/graphql/services/graphql.service";
+import { ToastService } from "../core/services/toast.service";
+import { GraphQLType } from "../core/graphql/enums/graphql-type.enum";
+import { User } from "../models/user.model";
+import { UserInput } from "./inputs/user.input";
 
 const updateUserMutation = gql`
   mutation updateUser(
@@ -29,9 +33,31 @@ const updateUserMutation = gql`
     }
   }
 `;
-const queryExamResults = gql`query getAllExamResults{getAllExamResults{
-  _id, user, exam, date, passed, reportUri , martialArt{name, styleName},rank}
-}`;
+
+const resetPwMutation = gql`
+  mutation setUserPassword($newPassword: String!) {
+    setUserPassword(newPassword: $newPassword) {
+      _id
+    }
+  }
+`;
+const queryExamResults = gql`
+  query getAllExamResults {
+    getAllExamResults {
+      _id
+      user
+      exam
+      date
+      passed
+      reportUri
+      martialArt {
+        name
+        styleName
+      }
+      rank
+    }
+  }
+`;
 
 @Injectable()
 export class UserService {
@@ -40,48 +66,96 @@ export class UserService {
   private _examResults: BehaviorSubject<any[]> = new BehaviorSubject([]);
   public readonly examResults = this._examResults.asObservable();
 
-  constructor(private apollo: Apollo, private authService: AuthService, graphQlService: GraphQLService) {
+  constructor(
+    private apollo: Apollo,
+    private authService: AuthService,
+    private toastService: ToastService,
+    private graphQlService: GraphQLService
+  ) {
     this.fetch();
   }
 
-  printError(err) {
-    logError('[UserComponent]', err);
-    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
-  }
-
   /**
-   *
-   * @param input: { newPassword, firstname, lastName, email, clubs[ ], martialArts[ ] }
+   * Updates the current user
+   * @param input: UserInput object
    */
-  async updateUser(input: object) {
-    await this.apollo
+  async updateUser(input: UserInput, newPassword?: string) {
+    let args;
+    if (newPassword) {
+      args = { input, newPassword };
+    } else {
+      args = { input };
+    }
+    this.apollo
       .watchQuery<any>({
         query: updateUserMutation,
         fetchPolicy: 'no-cache',
-        variables: input
+        variables: args
       })
       .valueChanges.subscribe(
         (response) => {
-          console.log('[UserService] Done!');
+          this.toastService.success(
+            "Daten Aktualisiert",
+            "Ihre Daten wurden erfolgreich aktualisiert!"
+          );
         },
         (err) => {
-          this.printError(err);
+          console.error(err);
+          this.toastService.error(
+            "Fehlschlag!",
+            "Das aktualisieren ihrer Daten ist fehlgeschlagen!"
+          );
+        }
+      );
+  }
+
+  async setUserPassword(newPassword: string) {
+    this.graphQlService
+      .graphQl("setUserPassword", {
+        arguments: { newPassword },
+        fields: ["_id"],
+        type: GraphQLType.MUTATION,
+        loading: true,
+        log: true,
+      })
+      .subscribe(
+        (response) => {
+          this.toastService.success(
+            "Daten Aktualisiert",
+            "Ihre Daten wurden erfolgreich aktualisiert!"
+          );
+        },
+        (err) => {
+          console.error(err);
+          this.toastService.error(
+            "Fehlschlag!",
+            "Das aktualisieren ihrer Daten ist fehlgeschlagen!"
+          );
         }
       );
   }
 
   async fetch() {
-    this.apollo.watchQuery<any>({
-      query: queryExamResults,
-      fetchPolicy: 'no-cache'
-    }).valueChanges.subscribe((response) => {
-      this.examResultsArray = response.data.getAllExamResults;
-      this.examResultsArray.forEach(ele => {
-        ele.date = normalizeDate(ele.date);
-      });
-      this._examResults.next(this.examResultsArray);
-    }, (err) => {
-      this.printError(err);
-    });
+    this.apollo
+      .watchQuery<any>({
+        query: queryExamResults,
+        fetchPolicy: "no-cache",
+      })
+      .valueChanges.subscribe(
+        (response) => {
+          this.examResultsArray = response.data.getAllExamResults;
+          this.examResultsArray.forEach((ele) => {
+            ele.date = normalizeDate(ele.date);
+          });
+          this._examResults.next(this.examResultsArray);
+        },
+        (err) => {
+          console.error(err);
+          this.toastService.error(
+            "Server Fehler!",
+            "Beim lesen der Prüfungsergebnisse ist ein Fehler aufgetreten!"
+          );
+        }
+      );
   }
 }

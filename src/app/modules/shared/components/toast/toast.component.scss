@@ -5,14 +5,14 @@ $info: #007bff;
 .toast {
   min-width: 350px;
   background-color: white !important;
-  border-top: 5px solid $success;
+  border-top: 10px solid $success;
 
   &-error {
-    border-top: 5px solid $error;
+    border-top: 10px solid $error;
   }
 
   &-info {
-    border-top: 5px solid $info;
+    border-top: 10px solid $info;
   }
 }
 
