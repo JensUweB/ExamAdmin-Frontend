@@ -28,6 +28,7 @@ import { MainNavComponent } from './modules/main-nav/main-nav.component';
 import { MaterialModule } from './material-module';
 import { SentryErrorHandler } from './modules/services/sentry-error-handler.service';
 import { SharedModule } from './modules/shared/shared.module';
+import { PasswordResetComponent } from './modules/auth/components/password-reset/password-reset.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SharedModule } from './modules/shared/shared.module';
     NewExamComponent,
     NewMartialartComponent,
     MartialartDetailsComponent,
-    MainNavComponent
+    MainNavComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,

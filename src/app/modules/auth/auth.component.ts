@@ -7,8 +7,6 @@ import { Apollo } from 'apollo-angular';
 import { Alert } from '../types/Alert';
 import { ToastService } from '../core/services/toast.service';
 
-const signUp = gql`mutation signup($firstName: String!, $lastName: String!, $email: String!, $password: String!){
-  signup(userInput: {firstName: $firstName, lastName: $lastName, email: $email, password: $password})}`;
 
 @Component({
   selector: 'app-auth',
@@ -34,7 +32,7 @@ export class AuthComponent implements OnInit {
       firstName: [''],
       lastName: [''],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)] ], // Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')
+      password: [''], // Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$')
     });
   }
 
@@ -44,24 +42,14 @@ export class AuthComponent implements OnInit {
         this.authService.login(this.email.value, this.password.value);
 
       } else {
-        // this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
-        this.apollo.mutate<any>({
-          mutation: signUp,
-          variables: {
-            firstName: this.firstName.value,
-            lastName: this.lastName.value,
-            email: this.email.value,
-            password: this.password.value
-          }
-        }).subscribe((response) => {
-          this.disableSignup = true;
-          this.toastService.success('Konto erstellt!', 'Ein neues Benutzerkonto wurde erfolgreich erstellt!', 6000);
-        }, (err) => {
-          this.toastService.error('Server Fehler!','Es ist ein Server Fehler aufgetreten!');
-          console.error(err);
-        });
+        const result = await this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
+        if (result) { this.disableSignup = true; }
       }
     }
+  }
+
+  async resetPassword() {
+    this.authService.resetPassword(this.email.value);
   }
 
   /**

@@ -17,6 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ExamResult } from '../models/examResult.model';
 import { MatSort } from '@angular/material/sort';
 import { environment } from 'src/environments/environment';
+import { UserInput } from './inputs/user.input';
 
 
 const clubMutation = gql`mutation addUserToClub($id: String!){addUserToClub(clubId: $id){_id}}`;
@@ -152,13 +153,18 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async onUserUpdate() {
     if (this.userForm.valid && this.newPassword.value === this.newPassword2.value) {
-      await this.userService.updateUser({
+      const input: UserInput = {
         firstName: this.firstName.value,
         lastName: this.lastName.value,
         email: this.email.value,
         password: this.password.value,
-        newPassword: this.newPassword.value
-      });
+      };
+      if (this.newPassword.touched) {
+        await this.userService.updateUser(input,this.newPassword.value);
+      } else {
+        await this.userService.updateUser(input);
+      }
+
       this.authService.loadUser();
       // Updating this.user object manualy because fetching from authservice doesn't work correctly here
       this.user.firstName = this.firstName.value;
