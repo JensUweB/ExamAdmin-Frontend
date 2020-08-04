@@ -44,7 +44,7 @@
     "apollo-upload-client": "^12.1.0",
     "bootstrap": "^4.4.1",
     "font-awesome": "^4.7.0",
-    "graphql": "^14.6.0",
+    "graphql": "^14.7.0",
     "graphql-tag": "^2.10.3",
     "rxjs": "^6.5.5",
     "tslib": "^1.13.0",
