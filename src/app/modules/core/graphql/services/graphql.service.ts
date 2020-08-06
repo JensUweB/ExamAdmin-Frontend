@@ -24,6 +24,11 @@ export class GraphQLService extends GraphQLBasicService {
     super(apollo, graphqlMetaService);
   }
 
+  /**
+   * Send a graphql query or mutation
+   * @param graphql the name of the query
+   * @param options options object
+   */
   public graphQl(graphql: string, options: IGraphQLOptions = {}): Observable<any> {
     this.handleLoader('start', options);
 

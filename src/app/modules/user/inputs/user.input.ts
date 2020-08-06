@@ -5,4 +5,5 @@ export class UserInput {
     lastName: string;
     email: string;
     password: string;
+    newPassword?: string;
 }

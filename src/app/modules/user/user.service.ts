@@ -12,35 +12,6 @@ import { GraphQLType } from '../core/graphql/enums/graphql-type.enum';
 import { User } from '../models/user.model';
 import { UserInput } from './inputs/user.input';
 
-const updateUserMutation = gql`
-  mutation updateUser(
-    $newPassword: String!
-    $firstName: String!
-    $lastName: String!
-    $email: String!
-    $password: String!
-  ) {
-    updateUser(
-      newPassword: $newPassword
-      input: {
-        firstName: $firstName
-        lastName: $lastName
-        email: $email
-        password: $password
-      }
-    ) {
-      _id
-    }
-  }
-`;
-
-const resetPwMutation = gql`
-  mutation setUserPassword($newPassword: String!) {
-    setUserPassword(newPassword: $newPassword) {
-      _id
-    }
-  }
-`;
 const queryExamResults = gql`
   query getAllExamResults {
     getAllExamResults {
@@ -79,20 +50,15 @@ export class UserService {
    * Updates the current user
    * @param input: UserInput object
    */
-  async updateUser(input: UserInput, newPassword?: string) {
-    let args;
-    if (newPassword) {
-      args = { input, newPassword };
-    } else {
-      args = { input };
-    }
-    this.apollo
-      .watchQuery<any>({
-        query: updateUserMutation,
-        fetchPolicy: 'no-cache',
-        variables: args
-      })
-      .valueChanges.subscribe(
+  async updateUser(input: UserInput) {
+    this.graphQlService
+      .graphQl('updateUser', {
+        arguments: { input },
+        fields: ['_id'],
+        type: GraphQLType.MUTATION,
+        loading: true,
+        log: true,
+      }).subscribe(
         (response) => {
           this.toastService.success(
             'Daten Aktualisiert',
@@ -110,9 +76,11 @@ export class UserService {
   }
 
   async setUserPassword(newPassword: string) {
+    const input = new UserInput;
+    input.newPassword = newPassword;
     this.graphQlService
-      .graphQl('setUserPassword', {
-        arguments: { newPassword },
+      .graphQl('updateUser', {
+        arguments: { input },
         fields: ['_id'],
         type: GraphQLType.MUTATION,
         loading: true,
