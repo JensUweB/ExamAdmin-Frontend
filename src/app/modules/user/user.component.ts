@@ -160,7 +160,7 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
         password: this.password.value,
       };
       if (this.newPassword.touched) {
-        await this.userService.updateUser(input,this.newPassword.value);
+        await this.userService.updateUser(input, this.newPassword.value);
       } else {
         await this.userService.updateUser(input);
       }

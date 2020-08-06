@@ -14,17 +14,17 @@
         <a mat-list-item routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated" i18n>Login / Register</a>
         <a mat-list-item routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Exams</a>
         <a mat-list-item routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Martial Arts</a>
-        <mat-form-field>
-          <mat-label i18n>Select Theme</mat-label>
-          <mat-select>
-            <mat-option value="light" (click)="onThemeChange('theme-light')" i18n>Light Theme</mat-option>
-            <mat-option value="dark" (click)="onThemeChange('theme-dark')" i18n>Dark Theme</mat-option>
-          </mat-select>
-        </mat-form-field>
         <button class="hover-shadow" mat-menu-item [matMenuTriggerFor]="dropMenuSide">
           <mat-icon>settings</mat-icon>
         </button>
         <mat-menu #dropMenuSide="matMenu">
+          <mat-form-field>
+            <mat-label i18n>Select Theme</mat-label>
+            <mat-select>
+              <mat-option value="light" (click)="onThemeChange('theme-light')" i18n>Light Theme</mat-option>
+              <mat-option value="dark" (click)="onThemeChange('theme-dark')" i18n>Dark Theme</mat-option>
+            </mat-select>
+          </mat-form-field>
           <button mat-menu-item (click)="addMA()">
             <mat-icon>add</mat-icon>
             <span i18n>Martial Art</span>
@@ -63,26 +63,26 @@
         <a routerLink="/auth" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="!isAuthenticated" i18n>Login / Register</a>
         <a routerLink="/exams" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Exams</a>
         <a routerLink="/martialArts" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngIf="isAuthenticated" i18n>Martial Arts</a>
-        <mat-form-field>
-          <mat-label>Select Theme</mat-label>
-          <mat-select>
-            <mat-option value="light" (click)="onThemeChange('theme-light')">Light Theme</mat-option>
-            <mat-option value="dark" (click)="onThemeChange('theme-dark')">Dark Theme</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button class="hover-shadow" mat-icon-button [matMenuTriggerFor]="dropMenu" *ngIf="isAuthenticated">
+        <button class="hover-shadow" mat-icon-button [matMenuTriggerFor]="dropMenu">
           <mat-icon>settings</mat-icon>
         </button>
         <mat-menu #dropMenu="matMenu">
-          <button mat-menu-item (click)="addMA()">
+          <mat-form-field>
+            <mat-label>Select Theme</mat-label>
+            <mat-select>
+              <mat-option value="light" (click)="onThemeChange('theme-light')">Light Theme</mat-option>
+              <mat-option value="dark" (click)="onThemeChange('theme-dark')">Dark Theme</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button *ngIf="isAuthenticated" mat-menu-item (click)="addMA()">
             <mat-icon>add</mat-icon>
             <span i18n>Martial Art</span>
           </button>
-          <button mat-menu-item (click)="addExam()">
+          <button *ngIf="isAuthenticated" mat-menu-item (click)="addExam()">
             <mat-icon>add</mat-icon>
             <span i18n>Exam</span>
           </button>
-          <button mat-menu-item (click)="addExamResult()">
+          <button *ngIf="isAuthenticated" mat-menu-item (click)="addExamResult()">
             <mat-icon>add</mat-icon>
             <span i18n>Exam Result</span>
           </button>

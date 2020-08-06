@@ -24,7 +24,7 @@ import { NewMartialartComponent } from './modules/martialArts/new-martialart/new
 import { MartialartDetailsComponent } from './modules/martialArts/martialart-details/martialart-details.component';
 import { UserService } from './modules/user/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MainNavComponent } from './modules/main-nav/main-nav.component';
+import { MainNavComponent, FeedbackDialogComponent } from './modules/main-nav/main-nav.component';
 import { MaterialModule } from './material-module';
 import { SentryErrorHandler } from './modules/services/sentry-error-handler.service';
 import { SharedModule } from './modules/shared/shared.module';
@@ -45,6 +45,7 @@ import { PasswordResetComponent } from './modules/auth/components/password-reset
     NewMartialartComponent,
     MartialartDetailsComponent,
     MainNavComponent,
+    FeedbackDialogComponent,
     PasswordResetComponent
   ],
   imports: [

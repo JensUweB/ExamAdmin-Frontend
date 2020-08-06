@@ -1,16 +1,16 @@
-import { AuthService } from "../auth/auth.service";
-import { Apollo } from "apollo-angular";
-import gql from "graphql-tag";
-import { Alert } from "../types/Alert";
-import { Injectable } from "@angular/core";
-import { getGraphQLError, logError } from "../helpers/error.helpers";
-import { BehaviorSubject, Observable } from "rxjs";
-import { normalizeDate } from "../helpers/date.helper";
-import { GraphQLService } from "../core/graphql/services/graphql.service";
-import { ToastService } from "../core/services/toast.service";
-import { GraphQLType } from "../core/graphql/enums/graphql-type.enum";
-import { User } from "../models/user.model";
-import { UserInput } from "./inputs/user.input";
+import { AuthService } from '../auth/auth.service';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
+import { Alert } from '../types/Alert';
+import { Injectable } from '@angular/core';
+import { getGraphQLError, logError } from '../helpers/error.helpers';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { normalizeDate } from '../helpers/date.helper';
+import { GraphQLService } from '../core/graphql/services/graphql.service';
+import { ToastService } from '../core/services/toast.service';
+import { GraphQLType } from '../core/graphql/enums/graphql-type.enum';
+import { User } from '../models/user.model';
+import { UserInput } from './inputs/user.input';
 
 const updateUserMutation = gql`
   mutation updateUser(
@@ -95,15 +95,15 @@ export class UserService {
       .valueChanges.subscribe(
         (response) => {
           this.toastService.success(
-            "Daten Aktualisiert",
-            "Ihre Daten wurden erfolgreich aktualisiert!"
+            'Daten Aktualisiert',
+            'Ihre Daten wurden erfolgreich aktualisiert!'
           );
         },
         (err) => {
           console.error(err);
           this.toastService.error(
-            "Fehlschlag!",
-            "Das aktualisieren ihrer Daten ist fehlgeschlagen!"
+            'Fehlschlag!',
+            'Das aktualisieren ihrer Daten ist fehlgeschlagen!'
           );
         }
       );
@@ -111,9 +111,9 @@ export class UserService {
 
   async setUserPassword(newPassword: string) {
     this.graphQlService
-      .graphQl("setUserPassword", {
+      .graphQl('setUserPassword', {
         arguments: { newPassword },
-        fields: ["_id"],
+        fields: ['_id'],
         type: GraphQLType.MUTATION,
         loading: true,
         log: true,
@@ -121,15 +121,15 @@ export class UserService {
       .subscribe(
         (response) => {
           this.toastService.success(
-            "Daten Aktualisiert",
-            "Ihre Daten wurden erfolgreich aktualisiert!"
+            'Daten Aktualisiert',
+            'Ihre Daten wurden erfolgreich aktualisiert!'
           );
         },
         (err) => {
           console.error(err);
           this.toastService.error(
-            "Fehlschlag!",
-            "Das aktualisieren ihrer Daten ist fehlgeschlagen!"
+            'Fehlschlag!',
+            'Das aktualisieren ihrer Daten ist fehlgeschlagen!'
           );
         }
       );
@@ -139,7 +139,7 @@ export class UserService {
     this.apollo
       .watchQuery<any>({
         query: queryExamResults,
-        fetchPolicy: "no-cache",
+        fetchPolicy: 'no-cache',
       })
       .valueChanges.subscribe(
         (response) => {
@@ -152,8 +152,8 @@ export class UserService {
         (err) => {
           console.error(err);
           this.toastService.error(
-            "Server Fehler!",
-            "Beim lesen der Prüfungsergebnisse ist ein Fehler aufgetreten!"
+            'Server Fehler!',
+            'Beim lesen der Prüfungsergebnisse ist ein Fehler aufgetreten!'
           );
         }
       );
