@@ -159,11 +159,8 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
         email: this.email.value,
         password: this.password.value,
       };
-      if (this.newPassword.touched) {
-        await this.userService.updateUser(input,this.newPassword.value);
-      } else {
-        await this.userService.updateUser(input);
-      }
+      if (this.newPassword.value) { input.newPassword = this.newPassword.value; }
+      this.userService.updateUser(input);
 
       this.authService.loadUser();
       // Updating this.user object manualy because fetching from authservice doesn't work correctly here

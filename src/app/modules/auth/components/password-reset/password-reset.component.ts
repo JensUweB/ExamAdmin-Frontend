@@ -12,8 +12,6 @@ import { subscribe } from 'graphql';
   styleUrls: ['./password-reset.component.css']
 })
 export class PasswordResetComponent implements OnInit {
-  token;
-  public pwForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,26 +24,28 @@ export class PasswordResetComponent implements OnInit {
     localStorage.setItem('token', this.token);
   }
 
+  get password() {
+    return this.pwForm.get('password');
+  }
+  get password2() {
+    return this.pwForm.get('password2');
+  }
+  token;
+  public pwForm: FormGroup;
+abcdefg;
+
   ngOnInit(): void {
     this.pwForm = this.fb.group({
       password: ['', Validators.required],
       password2: ['', Validators.required]
     });
-  }abcdefg
-
+  }
   async setPassword() {
     if (this.pwForm.valid && this.password.value === this.password2.value) {
       this.userService.setUserPassword(this.password.value);
     } else {
       this.toastService.error('Eingabe fehlerhaft!', 'Bitte das neue Passwort in beide Felder eintragen!');
     }
-  }
-
-  get password() {
-    return this.pwForm.get('password');
-  }
-  get password2() {
-    return this.pwForm.get('password2');
   }
 
 }

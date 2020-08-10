@@ -1,15 +1,15 @@
-import { Injectable } from "@angular/core";
-import gql from "graphql-tag";
-import { Apollo } from "apollo-angular";
-import { BehaviorSubject } from "rxjs";
-import { Router } from "@angular/router";
-import { User } from "../models/user.model";
-import { Alert } from "../types/Alert";
-import { getStatusCode } from "../helpers/error.helpers";
-import { ExamService } from "../exam/exam.service";
-import { MartialArtsService } from "../martialArts/martialArts.service";
-import { GraphQLService } from "../core/graphql/services/graphql.service";
-import { ToastService } from "../core/services/toast.service";
+import { Injectable } from '@angular/core';
+import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
+import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { User } from '../models/user.model';
+import { Alert } from '../types/Alert';
+import { getStatusCode } from '../helpers/error.helpers';
+import { ExamService } from '../exam/exam.service';
+import { MartialArtsService } from '../martialArts/martialArts.service';
+import { GraphQLService } from '../core/graphql/services/graphql.service';
+import { ToastService } from '../core/services/toast.service';
 
 const signUp = gql`
   mutation signup(
@@ -103,7 +103,7 @@ const pwReset = gql`
   }
 `;
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private userBS: BehaviorSubject<User> = new BehaviorSubject(null);
   public readonly user = this.userBS.asObservable();
@@ -125,14 +125,14 @@ export class AuthService {
   loginError(err) {
     if (getStatusCode(err) === 401) {
       this.toastService.error(
-        "Login Fehlgeschlagen!",
-        "E-Mail oder Paswort nicht korrekt!",
+        'Login Fehlgeschlagen!',
+        'E-Mail oder Paswort nicht korrekt!',
         8000
       );
     } else {
       this.toastService.error(
-        "Server Fehler!",
-        "Es ist ein Server Fehler aufgetreten!"
+        'Server Fehler!',
+        'Es ist ein Server Fehler aufgetreten!'
       );
     }
   }
@@ -142,27 +142,27 @@ export class AuthService {
       .watchQuery<any>({
         query: login,
         variables: {
-          email: email,
-          password: password,
+          email,
+          password,
         },
-        fetchPolicy: "no-cache",
+        fetchPolicy: 'no-cache',
       })
       .valueChanges.subscribe(
         (response) => {
           if (response.data) {
-            this.toastService.success("Login", "Login erfolgreich!");
+            this.toastService.success('Login', 'Login erfolgreich!');
             this.userBS.next(response.data.login.user);
             this.token = response.data.login.token;
             this.tokenExpireDate = response.data.login.tokenExpireDate;
             this.isAuthenticatedBS.next(true);
-            localStorage.setItem("token", this.token);
+            localStorage.setItem('token', this.token);
             localStorage.setItem(
-              "tokenExpDate",
+              'tokenExpDate',
               this.tokenExpireDate.toString()
             );
             this.maService.fetch();
             this.examService.fetchExams();
-            this.router.navigate(["/"]);
+            this.router.navigate(['/']);
           }
           if (response.errors) {
             this.loginError(response.errors);
@@ -175,12 +175,12 @@ export class AuthService {
   }
 
   async loadUser() {
-    if (localStorage.getItem("token")) {
-      this.token = localStorage.getItem("token");
+    if (localStorage.getItem('token')) {
+      this.token = localStorage.getItem('token');
       this.apollo
         .watchQuery<any>({
           query: getUser,
-          fetchPolicy: "no-cache",
+          fetchPolicy: 'no-cache',
         })
         .valueChanges.subscribe(
           (response) => {
@@ -203,8 +203,8 @@ export class AuthService {
     this.userBS.next(null);
     this.token = null;
     this.tokenExpireDate = null;
-    localStorage.setItem("token", null);
-    this.router.navigate(["/"]);
+    localStorage.setItem('token', null);
+    this.router.navigate(['/']);
   }
 
   async signup(
@@ -218,25 +218,25 @@ export class AuthService {
       .mutate<any>({
         mutation: signUp,
         variables: {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
+          firstName,
+          lastName,
+          email,
+          password,
         },
       })
       .subscribe(
         (response) => {
           this.toastService.success(
-            "Konto erstellt!",
-            "Ein neues Benutzerkonto wurde erfolgreich erstellt!",
+            'Konto erstellt!',
+            'Ein neues Benutzerkonto wurde erfolgreich erstellt!',
             6000
           );
           result = true;
         },
         (err) => {
           this.toastService.error(
-            "Server Fehler!",
-            "Es ist ein Server Fehler aufgetreten!"
+            'Server Fehler!',
+            'Es ist ein Server Fehler aufgetreten!'
           );
           console.error(err);
         }
@@ -249,7 +249,7 @@ export class AuthService {
       .mutate<any>({
         mutation: pwReset,
         variables: {
-          email: email,
+          email,
         },
       })
       .subscribe(
@@ -257,8 +257,8 @@ export class AuthService {
         (err) => {}
       );
     this.toastService.info(
-      "Passwort Reset",
-      "Falls ein Konto mit dieser E-Mail existiert, wurde das Passwort zurückgesetzt.",
+      'Passwort Reset',
+      'Falls ein Konto mit dieser E-Mail existiert, wurde das Passwort zurückgesetzt.',
       6000
     );
   }
