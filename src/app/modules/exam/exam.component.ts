@@ -24,11 +24,9 @@ export class ExamComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
-    if (!environment.production) { console.log('[ExamComponent] Initializing...'); }
     await this.examService.fetchExams();
     this.examSubscription = this.examService.exams.subscribe(data => this.plannedExams = data);
     this.userSubscription = this.authService.user.subscribe(data => this.user = data);
-    if (!environment.production) { console.log('[ExamComponent] Done.'); }
   }
   showDetails(exam: any): void {
     this.examService.setExam(exam);

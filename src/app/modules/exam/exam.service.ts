@@ -4,9 +4,10 @@ import { Apollo } from 'apollo-angular';
 import { Subscription, BehaviorSubject } from 'rxjs';
 import { normalizeDate } from '../helpers/date.helper';
 import { logError } from '../helpers/error.helpers';
+import { filter } from 'rxjs/operators';
 
 const examsQuery = gql`
-query {getPlannedExams {
+query getAllExams($minDate: any){getAllExams(minDate: $minDate) {
   _id,title,description,examDate,regEndDate,examPlace, price, minRank
   participants {
     _id,firstName,lastName
@@ -38,30 +39,34 @@ export class ExamService {
   private querySubscription: Subscription;
   private examinerClubs = [];
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) {
+    this.fetchExams();
+  }
 
   printError(err) {
-    logError('[UserComponent]', err);
+    console.error(err);
     // this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   fetchExams() {
-    console.log('[ExamService] Fetching data...');
-    this.querySubscription = this.apollo
+    this.apollo
       .watchQuery<any>({
         query: examsQuery,
+        variables: {
+          minDate: new Date('2020-01-01')
+        },
         fetchPolicy: 'no-cache'
       })
       .valueChanges.subscribe(
-        response => {
+        (response) => {
           if (response.data) {
-            const exams = response.data.getPlannedExams;
-            console.log('[ExamService] Got some data. Preparing data...');
+            const exams = response.data.getAllExams;
             exams.forEach(exam => {
               exam.examDate = normalizeDate(exam.examDate);
               exam.regEndDate = normalizeDate(exam.regEndDate);
               exam.isHidden = true;
 
+              // Filter all participants martial arts list to get info about the participant related to the current exam
               if (exams) {
                 exams.forEach((item) => {
                   if (item.participants) {
@@ -78,7 +83,6 @@ export class ExamService {
                 });
               }
               this._exams.next(exams);
-              console.log('[ExamService] Done.');
             });
           }
         },
@@ -86,7 +90,6 @@ export class ExamService {
           this.printError(err);
         }
       );
-    this.querySubscription.unsubscribe();
   }
 
   setExam(exam) {

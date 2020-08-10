@@ -63,8 +63,7 @@ export class NewExamComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.examForm = this.fb.group({
-      martialArt: [null, [Validators.required]],
-      // club: undefined,
+      martialArt: [null, Validators.required],
       title: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', [Validators.required, Validators.minLength(5)]],
       examPlace: ['', [Validators.required, Validators.minLength(5)]],
@@ -89,11 +88,10 @@ export class NewExamComponent implements OnInit, OnDestroy {
     });
 
     if (this.martialArts.length > 0) { this.isExaminer = true; }
-    if (!environment.production) { console.log('[NewExamComp] ', this.martialArts); }
   }
 
   printError(err) {
-    logError('[UserComponent]', err);
+    console.error(err);
     this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
@@ -143,16 +141,14 @@ export class NewExamComponent implements OnInit, OnDestroy {
   // ($title: String!, $description: String!, $examDate: Date!, $regEndDate: Date!,
   // $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
   async onSubmit() {
-    if (this.examForm.valid) {
-      if (!environment.production) { console.log('[NewExamComp] Your form is valid!'); }
-
+    if (true) {
       // Build correct date objects
-      const examDate = new Date(this.regEndDate.value.year, this.examDate.value.month,
+      const examDate = this.examDate.value/* new Date(this.regEndDate.value.year, this.examDate.value.month,
         this.examDate.value.day, this.examTime.value.hour, this.examTime.value.minute,
-        this.examTime.value.second, 0);
-      const regEndDate = new Date(this.regEndDate.value.year, this.regEndDate.value.month,
+        this.examTime.value.second, 0); */
+      const regEndDate = this.regEndDate.value/* new Date(this.regEndDate.value.year, this.regEndDate.value.month,
         this.regEndDate.value.day, this.regEndTime.value.hour, this.regEndTime.value.minute,
-        this.regEndTime.value.second, 0);
+        this.regEndTime.value.second, 0); */
 
       let minrank = this.minRank.value;
       if (minrank === 'none') { minrank = undefined; }
@@ -168,18 +164,14 @@ export class NewExamComponent implements OnInit, OnDestroy {
           regEndDate,
           minRank: minrank,
           isPublic: this.isPublic.value,
-          // clubId: this.club.value,
           userId: this.user._id,
           maId: this.martialArts[this.martialArt.value]._id
         }
       }).subscribe(response => {
         this.examService.fetchExams();
         this.alerts.push({type: 'success', message: 'Success! A new exam was created.'});
-        if (response.data) {
-          if (!environment.production) { console.log('[NewExamComp] New exam successfull created!'); }
-        }
       }, (err) => {
-        this.printError(err);
+        console.error(err);
       });
       this.isSubmitted = true;
     } else {
