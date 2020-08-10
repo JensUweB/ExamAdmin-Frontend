@@ -184,4 +184,16 @@ export class Helper {
     });
     return uuid;
   }
+
+  /**
+   * Converts a date to german date format
+   * @param input date string
+   */
+  normalizeDate(input: string): string {
+    const date = new Date(input);
+    const str: string[] = date.toLocaleDateString().split('.');
+    if (str.length && str.length > 0 && str[0].padStart) {
+        return str[0].padStart(2, '0') + '.' + str[1].padStart(2, '0') + '.' + str[2];
+    }
+  }
 }
