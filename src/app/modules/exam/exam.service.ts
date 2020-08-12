@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import gql from "graphql-tag";
-import { Apollo } from "apollo-angular";
-import { Subscription, BehaviorSubject, Observable } from "rxjs";
-import { normalizeDate } from "../helpers/date.helper";
-import { logError } from "../helpers/error.helpers";
-import { filter } from "rxjs/operators";
-import { ToastService } from "../core/services/toast.service";
+import { Injectable } from '@angular/core';
+import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
+import { Subscription, BehaviorSubject, Observable } from 'rxjs';
+import { normalizeDate } from '../helpers/date.helper';
+import { logError } from '../helpers/error.helpers';
+import { filter } from 'rxjs/operators';
+import { ToastService } from '../core/services/toast.service';
 import { Exam } from '../models/exam.model';
 
 const examsQuery = gql`
@@ -119,7 +119,7 @@ export class ExamService {
         variables: {
           minDate: new Date(Date.now()),
         },
-        fetchPolicy: "no-cache",
+        fetchPolicy: 'no-cache',
       })
       .valueChanges.subscribe(
         (response) => {
@@ -130,8 +130,8 @@ export class ExamService {
         (err) => {
           console.error(err);
           this.toastService.error(
-            "Server Fehler!",
-            "Prüfungen konnten nicht abgefragt werden!"
+            'Server Fehler!',
+            'Prüfungen konnten nicht abgefragt werden!'
           );
         }
       );
@@ -142,7 +142,7 @@ export class ExamService {
    * @param previousMonth the number of months you want to go back. e.g. '3' means, you get exams of the past three months
    */
   fetchUserExams(previousMonth: number = 0): Observable<Exam[]> {
-    let date = new Date(Date.now());
+    const date = new Date(Date.now());
     date.setMonth(date.getMonth() - previousMonth);
 
     return new Observable((subscriber) => {
@@ -152,7 +152,7 @@ export class ExamService {
         variables: {
           minDate: date,
         },
-        fetchPolicy: "no-cache",
+        fetchPolicy: 'no-cache',
       })
       .valueChanges.subscribe(
         (response) => {
@@ -164,12 +164,12 @@ export class ExamService {
         (err) => {
           console.error(err);
           this.toastService.error(
-            "Server Fehler!",
-            "Prüfungen konnten nicht abgefragt werden!"
+            'Server Fehler!',
+            'Prüfungen konnten nicht abgefragt werden!'
           );
         }
       );
-    })
+    });
   }
 
   processExams(exams) {

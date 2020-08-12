@@ -143,10 +143,10 @@ export class NewExamComponent implements OnInit, OnDestroy {
   async onSubmit() {
     if (true) {
       // Build correct date objects
-      const examDate = this.examDate.value/* new Date(this.regEndDate.value.year, this.examDate.value.month,
+      const examDate = this.examDate.value; /* new Date(this.regEndDate.value.year, this.examDate.value.month,
         this.examDate.value.day, this.examTime.value.hour, this.examTime.value.minute,
         this.examTime.value.second, 0); */
-      const regEndDate = this.regEndDate.value/* new Date(this.regEndDate.value.year, this.regEndDate.value.month,
+      const regEndDate = this.regEndDate.value; /* new Date(this.regEndDate.value.year, this.regEndDate.value.month,
         this.regEndDate.value.day, this.regEndTime.value.hour, this.regEndTime.value.minute,
         this.regEndTime.value.second, 0); */
 

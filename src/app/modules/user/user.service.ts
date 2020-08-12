@@ -76,7 +76,7 @@ export class UserService {
   }
 
   async setUserPassword(newPassword: string) {
-    const input = new UserInput;
+    const input = new UserInput();
     input.newPassword = newPassword;
     this.graphQlService
       .graphQl('updateUser', {
