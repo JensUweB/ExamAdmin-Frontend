@@ -1,0 +1,17 @@
+
+mat-card {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    width: 350px;
+    height: 350px;
+ }
+ mat-card-header {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+ }
+ mat-card-content {
+    flex-grow: 1;
+    overflow-x: hidden;
+ }

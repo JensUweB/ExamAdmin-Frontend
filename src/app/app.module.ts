@@ -29,6 +29,7 @@ import { MaterialModule } from './material-module';
 import { SentryErrorHandler } from './modules/services/sentry-error-handler.service';
 import { SharedModule } from './modules/shared/shared.module';
 import { PasswordResetComponent } from './modules/auth/components/password-reset/password-reset.component';
+import { LibraryModule } from './modules/library/library.module';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { PasswordResetComponent } from './modules/auth/components/password-reset
     FormsModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false /* environment.production */ }),
-    SharedModule
+    SharedModule,
+    LibraryModule,
   ],
   providers: [
     ExamService,

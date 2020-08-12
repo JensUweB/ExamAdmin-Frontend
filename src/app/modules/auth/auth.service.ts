@@ -191,9 +191,7 @@ export class AuthService {
               this.examService.fetchExams();
             }
           },
-          (err) => {
-            this.loginError(err);
-          }
+          (err) => {}
         );
     }
   }

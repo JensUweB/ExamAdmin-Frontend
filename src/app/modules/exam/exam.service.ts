@@ -1,23 +1,93 @@
 import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { Subscription, BehaviorSubject } from 'rxjs';
+import { Subscription, BehaviorSubject, Observable } from 'rxjs';
 import { normalizeDate } from '../helpers/date.helper';
 import { logError } from '../helpers/error.helpers';
+import { filter } from 'rxjs/operators';
+import { ToastService } from '../core/services/toast.service';
+import { Exam } from '../models/exam.model';
 
 const examsQuery = gql`
-query {getPlannedExams {
-  _id,title,description,examDate,regEndDate,examPlace, price, minRank
-  participants {
-    _id,firstName,lastName
-    martialArts {
-      _id {_id }, rankId
+  query getAllExams($minDate: DateTime!) {
+    getAllExams(minDate: $minDate) {
+      _id
+      title
+      description
+      examDate
+      regEndDate
+      examPlace
+      price
+      minRank
+      participants {
+        _id
+        firstName
+        lastName
+        martialArts {
+          _id {
+            _id
+          }
+          rankId
+        }
+      }
+      martialArt {
+        _id
+        name
+        styleName
+        ranks {
+          _id
+          name
+          number
+        }
+      }
+      examiner {
+        _id
+        firstName
+        lastName
+      }
     }
   }
+`;
+
+const userExamsQuery = gql`
+query getUserExams($minDate: DateTime!) {
+  getUserExams(minDate: $minDate) {
+    _id
+    title
+    description
+    examDate
+    regEndDate
+    examPlace
+    price
+    minRank
+    participants {
+      _id
+      firstName
+      lastName
+      martialArts {
+        _id {
+          _id
+        }
+        rankId
+      }
+    }
     martialArt {
-    _id,name,styleName, ranks{_id, name, number}
-  } examiner {
-    _id,firstName,lastName}}}
+      _id
+      name
+      styleName
+      ranks {
+        _id
+        name
+        number
+      }
+    }
+    examiner {
+      _id
+      firstName
+      lastName
+    }
+  }
+}
 `;
 
 const clubsQuery = gql`
@@ -34,88 +104,108 @@ export class ExamService {
   private currentExam;
   private _exams: BehaviorSubject<any[]> = new BehaviorSubject([]);
   public readonly exams = this._exams.asObservable();
-  editExam = false;
+  public editExam = false;
   private querySubscription: Subscription;
   private examinerClubs = [];
 
-  constructor(private apollo: Apollo) {}
-
-  printError(err) {
-    logError('[UserComponent]', err);
-    // this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+  constructor(private apollo: Apollo, private toastService: ToastService) {
+    this.fetchExams();
   }
 
   fetchExams() {
-    console.log('[ExamService] Fetching data...');
-    this.querySubscription = this.apollo
+    this.apollo
       .watchQuery<any>({
         query: examsQuery,
-        fetchPolicy: 'no-cache'
+        variables: {
+          minDate: new Date(Date.now()),
+        },
+        fetchPolicy: 'no-cache',
       })
       .valueChanges.subscribe(
-        response => {
+        (response) => {
           if (response.data) {
-            const exams = response.data.getPlannedExams;
-            console.log('[ExamService] Got some data. Preparing data...');
-            exams.forEach(exam => {
-              exam.examDate = normalizeDate(exam.examDate);
-              exam.regEndDate = normalizeDate(exam.regEndDate);
-              exam.isHidden = true;
-
-              if (exams) {
-                exams.forEach((item) => {
-                  if (item.participants) {
-                    item.participants.forEach(user => {
-                      if (Array.isArray(user.martialArts)) {
-                        user.martialArts = user.martialArts.filter(ma => ma._id._id === item.martialArt._id);
-
-                        if (user.martialArts[0]) {
-                          user.martialArts = {...item.martialArt.ranks.filter(rank => rank._id === user.martialArts[0].rankId)};
-                        }
-                      }
-                    });
-                  }
-                });
-              }
-              this._exams.next(exams);
-              console.log('[ExamService] Done.');
-            });
+            this._exams.next(this.processExams(response.data.getAllExams));
           }
         },
-        err => {
-          this.printError(err);
+        (err) => {
+          console.error(err);
+          this.toastService.error(
+            'Server Fehler!',
+            'Prüfungen konnten nicht abgefragt werden!'
+          );
         }
       );
-    this.querySubscription.unsubscribe();
+  }
+
+  /**
+   * Fetches all exams where the current user was either examiner or participant
+   * @param previousMonth the number of months you want to go back. e.g. '3' means, you get exams of the past three months
+   */
+  fetchUserExams(previousMonth: number = 0): Observable<Exam[]> {
+    const date = new Date(Date.now());
+    date.setMonth(date.getMonth() - previousMonth);
+
+    return new Observable((subscriber) => {
+      this.apollo
+      .watchQuery<any>({
+        query: userExamsQuery,
+        variables: {
+          minDate: date,
+        },
+        fetchPolicy: 'no-cache',
+      })
+      .valueChanges.subscribe(
+        (response) => {
+          if (response.data) {
+            subscriber.next(this.processExams(response.data.getUserExams));
+            subscriber.complete();
+          }
+        },
+        (err) => {
+          console.error(err);
+          this.toastService.error(
+            'Server Fehler!',
+            'Prüfungen konnten nicht abgefragt werden!'
+          );
+        }
+      );
+    });
+  }
+
+  processExams(exams) {
+    exams.forEach((exam) => {
+      exam.examDate = normalizeDate(exam.examDate);
+      exam.regEndDate = normalizeDate(exam.regEndDate);
+      exam.isHidden = true;
+
+      // Filter all participants martial arts list to get info about the participant related to the current exam
+      if (exams) {
+        exams.forEach((item) => {
+          if (item.participants) {
+            item.participants.forEach((user) => {
+              if (Array.isArray(user.martialArts)) {
+                user.martialArts = user.martialArts.filter(
+                  (ma) => ma._id._id === item.martialArt._id
+                );
+
+                if (user.martialArts[0]) {
+                  user.martialArts = {
+                    ...item.martialArt.ranks.filter(
+                      (rank) => rank._id === user.martialArts[0].rankId
+                    ),
+                  };
+                }
+              }
+            });
+          }
+        });
+      }
+    });
+    return exams;
   }
 
   setExam(exam) {
     this.currentExam = exam;
-    /*
-    this.currentExam.examiner.clubs.forEach(ele => {
-      this.apollo
-        .watchQuery<any>({
-          query: clubsQuery,
-          variables: {
-            id: ele.club._id
-          },
-          fetchPolicy: "no-cache"
-        })
-        .valueChanges.subscribe(
-          response => {
-            if (response.data) {
-              this.examinerClubs.push(response.data.getClubById);
-            }
-          },
-          err => {
-            console.warn(
-              "[ExamService]: GraphQL Error:",
-              err.graphQLErrors[0].message
-            );
-          }
-        );
-    });
-    */
   }
 
   getExam() {

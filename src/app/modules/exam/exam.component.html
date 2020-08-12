@@ -4,79 +4,57 @@
       <div class="col-sm">
         <h1 i18n="Headline">Exams</h1>
       </div>
-      <div class="col-sm">
-        <!--button class="btn btn-primary" (click)="showPlanned = !showPlanned">{{showPlanned ? 'Show my previously created exams' : 'Show upcomming exams'}}</button-->
-      </div>
     </div>
     <div class="row">
-      <div class="col">
-        <mat-accordion>
-          <mat-expansion-panel *ngFor="let result of plannedExams">
-            <mat-expansion-panel-header>
-              <mat-panel-title style="min-width: 50%;">
-                {{result.title}}
-              </mat-panel-title>
-              <mat-panel-description i18n>
-                {{result.examDate}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div class="row">
-              <div class="col-sm">
-                <b i18n>Martial Art:</b>
-              </div>
-              <div class="col-sm">
-                <b>{{result.martialArt.styleName}} {{result.martialArt.name}}</b>
-              </div>
+      <mat-card  *ngFor="let result of plannedExams" class="float-left">
+        <mat-card-header>
+          <mat-card-title>
+            {{result.title}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{result.examDate}}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="w-100">
+          <h3><b>{{result.martialArt.name}}</b>, <span class="subtitle">{{result.martialArt.styleName}}</span></h3>
+          <div class="row">
+            <div class="col-sm">
+              <b i18n>Exam Date:</b>
             </div>
-            <div class="row">
-              <div class="col-sm">
-                <b i18n>Registration End Date:</b>
-              </div>
-              <div class="col-sm">
-                {{result.regEndDate}}
-              </div>
+            <div class="col-sm">
+              {{result.examDate}}
             </div>
-            <div class="row">
-              <div class="col-sm">
-                <b i18n>Exam Date:</b>
-              </div>
-              <div class="col-sm">
-                {{result.examDate}}
-              </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <b i18n>Registration End Date:</b>
             </div>
-            <div class="row">
-              <div class="col-sm">
-                <!--b i18n>Club:</b-->
-                <b i18n>Adress:</b>
-              </div>
-              <div class="col-sm">
-                <!--{{result.club.name}}<br-->
-                {{result.examPlace}}
-              </div>
+            <div class="col-sm">
+              {{result.regEndDate}}
             </div>
-            <div class="row">
-              <div class="col-sm">
-                <b i18n>Examiner:</b>
-              </div>
-              <div class="col-sm">
-                {{result.examiner.firstName}} {{result.examiner.lastName}}
-              </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <b i18n>Adress:</b>
             </div>
-            <div class="row">
-              <div class="col-sm">
-                <b i18n>Price:</b>
-              </div>
-              <div class="col-sm">
-                {{result.price}}
-              </div>
+            <div class="col-sm">
+              {{result.examPlace}}
             </div>
-            <mat-action-row>
-              <button mat-raised-button color="primary" class="mat-btn" (click)="showDetails(result)" i18n="Butotn"><mat-icon>details</mat-icon> Details</button>
-              <button *ngIf="result.examiner._id == user._id" mat-raised-button color="primary" class="mat-btn" (click)="showEdit(result)" i18n="Button"><mat-icon>edit</mat-icon> Edit</button>
-            </mat-action-row>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </div>
+          </div>
+          <div class="row">
+            <div class="col-sm">
+              <b i18n>Price:</b>
+            </div>
+            <div class="col-sm">
+              {{result.price}}
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" class="mat-btn" (click)="showDetails(result)" i18n="Butotn"><mat-icon>details</mat-icon> Details</button>
+          <button *ngIf="result.examiner._id === user._id" mat-raised-button color="primary" class="mat-btn" (click)="showEdit(result)" i18n="Button"><mat-icon>edit</mat-icon> Edit</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
   </div>
 </div>
