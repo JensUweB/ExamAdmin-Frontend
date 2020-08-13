@@ -109,7 +109,9 @@ export class ExamService {
   private examinerClubs = [];
 
   constructor(private apollo: Apollo, private toastService: ToastService) {
-    this.fetchExams();
+    if (this.apollo.getClient()) {
+      this.fetchExams();
+    }
   }
 
   fetchExams() {

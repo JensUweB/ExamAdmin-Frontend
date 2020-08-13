@@ -11,7 +11,6 @@ import { ExamComponent } from './modules/exam/exam.component';
 import { ClubComponent } from './modules/club/club.component';
 import { StartComponent } from './modules/start/start.component';
 import { ExamResultComponent } from './modules/exam/exam-result/exam-result.component';
-import { GraphQLModule } from './apollo.config';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExamDetailsComponent } from './modules/exam/exam-details/exam-details.component';
 import { ExamService } from './modules/exam/exam.service';
@@ -30,6 +29,7 @@ import { SentryErrorHandler } from './modules/services/sentry-error-handler.serv
 import { SharedModule } from './modules/shared/shared.module';
 import { PasswordResetComponent } from './modules/auth/components/password-reset/password-reset.component';
 import { LibraryModule } from './modules/library/library.module';
+import { CoreModule } from './modules/core/core.module';
 
 @NgModule({
   declarations: [
@@ -55,10 +55,10 @@ import { LibraryModule } from './modules/library/library.module';
     MaterialModule,
     AppRoutingModule,
     NgbModule,
-    GraphQLModule,
     FormsModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false /* environment.production */ }),
+    CoreModule,
     SharedModule,
     LibraryModule,
   ],
@@ -75,4 +75,5 @@ import { LibraryModule } from './modules/library/library.module';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
