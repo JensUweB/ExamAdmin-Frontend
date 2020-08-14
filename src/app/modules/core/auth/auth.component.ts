@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { Alert } from '../types/Alert';
-import { ToastService } from '../core/services/toast.service';
+import { Alert } from '../../types/Alert';
+import { ToastService } from '../../core/services/toast.service';
 
 
 @Component({

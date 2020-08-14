@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MartialArt } from '../../models/martialArt.model';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { logError } from '../../helpers/error.helpers';
+import { ToastService } from '../../core/services/toast.service';
 
 const maQuery = gql`{getAllMartialArts{_id, name, styleName, description,
   examiners{_id, firstName, lastName, martialArts{_id{_id, ranks{name}},rankId}},
@@ -20,16 +21,17 @@ export class MartialArtsService {
     hasUpdated = new Subject();
 
     constructor(
-        private apollo: Apollo,
-        private router: Router) {}
+      private apollo: Apollo,
+      private router: Router,
+      private toastService: ToastService,
+    ) {}
 
     printError(err) {
-      logError('[UserComponent]', err);
-      // this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+      console.error(err);
+      this.toastService.error('Server Fehler!',err);
     }
 
     async fetch() {
-      console.log('[MAService] Fetching Data...');
       await this.apollo.watchQuery<any>({
         query: maQuery,
         fetchPolicy: 'no-cache'
@@ -46,7 +48,6 @@ export class MartialArtsService {
             }
           });
         });
-        console.log('[MAService] Done!');
         this.maArray = data;
         this._martialArts.next(data);
       }, (err) => {

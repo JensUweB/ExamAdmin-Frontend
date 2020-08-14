@@ -8,7 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import gql from 'graphql-tag';
 import { Alert } from '../../../types/Alert';
 import { logError, getGraphQLError } from '../../../helpers/error.helpers';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '../../../core/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';

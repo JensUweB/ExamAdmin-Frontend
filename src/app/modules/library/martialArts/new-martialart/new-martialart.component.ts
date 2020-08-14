@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Alert } from '../../../types/Alert';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '../../../core/auth/auth.service';
 import { MartialArtsService } from '../martialArts.service';
 import { MartialArt } from '../../../models/martialArt.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';

@@ -4,7 +4,7 @@ import { MartialArtsService } from './martialArts.service';
 import { MartialArt } from '../../models/martialArt.model';
 import { Subscription } from 'rxjs';
 import { User } from '../../models/user.model';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 import { environment } from 'src/environments/environment';
 
 

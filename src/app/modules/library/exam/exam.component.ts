@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, } from '@angular/core';
 import { Router } from '@angular/router';
 import { ExamService } from './exam.service';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'app-exam',

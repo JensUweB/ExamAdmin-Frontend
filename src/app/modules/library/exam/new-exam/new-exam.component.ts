@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '../../../core/auth/auth.service';
 import { User } from '../../../models/user.model';
 import { MartialArt } from '../../../models/martialArt.model';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';

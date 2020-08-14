@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import gql from 'graphql-tag';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '../../../core/auth/auth.service';
 import { Apollo } from 'apollo-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Alert } from '../../../types/Alert';

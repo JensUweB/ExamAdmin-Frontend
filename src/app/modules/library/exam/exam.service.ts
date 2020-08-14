@@ -102,15 +102,16 @@ const clubsQuery = gql`
 export class ExamService {
   private currentExam;
   private _exams: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  private querySubscription: Subscription;
+  private user;
+
   public readonly exams = this._exams.asObservable();
   public editExam = false;
-  private querySubscription: Subscription;
-  private examinerClubs = [];
 
-  constructor(private apollo: Apollo, private toastService: ToastService) {
-    if (this.apollo.getClient()) {
-      this.fetchExams();
-    }
+  constructor(
+    private apollo: Apollo,
+    private toastService: ToastService
+  ) {
   }
 
   fetchExams() {
@@ -211,9 +212,5 @@ export class ExamService {
 
   getExam() {
     return this.currentExam;
-  }
-
-  getCurrentClubs() {
-    return this.examinerClubs;
   }
 }

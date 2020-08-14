@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ExamService } from '../exam.service';
 import { Exam } from '../../../models/exam.model';
 import { User } from '../../../models/user.model';
-import { AuthService } from '../../../auth/auth.service';
+import { AuthService } from '../../../core/auth/auth.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Alert } from '../../../types/Alert';
@@ -45,7 +45,6 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
   hasCheckedIn: boolean;
   editExam: boolean;
   examForm: FormGroup;
-  clubs;
   alerts: Alert[] = [];
   displayedColumns = ['name', 'rank'];
 
@@ -62,7 +61,6 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
     this.exam = this.examService.getExam();
     this.editExam = this.examService.editExam;
     this.subscription = this.authService.user.subscribe(data => this.user = data);
-    this.clubs = this.examService.getCurrentClubs();
     this.hasCheckedIn = this.exam.participants.some(user => user._id === this.user._id);
 
     if (this.exam.minRank !== undefined) {

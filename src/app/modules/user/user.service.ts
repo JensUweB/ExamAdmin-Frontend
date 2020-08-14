@@ -1,9 +1,8 @@
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../core/auth/auth.service';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Alert } from '../types/Alert';
 import { Injectable } from '@angular/core';
-import { getGraphQLError, logError } from '../helpers/error.helpers';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { normalizeDate } from '../helpers/date.helper';
 import { GraphQLService } from '../core/graphql/services/graphql.service';

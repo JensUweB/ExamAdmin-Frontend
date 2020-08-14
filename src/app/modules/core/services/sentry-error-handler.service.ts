@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/browser';
 import { Injectable, ErrorHandler } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 
