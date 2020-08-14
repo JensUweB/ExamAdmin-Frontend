@@ -1,0 +1,206 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 i18n>My Profile</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3 i18n>Personal data:</h3>
+      <form>
+        <div class="row">
+          <div class="col-sm">
+            <form [formGroup]="userForm">
+              <!-- First Name -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your first name</mat-label>
+                <input matInput type="text" [formControl]="firstName" minlength="3" required>
+                <mat-icon matPrefix>title</mat-icon>
+                <mat-hint i18n>Your first name</mat-hint>
+                <mat-error *ngIf="firstName.invalid" i18n>You must enter a valid name</mat-error>
+              </mat-form-field>
+              <br/>
+              <!-- Last Name -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your last name</mat-label>
+                <input matInput type="text" [formControl]="lastName" minlength="3" required>
+                <mat-icon matPrefix>title</mat-icon>
+                <mat-hint i18n>Your last name</mat-hint>
+                <mat-error *ngIf="lastName.invalid" i18n>You must enter a valid name</mat-error>
+              </mat-form-field>
+              <br/>
+              <!-- Email -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your last name</mat-label>
+                <input matInput type="email" [formControl]="email" minlength="3" required>
+                <mat-icon matPrefix>email</mat-icon>
+                <mat-hint i18n>Your email</mat-hint>
+                <mat-error *ngIf="email.invalid" i18n>You must enter a valid email</mat-error>
+              </mat-form-field>
+              <br/>
+              <!-- Current Password -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your current password</mat-label>
+                <input matInput type="password" [formControl]="password" minlength="3" i18n-placeholder placeholder="your current password" required>
+                <mat-icon matPrefix>security</mat-icon>
+                <mat-hint i18n>Your current password</mat-hint>
+                <mat-error *ngIf="password.invalid" i18n>You must enter your current password</mat-error>
+              </mat-form-field>
+              <br/>
+              <!-- New Password -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your current password</mat-label>
+                <input matInput type="password" [formControl]="newPassword" minlength="3" i18n-placeholder placeholder="new password">
+                <mat-icon matPrefix>security</mat-icon>
+                <mat-hint i18n>Choose a new pasword, if you like</mat-hint>
+                <mat-error *ngIf="newPassword.invalid" i18n>You must enter a password</mat-error>
+              </mat-form-field>
+              <br/>
+              <!-- Repeat New Password -->
+              <mat-form-field class="full-width">
+                <mat-label i18n>Your current password</mat-label>
+                <input matInput type="password" [formControl]="newPassword2" minlength="3" i18n-placeholder placeholder="repeat new password">
+                <mat-icon matPrefix>security</mat-icon>
+                <mat-hint i18n>Repeat your new pasword</mat-hint>
+                <mat-error *ngIf="newPassword2.invalid" i18n>You must enter a password</mat-error>
+              </mat-form-field>
+              <br/><br/>
+              <div class="row">
+                <div class="col-sm">
+                  <button  mat-raised-button color="primary" class="mat-btn" (click)="onUserUpdate()"><mat-icon>update</mat-icon> Update</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col">
+      <!--div class="row">
+        <div class="col-8">
+          <h4 i18n>Your Clubs:</h4>
+        </div>
+        <div class="col-4">
+          <button type="button" class="btn btn-sm btn-success" (click)="openPopup(clubPopup)">Add</button>
+        </div>
+      </div>
+      <div class="row" *ngFor="let club of user.clubs">
+        <div class="col-sm">
+          <a href="/user/#">{{club.club.name}}</a>
+        </div>
+      </div>
+      <hr-->
+    <br/>
+      <div class="row">
+        <div class="col-8">
+          <h4 i18n>Your Martial Arts:</h4>
+        </div>
+        <div class="col-4">
+          <button  mat-icon-button color="primary" class="mat-btn-primary" aria-label="Add a martial art to your profile" (click)="openPopup(maPopup)">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div *ngFor="let martialArt of user.martialArts" class="row">
+        <div class="col-8">
+          <a class="link" (click)="showMaDetails(martialArt._id)">{{martialArt._id.styleName}} {{martialArt._id.name}}</a>
+        </div>
+        <div class="col-4">
+          <b>{{martialArt._id.ranks[0].name}}</b>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row" *ngIf="alerts">
+    <div class="col">
+      <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+        <p><strong>{{alert.message}}</strong></p>
+      </ngb-alert>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col">
+      <h4 i18n>Exam Results:</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col" *ngIf="examResults">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="full-width" matSort>
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n> Martial Art</th>
+                <td mat-cell *matCellDef="let result"> {{result.martialArt.styleName}} {{result.martialArt.name}} </td>
+            </ng-container>
+
+            <!-- Rank Column -->
+            <ng-container matColumnDef="rank">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Rank</th>
+                <td mat-cell *matCellDef="let result">{{result.rank}}</td>
+            </ng-container>
+
+            <!-- Passed Column -->
+            <ng-container matColumnDef="result">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Passed</th>
+                <td mat-cell *matCellDef="let result">
+                  <div *ngIf="result.passed" i18n>passed</div>
+                  <div *ngIf="!result.passed" i18n>failed</div>
+                </td>
+            </ng-container>
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Date</th>
+                <td mat-cell *matCellDef="let result">{{result.date}}</td>
+            </ng-container>
+
+            <!-- Protocol Column -->
+            <ng-container matColumnDef="file">
+              <th mat-header-cell *matHeaderCellDef i18n>Protocol</th>
+              <td mat-cell *matCellDef="let result"><a mat-raised-button color="primary" class="mat-btn" (click)="downloadFile(result.reportUri, null)" i18n><mat-icon>cloud_download</mat-icon> download</a></td>
+          </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let result; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator #examResultPagination
+            [length]="examResults?.length"
+            [pageIndex]="0"
+            [pageSize]="5"
+            [pageSizeOptions]="[5, 10, 25, 50]">
+        </mat-paginator>
+      </div>
+    </div>
+    <div class="col" *ngIf="!examResults">
+      <b i18n>Sorry, but you don't have any exam results yet!</b>
+    </div>
+  </div>
+</div>
+
+<!-- A popup form for adding a new martial art to the user profile -->
+<ng-template #maPopup let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" i18n>Add a Martial Art</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p i18n>Hello, {{user.firstName}}!<br>
+      Here you can add a new martial art to your profile, if you want!</p>
+    <form [formGroup]="maForm">
+      <select class="form-control" formControlName="maId">
+        <option *ngFor="let ma of martialArts; let i = index" [value]="i">{{ma.styleName}} {{ma.name}}</option>
+      </select>
+      <select *ngIf="maId.value" class="form-control" formControlName="rankId">
+        <option *ngFor="let rank of martialArts[maId.value].ranks" [value]="rank._id">{{rank.name}}</option>
+      </select>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button mat-raised-button color="primary" class="mat-btn" (click)="onMaSubmit(); c('Save click')" i18n>Add Martial Art</button>
+  </div>
+</ng-template>
