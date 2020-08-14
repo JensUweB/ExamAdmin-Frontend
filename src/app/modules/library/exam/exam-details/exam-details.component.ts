@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ExamService } from '../exam.service';
-import { Exam } from '../../../models/exam.model';
-import { User } from '../../../models/user.model';
+import { Exam } from '../../../core/classes/exam.class';
+import { User } from '../../../core/classes/user.class';
 import { AuthService } from '../../../core/auth/auth.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';

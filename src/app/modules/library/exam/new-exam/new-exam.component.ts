@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { AuthService } from '../../../core/auth/auth.service';
-import { User } from '../../../models/user.model';
-import { MartialArt } from '../../../models/martialArt.model';
+import { User } from '../../../core/classes/user.class';
+import { MartialArt } from '../../../core/classes/martialArt.class';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';

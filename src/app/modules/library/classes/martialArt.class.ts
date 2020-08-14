@@ -1,4 +1,4 @@
-import { User } from './user.model';
+import { User } from './user.class';
 
 export class MartialArt {
     _id: string;

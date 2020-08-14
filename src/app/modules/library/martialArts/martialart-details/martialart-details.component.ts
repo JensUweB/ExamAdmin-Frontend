@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { MartialArt } from '../../../models/martialArt.model';
+import { MartialArt } from '../../../core/classes/martialArt.class';
 import { MartialArtsService } from '../martialArts.service';
-import { User } from '../../../models/user.model';
+import { User } from '../../../core/classes/user.class';
 import { Apollo } from 'apollo-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

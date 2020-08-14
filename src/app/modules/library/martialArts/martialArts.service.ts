@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
-import { MartialArt } from '../../models/martialArt.model';
+import { MartialArt } from '../../core/classes/martialArt.class';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { logError } from '../../shared/helpers/error.helpers';
 import { ToastService } from '../../core/services/toast.service';

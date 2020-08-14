@@ -1,4 +1,4 @@
-import { MartialArt } from './martialArt.model';
+import { MartialArt } from './martialArt.class';
 
 export class MaRank {
     _id: MartialArt;

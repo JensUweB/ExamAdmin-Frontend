@@ -1,5 +1,5 @@
-import { User } from './user.model';
-import { Exam } from './exam.model';
+import { User } from './user.class';
+import { Exam } from './exam.class';
 
 export class ExamResult {
     _id: string;

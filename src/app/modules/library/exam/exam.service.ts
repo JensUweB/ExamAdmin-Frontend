@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
 import { normalizeDate } from '../../shared/helpers/date.helper';
 import { ToastService } from '../../core/services/toast.service';
-import { Exam } from '../../models/exam.model';
+import { Exam } from '../../core/classes/exam.class';
 
 const examsQuery = gql`
   query getAllExams($minDate: DateTime!) {

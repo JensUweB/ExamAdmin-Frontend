@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
-import { User } from '../../models/user.model';
+import { User } from '../classes/user.class';
 import { Alert } from '../../types/Alert';
 import { getStatusCode } from '../../shared/helpers/error.helpers';
 import { ExamService } from '../../library/exam/exam.service';

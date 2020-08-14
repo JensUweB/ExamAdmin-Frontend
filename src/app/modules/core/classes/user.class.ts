@@ -1,6 +1,6 @@
-import { Club } from './club.model';
-import { MartialArt } from './martialArt.model';
-import { MaRank } from './maRank.model';
+import { Club } from './club.class';
+import { MartialArt } from './martialArt.class';
+import { MaRank } from './maRank.class';
 
 export class User {
     _id: string;
