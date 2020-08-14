@@ -4,7 +4,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { Apollo } from 'apollo-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Alert } from '../../../types/Alert';
-import { logError, getGraphQLError } from '../../../helpers/error.helpers';
+import { logError, getGraphQLError } from '../../../shared/helpers/error.helpers';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

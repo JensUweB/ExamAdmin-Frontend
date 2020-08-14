@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { Alert } from '../../types/Alert';
-import { getStatusCode } from '../../helpers/error.helpers';
+import { getStatusCode } from '../../shared/helpers/error.helpers';
 import { ExamService } from '../../library/exam/exam.service';
 import { MartialArtsService } from '../../library/martialArts/martialArts.service';
 import { GraphQLService } from '../../core/graphql/services/graphql.service';

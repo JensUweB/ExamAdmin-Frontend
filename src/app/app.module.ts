@@ -4,12 +4,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserComponent } from './modules/user/user.component';
 import { StartComponent } from './modules/start/start.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { UserService } from './modules/user/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainNavComponent, FeedbackDialogComponent } from './modules/main-nav/main-nav.component';
 import { MaterialModule } from './material-module';
@@ -22,7 +20,6 @@ import { CoreModule } from './modules/core/core.module';
   declarations: [
     AppComponent,
     StartComponent,
-    UserComponent,
     MainNavComponent,
     FeedbackDialogComponent,
   ],
@@ -40,7 +37,6 @@ import { CoreModule } from './modules/core/core.module';
     LibraryModule,
   ],
   providers: [
-    UserService,
     // Sends error report to sentry, if unhandled error occurs
     {
       provide: ErrorHandler,

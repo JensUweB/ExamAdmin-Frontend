@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import gql from 'graphql-tag';
 import { Alert } from '../../../types/Alert';
-import { logError, getGraphQLError } from '../../../helpers/error.helpers';
+import { logError, getGraphQLError } from '../../../shared/helpers/error.helpers';
 import { AuthService } from '../../../core/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';

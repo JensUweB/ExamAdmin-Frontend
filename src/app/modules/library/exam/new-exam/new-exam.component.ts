@@ -10,8 +10,7 @@ import { Apollo } from 'apollo-angular';
 import { Alert } from '../../../types/Alert';
 import { ExamService } from '../exam.service';
 import { MartialArtsService } from '../../martialArts/martialArts.service';
-import { logError, getGraphQLError } from '../../../helpers/error.helpers';
-import { environment } from 'src/environments/environment';
+import { logError, getGraphQLError } from '../../../shared/helpers/error.helpers';
 
 const newExamQuery = gql`mutation createExam
 ($title: String!, $description: String!, $price: String!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!,

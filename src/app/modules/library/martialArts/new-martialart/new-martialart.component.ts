@@ -10,7 +10,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { logError, getGraphQLError } from '../../../helpers/error.helpers';
+import { logError, getGraphQLError } from '../../../shared/helpers/error.helpers';
 import { environment } from 'src/environments/environment';
 
 const newMA = gql`mutation createMartialArt

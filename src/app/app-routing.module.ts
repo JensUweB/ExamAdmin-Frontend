@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './modules/core/auth/auth.component';
-import { UserComponent } from './modules/user/user.component';
+import { UserComponent } from './modules/core/user/user.component';
 import { StartComponent } from './modules/start/start.component';
 import { ExamComponent } from './modules/library/exam/exam.component';
 import { MartialArtsComponent } from './modules/library/martialArts/martialArts.component';

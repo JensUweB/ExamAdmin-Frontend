@@ -9,7 +9,7 @@ import { Alert } from '../../../types/Alert';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { getGraphQLError, logError } from '../../../helpers/error.helpers';
+import { getGraphQLError, logError } from '../../../shared/helpers/error.helpers';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

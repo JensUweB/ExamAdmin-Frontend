@@ -1,14 +1,13 @@
-import { AuthService } from '../core/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Alert } from '../types/Alert';
+import { Alert } from '../../types/Alert';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { normalizeDate } from '../helpers/date.helper';
-import { GraphQLService } from '../core/graphql/services/graphql.service';
-import { ToastService } from '../core/services/toast.service';
-import { GraphQLType } from '../core/graphql/enums/graphql-type.enum';
-import { User } from '../models/user.model';
+import { BehaviorSubject } from 'rxjs';
+import { normalizeDate } from '../../shared/helpers/date.helper';
+import { GraphQLService } from '../graphql/services/graphql.service';
+import { ToastService } from '../services/toast.service';
+import { GraphQLType } from '../graphql/enums/graphql-type.enum';
 import { UserInput } from './inputs/user.input';
 
 const queryExamResults = gql`

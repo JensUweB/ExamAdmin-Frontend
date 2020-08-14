@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
-import { normalizeDate } from '../../helpers/date.helper';
-import { logError } from '../../helpers/error.helpers';
+import { normalizeDate } from '../../shared/helpers/date.helper';
 import { ToastService } from '../../core/services/toast.service';
 import { Exam } from '../../models/exam.model';
 

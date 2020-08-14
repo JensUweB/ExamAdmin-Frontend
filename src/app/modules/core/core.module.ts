@@ -10,6 +10,7 @@ import { SentryErrorHandler } from './services/sentry-error-handler.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from 'src/app/material-module';
+import { UserModule } from './user/user.module';
 
 
 
@@ -21,6 +22,7 @@ import { MaterialModule } from 'src/app/material-module';
     NgbModule,
     GraphqlModule,
     MaterialModule,
+    UserModule,
   ],
   declarations: [
     AuthComponent,
