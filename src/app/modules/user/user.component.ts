@@ -6,8 +6,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ClubService } from '../club/club.service';
-import { MartialArtsService } from '../martialArts/martialArts.service';
+import { MartialArtsService } from '../library/martialArts/martialArts.service';
 import { Alert } from '../types/Alert';
 import { Subscription } from 'rxjs';
 import { UserService } from './user.service';
@@ -52,7 +51,6 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
     private apollo: Apollo,
     private authService: AuthService,
     private userService: UserService,
-    private clubService: ClubService,
     private maService: MartialArtsService,
     private router: Router,
     private http: HttpClient,
@@ -107,19 +105,6 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
 
   openPopup(content) {
     this.modalService.open(content);
-  }
-
-  onClubSubmit() {
-    this.apollo.mutate<any>({
-      mutation: clubMutation,
-      variables: {
-        id: this.clubId.value
-      }
-    }).subscribe((response) => {
-      if (response.errors) { console.log('[User] ', response.errors ); }
-    }, (err) => {
-      this.printError(err);
-    });
   }
 
   async onMaSubmit() {

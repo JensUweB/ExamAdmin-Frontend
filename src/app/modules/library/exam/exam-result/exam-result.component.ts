@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import gql from 'graphql-tag';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../../auth/auth.service';
 import { Apollo } from 'apollo-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Alert } from '../../types/Alert';
-import { logError, getGraphQLError } from '../../helpers/error.helpers';
+import { Alert } from '../../../types/Alert';
+import { logError, getGraphQLError } from '../../../helpers/error.helpers';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

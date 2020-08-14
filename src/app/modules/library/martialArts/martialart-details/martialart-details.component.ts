@@ -1,18 +1,16 @@
 import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { MartialArt } from '../../models/martialArt.model';
+import { MartialArt } from '../../../models/martialArt.model';
 import { MartialArtsService } from '../martialArts.service';
-import { User } from '../../models/user.model';
+import { User } from '../../../models/user.model';
 import { Apollo } from 'apollo-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import gql from 'graphql-tag';
-import { Alert } from '../../types/Alert';
-import { logError, getGraphQLError } from '../../helpers/error.helpers';
-import { AuthService } from '../../auth/auth.service';
+import { Alert } from '../../../types/Alert';
+import { logError, getGraphQLError } from '../../../helpers/error.helpers';
+import { AuthService } from '../../../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { environment } from 'src/environments/environment';
 
 const query = gql`mutation addExaminer($maId: String!, $email: String!)

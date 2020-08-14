@@ -180,31 +180,6 @@
   </div>
 </div>
 
-<!-- Popup form for adding a new club to the user profile -->
-<ng-template #clubPopup let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title" i18n>Add a Club</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <p i18n>Hello, {{user.firstName}}!<br>
-      Here you can add a new club to your profile, if you want!</p>
-    <form [formGroup]="clubForm">
-      <div class="form-group">
-        <label i18n>Club list</label>
-        <select class="form-control" formControlName="clubId">
-          <option *ngFor="let club of clubs" [value]="club._id">{{club.name}}</option>
-        </select>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button mat-raised-button color="primary" class="mat-btn" (click)="onClubSubmit(); c('Save click')" i18n>Add Club</button>
-  </div>
-</ng-template>
-
 <!-- A popup form for adding a new martial art to the user profile -->
 <ng-template #maPopup let-c="close" let-d="dismiss">
   <div class="modal-header">

@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ExamService } from '../exam.service';
-import { Exam } from '../../models/exam.model';
-import { User } from '../../models/user.model';
-import { AuthService } from '../../auth/auth.service';
+import { Exam } from '../../../models/exam.model';
+import { User } from '../../../models/user.model';
+import { AuthService } from '../../../auth/auth.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { Alert } from '../../types/Alert';
+import { Alert } from '../../../types/Alert';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { getGraphQLError, logError } from '../../helpers/error.helpers';
+import { getGraphQLError, logError } from '../../../helpers/error.helpers';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

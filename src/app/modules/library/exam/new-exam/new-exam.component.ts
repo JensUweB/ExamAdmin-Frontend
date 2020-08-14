@@ -1,17 +1,16 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { AuthService } from '../../auth/auth.service';
-import { User } from '../../models/user.model';
-import { MartialArt } from '../../models/martialArt.model';
+import { AuthService } from '../../../auth/auth.service';
+import { User } from '../../../models/user.model';
+import { MartialArt } from '../../../models/martialArt.model';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { Alert } from '../../types/Alert';
+import { Alert } from '../../../types/Alert';
 import { ExamService } from '../exam.service';
-import { Exam } from '../../models/exam.model';
 import { MartialArtsService } from '../../martialArts/martialArts.service';
-import { logError, getGraphQLError } from '../../helpers/error.helpers';
+import { logError, getGraphQLError } from '../../../helpers/error.helpers';
 import { environment } from 'src/environments/environment';
 
 const newExamQuery = gql`mutation createExam

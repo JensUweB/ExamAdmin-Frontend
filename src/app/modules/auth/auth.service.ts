@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { Alert } from '../types/Alert';
 import { getStatusCode } from '../helpers/error.helpers';
-import { ExamService } from '../exam/exam.service';
-import { MartialArtsService } from '../martialArts/martialArts.service';
+import { ExamService } from '../library/exam/exam.service';
+import { MartialArtsService } from '../library/martialArts/martialArts.service';
 import { GraphQLService } from '../core/graphql/services/graphql.service';
 import { ToastService } from '../core/services/toast.service';
 

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
-import { MartialArt } from '../models/martialArt.model';
+import { MartialArt } from '../../models/martialArt.model';
 import { Subject, BehaviorSubject } from 'rxjs';
-import { logError } from '../helpers/error.helpers';
+import { logError } from '../../helpers/error.helpers';
 
 const maQuery = gql`{getAllMartialArts{_id, name, styleName, description,
   examiners{_id, firstName, lastName, martialArts{_id{_id, ranks{name}},rankId}},

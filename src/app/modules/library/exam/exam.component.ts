@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy, } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
 import { ExamService } from './exam.service';
 import { Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-exam',

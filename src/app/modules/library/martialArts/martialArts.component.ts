@@ -1,12 +1,10 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
-import gql from 'graphql-tag';
 import { MartialArtsService } from './martialArts.service';
-import { MartialArt } from '../models/martialArt.model';
+import { MartialArt } from '../../models/martialArt.model';
 import { Subscription } from 'rxjs';
-import { User } from '../models/user.model';
-import { AuthService } from '../auth/auth.service';
+import { User } from '../../models/user.model';
+import { AuthService } from '../../auth/auth.service';
 import { environment } from 'src/environments/environment';
 
 

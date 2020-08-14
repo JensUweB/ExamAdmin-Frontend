@@ -1,16 +1,16 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Alert } from '../../types/Alert';
+import { Alert } from '../../../types/Alert';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../../auth/auth.service';
 import { MartialArtsService } from '../martialArts.service';
-import { MartialArt } from '../../models/martialArt.model';
+import { MartialArt } from '../../../models/martialArt.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { logError, getGraphQLError } from '../../helpers/error.helpers';
+import { logError, getGraphQLError } from '../../../helpers/error.helpers';
 import { environment } from 'src/environments/environment';
 
 const newMA = gql`mutation createMartialArt
