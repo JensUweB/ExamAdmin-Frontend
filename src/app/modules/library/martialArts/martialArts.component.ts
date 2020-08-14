@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MartialArtsService } from './martialArts.service';
-import { MartialArt } from '../../core/classes/martialArt.class';
+import { MartialArt } from '../classes/martialArt.class';
 import { Subscription } from 'rxjs';
 import { User } from '../../core/classes/user.class';
 import { AuthService } from '../../core/auth/auth.service';

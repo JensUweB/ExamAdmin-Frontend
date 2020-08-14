@@ -1,6 +1,6 @@
-import { Club } from './club.class';
-import { MartialArt } from './martialArt.class';
-import { MaRank } from './maRank.class';
+import { Club } from '../../library/classes/club.class';
+import { MartialArt } from '../../library/classes/martialArt.class';
+import { MaRank } from '../../library/classes/maRank.class';
 
 export class User {
     _id: string;

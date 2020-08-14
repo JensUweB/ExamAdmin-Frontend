@@ -5,7 +5,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { AuthService } from '../../../core/auth/auth.service';
 import { MartialArtsService } from '../martialArts.service';
-import { MartialArt } from '../../../core/classes/martialArt.class';
+import { MartialArt } from '../../classes/martialArt.class';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

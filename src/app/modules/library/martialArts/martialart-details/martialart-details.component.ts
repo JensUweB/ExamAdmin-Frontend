@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, ChangeDetectorRef, ViewChild } from '@angular/core';
-import { MartialArt } from '../../../core/classes/martialArt.class';
+import { MartialArt } from '../../classes/martialArt.class';
 import { MartialArtsService } from '../martialArts.service';
 import { User } from '../../../core/classes/user.class';
 import { Apollo } from 'apollo-angular';

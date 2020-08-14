@@ -13,7 +13,7 @@ import { UserService } from './user.service';
 import { getGraphQLError, logError } from '../../shared/helpers/error.helpers';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ExamResult } from '../classes/examResult.class';
+import { ExamResult } from '../../library/classes/examResult.class';
 import { MatSort } from '@angular/material/sort';
 import { environment } from 'src/environments/environment';
 import { UserInput } from './inputs/user.input';

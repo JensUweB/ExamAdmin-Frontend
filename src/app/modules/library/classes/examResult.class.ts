@@ -1,4 +1,4 @@
-import { User } from './user.class';
+import { User } from '../../core/classes/user.class';
 import { Exam } from './exam.class';
 
 export class ExamResult {

@@ -1,5 +1,5 @@
 import { MartialArt } from './martialArt.class';
-import { User } from './user.class';
+import { User } from '../../core/classes/user.class';
 
 export class Club {
     _id: string;

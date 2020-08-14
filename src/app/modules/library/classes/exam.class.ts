@@ -1,5 +1,5 @@
 import { Club } from './club.class';
-import { User } from './user.class';
+import { User } from '../../core/classes/user.class';
 import { MartialArt } from './martialArt.class';
 
 export class Exam {
