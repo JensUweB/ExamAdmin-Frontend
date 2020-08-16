@@ -12,6 +12,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { logError, getGraphQLError } from '../../../shared/helpers/error.helpers';
 import { environment } from 'src/environments/environment';
+import { ToastService } from 'src/app/modules/core/services/toast.service';
+import { Helper } from 'src/app/modules/core/classes/helper.class';
 
 const newMA = gql`mutation createMartialArt
 ($name: String!, $styleName: String!, $description: String!, $ranks: [RankInput!], $userId: String!)
@@ -44,7 +46,6 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   martialArts: MartialArt[];
   form: FormGroup;
-  alerts: Alert[] = [];
   showRanks = false;
   private user;
 
@@ -52,6 +53,7 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
     private apollo: Apollo,
     private fb: FormBuilder,
     private authService: AuthService,
+    private toastService: ToastService,
     private maService: MartialArtsService,
     private router: Router,
     private modalService: NgbModal,
@@ -84,11 +86,6 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  printError(err) {
-    logError('[UserComponent]', err);
-    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
-  }
-
   addRankGroup(_id: string, name: string, num: number) {
     return this.fb.group({
       _id,
@@ -116,8 +113,6 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
   }
 
   async onSubmit() {
-    if (!environment.production) { console.log('[NewMartialArtComp] Creating new martial art...'); }
-
     // Cycle through the ranks array and set the correct rank numbers
     const ranks = this.ranks.value;
     for (let i = 0; i < ranks.length; i++) {
@@ -136,18 +131,16 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
       },
     }).subscribe(response => {
       if (response.data) {
-        this.alerts.push({type: 'success', message: 'New martial art was created!'});
-        if (!environment.production) { console.log('[NewMartialArtComp] Done.'); }
+        this.toastService.success(Helper.locales.successTitle, $localize`New martial art created!`);
       }
     }, (err) => {
-      this.printError(err);
+      console.error(err);
+      this.toastService.error(Helper.locales.serverErrorTitle, $localize`Could not create martial art`);
     });
     this.maService.fetch();
   }
 
   async onUpdate() {
-    if (!environment.production) { console.log('[NewMartialArtComp] Updating martial art...'); }
-
     // Cycle through the ranks array and set the correct rank numbers
     const ranks = this.ranks.value;
     for (let i = 0; i < ranks.length; i++) {
@@ -174,11 +167,11 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
       if (response.data) {
         this.maService.fetch();
         this.authService.loadUser();
-        this.alerts.push({type: 'success', message: 'Martial art was updated!'});
-        console.log('[NewMartialArtComp] Done.');
+        this.toastService.success(Helper.locales.successTitle, $localize`Martial art updated!`);
       }
     }, (err) => {
-      this.printError(err);
+      console.error(err);
+      this.toastService.error(Helper.locales.serverErrorTitle, $localize`Could not update martial art.`);
     });
   }
 
@@ -214,10 +207,6 @@ export class NewMartialartComponent implements OnInit, OnDestroy {
 
   get description() {
     return this.form.get('description');
-  }
-
-  close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert));
   }
 
   drop(event: CdkDragDrop<FormArray>) {

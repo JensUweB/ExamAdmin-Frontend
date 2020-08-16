@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
-import { normalizeDate } from '../../shared/helpers/date.helper';
 import { ToastService } from '../../core/services/toast.service';
 import { Exam } from '../classes/exam.class';
+import { Helper } from '../../core/classes/helper.class';
 
 const examsQuery = gql`
   query getAllExams($minDate: DateTime!) {
@@ -101,8 +101,7 @@ const clubsQuery = gql`
 export class ExamService {
   private currentExam;
   private _exams: BehaviorSubject<any[]> = new BehaviorSubject([]);
-  private querySubscription: Subscription;
-  private user;
+  private loadErrMsg = $localize`Could not load exams.`;
 
   public readonly exams = this._exams.asObservable();
   public editExam = false;
@@ -131,8 +130,8 @@ export class ExamService {
         (err) => {
           console.error(err);
           this.toastService.error(
-            'Server Fehler!',
-            'Prüfungen konnten nicht abgefragt werden!'
+            Helper.locales.serverErrorTitle,
+            this.loadErrMsg
           );
         }
       );
@@ -165,8 +164,8 @@ export class ExamService {
         (err) => {
           console.error(err);
           this.toastService.error(
-            'Server Fehler!',
-            'Prüfungen konnten nicht abgefragt werden!'
+            Helper.locales.serverErrorTitle,
+            this.loadErrMsg
           );
         }
       );
@@ -175,8 +174,8 @@ export class ExamService {
 
   processExams(exams) {
     exams.forEach((exam) => {
-      exam.examDate = normalizeDate(exam.examDate);
-      exam.regEndDate = normalizeDate(exam.regEndDate);
+      exam.examDate = Helper.normalizeDate(exam.examDate);
+      exam.regEndDate = Helper.normalizeDate(exam.regEndDate);
       exam.isHidden = true;
 
       // Filter all participants martial arts list to get info about the participant related to the current exam

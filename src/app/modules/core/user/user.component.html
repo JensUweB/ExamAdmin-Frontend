@@ -111,16 +111,6 @@
       </div>
     </div>
   </div>
-  <br>
-  <div class="row" *ngIf="alerts">
-    <div class="col">
-      <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
-        <p><strong>{{alert.message}}</strong></p>
-      </ngb-alert>
-    </div>
-  </div>
-  <br>
-  <br>
   <div class="row">
     <div class="col">
       <h4 i18n>Exam Results:</h4>

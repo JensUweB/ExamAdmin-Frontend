@@ -6,6 +6,7 @@ import { MartialArt } from '../classes/martialArt.class';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { logError } from '../../shared/helpers/error.helpers';
 import { ToastService } from '../../core/services/toast.service';
+import { Helper } from '../../core/classes/helper.class';
 
 const maQuery = gql`{getAllMartialArts{_id, name, styleName, description,
   examiners{_id, firstName, lastName, martialArts{_id{_id, ranks{name}},rankId}},
@@ -22,14 +23,8 @@ export class MartialArtsService {
 
     constructor(
       private apollo: Apollo,
-      private router: Router,
       private toastService: ToastService,
     ) {}
-
-    printError(err) {
-      console.error(err);
-      this.toastService.error('Server Fehler!',err);
-    }
 
     async fetch() {
       await this.apollo.watchQuery<any>({
@@ -51,7 +46,8 @@ export class MartialArtsService {
         this.maArray = data;
         this._martialArts.next(data);
       }, (err) => {
-        this.printError(err);
+        console.error(err);
+        this.toastService.error(Helper.locales.serverErrorTitle, $localize`Could not load martial arts`);
       });
     }
 

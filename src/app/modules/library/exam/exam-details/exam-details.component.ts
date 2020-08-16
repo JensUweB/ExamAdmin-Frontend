@@ -12,6 +12,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { getGraphQLError, logError } from '../../../shared/helpers/error.helpers';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ToastService } from 'src/app/modules/core/services/toast.service';
+import { Helper } from 'src/app/modules/core/classes/helper.class';
 
 const query = gql`mutation registerToExam($examId: String!){registerToExam(examId: $examId)}`;
 const unregister = gql`mutation unregisterFromExam($examId: String!){unregisterFromExam(examId: $examId)}`;
@@ -45,12 +47,12 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
   hasCheckedIn: boolean;
   editExam: boolean;
   examForm: FormGroup;
-  alerts: Alert[] = [];
   displayedColumns = ['name', 'rank'];
 
   constructor(
     private examService: ExamService,
     private authService: AuthService,
+    private toastService: ToastService,
     private apollo: Apollo,
     private fb: FormBuilder,
     private router: Router,
@@ -91,10 +93,8 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
       price: [this.exam.price, Validators.required],
       examDate: [this.exam.examDate, Validators.required],
       regEndDate: [this.exam.regEndDate, Validators.required],
-      // club: [this.exam.club._id],
       examiner: [this.exam.examiner._id, Validators.required],
       martialArt: [this.exam.martialArt._id, Validators.required],
-      // isPublic: [this.exam.isPublic],
     });
 
   }
@@ -103,8 +103,8 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
   }
 
   printError(err) {
-    logError('[UserComponent]', err);
-    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+    console.error(err);
+    this.toastService.error(Helper.locales.serverErrorTitle, $localize`An unexpected server error occured!`);
   }
 
   onCheckIn() {
@@ -117,7 +117,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
       if (response.data) {
         this.hasCheckedIn = true;
         this.exam.participants.push(this.user);
-        this.alerts.push({type: 'success', message: 'Success! You are now registered as participant.'});
+        this.toastService.success(Helper.locales.successTitle, $localize`You have successfully registered for this exam`);
       }
     }, (err) => {
       this.printError(err);
@@ -133,15 +133,14 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
       if (response.data) {
         this.hasCheckedIn = false;
         this.exam.participants = this.exam.participants.filter(user => user._id !== this.user._id);
-        this.alerts.push({type: 'success', message: 'Success! You are now removed from the participants list.'});
+        this.toastService.success(Helper.locales.successTitle, $localize`You have successfully logged out of this exam`);
       }
     }, (err) => {
       if (err.graphQLErrors[0]) {
-        this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+        this.printError(err.graphQLErrors[0]);
       } else {
-        this.alerts.push({type: 'danger', message: err});
+        this.printError(err);
       }
-      console.warn('[Exam]: GraphQL Error:', JSON.stringify(err));
     });
   }
 
@@ -169,8 +168,7 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
         }
       }).subscribe((response) => {
         this.examService.fetchExams();
-        this.alerts.push({type: 'success', message: 'Update Successful!'});
-        if (!environment.production) { console.log('[ExamDetails] Update Successful!'); }
+        this.toastService.success(Helper.locales.successTitle, $localize`Exam details have been updated`);
       }, (err) => {
         this.printError(err);
       });
@@ -184,16 +182,11 @@ export class ExamDetailsComponent implements OnInit, OnDestroy {
         examId: this.exam._id
       }
     }).subscribe((response) => {
-      this.alerts.push({type: 'success', message: 'Delete Successful!'});
-      if (!environment.production) { console.log('[ExamDetails] Update Successful!'); }
+      this.toastService.success(Helper.locales.successTitle, $localize`Delete successfull!`);
       this.router.navigate(['/exams']);
     }, (err) => {
       this.printError(err);
     });
-  }
-
-  close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 
   openPopup(content) {

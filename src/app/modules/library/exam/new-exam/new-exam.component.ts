@@ -7,10 +7,10 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { Alert } from '../../../types/Alert';
 import { ExamService } from '../exam.service';
 import { MartialArtsService } from '../../martialArts/martialArts.service';
-import { logError, getGraphQLError } from '../../../shared/helpers/error.helpers';
+import { ToastService } from 'src/app/modules/core/services/toast.service';
+import { Helper } from 'src/app/modules/core/classes/helper.class';
 
 const newExamQuery = gql`mutation createExam
 ($title: String!, $description: String!, $price: String!, $address: String!, $examDate: DateTime!, $regEndDate: DateTime!,
@@ -43,13 +43,13 @@ export class NewExamComponent implements OnInit, OnDestroy {
   martialArts: MartialArt[] = [];
   examForm: FormGroup;
   isSubmitted = false;
-  alerts: Alert[] = [];
   @ViewChild('examDatePicker') examDatePicker: any;
   @ViewChild('regEndDatePicker') regEndDatePicker: any;
 
   constructor(
     private apollo: Apollo,
     private authService: AuthService,
+    private toastService: ToastService,
     private maService: MartialArtsService,
     private examService: ExamService,
     config: NgbTimepickerConfig,
@@ -86,11 +86,6 @@ export class NewExamComponent implements OnInit, OnDestroy {
     });
 
     if (this.martialArts.length > 0) { this.isExaminer = true; }
-  }
-
-  printError(err) {
-    console.error(err);
-    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   get martialArt() {
@@ -139,7 +134,7 @@ export class NewExamComponent implements OnInit, OnDestroy {
   // ($title: String!, $description: String!, $examDate: Date!, $regEndDate: Date!,
   // $isPublic: Boolean, $clubId: String!, $userId: String, $maId: String!)
   async onSubmit() {
-    if (true) {
+    if (this.examForm.valid) {
       // Build correct date objects
       const examDate = this.examDate.value; /* new Date(this.regEndDate.value.year, this.examDate.value.month,
         this.examDate.value.day, this.examTime.value.hour, this.examTime.value.minute,
@@ -167,16 +162,14 @@ export class NewExamComponent implements OnInit, OnDestroy {
         }
       }).subscribe(response => {
         this.examService.fetchExams();
-        this.alerts.push({type: 'success', message: 'Success! A new exam was created.'});
+        this.toastService.success($localize`Exam created!`, $localize`A new exam was created successfully.`);
       }, (err) => {
         console.error(err);
+        this.toastService.error(Helper.locales.serverErrorTitle, $localize`Could not create exam.`);
       });
       this.isSubmitted = true;
     } else {
-      this.printError('Your form is not valid!');
+      this.toastService.error($localize`User Error`, $localize`The form is not valid. Please fill out all required fields.`);
     }
-  }
-  close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert), 1);
   }
 }
