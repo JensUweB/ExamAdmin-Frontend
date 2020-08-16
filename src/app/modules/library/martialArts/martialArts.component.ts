@@ -25,15 +25,14 @@ export class MartialArtsComponent implements OnInit, OnDestroy {
     public maService: MartialArtsService,
     private authService: AuthService,
     private router: Router,
-    private cdr: ChangeDetectorRef
   ) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.userSubscription = this.authService.user.subscribe(data => {
       this.user = data;
     });
-    await this.maService.fetch();
+    this.maService.fetch();
     this.subscription = this.maService.martialArts
     .subscribe(data => {
       this.martialArts = data;
@@ -42,7 +41,6 @@ export class MartialArtsComponent implements OnInit, OnDestroy {
         // Check for each martial art if user is allowed to change it
         this.martialArts.forEach(ma => ma.canEdit = ma.examiners.some(item => item._id === this.user._id));
       }
-      if (!environment.production) { console.log('[MAComponent] Data fetched!'); }
     });
   }
 

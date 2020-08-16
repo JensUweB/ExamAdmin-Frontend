@@ -17,6 +17,7 @@ import { ExamResult } from '../../library/classes/examResult.class';
 import { MatSort } from '@angular/material/sort';
 import { environment } from 'src/environments/environment';
 import { UserInput } from './inputs/user.input';
+import { ToastService } from '../services/toast.service';
 
 
 const clubMutation = gql`mutation addUserToClub($id: String!){addUserToClub(clubId: $id){_id}}`;
@@ -41,7 +42,6 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
   maForm: FormGroup;
   userForm: FormGroup;
   maError;
-  alerts: Alert[] = [];
   dataSource: MatTableDataSource<ExamResult[]>;
   displayedColumns = ['name', 'rank', 'result', 'date', 'file'];
   @ViewChild('examResultPagination', {static: false}) paginator: MatPaginator;
@@ -50,6 +50,7 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private apollo: Apollo,
     private authService: AuthService,
+    private toastService: ToastService,
     private userService: UserService,
     private maService: MartialArtsService,
     private router: Router,
@@ -67,10 +68,6 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
       maId: ['', Validators.required],
       rankId: ['', Validators.required],
     });
-    /*this.clubs = this.clubService.clubs;
-    this.clubForm = this.fb.group({
-      clubId: ''
-    });*/
 
     this.authSubscription = this.authService.user.subscribe(data => this.user = data);
     this.maSubscription = this.maService.martialArts.subscribe(data => this.martialArts = data);
@@ -119,16 +116,15 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }).subscribe((response) => {
       this.authService.loadUser();
-      this.alerts.push({type: 'success', message: 'Success! You added a new martial art to your profile!'});
-      if (!environment.production) {console.log('[UserComp] Success!'); }
+      this.toastService.success($localize`Success`, $localize`New martial art was added to your profile!`);
     }, (err) => {
       this.printError(err);
     });
   }
 
   printError(err) {
-    console.log('[UserComponent]', JSON.stringify(err));
-    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
+    console.error(err);
+    this.toastService.error($localize`Server Error`, $localize`An unexpected server error occured!`);
   }
 
   showMaDetails(ma) {
@@ -213,10 +209,6 @@ export class UserComponent implements OnInit, OnDestroy, AfterViewInit {
 
   get email() {
     return this.userForm.get('email');
-  }
-
-  close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert));
   }
 
   ngOnDestroy() {

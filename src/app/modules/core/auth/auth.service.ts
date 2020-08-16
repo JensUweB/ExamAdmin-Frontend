@@ -10,6 +10,7 @@ import { ExamService } from '../../library/exam/exam.service';
 import { MartialArtsService } from '../../library/martialArts/martialArts.service';
 import { GraphQLService } from '../../core/graphql/services/graphql.service';
 import { ToastService } from '../../core/services/toast.service';
+import { Helper } from '../classes/helper.class';
 
 const signUp = gql`
   mutation signup(
@@ -105,7 +106,10 @@ const pwReset = gql`
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  // private properties
   private userBS: BehaviorSubject<User> = new BehaviorSubject(null);
+
+  // public properties
   public readonly user = this.userBS.asObservable();
   token: string;
   tokenExpireDate: Date;
@@ -125,14 +129,14 @@ export class AuthService {
   loginError(err) {
     if (getStatusCode(err) === 401) {
       this.toastService.error(
-        'Login Fehlgeschlagen!',
-        'E-Mail oder Paswort nicht korrekt!',
+        $localize`Login failed!`,
+        $localize`Email or password incorrect!`,
         8000
       );
     } else {
       this.toastService.error(
-        'Server Fehler!',
-        'Es ist ein Server Fehler aufgetreten!'
+        Helper.locales.serverErrorTitle,
+        $localize`Login failed, but we don't know why!`
       );
     }
   }
@@ -150,7 +154,7 @@ export class AuthService {
       .valueChanges.subscribe(
         (response) => {
           if (response.data) {
-            this.toastService.success('Login', 'Login erfolgreich!');
+            this.toastService.success('Login', $localize`Your login was successfull!`);
             this.userBS.next(response.data.login.user);
             this.token = response.data.login.token;
             this.tokenExpireDate = response.data.login.tokenExpireDate;
@@ -203,6 +207,7 @@ export class AuthService {
     this.tokenExpireDate = null;
     localStorage.setItem('token', null);
     this.router.navigate(['/']);
+    this.toastService.success(`Logout`, $localize`Logout successfull.`);
   }
 
   async signup(
@@ -225,16 +230,16 @@ export class AuthService {
       .subscribe(
         (response) => {
           this.toastService.success(
-            'Konto erstellt!',
-            'Ein neues Benutzerkonto wurde erfolgreich erstellt!',
+            $localize`Signup successfull!`,
+            $localize`Please check your emails to complete signup!`,
             6000
           );
           result = true;
         },
         (err) => {
           this.toastService.error(
-            'Server Fehler!',
-            'Es ist ein Server Fehler aufgetreten!'
+            Helper.locales.serverErrorTitle,
+            $localize`An unexpected server error occured!`
           );
           console.error(err);
         }
@@ -255,8 +260,8 @@ export class AuthService {
         (err) => {}
       );
     this.toastService.info(
-      'Passwort Reset',
-      'Falls ein Konto mit dieser E-Mail existiert, wurde das Passwort zurückgesetzt.',
+      $localize`Passwort Reset`,
+      $localize`An confirmation email will be send, if this account exists`,
       6000
     );
   }

@@ -42,7 +42,7 @@ abcdefg;
     if (this.pwForm.valid && this.password.value === this.password2.value) {
       this.userService.setUserPassword(this.password.value);
     } else {
-      this.toastService.error('Eingabe fehlerhaft!', 'Bitte das neue Passwort in beide Felder eintragen!');
+      this.toastService.error($localize`Invalid input!`, $localize`You need to enter your new password twice!`);
     }
   }
 

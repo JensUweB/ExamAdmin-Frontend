@@ -77,39 +77,7 @@
         </mat-form-field>
         <hr>
         <hr>
-        <!--div class="row">
-            <div class="col-4">
-                Club:
-            </div>
-            <div class="col-8">
-                <select class="form-control" formControlName="club">
-                    <option value="">none</option>
-                    <option *ngFor="let ele of user.clubs" [value]="ele.club._id">{{ele.club.name}}</option>
-                </select>
-                <div *ngIf="!club.valid && club.touched" class="alert alert-danger" role="alert">
-                    Pleas choose a responsible club for this exam or choose none!
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-4">
-                Visibility:
-            </div>
-            <div class="col-8">
-                <div class="row">
-                    <div class="col-2">
-                        <fieldset>
-                                <input class="form-control" type="checkbox" formControlName="isPublic" value="false" checked>
-                        </fieldset>
-                    </div>
-                    <div class="col-8">
-                        Enable public registration?
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr-->
+        
         <div class="row">
             <div class="col">
                 <!-- Exam Date -->
@@ -155,13 +123,4 @@
             </div>
         </div>
     </form>
-    <div class="row" *ngIf="alerts">
-        <div class="col">
-          <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
-            <p><strong>{{alert.message}}</strong></p>
-          </ngb-alert>
-        </div>
-    </div>
-    <br>
-    <br>
 </div>

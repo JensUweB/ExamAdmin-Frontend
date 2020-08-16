@@ -3,10 +3,9 @@ import gql from 'graphql-tag';
 import { AuthService } from '../../../core/auth/auth.service';
 import { Apollo } from 'apollo-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Alert } from '../../../types/Alert';
-import { logError, getGraphQLError } from '../../../shared/helpers/error.helpers';
 import { Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { ToastService } from 'src/app/modules/core/services/toast.service';
+import { Helper } from 'src/app/modules/core/classes/helper.class';
 
 const query = gql`{getOpenExams{_id, title, examDate, martialArt{_id, name, styleName, ranks{name}},
 participants{_id, firstName, lastName}}}`;
@@ -33,17 +32,15 @@ export class ExamResultComponent implements OnInit, OnDestroy {
   exams;
   erForm: FormGroup;
   file: Blob;
-  errors = [];
   erId: string;
   user;
-  alerts: Alert[] = [];
 
   constructor(
     private authService: AuthService,
+    private toastService: ToastService,
     private apollo: Apollo,
     private fb: FormBuilder
   ) {
-    if (!environment.production) { console.log('[ExamResult] Fetching data...'); }
     this.user = authService.user;
     this.apollo.watchQuery<any>({
       query,
@@ -51,15 +48,10 @@ export class ExamResultComponent implements OnInit, OnDestroy {
     }).valueChanges.subscribe((response) => {
       if (response.data) {
         this.exams = response.data.getOpenExams;
-        if (!environment.production) { console.log('[ExamResult] Done.'); }
       }
     }, (err) => {
-      if (err.graphQLErrors[0]) {
-        this.alerts.push({type: 'danger', message: err.graphQLErrors[0].message.message});
-      } else {
-        this.alerts.push({type: 'danger', message: err});
-      }
-      console.warn('[ExamResult]: GraphQL Error:', JSON.stringify(err));
+      console.warn(err);
+      this.toastService.error(Helper.locales.serverErrorTitle, $localize`Could not load exam results`);
     });
 
     this.erForm = this.fb.group({
@@ -82,11 +74,6 @@ export class ExamResultComponent implements OnInit, OnDestroy {
     if (this.userSubscription) {this.userSubscription.unsubscribe(); }
   }
 
-  printError(err) {
-    logError('[UserComponent]', err);
-    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
-  }
-
   async onSubmit() {
     // create new exam result
     await this.apollo.mutate<any>({
@@ -106,11 +93,12 @@ export class ExamResultComponent implements OnInit, OnDestroy {
       }
     }).subscribe(response => {
       if (response.data) {
-        this.alerts.push({type: 'success', message: 'Success! Exam Result created!'});
+        this.toastService.success(Helper.locales.successTitle, $localize`Exam result created.`);
         this.uploadFile(response.data.createExamResult._id);
       }
     }, (err) => {
-      this.printError(err);
+      console.error(err);
+      this.toastService.error(Helper.locales.serverErrorTitle, $localize`Could not create exam result`);
 
       if (err.graphQLErrors[0].message.statusCode === 406) {
         this.erId = this.exams[this.examId.value]._id;
@@ -139,11 +127,12 @@ export class ExamResultComponent implements OnInit, OnDestroy {
       }
     }).subscribe(response => {
       if (response.data) {
-        this.alerts.push({type: 'success', message: 'Exam Result Procotol Upload finished!'});
+        this.toastService.success($localize`File Upload`, $localize`Protocol upload finished.`);
         return true;
       }
     }, (err) => {
-      this.printError(err);
+      console.error(err);
+      this.toastService.error(Helper.locales.serverErrorTitle, $localize`File upload failed.`);
       return false;
     });
   }
@@ -171,9 +160,5 @@ export class ExamResultComponent implements OnInit, OnDestroy {
   }
   get passed() {
     return this.erForm.get('passed');
-  }
-
-  close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert));
   }
 }

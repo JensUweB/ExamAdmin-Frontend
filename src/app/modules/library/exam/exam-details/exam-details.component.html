@@ -206,13 +206,6 @@
                 </div>
             </form>
             </div>
-            <div class="row" *ngIf="alerts">
-                <div class="col">
-                  <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
-                    <p><strong>{{alert.message}}</strong></p>
-                  </ngb-alert>
-                </div>
-            </div>
         </div>
     </div>
     <!-- Delete Confirmation Popup -->

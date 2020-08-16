@@ -4,11 +4,11 @@ import gql from 'graphql-tag';
 import { Alert } from '../../types/Alert';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { normalizeDate } from '../../shared/helpers/date.helper';
 import { GraphQLService } from '../graphql/services/graphql.service';
 import { ToastService } from '../services/toast.service';
 import { GraphQLType } from '../graphql/enums/graphql-type.enum';
 import { UserInput } from './inputs/user.input';
+import { Helper } from '../classes/helper.class';
 
 const queryExamResults = gql`
   query getAllExamResults {
@@ -111,7 +111,7 @@ export class UserService {
         (response) => {
           this.examResultsArray = response.data.getAllExamResults;
           this.examResultsArray.forEach((ele) => {
-            ele.date = normalizeDate(ele.date);
+            ele.date = Helper.normalizeDate(ele.date);
           });
           this._examResults.next(this.examResultsArray);
         },

@@ -68,13 +68,6 @@
                         <button mat-raised-button color="primary" class="mat-btn" (click)="onSubmit()" i18n="Button"><mat-icon>send</mat-icon> Send</button>
                     </div>
                 </div>
-                <div class="row" *ngIf="alerts">
-                    <div class="col">
-                      <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
-                        <p><strong>{{alert.message}}</strong></p>
-                      </ngb-alert>
-                    </div>
-                </div>
         </div>
         <div *ngIf="!exams">
             <h1 i18n="Alternative Headline">No exam results found!</h1>

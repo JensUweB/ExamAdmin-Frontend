@@ -12,6 +12,8 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { ToastService } from 'src/app/modules/core/services/toast.service';
+import { Helper } from 'src/app/modules/core/classes/helper.class';
 
 const query = gql`mutation addExaminer($maId: String!, $email: String!)
 {addExaminer(maId: $maId, email: $email){_id}}`;
@@ -27,7 +29,6 @@ export class MartialartDetailsComponent implements OnInit {
   @Output() ma: MartialArt;
   private userSubscription: Subscription;
   user: User;
-  alerts: Alert[] = [];
   editMode: boolean;
   examinerForm: FormGroup;
   isExaminer = false;
@@ -37,6 +38,7 @@ export class MartialartDetailsComponent implements OnInit {
   constructor(
     private maService: MartialArtsService,
     private authService: AuthService,
+    private toastService: ToastService,
     private apollo: Apollo,
     private fb: FormBuilder,
     private modalService: NgbModal,
@@ -44,7 +46,7 @@ export class MartialartDetailsComponent implements OnInit {
   ) {
     this.ma = maService.martialArt;
     this.editMode = maService.editMode;
-    this.userSubscription = authService.user.subscribe(data => {
+    this.userSubscription = this.authService.user.subscribe(data => {
       this.user = data;
       // Check if current user is an examiner
       if (this.user) {
@@ -59,7 +61,6 @@ export class MartialartDetailsComponent implements OnInit {
 
    async onSubmit() {
      if (this.examinerForm.valid) {
-      if (!environment.production) { console.log('[MADetailsComp] Adding new examiner... '); }
       this.apollo.mutate<any>({
         mutation: query,
         variables: {
@@ -69,18 +70,17 @@ export class MartialartDetailsComponent implements OnInit {
       }).subscribe(async response => {
         if (response.data) {
           // Fetch updates and pull the updated martial art to this component
-          if (!environment.production) { console.log('[MADetailsComp] Fetching updates... '); }
           this.maService.fetch()
           .then(() => {
             this.maService.setCurrent(this.ma, false);
             this.ma = this.maService.martialArt;
             this.router.navigateByUrl('martialArt-details');
-            if (!environment.production) { console.log('[MADetailsComp] Done. '); }
           });
-          this.alerts.push({type: 'success', message: 'New examiner was added!'});
+          this.toastService.success(Helper.locales.successTitle, $localize`New examiner was added.`);
         }
       }, (err) => {
-        this.printError(err);
+        console.error(err);
+        this.toastService.error(Helper.locales.serverErrorTitle, $localize`Could not add examiner. Are you authorized?`);
       });
      }
    }
@@ -95,21 +95,16 @@ export class MartialartDetailsComponent implements OnInit {
       }).subscribe(response => {
         if (response.data) {
           this.ma.examiners = this.ma.examiners.filter(user => user._id !== userId);
-          this.alerts.push({type: 'success', message: 'Examiner was removed!'});
-          if (!environment.production) { console.log('[NewMartialArtComp] Done.'); }
+          this.toastService.success(Helper.locales.successTitle, $localize`Examiner removed.`);
         }
       }, (err) => {
-        this.printError(err);
+        console.error(err);
+        this.toastService.error(Helper.locales.serverErrorTitle, $localize`Could not remove examiner. Are you authorized?`);
       });
    }
 
   ngOnInit(): void {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  }
-
-  printError(err) {
-    logError('[UserComponent]', err);
-    this.alerts.push({type: 'danger', message: getGraphQLError(err)});
   }
 
   showEdit() {
@@ -122,10 +117,6 @@ export class MartialartDetailsComponent implements OnInit {
 
   openPopup(content) {
     this.modalService.open(content);
-  }
-
-  close(alert: Alert) {
-    this.alerts.splice(this.alerts.indexOf(alert));
   }
 
   get email() {
