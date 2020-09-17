@@ -4,8 +4,9 @@ LABEL author="Jens Uwe Becker"
 LABEL maintainer="jens.becker@root-itsolutions.de"
 LABEL version="0.1"
 WORKDIR /app
-COPY . .
+COPY package.json .
 RUN npm install
+COPY . .
 RUN npm run build:de
 
 #### Stage 2
