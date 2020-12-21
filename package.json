@@ -25,7 +25,7 @@
     "@angular/compiler": "^9.1.12",
     "@angular/core": "^9.1.12",
     "@angular/forms": "^9.1.12",
-    "@angular/localize": "^9.1.12",
+    "@angular/localize": "^11.0.2",
     "@angular/material": "^9.2.2",
     "@angular/material-moment-adapter": "^9.2.4",
     "@angular/platform-browser": "^9.1.12",
@@ -36,8 +36,8 @@
     "@mat-datetimepicker/moment": "^4.1.0",
     "@ng-bootstrap/ng-bootstrap": "^5.3.1",
     "@sentry/browser": "^5.19.2",
-    "apollo-angular": "^1.9.1",
-    "apollo-angular-link-http": "^1.10.0",
+    "apollo-angular-link-http": "^1.11.0",
+    "apollo-angular": "^1.10.0",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-error": "^1.1.13",
@@ -45,11 +45,11 @@
     "bootstrap": "^4.5.0",
     "font-awesome": "^4.7.0",
     "graphql": "^14.7.0",
-    "graphql-tag": "^2.10.4",
+    "graphql-tag": "^2.11.0",
     "rxjs": "^6.6.0",
     "tslib": "^1.13.0",
     "zone.js": "~0.10.3",
-    "snyk": "^1.316.1"
+    "snyk": "^1.425.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.901.7",
