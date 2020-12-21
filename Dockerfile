@@ -2,10 +2,11 @@
 FROM node:12 as node
 LABEL author="Jens Uwe Becker"
 LABEL maintainer="jens.becker@root-itsolutions.de"
-LABEL version="0.1"
+LABEL version="0.3.5"
 WORKDIR /app
-COPY . .
+COPY package.json .
 RUN npm install
+COPY . .
 RUN npm run build:de
 
 #### Stage 2

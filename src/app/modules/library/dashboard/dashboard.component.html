@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="row">
+    <h1>Dashboard</h1>
+  </div>
+  <div class="row"  *ngIf="exams">
+      <div class="row w-100">
+        <div class="col-6">
+          <h2 i18n>Your exams</h2>
+        </div>
+        <div class="col-6">
+          <form [formGroup]="filterForm" class="float-right">
+            <mat-form-field appearance="fill">
+              <mat-label i18n>Show previous exams...</mat-label>
+              <mat-select
+                [formControl]="monthCount"
+                (selectionChange)="onSelectChange()"
+              >
+                <mat-option value="1" i18n>Last month</mat-option>
+                <mat-option value="2" i18n>Last two months</mat-option>
+                <mat-option value="3" i18n>Last three months</mat-option>
+                <mat-option value="4" i18n>Last four months</mat-option>
+                <mat-option value="5" i18n>Last five months</mat-option>
+                <mat-option value="6" i18n>Last six months</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+          <span class="float-right mr-10"><h2>Filter:</h2></span>
+        </div>
+      </div>
+      <div class="row">
+        <mat-card *ngFor="let result of exams">
+          <mat-card-header>
+            <mat-card-title>
+              {{ result.title }}
+            </mat-card-title>
+            <mat-card-subtitle>
+              {{ result.examDate }}
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="w-100">
+            <h3>
+              <b>{{ result.martialArt.name }}</b
+              >, <span class="subtitle">{{ result.martialArt.styleName }}</span>
+            </h3>
+            <div class="row">
+              <div class="col-sm">
+                <b i18n>Exam Date:</b>
+              </div>
+              <div class="col-sm">
+                {{ result.examDate }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <b i18n>Registration End Date:</b>
+              </div>
+              <div class="col-sm">
+                {{ result.regEndDate }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <b i18n>Adress:</b>
+              </div>
+              <div class="col-sm">
+                {{ result.examPlace }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                <b i18n>Price:</b>
+              </div>
+              <div class="col-sm">
+                {{ result.price }}
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-raised-button
+              color="primary"
+              class="mat-btn"
+              (click)="showDetails(result)"
+              i18n="Button"
+            >
+              <mat-icon>details</mat-icon> Details
+            </button>
+            <button
+              *ngIf="result.examiner._id === user._id"
+              mat-raised-button
+              color="primary"
+              class="mat-btn"
+              (click)="showEdit(result)"
+              i18n="Button"
+            >
+              <mat-icon>edit</mat-icon> Edit
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+  </div>
+  <div  *ngIf="!exams">
+    <b i18n>You have not yet taken any exams, nor have you created any.</b>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="mat-typography">
+    <div class="row">
+        <div class="col-sm">
+            <div class="row">
+                <div class="col-md-12">
+                    <form [formGroup]="userForm">
+                        <h1 class='mv3' i18n>{{login ? 'Login' : 'Sign Up'}}</h1>
+                        <div class='flex flex-column'>
+                            <div class="row">
+                                <div class="col">
+                                    <!-- First Name -->
+                                    <mat-form-field class="full-width"  *ngIf="!login">
+                                        <mat-label i18n>First Name</mat-label>
+                                        <input matInput type="text" [formControl]="firstName" minlength="3" required i18n-placeholder placeholder="John">
+                                        <mat-icon matPrefix>title</mat-icon>
+                                        <mat-hint i18n>Your first name</mat-hint>
+                                        <mat-error *ngIf="firstName.invalid" i18n>Please enter your first name</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <!-- Last Name -->
+                                    <mat-form-field class="full-width"  *ngIf="!login">
+                                        <mat-label i18n>Last Name</mat-label>
+                                        <input matInput type="text" [formControl]="lastName" minlength="3" required i18n-placeholder placeholder="Doe">
+                                        <mat-icon matPrefix>title</mat-icon>
+                                        <mat-hint i18n>Your last name</mat-hint>
+                                        <mat-error *ngIf="lastName.invalid" i18n>Please enter your last name</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <!-- E-Mail -->
+                                    <mat-form-field class="full-width">
+                                        <mat-label i18n>E-Mail</mat-label>
+                                        <input matInput type="text" [formControl]="email" minlength="3" required i18n-placeholder placeholder="john.doe@provider.com">
+                                        <mat-icon matPrefix>email</mat-icon>
+                                        <mat-hint i18n>Your email adress</mat-hint>
+                                        <mat-error *ngIf="email.invalid" i18n>Please enter your email adress</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <!-- Password -->
+                                    <mat-form-field class="full-width">
+                                        <mat-label i18n>Password</mat-label>
+                                        <input matInput type="password" [formControl]="password" minlength="5" placeholder="mySuper@Secret123">
+                                        <mat-icon matPrefix>security</mat-icon>
+                                        <mat-hint i18n>Your password</mat-hint>
+                                        <mat-error *ngIf="password.invalid" i18n>Please enter at least 5 characters. There is no max password length!</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='flex mt3'>
+                            <button mat-raised-button color="primary" class="mat-btn float-left" (click)="confirm()" i18n="Login Button">
+                                {{login ? 'Login' : 'Create Account'}}</button>
+                            <button mat-raised-button color="primary" class="mat-btn float-left" [disabled]="disableSignup" (click)="login = !login" i18n="Login Mode">
+                                {{login ? 'Need to create an account?' : 'Already have an account?'}}</button>
+                            <button mat-raised-button color="primary" class="mat-btn float-left" (click)="resetPassword()" i18n>Forgot password?</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="alerts">
+      <div class="col">
+        <ngb-alert [dismissible]="true" [type]="alert.type" *ngFor="let alert of alerts" (close)="close(alert)">
+          <p><strong>{{alert.message}}</strong></p>
+        </ngb-alert>
+      </div>
+    </div>
+    
+</div>

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, HostBinding, Inject } from '@angular/core
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../core/auth/auth.service';
 import { Router } from '@angular/router';
 import { version } from '../../../../package.json';
 import { OverlayContainer } from '@angular/cdk/overlay';
