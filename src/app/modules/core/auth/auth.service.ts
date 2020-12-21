@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import gql from 'graphql-tag';
-import { Apollo } from 'apollo-angular';
-import { BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
-import { User } from '../classes/user.class';
-import { Alert } from '../../types/Alert';
-import { getStatusCode } from '../../shared/helpers/error.helpers';
-import { ExamService } from '../../library/exam/exam.service';
-import { MartialArtsService } from '../../library/martialArts/martialArts.service';
-import { GraphQLService } from '../../core/graphql/services/graphql.service';
-import { ToastService } from '../../core/services/toast.service';
-import { Helper } from '../classes/helper.class';
+import { Injectable } from "@angular/core";
+import gql from "graphql-tag";
+import { Apollo } from "apollo-angular";
+import { BehaviorSubject, Observable } from "rxjs";
+import { Router } from "@angular/router";
+import { User } from "../classes/user.class";
+import { Alert } from "../../types/Alert";
+import { getStatusCode } from "../../shared/helpers/error.helpers";
+import { ExamService } from "../../library/exam/exam.service";
+import { MartialArtsService } from "../../library/martialArts/martialArts.service";
+import { GraphQLService } from "../../core/graphql/services/graphql.service";
+import { ToastService } from "../../core/services/toast.service";
+import { Helper } from "../classes/helper.class";
 
 const signUp = gql`
   mutation signup(
@@ -104,7 +104,7 @@ const pwReset = gql`
   }
 `;
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class AuthService {
   // private properties
   private userBS: BehaviorSubject<User> = new BehaviorSubject(null);
@@ -149,24 +149,27 @@ export class AuthService {
           email,
           password,
         },
-        fetchPolicy: 'no-cache',
+        fetchPolicy: "no-cache",
       })
       .valueChanges.subscribe(
         (response) => {
           if (response.data) {
-            this.toastService.success('Login', $localize`Your login was successfull!`);
+            this.toastService.success(
+              "Login",
+              $localize`Your login was successfull!`
+            );
             this.userBS.next(response.data.login.user);
             this.token = response.data.login.token;
             this.tokenExpireDate = response.data.login.tokenExpireDate;
             this.isAuthenticatedBS.next(true);
-            localStorage.setItem('token', this.token);
+            localStorage.setItem("token", this.token);
             localStorage.setItem(
-              'tokenExpDate',
+              "tokenExpDate",
               this.tokenExpireDate.toString()
             );
             this.maService.fetch();
             this.examService.fetchExams();
-            this.router.navigate(['/']);
+            this.router.navigate(["/"]);
           }
           if (response.errors) {
             this.loginError(response.errors);
@@ -179,12 +182,12 @@ export class AuthService {
   }
 
   async loadUser() {
-    if (localStorage.getItem('token')) {
-      this.token = localStorage.getItem('token');
+    if (localStorage.getItem("token")) {
+      this.token = localStorage.getItem("token");
       this.apollo
         .watchQuery<any>({
           query: getUser,
-          fetchPolicy: 'no-cache',
+          fetchPolicy: "no-cache",
         })
         .valueChanges.subscribe(
           (response) => {
@@ -205,19 +208,14 @@ export class AuthService {
     this.userBS.next(null);
     this.token = null;
     this.tokenExpireDate = null;
-    localStorage.setItem('token', null);
-    this.router.navigate(['/']);
+    localStorage.setItem("token", null);
+    this.router.navigate(["/"]);
     this.toastService.success(`Logout`, $localize`Logout successfull.`);
   }
 
-  async signup(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-  ): Promise<boolean> {
-    let result = false;
-    await this.apollo
+  signup(firstName: string, lastName: string, email: string, password: string): Observable<any> {
+    return new Observable((subscriber) => {
+      this.apollo
       .mutate<any>({
         mutation: signUp,
         variables: {
@@ -229,22 +227,45 @@ export class AuthService {
       })
       .subscribe(
         (response) => {
-          this.toastService.success(
-            $localize`Signup successfull!`,
-            $localize`Please check your emails to complete signup!`,
-            6000
-          );
-          result = true;
+          if (response.data) {
+            if (response.data.signup === 'ACCOUNT_CREATED') {
+              this.toastService.success(
+                $localize`Account created`,
+                $localize`You can now login to your account!`,
+                6000
+              );
+            } 
+            if (response.data.signup === 'ACCOUNT_CONFIRM') {
+              this.toastService.success(
+                $localize`Signup successfull!`,
+                $localize`Please check your emails to complete signup!`,
+                6000
+              );
+            }
+            subscriber.next(response.data);
+            subscriber.complete();
+          }
+          if (response.errors) {
+            console.error(response.errors[0]);
+            this.toastService.error(
+              Helper.locales.serverErrorTitle,
+              $localize`An unexpected server error occured!`
+            );
+            subscriber.error(response.errors);
+            subscriber.complete();
+          }
         },
         (err) => {
+          console.error(err);
           this.toastService.error(
             Helper.locales.serverErrorTitle,
             $localize`An unexpected server error occured!`
           );
-          console.error(err);
+          subscriber.error(err);
+          subscriber.complete();
         }
       );
-    return result;
+    })
   }
 
   async resetPassword(email: string) {

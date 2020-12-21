@@ -41,8 +41,13 @@ export class AuthComponent implements OnInit {
         this.authService.login(this.email.value, this.password.value);
 
       } else {
-        const result = await this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value);
-        if (result) { this.disableSignup = true; }
+        this.authService.signup(this.firstName.value, this.lastName.value, this.email.value, this.password.value)
+        .subscribe((response) => {
+          if (response) {
+            this.login = true;
+            this.disableSignup = true;
+          }
+        });
       }
     }
   }
