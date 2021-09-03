@@ -25,7 +25,7 @@
     "@angular/compiler": "^9.1.12",
     "@angular/core": "^9.1.12",
     "@angular/forms": "^9.1.12",
-    "@angular/localize": "^11.0.2",
+    "@angular/localize": "^11.2.14",
     "@angular/material": "^9.2.2",
     "@angular/material-moment-adapter": "^9.2.4",
     "@angular/platform-browser": "^9.1.12",
