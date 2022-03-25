@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "int:extract": "ng xi18n --output-path src/locale/",
-    "snyk-protect": "snyk protect",
+    "snyk-protect": "snyk-protect",
     "prepare": "npm run snyk-protect",
     "postinstall": "ngcc",
     "precache": "sw-precache --verbose --config=sw-precache-config.js"
@@ -49,7 +49,7 @@
     "rxjs": "^6.6.0",
     "tslib": "^1.13.0",
     "zone.js": "~0.10.3",
-    "snyk": "^1.425.4"
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.901.7",
